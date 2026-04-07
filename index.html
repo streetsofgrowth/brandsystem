@@ -2436,9 +2436,9 @@ body { font-family: 'Open Sans', sans-serif; font-size: 14px; }
 
 <!-- =================== ICON ILLUSTRATIONS =================== -->
 <section id="icon-illustrations" class="sg-section">
-  <div class="sg-section-label">Foundations</div>
+  <div class="sg-section-label">Brand Assets</div>
   <h2 class="sg-section-title">Icon Illustrations</h2>
-  <p class="sg-section-desc">SOG's custom illustration icon set is a core part of the brand identity. Each icon is designed on a 500×500 canvas with a solid brand-colour background, using a consistent line weight and illustrative style. These icons communicate SOG's programmes, values, and services with warmth and clarity.</p>
+  <p class="sg-section-desc">SOG's icon illustrations are custom-designed visual assets — distinct from UI icons. They are used as images in presentations, PowerPoint decks, websites, infographics, and printed communications. Each illustration is stylised in SOG brand colours and designed to be instantly recognisable as an extension of our brand identity.</p>
 
   <style>
     .icon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:16px;margin-top:16px}
@@ -2448,25 +2448,88 @@ body { font-family: 'Open Sans', sans-serif; font-size: 14px; }
     .icon-category-title{font-size:13px;font-weight:700;color:var(--sog-charcoal);text-transform:uppercase;letter-spacing:.06em;margin:32px 0 4px;padding-bottom:8px;border-bottom:2px solid var(--border)}
   </style>
 
-  <!-- Usage guidelines -->
+  <!-- Specs & Usage -->
   <div class="sg-sub" style="margin-bottom:32px">
-    <div class="sg-sub-title">Usage Guidelines</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
-      <div style="background:var(--muted-bg);border-radius:10px;padding:20px">
-        <span class="material-icons" style="font-size:24px;color:var(--sog-teal);display:block;margin-bottom:8px">straighten</span>
-        <div style="font-size:13px;font-weight:700;color:var(--sog-charcoal);margin-bottom:6px">Minimum Size</div>
-        <div style="font-size:13px;color:var(--text);line-height:1.6">Use at 48px minimum in digital contexts. For print, no smaller than 15mm square to preserve detail.</div>
+    <div class="sg-sub-title">Illustration Specifications</div>
+    <div class="sg-sub-desc">When designing or reproducing these illustrations, use the following settings to ensure consistency across all brand applications.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:16px">
+
+      <!-- Spec table -->
+      <div>
+        <table style="width:100%;border-collapse:collapse;font-size:13px">
+          <thead>
+            <tr style="background:var(--sog-charcoal);color:#fff">
+              <th style="padding:10px 14px;text-align:left;border-radius:8px 0 0 0;font-weight:600">Property</th>
+              <th style="padding:10px 14px;text-align:left;border-radius:0 8px 0 0;font-weight:600">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 14px;color:var(--text-muted);font-weight:600">Canvas Size</td>
+              <td style="padding:10px 14px;color:var(--text)">500 × 500 px</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);background:var(--muted-bg)">
+              <td style="padding:10px 14px;color:var(--text-muted);font-weight:600">Clear Space</td>
+              <td style="padding:10px 14px;color:var(--text)">68 px</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 14px;color:var(--text-muted);font-weight:600">Stroke Width</td>
+              <td style="padding:10px 14px;color:var(--text)">5 px</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);background:var(--muted-bg)">
+              <td style="padding:10px 14px;color:var(--text-muted);font-weight:600">Colours</td>
+              <td style="padding:10px 14px;color:var(--text)">3–6 tones including white</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 14px;color:var(--text-muted);font-weight:600">Minimum Display Size</td>
+              <td style="padding:10px 14px;color:var(--text)">50 px</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);background:var(--muted-bg)">
+              <td style="padding:10px 14px;color:var(--text-muted);font-weight:600">Outer Radius</td>
+              <td style="padding:10px 14px;color:var(--text)">14 px</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 14px;color:var(--text-muted);font-weight:600">Inner Radius</td>
+              <td style="padding:10px 14px;color:var(--text)">Half the selected outer radius</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div style="background:var(--muted-bg);border-radius:10px;padding:20px">
-        <span class="material-icons" style="font-size:24px;color:var(--sog-teal);display:block;margin-bottom:8px">palette</span>
-        <div style="font-size:13px;font-weight:700;color:var(--sog-charcoal);margin-bottom:6px">Colour Integrity</div>
-        <div style="font-size:13px;color:var(--text);line-height:1.6">Never recolour or alter the icon backgrounds. Each icon's colour is intentional and tied to its category theme.</div>
+
+      <!-- Size scale + do not -->
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:16px">Recommended Sizes</div>
+          <div style="display:flex;align-items:flex-end;gap:24px">
+            <div style="text-align:center">
+              <img src="icons/Target.svg" style="width:50px;height:50px;border-radius:7px;display:block;margin:0 auto 6px">
+              <div style="font-size:11px;color:var(--text-muted);font-weight:600">50px</div>
+              <div style="font-size:10px;color:var(--text-muted)">Minimum</div>
+            </div>
+            <div style="text-align:center">
+              <img src="icons/Target.svg" style="width:100px;height:100px;border-radius:14px;display:block;margin:0 auto 6px">
+              <div style="font-size:11px;color:var(--text-muted);font-weight:600">100px</div>
+              <div style="font-size:10px;color:var(--text-muted)">Standard</div>
+            </div>
+            <div style="text-align:center">
+              <img src="icons/Target.svg" style="width:150px;height:150px;border-radius:21px;display:block;margin:0 auto 6px">
+              <div style="font-size:11px;color:var(--text-muted);font-weight:600">200px</div>
+              <div style="font-size:10px;color:var(--text-muted)">Feature</div>
+            </div>
+          </div>
+        </div>
+        <div style="background:#FFF5F5;border:1px solid #F5C0C0;border-radius:8px;padding:14px">
+          <div style="font-size:12px;font-weight:700;color:#A31F1F;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Do Not</div>
+          <ul style="font-size:12px;color:var(--text);line-height:1.8;margin:0;padding-left:16px">
+            <li>Recolour or alter the illustration</li>
+            <li>Stretch, crop, or rotate the artwork</li>
+            <li>Remove or change the background</li>
+            <li>Use below the 50px minimum size</li>
+            <li>Use as a substitute for UI icons</li>
+          </ul>
+        </div>
       </div>
-      <div style="background:var(--muted-bg);border-radius:10px;padding:20px">
-        <span class="material-icons" style="font-size:24px;color:var(--sog-teal);display:block;margin-bottom:8px">crop_free</span>
-        <div style="font-size:13px;font-weight:700;color:var(--sog-charcoal);margin-bottom:6px">Clear Space</div>
-        <div style="font-size:13px;color:var(--text);line-height:1.6">Maintain at least 8px of clear space around each icon. Do not crowd icons with text or other graphic elements.</div>
-      </div>
+
     </div>
   </div>
 
