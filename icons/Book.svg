@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        stroke: #231f20;
+        stroke-linecap: round;
+        stroke-miterlimit: 10;
+        stroke-width: 5px;
+      }
+
+      .cls-2 {
+        fill: #0b8699;
+      }
+
+      .cls-5 {
+        fill: #005a65;
+      }
+
+      .cls-5, .cls-6 {
+        stroke-width: 0px;
+      }
+
+      .cls-6 {
+        fill: #009eac;
+      }
+
+      .cls-3 {
+        fill: #022c33;
+      }
+
+      .cls-4 {
+        fill: #68bfcb;
+      }
+    </style>
+  </defs>
+  <g id="Layer_2" data-name="Layer 2">
+    <rect class="cls-6" x="0" width="500" height="500"/>
+  </g>
+  <g id="Layer_1" data-name="Layer 1">
+    <g>
+      <g>
+        <g>
+          <path class="cls-5" d="M357.31,89.94v271.06h-214.62V113.04c0-12.75,10.34-23.09,23.09-23.09h191.53Z"/>
+          <path class="cls-1" d="M357.31,361.01h-214.62V113.04c0-12.75,10.34-23.09,23.09-23.09h191.53v271.06Z"/>
+        </g>
+        <path class="cls-4" d="M165.79,343.43h191.52v46.19h-191.52c-12.75,0-23.09-10.35-23.09-23.09h0c0-12.75,10.35-23.1,23.09-23.1Z"/>
+        <polygon class="cls-2" points="211.51 410.05 188.17 394.78 164.84 410.05 164.84 369.19 211.51 369.19 211.51 410.05"/>
+        <line class="cls-1" x1="179.74" y1="89.95" x2="179.74" y2="343.43"/>
+      </g>
+      <rect class="cls-3" x="221.56" y="134.57" width="95.46" height="62.27"/>
+      <line class="cls-1" x1="221.56" y1="248.97" x2="317.02" y2="248.97"/>
+      <line class="cls-1" x1="221.56" y1="230.26" x2="317.02" y2="230.26"/>
+    </g>
+  </g>
+</svg>

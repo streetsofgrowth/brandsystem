@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6 {
+        stroke: #231f20;
+        stroke-miterlimit: 10;
+        stroke-width: 5px;
+      }
+
+      .cls-1, .cls-4, .cls-5 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: #5b666d;
+      }
+
+      .cls-3 {
+        fill: #eaecee;
+      }
+
+      .cls-4 {
+        stroke-dasharray: 0 0 12.38 12.38;
+      }
+
+      .cls-7 {
+        fill: #323e48;
+      }
+
+      .cls-7, .cls-8 {
+        stroke-width: 0px;
+      }
+
+      .cls-8 {
+        fill: #e1dfeb;
+      }
+
+      .cls-5 {
+        stroke-dasharray: 0 0 12.39 12.39;
+      }
+
+      .cls-6 {
+        fill: #232c33;
+      }
+    </style>
+  </defs>
+  <g id="Layer_2" data-name="Layer 2">
+    <rect class="cls-7" x="0" y="-.27" width="500" height="500"/>
+  </g>
+  <g id="Layer_1" data-name="Layer 1">
+    <g>
+      <g>
+        <path class="cls-3" d="M72.95,193.5c97.86,97.86,256.23,97.86,354.09,0-97.86-97.86-256.23-97.86-354.09,0Z"/>
+        <circle class="cls-2" cx="250" cy="192.11" r="53.4"/>
+        <circle class="cls-6" cx="250" cy="192.11" r="32.25"/>
+        <circle class="cls-8" cx="230.41" cy="167.18" r="7.31"/>
+      </g>
+      <g>
+        <line class="cls-1" x1="209.32" y1="334.57" x2="210.97" y2="328.8"/>
+        <line class="cls-4" x1="214.39" y1="316.9" x2="246.83" y2="203.83"/>
+        <line class="cls-1" x1="248.53" y1="197.88" x2="250.19" y2="192.11"/>
+      </g>
+      <g>
+        <line class="cls-1" x1="291.06" y1="334.57" x2="289.39" y2="328.81"/>
+        <line class="cls-5" x1="285.96" y1="316.9" x2="253.38" y2="203.83"/>
+        <line class="cls-1" x1="251.66" y1="197.88" x2="250" y2="192.11"/>
+      </g>
+    </g>
+    <rect class="cls-3" x="204.68" y="313.55" width="90.65" height="90.65" rx="10" ry="10"/>
+    <rect class="cls-6" x="79.59" y="313.55" width="90.65" height="90.65" rx="10" ry="10"/>
+    <rect class="cls-6" x="329.77" y="313.55" width="90.65" height="90.65" rx="10" ry="10"/>
+  </g>
+</svg>

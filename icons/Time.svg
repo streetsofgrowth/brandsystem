@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke-linecap: round;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5 {
+        stroke: #231f20;
+        stroke-miterlimit: 10;
+        stroke-width: 5px;
+      }
+
+      .cls-6 {
+        fill: #4197cb;
+      }
+
+      .cls-6, .cls-7 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: #3d88b9;
+      }
+
+      .cls-3 {
+        fill: #a1cbe5;
+      }
+
+      .cls-4 {
+        fill: #7cb6db;
+      }
+
+      .cls-5 {
+        fill: #fff;
+      }
+
+      .cls-7 {
+        fill: #231f20;
+      }
+    </style>
+  </defs>
+  <g id="Layer_2" data-name="Layer 2">
+    <rect class="cls-6" width="500" height="500"/>
+  </g>
+  <g id="Layer_1" data-name="Layer 1">
+    <g>
+      <path class="cls-4" d="M250,108.59c78.1,0,141.41,63.31,141.41,141.41s-63.31,141.41-141.41,141.41"/>
+      <path class="cls-3" d="M250,391.41c-78.1,0-141.41-63.31-141.41-141.41s63.31-141.41,141.41-141.41"/>
+      <line class="cls-1" x1="250" y1="250" x2="307.71" y2="306.17"/>
+      <polygon class="cls-5" points="257.1 247.86 242.9 247.86 242.9 184.43 250 171.85 257.1 184.43 257.1 247.86"/>
+      <polygon class="cls-5" points="250 242.9 250 257.1 202.77 257.1 190.19 250 202.77 242.9 250 242.9"/>
+      <circle class="cls-2" cx="250" cy="250" r="13.88"/>
+      <circle class="cls-7" cx="340.15" cy="198.59" r="6.01"/>
+      <circle class="cls-7" cx="302.87" cy="160.29" r="6.01"/>
+      <circle class="cls-7" cx="197.69" cy="158.9" r="6.01"/>
+      <circle class="cls-7" cx="159.36" cy="196.18" r="6.01"/>
+      <circle class="cls-7" cx="157.96" cy="301.37" r="6.01"/>
+      <circle class="cls-7" cx="195.24" cy="339.7" r="6.01"/>
+      <circle class="cls-7" cx="300.43" cy="341.1" r="6.01"/>
+      <circle class="cls-7" cx="338.77" cy="303.82" r="6.01"/>
+      <circle class="cls-5" cx="144.45" cy="249.74" r="8.65"/>
+      <circle class="cls-5" cx="353.68" cy="250.24" r="9.15"/>
+      <g>
+        <circle class="cls-5" cx="249.81" cy="145.38" r="8.65"/>
+        <circle class="cls-5" cx="249.31" cy="354.61" r="9.15"/>
+      </g>
+      <circle class="cls-5" cx="296.61" cy="295.36" r="7.49"/>
+    </g>
+  </g>
+</svg>

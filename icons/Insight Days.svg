@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 500 500">
+  <!-- Generator: Adobe Illustrator 29.0.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 192)  -->
+  <defs>
+    <style>
+      .st0 {
+        stroke: #5eb3e4;
+      }
+
+      .st0, .st1 {
+        stroke-linecap: round;
+      }
+
+      .st0, .st1, .st2, .st3, .st4, .st5, .st6, .st7 {
+        stroke-miterlimit: 10;
+        stroke-width: 5px;
+      }
+
+      .st0, .st8 {
+        fill: #5eb3e4;
+      }
+
+      .st1, .st4, .st5, .st6, .st7 {
+        stroke: #231f20;
+      }
+
+      .st1, .st5 {
+        fill: none;
+      }
+
+      .st9 {
+        fill: #231f20;
+      }
+
+      .st10 {
+        fill: #3f434f;
+      }
+
+      .st11 {
+        fill: #1b3648;
+      }
+
+      .st12, .st7 {
+        fill: #e0deea;
+      }
+
+      .st2 {
+        fill: #e0c26c;
+      }
+
+      .st2, .st3 {
+        stroke: #3f434f;
+      }
+
+      .st3, .st13 {
+        fill: #fff;
+      }
+
+      .st4, .st14 {
+        fill: #84bfe8;
+      }
+
+      .st6, .st15 {
+        fill: #4d8ec1;
+      }
+    </style>
+  </defs>
+  <rect class="st8" x="0" width="500" height="500"/>
+  <g>
+    <g>
+      <g>
+        <path class="st12" d="M402.3,359.4v26.9c0,15.1-12.2,27.3-27.3,27.3h-15.9v-54.1h43.2Z"/>
+        <rect class="st15" x="359.1" y="305.2" width="43.2" height="54.1"/>
+        <rect class="st12" x="359.1" y="251.1" width="43.2" height="54.1"/>
+        <rect class="st15" x="359.1" y="197" width="43.2" height="54.1"/>
+        <path class="st11" d="M402.3,175.7v21.2H100.1v-21.2c0-15.1,12.2-27.3,27.3-27.3h247.6c15.1,0,27.3,12.2,27.3,27.3Z"/>
+        <rect class="st15" x="316" y="359.4" width="43.2" height="54.1"/>
+        <rect class="st12" x="316" y="305.2" width="43.2" height="54.1"/>
+        <rect class="st15" x="316" y="251.1" width="43.2" height="54.1"/>
+        <rect class="st12" x="316" y="197" width="43.2" height="54.1"/>
+        <rect class="st12" x="272.8" y="359.4" width="43.2" height="54.1"/>
+        <rect class="st15" x="272.8" y="305.2" width="43.2" height="54.1"/>
+        <rect class="st12" x="272.8" y="251.1" width="43.2" height="54.1"/>
+        <rect class="st15" x="272.8" y="197" width="43.2" height="54.1"/>
+        <rect class="st15" x="229.6" y="359.4" width="43.2" height="54.1"/>
+        <rect class="st12" x="229.6" y="305.2" width="43.2" height="54.1"/>
+        <rect class="st15" x="229.6" y="251.1" width="43.2" height="54.1"/>
+        <rect class="st12" x="229.6" y="197" width="43.2" height="54.1"/>
+        <rect class="st12" x="186.5" y="359.4" width="43.2" height="54.1"/>
+        <rect class="st15" x="186.5" y="305.2" width="43.2" height="54.1"/>
+        <rect class="st12" x="186.5" y="251.1" width="43.2" height="54.1"/>
+        <rect class="st15" x="186.5" y="197" width="43.2" height="54.1"/>
+        <rect class="st15" x="143.3" y="359.4" width="43.2" height="54.1"/>
+        <rect class="st12" x="143.3" y="305.2" width="43.2" height="54.1"/>
+        <rect class="st15" x="143.3" y="251.1" width="43.2" height="54.1"/>
+        <rect class="st12" x="143.3" y="197" width="43.2" height="54.1"/>
+        <path class="st12" d="M143.3,359.4v54.1h-15.9c-15.1,0-27.3-12.2-27.3-27.3v-26.9h43.2Z"/>
+        <rect class="st15" x="100.1" y="305.2" width="43.2" height="54.1"/>
+        <rect class="st12" x="100.1" y="251.1" width="43.2" height="54.1"/>
+        <rect class="st15" x="100.1" y="197" width="43.2" height="54.1"/>
+      </g>
+      <g>
+        <path class="st5" d="M402.3,197v189.3c0,15.1-12.2,27.3-27.3,27.3H127.4c-15.1,0-27.3-12.2-27.3-27.3v-189.3"/>
+        <polyline class="st5" points="100.1 359.4 143.3 359.4 186.5 359.4 229.6 359.4 272.8 359.4 316 359.4 359.1 359.4 402.3 359.4"/>
+        <polyline class="st5" points="100.1 305.2 143.3 305.2 186.5 305.2 229.6 305.2 272.8 305.2 316 305.2 359.1 305.2 402.3 305.2"/>
+        <polyline class="st5" points="100.1 251.1 143.3 251.1 186.5 251.1 229.6 251.1 272.8 251.1 316 251.1 359.1 251.1 402.3 251.1"/>
+        <polyline class="st5" points="359.1 197 359.1 251.1 359.1 305.2 359.1 359.4 359.1 413.5"/>
+        <polyline class="st5" points="316 197 316 251.1 316 305.2 316 359.4 316 413.5"/>
+        <polyline class="st5" points="272.8 197 272.8 251.1 272.8 305.2 272.8 359.4 272.8 413.5"/>
+        <polyline class="st5" points="229.6 197 229.6 251.1 229.6 305.2 229.6 359.4 229.6 413.5"/>
+        <polyline class="st5" points="186.5 197 186.5 251.1 186.5 305.2 186.5 359.4 186.5 413.5"/>
+        <polyline class="st5" points="143.3 197 143.3 251.1 143.3 305.2 143.3 359.4 143.3 413.5"/>
+        <path class="st5" d="M402.3,197v-21.2c0-15.1-12.2-27.3-27.3-27.3H127.4c-15.1,0-27.3,12.2-27.3,27.3v21.2h302.2Z"/>
+      </g>
+    </g>
+    <circle class="st4" cx="165.5" cy="224" r="8.8"/>
+    <circle class="st4" cx="294" cy="278.4" r="8.8"/>
+    <circle class="st4" cx="251.2" cy="388.6" r="8.8"/>
+    <line class="st0" x1="159.4" y1="172.7" x2="345.2" y2="172.7"/>
+    <g>
+      <g>
+        <polygon class="st14" points="438.8 229.5 401.4 266.9 374.7 265.1 412.8 227 438.8 229.5"/>
+        <polygon class="st11" points="410.2 201 412.8 227 374.7 265.1 372.9 238.4 410.2 201"/>
+      </g>
+      <g>
+        <polygon class="st1" points="412.8 227 438.8 229.5 401.4 266.9 374.7 265.1 372.9 238.4 410.2 201 412.8 227"/>
+        <polyline class="st1" points="412.8 227 374.7 265.1 251.2 388.6"/>
+      </g>
+    </g>
+    <g>
+      <path class="st3" d="M323,134.3s-31.7,47.3-70.7,47.3-70.7-47.3-70.7-47.3c0,0,31.7-47.3,70.7-47.3s70.7,47.3,70.7,47.3Z"/>
+      <circle class="st2" cx="252.3" cy="134.3" r="36.6"/>
+      <circle class="st10" cx="252.3" cy="134.3" r="14.1"/>
+      <circle class="st13" cx="261.4" cy="125.7" r="6.4"/>
+      <path class="st7" d="M323,134.3s-31.7,47.3-70.7,47.3-70.7-47.3-70.7-47.3c0,0,31.7-47.3,70.7-47.3s70.7,47.3,70.7,47.3Z"/>
+      <circle class="st6" cx="252.3" cy="134.3" r="36.6"/>
+      <circle class="st9" cx="252.3" cy="134.3" r="14.1"/>
+      <circle class="st13" cx="261.4" cy="125.7" r="6.4"/>
+    </g>
+  </g>
+</svg>
