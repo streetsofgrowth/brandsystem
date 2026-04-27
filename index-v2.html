@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Streets of Growth — UX/UI Style Guide v1.0</title>
+<title>Streets of Growth — Brand & UX/UI Style Guide v2.0</title>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
@@ -12,6 +12,8 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'Open Sans',sans-serif;font-size:14px;color:#323E48;background:#EAECEF;-webkit-font-smoothing:antialiased}
+
+/* ── Design Tokens ─────────────────────────────────── */
 :root{
   --sog-purple:#625D9C;--sog-blue:#4197CB;--sog-sky:#5EB3E4;--sog-teal:#0095A9;
   --sog-green:#00AF9A;--sog-charcoal:#323E48;--sog-red:#F32735;--sog-orange:#FF6C0E;
@@ -25,54 +27,152 @@ body{font-family:'Open Sans',sans-serif;font-size:14px;color:#323E48;background:
   --bg:#fff;--surface:#fff;--muted-bg:#F5F5F7;--border:#E2E4E6;
   --text:#323E48;--text-muted:#70787F;--primary:#625D9C;
   --radius-sm:4px;--radius-md:8px;--radius-lg:12px;--radius-xl:16px;--radius-full:9999px;
-  --sidebar-w:260px;
+  --sidebar-w:264px;
+  --section-gap:14px;
+  --transition-fast:.15s cubic-bezier(.4,0,.2,1);
+  --transition-med:.25s cubic-bezier(.4,0,.2,1);
+  --transition-spring:.35s cubic-bezier(.34,1.56,.64,1);
 }
-#page-wrapper{display:flex;min-height:100vh;background:#f0f2f5}
-#sidebar-wrap{width:calc(var(--sidebar-w) + 24px);flex-shrink:0;padding:16px 0 16px 16px;position:sticky;top:0;height:100vh;border-right:none;box-sizing:border-box}
-#sidebar{width:var(--sidebar-w);height:100%;display:flex;flex-direction:column;background:linear-gradient(160deg,#2C2A46 0%,#00434C 100%);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.22);overflow:hidden}
-#content{flex:1;overflow:hidden;padding:0;background:#f0f2f5}
-.sg-section{padding:64px 64px 80px;border-bottom:1px solid var(--border);max-width:1100px;background:#fff;margin:16px 16px 0;border-radius:16px}
-.sg-section:last-child{border-bottom:none;margin-bottom:16px}
-.sidebar-logo{padding:20px 16px 16px;background:transparent;border-radius:0;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;flex-shrink:0}
-.sidebar-logo-mark{width:36px;height:36px;background:rgba(255,255,255,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;flex-shrink:0}
-.sidebar-logo-text{font-size:13px;font-weight:700;color:#fff;line-height:1.3}
-.sidebar-search{padding:10px 10px;position:relative;display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,0.1);flex-shrink:0}
-.sidebar-search-icon{font-size:13px;line-height:1;color:rgba(255,255,255,0.35);pointer-events:none;position:absolute;left:20px;top:50%;transform:translateY(-50%)}
-.sidebar-search-input{width:100%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:7px 28px 7px 30px;font-size:12px;font-family:inherit;color:#fff;outline:none;transition:background .15s,border-color .15s}
-.sidebar-search-input::placeholder{color:rgba(255,255,255,0.35)}
-.sidebar-search-input:focus{background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.3)}
-.sidebar-search-clear{display:none;position:absolute;right:22px;background:none;border:none;color:rgba(255,255,255,0.4);font-size:16px;line-height:1;cursor:pointer;padding:0;font-family:inherit}
-.sidebar-search-clear:hover{color:#fff}
+
+/* ── Layout ────────────────────────────────────────── */
+#page-wrapper{display:flex;min-height:100vh;background:#EAECEF}
+#sidebar-wrap{width:calc(var(--sidebar-w) + 20px);flex-shrink:0;padding:14px 0 14px 14px;position:sticky;top:0;height:100vh;box-sizing:border-box}
+#content{flex:1;overflow:hidden;padding:0;background:#EAECEF}
+#main-content{padding-bottom:40px}
+
+/* ── Sidebar v2 ────────────────────────────────────── */
+#sidebar{
+  width:var(--sidebar-w);height:100%;display:flex;flex-direction:column;
+  background:#fff;border-radius:16px;
+  border:1px solid rgba(0,0,0,.07);
+  box-shadow:0 2px 12px rgba(0,0,0,.06),0 1px 3px rgba(0,0,0,.04);
+  overflow:hidden;
+}
+
+/* Sidebar header */
+.sidebar-header{
+  padding:18px 16px 14px;
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
+}
+.sidebar-brand{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.sidebar-mark{
+  width:34px;height:34px;border-radius:9px;
+  background:linear-gradient(135deg,var(--sog-purple) 0%,var(--sog-teal) 100%);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.sidebar-wordmark{font-size:13px;font-weight:700;color:var(--text);line-height:1.2;letter-spacing:-.01em}
+.sidebar-wordmark span{display:block;font-size:11px;font-weight:400;color:var(--text-muted)}
+
+/* Sidebar search */
+.sidebar-search{position:relative;display:flex;align-items:center}
+.sidebar-search-icon{font-size:16px!important;color:var(--text-muted);position:absolute;left:10px;pointer-events:none;line-height:1}
+.sidebar-search-input{
+  width:100%;background:var(--muted-bg);border:1.5px solid transparent;
+  border-radius:8px;padding:7px 28px 7px 32px;
+  font-size:13px;font-family:inherit;color:var(--text);outline:none;
+  transition:border-color var(--transition-fast),background var(--transition-fast);
+}
+.sidebar-search-input::placeholder{color:var(--charcoal-40)}
+.sidebar-search-input:focus{background:#fff;border-color:var(--sog-purple);box-shadow:0 0 0 3px rgba(98,93,156,.12)}
+.sidebar-search-input:focus-visible{outline:none;border-color:var(--sog-purple);box-shadow:0 0 0 3px rgba(98,93,156,.2)}
+.sidebar-search-clear{display:none;position:absolute;right:8px;background:none;border:none;color:var(--text-muted);font-size:16px;line-height:1;cursor:pointer;padding:2px;border-radius:4px;transition:color var(--transition-fast)}
+.sidebar-search-clear:hover{color:var(--text)}
 .sidebar-search-clear.visible{display:block}
 .sidebar-link.search-hidden{display:none}
 .sidebar-group.search-hidden{display:none}
-.sidebar-no-results{display:none;padding:10px 20px;font-size:12px;color:rgba(50,62,72,0.4);font-style:italic}
+.sidebar-no-results{display:none;padding:10px 16px;font-size:12px;color:var(--text-muted);font-style:italic}
 .sidebar-no-results.visible{display:block}
-.sidebar-nav{padding:6px 0 24px;flex:1;overflow-y:auto}
-.sidebar-footer{padding:12px 16px;border-top:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;gap:8px;flex-shrink:0;border-radius:0}
-.sidebar-footer-version{font-size:10px;color:rgba(255,255,255,0.35);font-weight:500;letter-spacing:.04em}
-.sidebar-footer-dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,0.2);flex-shrink:0}
-.sidebar-footer-brand{font-size:10px;color:rgba(255,255,255,0.3);font-weight:400}
-.sidebar-group{margin-bottom:2px}
-.sidebar-group+.sidebar-group{margin-top:6px}
-.sidebar-group-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.35);padding:12px 18px 4px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none;transition:color .15s}
-.sidebar-group-label:hover{color:rgba(255,255,255,0.6)}
-.sidebar-chevron{width:11px;height:11px;opacity:.4;flex-shrink:0;transition:transform .2s ease}
+
+/* Sidebar nav */
+.sidebar-nav{padding:8px 0 16px;flex:1;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--charcoal-20) transparent}
+.sidebar-nav::-webkit-scrollbar{width:4px}
+.sidebar-nav::-webkit-scrollbar-thumb{background:var(--charcoal-20);border-radius:2px}
+
+/* Sidebar groups */
+.sidebar-group{margin-bottom:0}
+.sidebar-group+.sidebar-group{margin-top:4px}
+.sidebar-group-label{
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--charcoal-40);padding:10px 16px 4px;
+  cursor:pointer;display:flex;align-items:center;justify-content:space-between;
+  user-select:none;transition:color var(--transition-fast);
+}
+.sidebar-group-label:hover{color:var(--text-muted)}
+.sidebar-chevron{width:10px;height:10px;opacity:.4;flex-shrink:0;transition:transform var(--transition-med)}
 .sidebar-group.collapsed .sidebar-chevron{transform:rotate(-90deg)}
-.sidebar-group-links{overflow:hidden;max-height:1400px;opacity:1;transition:max-height .35s ease,opacity .2s ease}
+.sidebar-group-links{
+  overflow:hidden;
+  max-height:1400px;opacity:1;
+  transition:max-height var(--transition-med),opacity var(--transition-fast);
+}
 .sidebar-group.collapsed .sidebar-group-links{max-height:0;opacity:0}
-.sidebar-link{display:block;margin:1px 8px;padding:7px 12px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;cursor:pointer;border-radius:8px;transition:background .15s,color .15s}
-.sidebar-link:hover{background:rgba(255,255,255,0.08);color:#fff}
-.sidebar-link.active{background:rgba(255,255,255,0.15);color:#fff;font-weight:600;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.2)}
-.sidebar-sub-link{display:block;margin:1px 8px 1px 20px;padding:6px 12px;font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;cursor:pointer;border-radius:7px;transition:background .15s,color .15s}
-.sidebar-sub-link:hover{background:rgba(255,255,255,0.07);color:#fff}
-.sidebar-sub-link.active{background:rgba(255,255,255,0.12);color:#fff;font-weight:600}
+
+/* Sidebar links */
+.sidebar-link{
+  display:flex;align-items:center;gap:8px;
+  margin:1px 8px;padding:7px 10px;
+  font-size:13px;color:var(--text-muted);
+  text-decoration:none;cursor:pointer;
+  border-radius:8px;
+  transition:background var(--transition-fast),color var(--transition-fast);
+  position:relative;
+}
+.sidebar-link:hover{background:var(--purple-10);color:var(--sog-purple)}
+.sidebar-link.active{
+  background:var(--purple-10);color:var(--sog-purple);font-weight:600;
+}
+.sidebar-link.active::before{
+  content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);
+  width:3px;height:18px;background:var(--sog-purple);border-radius:0 3px 3px 0;
+}
+.sidebar-sub-link{
+  display:block;margin:1px 8px 1px 22px;padding:5px 10px;
+  font-size:12px;color:var(--charcoal-40);text-decoration:none;
+  cursor:pointer;border-radius:7px;
+  transition:background var(--transition-fast),color var(--transition-fast);
+}
+.sidebar-sub-link:hover{background:var(--muted-bg);color:var(--text)}
+.sidebar-sub-link.active{background:var(--purple-10);color:var(--sog-purple);font-weight:600}
+
+/* Sidebar footer */
+.sidebar-footer{
+  padding:12px 16px;border-top:1px solid var(--border);
+  display:flex;align-items:center;gap:8px;flex-shrink:0;
+}
+.sidebar-footer-version{
+  font-size:11px;font-weight:600;
+  background:var(--purple-10);color:var(--sog-purple);
+  padding:3px 9px;border-radius:var(--radius-full);
+}
+.sidebar-footer-dot{width:3px;height:3px;border-radius:50%;background:var(--border);flex-shrink:0}
+.sidebar-footer-brand{font-size:11px;color:var(--text-muted);font-weight:400}
+
+/* ── Section layout ────────────────────────────────── */
+.sg-section{
+  padding:56px 60px 72px;border-bottom:1px solid var(--border);
+  max-width:1100px;background:#fff;
+  margin:var(--section-gap) var(--section-gap) 0;border-radius:16px;
+  border:1px solid rgba(0,0,0,.05);
+  opacity:0;transform:translateY(18px);
+  transition:opacity .5s cubic-bezier(.4,0,.2,1),transform .5s cubic-bezier(.4,0,.2,1);
+}
+.sg-section.visible{opacity:1;transform:translateY(0)}
+.sg-section:last-child{border-bottom:none;margin-bottom:var(--section-gap)}
+
+/* Section hero override for intro */
+.sg-section.intro-hero{padding:0;overflow:hidden;background:transparent;border:none}
+
+/* ── Typography tokens ─────────────────────────────── */
 .sg-section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--sog-purple);margin-bottom:8px}
-.sg-section-title{font-size:36px;font-weight:700;color:var(--sog-charcoal);margin-bottom:12px;line-height:1.2}
-.sg-section-desc{font-size:16px;color:var(--text-muted);max-width:700px;line-height:1.6;margin-bottom:48px}
+.sg-section-title{font-size:34px;font-weight:700;color:var(--sog-charcoal);margin-bottom:12px;line-height:1.15;letter-spacing:-.01em}
+.sg-section-desc{font-size:16px;color:var(--text-muted);max-width:700px;line-height:1.65;margin-bottom:48px}
 .sg-sub{margin-bottom:48px}
 .sg-sub-title{font-size:18px;font-weight:600;color:var(--sog-charcoal);margin-bottom:6px}
 .sg-sub-desc{font-size:14px;color:var(--text-muted);margin-bottom:20px;line-height:1.5}
+
+/* ── Components (all carried over) ─────────────────── */
 .sg-example{background:var(--muted-bg);border:1px solid var(--border);border-radius:12px;padding:32px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start}
 .sg-example.column{flex-direction:column}
 .sg-example.center{justify-content:center;align-items:center}
@@ -88,7 +188,7 @@ body{font-family:'Open Sans',sans-serif;font-size:14px;color:#323E48;background:
 .swatch-color{height:80px}
 .swatch-info{padding:12px;background:#fff}
 .swatch-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
-.swatch-hex{font-size:12px;color:var(--text-muted);font-family:monospace;display:flex;align-items:center;gap:5px}
+.swatch-hex{font-size:12px;color:var(--text-muted);font-family:'SF Mono',Consolas,monospace;display:flex;align-items:center;gap:5px}
 .copy-btn{background:none;border:none;cursor:pointer;padding:2px 3px;border-radius:3px;color:var(--text-muted);opacity:0;transition:opacity .15s,color .15s,background .15s;flex-shrink:0;display:inline-flex;align-items:center;line-height:1}
 .copy-btn:hover{background:var(--charcoal-10);color:var(--sog-purple)}
 .copy-btn.copied{color:var(--sog-green)!important;opacity:1!important}
@@ -100,7 +200,6 @@ body{font-family:'Open Sans',sans-serif;font-size:14px;color:#323E48;background:
 .sg-copy-code .copy-btn{flex-shrink:0;opacity:.6}
 .sg-copy-code:hover .copy-btn{opacity:1}
 .sg-copy-code .copy-btn-text{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-/* KPI Cards */
 .kpi-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;position:relative;overflow:hidden}
 .kpi-card-label{font-size:12px;color:var(--text-muted);font-weight:500;margin-bottom:8px}
 .kpi-card-value{font-size:32px;font-weight:800;color:var(--text);line-height:1;margin-bottom:6px}
@@ -108,13 +207,11 @@ body{font-family:'Open Sans',sans-serif;font-size:14px;color:#323E48;background:
 .kpi-card-trend.up{color:#00AF9A}
 .kpi-card-trend.down{color:#F32735}
 .kpi-sparkline{height:40px!important;width:100%!important}
-/* Funnel */
 .funnel-stage-wrap{display:flex;align-items:center;gap:16px;margin-bottom:6px}
 .funnel-bar{height:52px;border-radius:6px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;color:#fff;font-weight:600;font-size:14px;transition:opacity .2s;flex-shrink:0}
 .funnel-bar:hover{opacity:.85;cursor:default}
 .funnel-meta{font-size:12px;color:var(--text-muted);white-space:nowrap}
 .funnel-connector{width:2px;height:12px;background:var(--border);margin:0 auto;display:block}
-/* Gauge */
 .gauge-wrap{text-align:center}
 .gauge-canvas-wrap{position:relative;height:150px;width:100%}
 .gauge-center{position:absolute;bottom:0;left:50%;transform:translateX(-50%);text-align:center;line-height:1.2}
@@ -127,7 +224,6 @@ body{font-family:'Open Sans',sans-serif;font-size:14px;color:#323E48;background:
 .swatch-val.full{grid-column:1/-1}
 .swatch-val-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--text-muted)}
 .swatch-val-val{font-size:10.5px;color:var(--text);line-height:1.4;font-family:inherit}
-/* Logo Usage */
 .logo-variant-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:8px}
 .logo-variant-card{border-radius:12px;overflow:hidden;border:1px solid var(--border)}
 .logo-variant-preview{height:130px;display:flex;align-items:center;justify-content:center;padding:24px}
@@ -143,31 +239,34 @@ body{font-family:'Open Sans',sans-serif;font-size:14px;color:#323E48;background:
 .logo-clear-diagram{background:#fff;border:1px solid var(--border);border-radius:12px;padding:32px;display:flex;align-items:center;justify-content:center}
 .tint-strip{display:flex;border-radius:8px;overflow:hidden;height:48px;margin-bottom:8px}
 .tint-cell{flex:1;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-family:inherit;font-size:14px;font-weight:600;border-radius:8px;cursor:pointer;transition:all .15s;border:none;padding:0 16px;height:36px;text-decoration:none;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-family:inherit;font-size:14px;font-weight:600;border-radius:8px;cursor:pointer;transition:background var(--transition-fast),transform var(--transition-fast),box-shadow var(--transition-fast);border:none;padding:0 16px;height:36px;text-decoration:none;white-space:nowrap}
 .btn:focus-visible{outline:2px solid var(--sog-purple);outline-offset:2px}
+.btn:active{transform:translateY(0) scale(.98)}
 .btn-primary{background:var(--sog-purple);color:#fff}
-.btn-primary:hover{background:#534F87}
+.btn-primary:hover{background:#534F87;transform:translateY(-1px);box-shadow:0 4px 12px rgba(98,93,156,.3)}
 .btn-secondary{background:var(--sog-teal);color:#fff}
-.btn-secondary:hover{background:#007A8A}
+.btn-secondary:hover{background:#007A8A;transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,149,169,.25)}
 .btn-outline{background:transparent;color:var(--sog-purple);border:1.5px solid var(--sog-purple)}
 .btn-outline:hover{background:var(--purple-10)}
 .btn-ghost{background:transparent;color:var(--text)}
 .btn-ghost:hover{background:var(--charcoal-10)}
 .btn-danger{background:var(--sog-red);color:#fff}
-.btn-danger:hover{background:#CE1F2B}
+.btn-danger:hover{background:#CE1F2B;transform:translateY(-1px)}
 .btn-link{background:transparent;color:var(--sog-purple);padding:0;height:auto;text-decoration:underline;font-weight:400;border:none}
 .btn-sm{height:28px;font-size:12px;padding:0 10px;border-radius:6px}
 .btn-lg{height:44px;font-size:16px;padding:0 24px;border-radius:10px}
 .btn-icon{width:36px;padding:0}
-.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+/* Global focus-visible ring for any interactive element */
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--sog-purple);outline-offset:2px;border-radius:4px}
 .sg-label{display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px}
 .sg-label .required{color:var(--sog-red);margin-left:2px}
-.sg-input{display:block;width:100%;height:38px;padding:0 12px;font-family:inherit;font-size:14px;color:var(--text);background:#fff;border:1.5px solid var(--border);border-radius:8px;transition:border-color .15s,box-shadow .15s;box-sizing:border-box}
+.sg-input{display:block;width:100%;height:38px;padding:0 12px;font-family:inherit;font-size:14px;color:var(--text);background:#fff;border:1.5px solid var(--border);border-radius:8px;transition:border-color var(--transition-fast),box-shadow var(--transition-fast);box-sizing:border-box}
 .sg-input:focus{outline:none;border-color:var(--sog-purple);box-shadow:0 0 0 3px rgba(98,93,156,.15)}
 .sg-input.error{border-color:var(--sog-red)}
 .sg-input.error:focus{box-shadow:0 0 0 3px rgba(243,39,53,.15)}
 .sg-input:disabled{background:var(--muted-bg);color:var(--text-muted);cursor:not-allowed}
-.sg-textarea{width:100%;min-height:100px;padding:10px 12px;font-family:inherit;font-size:14px;color:var(--text);background:#fff;border:1.5px solid var(--border);border-radius:8px;resize:vertical;transition:border-color .15s,box-shadow .15s;box-sizing:border-box}
+.sg-textarea{width:100%;min-height:100px;padding:10px 12px;font-family:inherit;font-size:14px;color:var(--text);background:#fff;border:1.5px solid var(--border);border-radius:8px;resize:vertical;transition:border-color var(--transition-fast),box-shadow var(--transition-fast);box-sizing:border-box}
 .sg-textarea:focus{outline:none;border-color:var(--sog-purple);box-shadow:0 0 0 3px rgba(98,93,156,.15)}
 .sg-helper{font-size:12px;color:var(--text-muted);margin-top:5px}
 .sg-error-msg{font-size:12px;color:var(--sog-red);margin-top:5px}
@@ -227,19 +326,19 @@ body{font-family:'Open Sans',sans-serif;font-size:14px;color:#323E48;background:
 .toast-icon{font-size:16px;flex-shrink:0}
 .nav-demo{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden}
 .nav-demo-sidebar{width:200px;background:#fff;border-right:1px solid var(--border);padding:12px 0}
-.nav-item{display:flex;align-items:center;gap:8px;padding:8px 16px;font-size:13px;color:var(--text-muted);cursor:pointer;transition:all .15s}
+.nav-item{display:flex;align-items:center;gap:8px;padding:8px 16px;font-size:13px;color:var(--text-muted);cursor:pointer;transition:all var(--transition-fast)}
 .nav-item:hover{background:var(--purple-10);color:var(--sog-charcoal)}
 .nav-item.active{background:var(--purple-10);color:var(--sog-purple);font-weight:600}
 .nav-item-icon{font-size:16px}
 .tab-bar{display:flex;background:var(--muted-bg);border:1px solid var(--border);border-radius:10px;padding:4px;gap:2px;width:fit-content}
-.tab-pill{padding:6px 16px;border-radius:8px;font-size:13px;font-weight:500;color:var(--text-muted);cursor:pointer;transition:all .15s}
+.tab-pill{padding:6px 16px;border-radius:8px;font-size:13px;font-weight:500;color:var(--text-muted);cursor:pointer;transition:all var(--transition-fast)}
 .tab-pill.active{background:#fff;color:var(--sog-purple);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.08)}
 .chart-wrapper{position:relative;height:320px;width:100%}
 .chart-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:24px}
 .chart-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px}
 .chart-desc{font-size:13px;color:var(--text-muted);margin-bottom:20px}
 .chart-toggle{display:flex;gap:4px;margin-bottom:16px}
-.chart-toggle-btn{padding:4px 12px;font-size:12px;font-weight:600;border-radius:6px;border:1.5px solid var(--border);background:#fff;color:var(--text-muted);cursor:pointer;transition:all .15s;font-family:inherit}
+.chart-toggle-btn{padding:4px 12px;font-size:12px;font-weight:600;border-radius:6px;border:1.5px solid var(--border);background:#fff;color:var(--text-muted);cursor:pointer;transition:all var(--transition-fast);font-family:inherit}
 .chart-toggle-btn.active{background:var(--purple-10);color:var(--sog-purple);border-color:var(--purple-40)}
 .heatmap-wrap{overflow-x:auto}
 .hm-table{border-collapse:collapse;font-size:11px;min-width:600px}
@@ -294,11 +393,20 @@ body{font-family:'Open Sans',sans-serif;font-size:14px;color:#323E48;background:
 .icon-size-group{display:flex;flex-direction:column;align-items:center;gap:8px}
 .icon-size-label{font-size:10px;color:var(--text-muted);font-weight:600}
 .color-strip{display:flex;border-radius:10px;overflow:hidden;height:56px;margin-bottom:24px}
-.color-strip-cell{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;gap:2px}
+.color-strip-cell{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-size:9px;font-weight:700;color:#fff;gap:2px;
+  cursor:pointer;transition:flex var(--transition-med),filter var(--transition-fast);
+}
+.color-strip-cell:hover{flex:1.6;filter:brightness(1.08)}
 .color-strip-cell.light-text *{color:rgba(0,0,0,.6)}
 .usage-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
-.usage-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px}
-.usage-card-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.usage-card{
+  background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px;
+  transition:box-shadow var(--transition-med),transform var(--transition-med);
+}
+.usage-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.07);transform:translateY(-2px)}
+.usage-card-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px;display:flex;align-items:center;gap:8px}
 .usage-card-icon{font-size:18px}
 .usage-card-body{font-size:13px;color:var(--text-muted);line-height:1.6}
 .usage-card-list{font-size:13px;color:var(--text-muted);line-height:1.6;margin-top:8px;padding-left:16px}
@@ -308,7 +416,7 @@ body{font-family:'Open Sans',sans-serif;font-size:14px;color:#323E48;background:
 .crumb-link:hover{text-decoration:underline}
 .crumb-current{color:var(--text-muted)}
 .pagination{display:flex;gap:4px;align-items:center}
-.page-btn{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:#fff;color:var(--text-muted);transition:all .15s;font-family:inherit}
+.page-btn{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:#fff;color:var(--text-muted);transition:all var(--transition-fast);font-family:inherit}
 .page-btn:hover{background:var(--purple-10);color:var(--sog-purple)}
 .page-btn.active{background:var(--sog-purple);color:#fff;border-color:var(--sog-purple)}
 .page-btn.disabled{opacity:.4;cursor:not-allowed}
@@ -355,17 +463,176 @@ body{font-family:'Open Sans',sans-serif;font-size:14px;color:#323E48;background:
 .flow-arrow{color:var(--text-muted);font-size:14px}
 .focus-demo-btn{padding:10px 20px;background:var(--sog-purple);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer}
 .focus-demo-btn:focus-visible{outline:2px solid var(--sog-purple);outline-offset:2px}
-#skip-link{position:absolute;top:-100%;left:16px;background:var(--sog-purple);color:#fff;padding:8px 16px;border-radius:6px;font-size:14px;font-weight:600;text-decoration:none;z-index:999;transition:top .15s}
+
+/* ── Skip link ─────────────────────────────────────── */
+#skip-link{position:absolute;top:-100%;left:16px;background:var(--sog-purple);color:#fff;padding:8px 16px;border-radius:6px;font-size:14px;font-weight:600;text-decoration:none;z-index:999;transition:top var(--transition-fast)}
 #skip-link:focus{top:16px}
+
+/* ── Mobile topbar ─────────────────────────────────── */
 .mobile-menu-btn{display:none}
-#mobile-topbar{display:none;position:fixed;top:0;left:0;right:0;z-index:200;background:linear-gradient(135deg,#2C2A46 0%,#00434C 100%);height:56px;padding:0 16px;align-items:center;justify-content:space-between;box-shadow:0 2px 16px rgba(0,0,0,0.18)}
+#mobile-topbar{display:none;position:fixed;top:0;left:0;right:0;z-index:200;background:#fff;border-bottom:1px solid var(--border);height:56px;padding:0 16px;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,.06)}
 .mobile-topbar-brand{display:flex;align-items:center;gap:10px}
-.mobile-topbar-mark{width:32px;height:32px;background:rgba(255,255,255,0.22);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px;flex-shrink:0}
-.mobile-topbar-title{font-size:14px;font-weight:700;color:#fff;letter-spacing:-.01em}
-.mobile-topbar-btn{background:rgba(255,255,255,0.15);border:none;border-radius:8px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;flex-shrink:0}
-.mobile-topbar-btn:active{background:rgba(255,255,255,0.25)}
-#sidebar-overlay{display:none;position:fixed;top:56px;left:0;right:0;bottom:0;background:rgba(0,0,0,0.45);z-index:149}
+.mobile-topbar-mark{width:32px;height:32px;background:linear-gradient(135deg,var(--sog-purple),var(--sog-teal));border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mobile-topbar-title{font-size:14px;font-weight:700;color:var(--text);letter-spacing:-.01em}
+.mobile-topbar-btn{background:var(--muted-bg);border:none;border-radius:8px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);flex-shrink:0;transition:background var(--transition-fast)}
+.mobile-topbar-btn:active{background:var(--charcoal-20)}
+#sidebar-overlay{display:none;position:fixed;top:56px;left:0;right:0;bottom:0;background:rgba(0,0,0,.35);z-index:149;backdrop-filter:blur(2px)}
 #sidebar-overlay.visible{display:block}
+
+/* ── Intro hero ────────────────────────────────────── */
+.hero-wrap{
+  background:#fff;border-radius:16px;
+  border:1px solid rgba(0,0,0,.05);
+  overflow:hidden;margin:var(--section-gap) var(--section-gap) 0;
+}
+.hero-band{
+  background:linear-gradient(125deg,#1E1C38 0%,#2C2A46 45%,#00434C 100%);
+  padding:52px 60px 48px;
+  position:relative;overflow:hidden;
+}
+/* subtle dot-grid texture */
+.hero-band::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:24px 24px;pointer-events:none;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+  color:rgba(255,255,255,.55);margin-bottom:20px;
+}
+.hero-eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--sog-sky);flex-shrink:0}
+.hero-title{
+  font-size:42px;font-weight:700;color:#fff;
+  line-height:1.1;letter-spacing:-.01em;
+  max-width:640px;margin-bottom:16px;
+}
+.hero-title em{font-style:normal;color:var(--sog-sky)}
+.hero-subtitle{
+  font-size:15px;color:rgba(255,255,255,.65);
+  max-width:580px;line-height:1.65;margin-bottom:32px;
+}
+/* Colour pill strip inside hero */
+.hero-pill-row{display:flex;gap:6px;flex-wrap:wrap}
+.hero-pill{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);
+  border-radius:var(--radius-full);padding:5px 12px;
+  font-size:11px;font-weight:600;color:rgba(255,255,255,.8);
+  cursor:pointer;
+  transition:background var(--transition-fast),border-color var(--transition-fast),transform var(--transition-spring);
+  user-select:none;
+}
+.hero-pill:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.3);transform:translateY(-2px)}
+.hero-pill:active{transform:scale(.96)}
+.hero-pill-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+/* hero pill copied flash */
+.hero-pill.copied{background:rgba(0,175,154,.25);border-color:rgba(0,175,154,.5)}
+
+/* Hero stats row */
+.hero-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid rgba(255,255,255,.08);
+  padding:28px 60px;gap:0;
+}
+.hero-stat{
+  padding:0 24px 0 0;border-right:1px solid rgba(0,0,0,.06);
+  opacity:0;transform:translateY(8px);
+}
+.hero-stat:first-child{padding-left:0}
+.hero-stat:last-child{border-right:none}
+.hero-stat-num{
+  font-size:28px;font-weight:700;color:var(--sog-charcoal);
+  letter-spacing:-.01em;line-height:1;margin-bottom:4px;
+}
+.hero-stat-label{font-size:12px;color:var(--text-muted);line-height:1.4}
+
+/* Staggered stat animation */
+.hero-stat.visible{opacity:1;transform:translateY(0);transition:opacity .5s ease,transform .5s ease}
+.hero-stat:nth-child(1).visible{transition-delay:.05s}
+.hero-stat:nth-child(2).visible{transition-delay:.12s}
+.hero-stat:nth-child(3).visible{transition-delay:.19s}
+.hero-stat:nth-child(4).visible{transition-delay:.26s}
+
+/* Intro body */
+.intro-body{padding:44px 60px 52px;background:#fff}
+.intro-lead{
+  font-size:17px;font-weight:600;color:var(--text);
+  line-height:1.7;max-width:780px;margin-bottom:16px;
+}
+.intro-lead-sub{
+  font-size:15px;color:var(--text-muted);
+  max-width:780px;line-height:1.7;margin-bottom:36px;
+}
+
+/* Colour palette strip */
+.colour-strip-row{margin-bottom:6px}
+.colour-strip-inner{display:flex;border-radius:10px;overflow:hidden;height:52px}
+.colour-cell{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-size:9px;font-weight:700;color:#fff;gap:2px;
+  cursor:pointer;transition:flex var(--transition-med),filter var(--transition-fast);
+  position:relative;overflow:hidden;
+}
+.colour-cell:hover{flex:2;filter:brightness(1.08)}
+.colour-cell.light-label span{color:rgba(0,0,0,.65)}
+.colour-cell-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;pointer-events:none}
+.colour-cell-hex{font-size:9px;font-family:'SF Mono',Consolas,monospace;opacity:.75;pointer-events:none}
+.colour-strip-caption{font-size:11px;color:var(--text-muted);margin-bottom:36px}
+
+/* Audience cards */
+.audience-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
+.audience-card{
+  background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px;
+  transition:box-shadow var(--transition-med),transform var(--transition-med);
+  position:relative;overflow:hidden;
+}
+.audience-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--sog-purple),var(--sog-teal));
+  border-radius:14px 14px 0 0;
+}
+.audience-card:hover{box-shadow:0 6px 20px rgba(0,0,0,.08);transform:translateY(-2px)}
+.audience-icon{
+  width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:14px;flex-shrink:0;
+}
+.audience-icon .material-icons{font-size:20px}
+.audience-icon.purple{background:var(--purple-10);color:var(--sog-purple)}
+.audience-icon.teal{background:var(--teal-10);color:var(--sog-teal)}
+.audience-card-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:6px}
+.audience-card-body{font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:12px}
+.audience-card-list{font-size:13px;color:var(--text-muted);line-height:1.7;padding-left:0;list-style:none}
+.audience-card-list li{display:flex;align-items:flex-start;gap:8px;padding:3px 0}
+.audience-card-list li::before{content:'→';color:var(--sog-purple);font-weight:600;flex-shrink:0;margin-top:1px}
+
+/* Info callout v2 */
+.intro-callout{
+  background:var(--blue-10);border:1px solid var(--blue-40);
+  border-radius:12px;padding:16px 20px;
+  font-size:13px;color:var(--sog-charcoal);line-height:1.6;
+  display:flex;gap:12px;align-items:flex-start;
+}
+.intro-callout-icon{color:var(--sog-blue);font-size:18px;flex-shrink:0;margin-top:1px}
+.intro-callout strong{color:#1B6FA0}
+.intro-callout a{color:var(--sog-purple);font-weight:600}
+
+/* ── Section entrance animations ──────────────────── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* Staggered children within sections */
+.sg-section .sg-sub{
+  opacity:0;transform:translateY(12px);
+  transition:opacity .45s cubic-bezier(.4,0,.2,1),transform .45s cubic-bezier(.4,0,.2,1);
+}
+.sg-section.visible .sg-sub:nth-child(1){opacity:1;transform:none;transition-delay:.06s}
+.sg-section.visible .sg-sub:nth-child(2){opacity:1;transform:none;transition-delay:.12s}
+.sg-section.visible .sg-sub:nth-child(3){opacity:1;transform:none;transition-delay:.18s}
+.sg-section.visible .sg-sub:nth-child(4){opacity:1;transform:none;transition-delay:.24s}
+.sg-section.visible .sg-sub:nth-child(n+5){opacity:1;transform:none;transition-delay:.3s}
+
+/* ── Responsive ────────────────────────────────────── */
 @media(max-width:768px){
   #mobile-topbar{display:flex}
   #page-wrapper{padding-top:56px}
@@ -373,19 +640,64 @@ body{font-family:'Open Sans',sans-serif;font-size:14px;color:#323E48;background:
   #sidebar-wrap.open{display:block}
   #sidebar{border-radius:12px;height:100%}
   #content{width:100%}
-  .sg-section{padding:40px 24px 56px}
+  .sg-section{padding:32px 20px 48px;margin:10px 10px 0}
+  .hero-wrap{margin:10px 10px 0}
+  .hero-band{padding:32px 20px 28px}
+  .hero-title{font-size:26px;letter-spacing:-.02em}
+  .hero-subtitle{font-size:14px}
+  /* Stats: 2 columns on mobile */
+  .hero-stats{grid-template-columns:1fr 1fr;padding:20px;gap:16px}
+  .hero-stat{border-right:none;padding:0}
+  .hero-stat-num{font-size:22px}
+  .intro-body{padding:28px 20px 36px}
+  .intro-lead{font-size:15px}
+  .intro-lead-sub{font-size:14px}
+  /* Colour strip: stack vertically on mobile */
+  .colour-strip-inner{flex-direction:column;height:auto;border-radius:10px}
+  .colour-cell{flex:none;height:44px;flex-direction:row;gap:10px;justify-content:flex-start;padding:0 16px;border-radius:0}
+  .colour-cell:hover{flex:none;filter:brightness(1.04)}
+  .colour-cell-label{font-size:12px;font-weight:600;letter-spacing:.02em}
+  .colour-cell-hex{font-size:11px;opacity:.8}
+  .colour-strip-caption{font-size:11px;margin-bottom:24px}
+  /* Hero pills: wrap naturally, smaller */
+  .hero-pill-row{gap:5px}
+  .hero-pill{font-size:10px;padding:4px 9px}
+  /* Audience grid: single column */
+  .audience-grid{grid-template-columns:1fr}
+  /* Other grid layouts */
   .scorecard-grid{grid-template-columns:1fr}
   .do-dont{grid-template-columns:1fr}
   .usage-grid{grid-template-columns:1fr}
+  /* Section title size */
+  .sg-section-title{font-size:26px}
 }
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+/* Tighter mobile for very small screens */
+@media(max-width:400px){
+  .hero-title{font-size:22px}
+  .hero-stats{grid-template-columns:1fr}
+  .sg-section{padding:24px 16px 40px}
+  .intro-body{padding:24px 16px 32px}
+  .hero-band{padding:28px 16px 24px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+  .sg-section{opacity:1;transform:none}
+  .hero-stat{opacity:1;transform:none}
+  .sg-section .sg-sub{opacity:1;transform:none}
+}
 </style>
 </head>
 <body>
 <a href="#main-content" id="skip-link">Skip to main content</a>
+
+<!-- Mobile topbar -->
 <div id="mobile-topbar">
   <div class="mobile-topbar-brand">
-    <div class="mobile-topbar-mark">SG</div>
+    <div class="mobile-topbar-mark">
+      <svg width="18" height="18" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g><polygon fill="#323e48" points="352 235.7 352 349.9 143.8 349.9 143.8 321 154 321 129.5 278.5 105 321 115.2 321 115.2 378.5 143.8 378.5 143.8 378.5 352 378.5 380.5 349.9 380.5 235.7 352 235.7"/><polygon fill="#323e48" points="380.5 179 380.5 121.5 352 121.5 352 121.5 143.8 121.5 115.2 150.1 115.2 264.3 143.8 264.3 143.8 150.1 352 150.1 352 179 341.7 179 366.2 221.5 390.8 179 380.5 179"/><rect fill="#5eb3e4" x="229.4" y="235.7" width="94.4" height="28.5"/><rect fill="#00af9a" x="172.3" y="292.8" width="151.5" height="28.5"/><rect fill="#625d9c" x="172.3" y="178.6" width="151.5" height="28.5"/><polygon fill="#4197cb" points="200.9 235.7 172.3 264.3 172.3 178.6 200.9 207.2 200.9 235.7"/><polygon fill="#0095a9" points="323.8 321.4 295.2 292.8 295.2 264.3 323.8 235.7 323.8 321.4"/></g>
+      </svg>
+    </div>
     <span class="mobile-topbar-title">Streets of Growth</span>
   </div>
   <button class="mobile-topbar-btn" id="mobile-nav-toggle" aria-label="Toggle navigation">
@@ -393,26 +705,38 @@ body{font-family:'Open Sans',sans-serif;font-size:14px;color:#323E48;background:
   </button>
 </div>
 <div id="sidebar-overlay"></div>
+
 <div id="page-wrapper">
+
+<!-- ── Sidebar v2 ────────────────────────────────── -->
 <div id="sidebar-wrap">
 <nav id="sidebar" aria-label="Style guide navigation">
-  <div class="sidebar-logo">
-    <svg height="20" viewBox="0 0 1023.5 132" width="155" xmlns="http://www.w3.org/2000/svg" style="display:block;flex-shrink:0"><g fill="#ffffff"><path d="m215.1 73.9c-10.2-3.6-21.8-9.1-21.8-22.1s8.8-19.7 22.8-19.7 22.7 11 22.7 11l-8.3 8.2s-5.8-7.9-14.4-7.9-10.6 3.7-10.6 8.4 5.5 8 15 11.5c10.6 4 19.5 8.8 19.5 21.4s-11.1 19.4-24.3 19.4-25.5-14.2-25.5-14.2l9-7.6s6 10.4 16.5 10.4 12.1-2.4 12.1-8.1-4.5-8-12.7-10.8z"/><path d="m247.1 55.8h9.3v-14h11.9v14h14.2v10.7h-14.2v19c0 5.8 3 7.5 6.2 7.5s5-1.7 5-1.7l4.4 9.7s-4.5 3.1-11.3 3.1-16.1-6.7-16.1-16.7v-20.9h-9.3v-10.7z"/><path d="m324.6 56.1-4.2 10.7s-2.2-1.1-5.7-1.1c-7.3 0-10.5 6.4-10.5 6.4v30.8h-11.9v-47.2h11.3v6.9s4.1-8.1 12.8-8.1 8.2 1.5 8.2 1.5z"/><path d="m373.4 79.2v4.5h-35.2c.9 4.2 5.8 9.6 13.2 9.6s12.9-4.8 12.9-4.8l6 9s-7.5 6.8-18.9 6.8-25.4-10.9-25.4-24.8 10-24.8 23.7-24.8 23.8 10 23.8 24.6zm-11.9-4.2c-.2-4.1-4-9.5-11.8-9.5s-11.1 5.4-11.5 9.5h23.4z"/><path d="m426.4 79.2v4.5h-35.2c.9 4.2 5.8 9.6 13.2 9.6s12.9-4.8 12.9-4.8l6 9s-7.5 6.8-18.9 6.8-25.4-10.9-25.4-24.8 10-24.8 23.7-24.8 23.8 10 23.8 24.6zm-11.9-4.2c-.2-4.1-4-9.5-11.8-9.5s-11.1 5.4-11.5 9.5h23.4z"/><path d="m431.4 55.8h9.3v-14h11.9v14h14.2v10.7h-14.2v19c0 5.8 3 7.5 6.2 7.5s5-1.7 5-1.7l4.4 9.7s-4.5 3.1-11.3 3.1-16.1-6.7-16.1-16.7v-20.9h-9.3v-10.7z"/><path d="m480.3 87s6.3 6.8 14.2 6.8 9-1.4 9-4.3-2.2-3.7-9.4-5.2c-9.4-2-17.5-6-17.5-14.9s7.4-14.7 20.3-14.7 17.7 5.8 17.7 5.8l-6 8.7s-5.4-4.1-11.7-4.1-8.6 1.6-8.6 4.5 3.2 3.6 11.1 5.3c9.4 2 16 5.1 16 14.8s-8.6 14.5-20.6 14.5-21.3-8.6-21.3-8.6l6.7-8.7z"/><path d="m601.1 79.4c0 13.8-11.1 24.8-25.2 24.8s-25.2-10.9-25.2-24.8 11.1-24.8 25.2-24.8 25.2 10.8 25.2 24.8zm-12.2 0c0-7.4-5-13.6-13-13.6s-13 6.3-13 13.6 5 13.6 13 13.6 13-6.3 13-13.6z"/><path d="m605.5 55.8h9.4v-11.5c0-13.1 9.3-17.7 16.9-17.7s10.4 2.5 10.4 2.5l-4.5 10s-1.8-1.4-4.8-1.4-6.2 1.3-6.2 7.2v10.9h11.5v10.7h-11.5v36.4h-11.9v-36.4h-9.4v-10.7z"/><path d="m724.1 89.7v-14.7h-15.8v-11.1h27.6v31.6s-8.9 8.8-25.8 8.8-36.6-15.4-36.6-36 15.7-36 36.1-36 25.8 10.4 25.8 10.4l-8.2 8s-5.8-7.3-17.6-7.3-24 11.4-24 24.9 10.4 24.9 24.5 24.9 14-3.4 14-3.4z"/><path d="m779.3 56.1-4.2 10.7s-2.2-1.1-5.7-1.1c-7.3 0-10.5 6.4-10.5 6.4v30.8h-11.9v-47.2h11.3v6.9s4.1-8.1 12.8-8.1 8.2 1.5 8.2 1.5z"/><path d="m831 79.4c0 13.8-11.1 24.8-25.2 24.8s-25.2-10.9-25.2-24.8 11.1-24.8 25.2-24.8 25.2 10.8 25.2 24.8zm-12.1 0c0-7.4-5-13.6-13-13.6s-13 6.3-13 13.6 5 13.6 13 13.6 13-6.3 13-13.6z"/><path d="m846 55.8 9.7 24.2 10.2-24.2h10l9.9 24.2 10.1-24.2h12.1l-22.8 49.5-15.1-33.6-14.9 33.6-22.8-49.5h13.3z"/><path d="m910.9 55.8h9.3v-14h11.9v14h14.2v10.7h-14.2v19c0 5.8 3 7.5 6.2 7.5s5-1.7 5-1.7l4.4 9.7s-4.5 3.1-11.3 3.1-16.1-6.7-16.1-16.7v-20.9h-9.3v-10.7z"/><path d="m1000 72.5v30.5h-11.9v-27.6c0-6.8-4.2-9.7-9.3-9.7s-9.4 6.2-9.4 6.2v31h-11.9v-75.1h11.9v33.7s4.2-6.9 13.3-6.9 17.3 6.5 17.3 17.8z"/><path d="m126.9 58.7v58.6h-107v-14.8h5.3l-12.6-21.8-12.6 21.8h5.3v29.5h14.6 107l14.6-14.7v-58.6z"/><path d="m141.5 29.5v-29.5h-14.6-107l-14.6 14.7v58.6h14.6v-58.6h107v14.8h-5.3l12.6 21.8 12.6-21.8z"/></g><path d="m63.9 58.7h48.5v14.7h-48.5z" fill="#5eb3e4"/><path d="m34.6 88h77.8v14.7h-77.8z" fill="#00af9a"/><path d="m34.6 29.3h77.8v14.7h-77.8z" fill="#625d9c"/><path d="m49.3 58.7-14.7 14.6v-44l14.7 14.7z" fill="#4197cb"/><path d="m112.4 102.7-14.7-14.7v-14.7l14.7-14.6z" fill="#0095a9"/><path d="m1023.5 94.3c0 4.7-3.7 8.3-8.4 8.3s-8.5-3.7-8.5-8.3 3.8-8.2 8.5-8.2 8.4 3.7 8.4 8.2zm-14.8 0c0 3.7 2.7 6.6 6.4 6.6s6.3-2.9 6.3-6.5-2.7-6.6-6.3-6.6-6.4 3-6.4 6.6zm5.1 4.3h-1.9v-8.2c.8-.2 1.8-.3 3.2-.3s2.3.3 2.9.6c.5.4.8 1 .8 1.8s-.7 1.6-1.7 1.9c.8.4 1.3 1 1.5 2.1.3 1.3.4 1.8.6 2.1h-2.1c-.2-.3-.4-1.1-.7-2-.1-.9-.7-1.3-1.7-1.3h-.9zm0-4.6h.9c1.1 0 1.9-.4 1.9-1.2s-.6-1.3-1.8-1.3-.9 0-1.1.1v2.4z" fill="#323e48"/></svg>
+
+  <div class="sidebar-header">
+    <div class="sidebar-brand">
+      <div class="sidebar-mark">
+        <svg width="20" height="20" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+          <g><polygon fill="#fff" points="352 235.7 352 349.9 143.8 349.9 143.8 321 154 321 129.5 278.5 105 321 115.2 321 115.2 378.5 143.8 378.5 143.8 378.5 352 378.5 380.5 349.9 380.5 235.7 352 235.7" opacity=".9"/><polygon fill="#fff" points="380.5 179 380.5 121.5 352 121.5 352 121.5 143.8 121.5 115.2 150.1 115.2 264.3 143.8 264.3 143.8 150.1 352 150.1 352 179 341.7 179 366.2 221.5 390.8 179 380.5 179" opacity=".9"/><rect fill="#fff" x="229.4" y="235.7" width="94.4" height="28.5" opacity=".7"/><rect fill="#fff" x="172.3" y="292.8" width="151.5" height="28.5" opacity=".7"/><rect fill="#fff" x="172.3" y="178.6" width="151.5" height="28.5" opacity=".7"/></g>
+        </svg>
+      </div>
+      <div class="sidebar-wordmark">Streets of Growth<span>Brand & UX/UI Style Guide</span></div>
+    </div>
+    <div class="sidebar-search">
+      <span class="material-icons-outlined sidebar-search-icon">search</span>
+      <input id="sidebar-search-input" class="sidebar-search-input" type="text" placeholder="Search sections…" autocomplete="off" spellcheck="false" aria-label="Search navigation">
+      <button id="sidebar-search-clear" class="sidebar-search-clear" aria-label="Clear search">×</button>
+    </div>
   </div>
-  <div class="sidebar-search">
-    <span class="material-icons sidebar-search-icon">search</span>
-    <input id="sidebar-search-input" class="sidebar-search-input" type="text" placeholder="Search…" autocomplete="off" spellcheck="false">
-    <button id="sidebar-search-clear" class="sidebar-search-clear" aria-label="Clear search">×</button>
-  </div>
+
   <div class="sidebar-nav" id="sidebar-nav-content">
     <div class="sidebar-group">
-      <div class="sidebar-group-label">Introduction<svg class="sidebar-chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="sidebar-group-label" role="button" tabindex="0">Introduction<svg class="sidebar-chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="sidebar-group-links">
         <a href="#intro" class="sidebar-link">Overview</a>
       </div>
     </div>
     <div class="sidebar-group">
-      <div class="sidebar-group-label">Brand Identity<svg class="sidebar-chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="sidebar-group-label" role="button" tabindex="0">Brand Identity<svg class="sidebar-chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="sidebar-group-links">
         <a href="#who-we-are" class="sidebar-link">Who We Are</a>
         <a href="#vision-purpose" class="sidebar-link">Vision &amp; Purpose</a>
@@ -420,19 +744,19 @@ body{font-family:'Open Sans',sans-serif;font-size:14px;color:#323E48;background:
       </div>
     </div>
     <div class="sidebar-group">
-      <div class="sidebar-group-label">Foundations<svg class="sidebar-chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="sidebar-group-label" role="button" tabindex="0">Foundations<svg class="sidebar-chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="sidebar-group-links">
         <a href="#logo" class="sidebar-link">Logo Usage</a>
         <a href="#color" class="sidebar-link">Colour Palette</a>
         <a href="#gradients" class="sidebar-link">Gradient Colours</a>
         <a href="#typography" class="sidebar-link">Typography</a>
-        <a href="#spacing" class="sidebar-link">Spacing & Layout</a>
+        <a href="#spacing" class="sidebar-link">Spacing &amp; Layout</a>
         <a href="#icons" class="sidebar-link">Iconography</a>
         <a href="#icon-illustrations" class="sidebar-link">Icon Illustrations</a>
       </div>
     </div>
     <div class="sidebar-group">
-      <div class="sidebar-group-label">Components<svg class="sidebar-chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="sidebar-group-label" role="button" tabindex="0">Components<svg class="sidebar-chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="sidebar-group-links">
         <a href="#buttons" class="sidebar-link">Buttons</a>
         <a href="#forms" class="sidebar-link">Form Elements</a>
@@ -441,14 +765,14 @@ body{font-family:'Open Sans',sans-serif;font-size:14px;color:#323E48;background:
         <a href="#alerts" class="sidebar-link">Alerts</a>
         <a href="#navigation" class="sidebar-link">Navigation</a>
         <a href="#tables" class="sidebar-link">Data Tables</a>
-        <a href="#progress" class="sidebar-link">Progress & Loading</a>
-        <a href="#avatars" class="sidebar-link">Avatars & Identity</a>
+        <a href="#progress" class="sidebar-link">Progress &amp; Loading</a>
+        <a href="#avatars" class="sidebar-link">Avatars &amp; Identity</a>
       </div>
     </div>
     <div class="sidebar-group">
-      <div class="sidebar-group-label">Data Visualisation<svg class="sidebar-chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="sidebar-group-label" role="button" tabindex="0">Data Visualisation<svg class="sidebar-chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="sidebar-group-links">
-        <a href="#dataviz" class="sidebar-link">Overview & Tokens</a>
+        <a href="#dataviz" class="sidebar-link">Overview &amp; Tokens</a>
         <a href="#chart-timeline" class="sidebar-link">Timeline — Bubble</a>
         <a href="#chart-risk" class="sidebar-link">Risk Score — Mixed</a>
         <a href="#chart-tools" class="sidebar-link">Tool Frequency — Bar</a>
@@ -470,75 +794,124 @@ body{font-family:'Open Sans',sans-serif;font-size:14px;color:#323E48;background:
       </div>
     </div>
     <div class="sidebar-group">
-      <div class="sidebar-group-label">Patterns<svg class="sidebar-chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="sidebar-group-label" role="button" tabindex="0">Patterns<svg class="sidebar-chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="sidebar-group-links">
         <a href="#patterns" class="sidebar-link">Layout Patterns</a>
         <a href="#accessibility" class="sidebar-link">Accessibility</a>
       </div>
     </div>
   </div>
-  <div class="sidebar-no-results" id="sidebar-no-results">No results found</div>
+
+  <div class="sidebar-no-results" id="sidebar-no-results" role="status" aria-live="polite">No results found</div>
+
   <div class="sidebar-footer">
-    <span class="sidebar-footer-version">v1.0</span>
+    <span class="sidebar-footer-version">v2.0</span>
     <span class="sidebar-footer-dot"></span>
     <span class="sidebar-footer-brand">Brand &amp; UX/UI Style Guide</span>
   </div>
 </nav>
-</div>
+</div><!-- /sidebar-wrap -->
+
+<!-- ── Main content ──────────────────────────────── -->
 <main id="content">
 <div id="main-content">
 
-<!-- =================== INTRO =================== -->
-<section id="intro" class="sg-section">
-  <div style="margin-bottom:32px">
-    <div class="sg-section-label" style="margin-bottom:4px">Design System v1.0</div>
-    <h1 style="font-size:36px;font-weight:800;color:var(--sog-charcoal);line-height:1.1">Streets of Growth: Brand &amp; UX/UI Style Guide</h1>
-  </div>
+<!-- =================== HERO / OVERVIEW =================== -->
+<div id="intro" class="hero-wrap">
+  <!-- Dark hero band -->
+  <div class="hero-band">
+    <div class="hero-eyebrow" id="hero-eyebrow" aria-hidden="true"><span class="hero-eyebrow-dot"></span>Design System v2.0</div>
+    <h1 class="hero-title" aria-describedby="hero-eyebrow">Streets of Growth:<br><em>Brand &amp; UX/UI Style Guide</em></h1>
+    <p class="hero-subtitle">The single source of truth for all digital SOG products — covering visual identity, components, data visualisation, and accessibility standards.</p>
 
-  <div style="margin-bottom:40px">
-    <p style="font-size:15px;color:var(--text-muted);line-height:1.7;max-width:900px">At Streets of Growth, we take pride in our corporate identity, which comprises various visual and verbal elements such as the logo, name, colours, type, and graphics, including web, application, and data visualisation space, providing live component examples, interactive charts and accessibility standards. These elements are essential in conveying a strong, unified message about Streets of Growth's image and values. That's why we have developed guidelines that outline the correct usage of these elements, to ensure that our brand is consistently and effectively presented across all communication channels.</p>
-    <p style="font-size:15px;color:var(--text-muted);line-height:1.7;max-width:900px;margin-top:12px;margin-bottom:0">Our commitment to quality, consistency, and style is reflected in these guidelines, which serve as a reference for anyone who uses the Streets of Growth name and marks. We consider our brand assets, including the logo, name, colours, and other identifying elements, to be valuable and deserving of protection. It is the responsibility of everyone in our organisation to prevent any unauthorised or incorrect use of our brand elements and to safeguard the company's interests.</p>
-  </div>
-
-  <div class="color-strip" style="margin-bottom:8px">
-    <div class="color-strip-cell" style="background:#625D9C"><span>Purple</span></div>
-    <div class="color-strip-cell" style="background:#4197CB"><span>Blue</span></div>
-    <div class="color-strip-cell" style="background:#5EB3E4"><span>Sky</span></div>
-    <div class="color-strip-cell" style="background:#0095A9"><span>Teal</span></div>
-    <div class="color-strip-cell" style="background:#00AF9A"><span>Green</span></div>
-    <div class="color-strip-cell" style="background:#323E48"><span>Charcoal</span></div>
-    <div class="color-strip-cell" style="background:#F32735"><span>Red</span></div>
-    <div class="color-strip-cell" style="background:#FF6C0E"><span>Orange</span></div>
-    <div class="color-strip-cell light-text" style="background:#F2CD00"><span style="color:rgba(0,0,0,.7)">Yellow</span></div>
-    <div class="color-strip-cell light-text" style="background:#F5F5F7;border:1px solid #E2E4E6"><span style="color:rgba(0,0,0,.5)">Off-White</span></div>
-  </div>
-  <p style="font-size:11px;color:var(--text-muted);margin-bottom:40px">Quick reference: all 10 SOG brand colours</p>
-
-  <div class="usage-grid">
-    <div class="usage-card">
-      <div class="usage-card-title"><span class="usage-card-icon">🎨</span>For Designers</div>
-      <div class="usage-card-body">Use this guide as your single source of truth for all digital SOG products. Reference the live component examples to match spacing, colour usage, and typographic hierarchy exactly. The colour swatches include Pantone references for cross-medium consistency.</div>
-      <ul class="usage-card-list">
-        <li>Use SOG tokens (CSS variables) in all Figma variables</li>
-        <li>Never create one-off colours; extend from the tint, shade, and tone scales</li>
-        <li>Always verify contrast ratios against the Accessibility section</li>
-      </ul>
-    </div>
-    <div class="usage-card">
-      <div class="usage-card-title"><span class="usage-card-icon">💻</span>For Developers</div>
-      <div class="usage-card-body">All SOG design tokens are available as CSS custom properties on <code style="background:var(--muted-bg);padding:2px 6px;border-radius:4px;font-size:12px">:root</code>. Reference them as <code style="background:var(--muted-bg);padding:2px 6px;border-radius:4px;font-size:12px">var(--sog-purple)</code> in your stylesheets. Never hardcode hex values — always use the token.</div>
-      <ul class="usage-card-list">
-        <li>Copy the CSS variables block from the Colour section</li>
-        <li>Import Open Sans from Google Fonts (weights 300/400/500/700)</li>
-        <li>Use Chart.js 4.4.0 with the SOG_COLORS constant for all charts</li>
-      </ul>
+    <!-- Colour pills — click to copy hex -->
+    <div class="hero-pill-row" aria-label="Brand colour palette">
+      <button class="hero-pill" data-hex="#625D9C" aria-label="Copy Purple hex"><span class="hero-pill-dot" style="background:#625D9C"></span>Purple</button>
+      <button class="hero-pill" data-hex="#4197CB" aria-label="Copy Blue hex"><span class="hero-pill-dot" style="background:#4197CB"></span>Blue</button>
+      <button class="hero-pill" data-hex="#5EB3E4" aria-label="Copy Sky hex"><span class="hero-pill-dot" style="background:#5EB3E4"></span>Sky</button>
+      <button class="hero-pill" data-hex="#0095A9" aria-label="Copy Teal hex"><span class="hero-pill-dot" style="background:#0095A9"></span>Teal</button>
+      <button class="hero-pill" data-hex="#00AF9A" aria-label="Copy Green hex"><span class="hero-pill-dot" style="background:#00AF9A"></span>Green</button>
+      <button class="hero-pill" data-hex="#323E48" aria-label="Copy Charcoal hex"><span class="hero-pill-dot" style="background:#323E48"></span>Charcoal</button>
+      <button class="hero-pill" data-hex="#F32735" aria-label="Copy Red hex"><span class="hero-pill-dot" style="background:#F32735"></span>Red</button>
+      <button class="hero-pill" data-hex="#FF6C0E" aria-label="Copy Orange hex"><span class="hero-pill-dot" style="background:#FF6C0E"></span>Orange</button>
+      <button class="hero-pill" data-hex="#F2CD00" aria-label="Copy Yellow hex"><span class="hero-pill-dot" style="background:#F2CD00"></span>Yellow</button>
     </div>
   </div>
 
-  <div class="info-callout">
-    <strong>Brand Guidelines v1.2:</strong> This digital style guide is a companion to the full SOG Brand Guidelines v1.2 PDF. Logo usage rules and colour specifications are documented in the <a href="#logo" style="color:var(--sog-purple);font-weight:600">Logo Usage</a> and <a href="#color" style="color:var(--sog-purple);font-weight:600">Colour Palette</a> sections. For print specifications and campaign guidelines, refer to the master brand document.
+  <!-- Stats row -->
+  <div class="hero-stats" aria-label="Guide statistics">
+    <div class="hero-stat">
+      <div class="hero-stat-num">10</div>
+      <div class="hero-stat-label">Brand colours with full tint scales</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">19</div>
+      <div class="hero-stat-label">Chart & data viz patterns</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">9+</div>
+      <div class="hero-stat-label">Core UI component groups</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">WCAG</div>
+      <div class="hero-stat-label">AA accessibility standards</div>
+    </div>
   </div>
-</section>
+
+  <!-- Body: description + audience cards + callout -->
+  <div class="intro-body">
+    <p class="intro-lead">At Streets of Growth, our identity is built on more than a logo — it's a coherent system of visual and verbal elements that express who we are across every channel.</p>
+    <p class="intro-lead-sub">These guidelines define the correct usage of all brand elements — from colour tokens and typography to interactive components and data visualisation patterns — ensuring Streets of Growth is consistently and effectively presented everywhere we show up.</p>
+
+    <!-- Interactive colour strip -->
+    <div class="colour-strip-row" role="img" aria-label="SOG brand colour strip">
+      <div class="colour-strip-inner" id="colour-strip">
+        <div class="colour-cell" style="background:#625D9C" data-hex="#625D9C" data-name="Purple"><span class="colour-cell-label">Purple</span><span class="colour-cell-hex">#625D9C</span></div>
+        <div class="colour-cell" style="background:#4197CB" data-hex="#4197CB" data-name="Blue"><span class="colour-cell-label">Blue</span><span class="colour-cell-hex">#4197CB</span></div>
+        <div class="colour-cell" style="background:#5EB3E4" data-hex="#5EB3E4" data-name="Sky"><span class="colour-cell-label">Sky</span><span class="colour-cell-hex">#5EB3E4</span></div>
+        <div class="colour-cell" style="background:#0095A9" data-hex="#0095A9" data-name="Teal"><span class="colour-cell-label">Teal</span><span class="colour-cell-hex">#0095A9</span></div>
+        <div class="colour-cell" style="background:#00AF9A" data-hex="#00AF9A" data-name="Green"><span class="colour-cell-label">Green</span><span class="colour-cell-hex">#00AF9A</span></div>
+        <div class="colour-cell" style="background:#323E48" data-hex="#323E48" data-name="Charcoal"><span class="colour-cell-label">Charcoal</span><span class="colour-cell-hex">#323E48</span></div>
+        <div class="colour-cell" style="background:#F32735" data-hex="#F32735" data-name="Red"><span class="colour-cell-label">Red</span><span class="colour-cell-hex">#F32735</span></div>
+        <div class="colour-cell" style="background:#FF6C0E" data-hex="#FF6C0E" data-name="Orange"><span class="colour-cell-label">Orange</span><span class="colour-cell-hex">#FF6C0E</span></div>
+        <div class="colour-cell light-label" style="background:#F2CD00" data-hex="#F2CD00" data-name="Yellow"><span class="colour-cell-label">Yellow</span><span class="colour-cell-hex">#F2CD00</span></div>
+        <div class="colour-cell light-label" style="background:#F5F5F7;border-right:1px solid #E2E4E6" data-hex="#F5F5F7" data-name="Off-White"><span class="colour-cell-label">Off-White</span><span class="colour-cell-hex">#F5F5F7</span></div>
+      </div>
+    </div>
+    <p class="colour-strip-caption">Click any colour to copy its hex token · Hover to expand</p>
+
+    <!-- Audience cards -->
+    <div class="audience-grid">
+      <div class="audience-card">
+        <div class="audience-icon purple"><span class="material-icons-outlined">palette</span></div>
+        <div class="audience-card-title">For Designers</div>
+        <div class="audience-card-body">Use this guide as your single source of truth for all digital SOG products. Reference live component examples to match spacing, colour usage, and typographic hierarchy exactly.</div>
+        <ul class="audience-card-list">
+          <li>Use SOG tokens (CSS variables) in all Figma variables</li>
+          <li>Never create one-off colours — extend from the tint scale</li>
+          <li>Always verify contrast ratios against the Accessibility section</li>
+        </ul>
+      </div>
+      <div class="audience-card">
+        <div class="audience-icon teal"><span class="material-icons-outlined">code</span></div>
+        <div class="audience-card-title">For Developers</div>
+        <div class="audience-card-body">All SOG design tokens are available as CSS custom properties on <code style="background:var(--muted-bg);padding:2px 6px;border-radius:4px;font-size:12px;font-family:'SF Mono',Consolas,monospace">:root</code>. Reference them as <code style="background:var(--muted-bg);padding:2px 6px;border-radius:4px;font-size:12px;font-family:'SF Mono',Consolas,monospace">var(--sog-purple)</code> — never hardcode hex values.</div>
+        <ul class="audience-card-list">
+          <li>Copy the CSS variables block from the Colour section</li>
+          <li>Import Open Sans from Google Fonts (weights 300/400/500/600/700)</li>
+          <li>Use Chart.js 4.4.0 with the SOG_COLORS constant for charts</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Callout -->
+    <div class="intro-callout" role="note" aria-label="Brand guidelines note">
+      <span class="material-icons-outlined intro-callout-icon">info</span>
+      <div><strong>Brand Guidelines v1.2:</strong> This digital style guide is a companion to the full SOG Brand Guidelines v1.2 PDF. Logo usage rules and colour specifications are documented in the <a href="#logo">Logo Usage</a> and <a href="#color">Colour Palette</a> sections. For print specifications and campaign guidelines, refer to the master brand document.</div>
+    </div>
+  </div>
+</div>
+<!-- /hero-wrap -->
 
 <!-- =================== WHO WE ARE =================== -->
 <section id="who-we-are" class="sg-section">
@@ -5125,6 +5498,143 @@ function initBulletCharts() {
 }
 
 // ── Boot ──────────────────────────────────────────────────────
+// ── WCAG: add landmark region roles to all sections ───
+function initLandmarks() {
+  document.querySelectorAll('.sg-section').forEach((section, i) => {
+    section.setAttribute('role', 'region');
+    const heading = section.querySelector('h1,h2,h3');
+    if (heading) {
+      if (!heading.id) heading.id = 'section-heading-' + i;
+      section.setAttribute('aria-labelledby', heading.id);
+    }
+  });
+  // Also mark the info-callout divs with role=note
+  document.querySelectorAll('.info-callout').forEach(el => {
+    if (!el.getAttribute('role')) el.setAttribute('role', 'note');
+  });
+}
+
+// ── Scroll-spy (IntersectionObserver) ──────────────────
+function initScrollSpy() {
+  const links = document.querySelectorAll('.sidebar-link');
+  const sectionIds = [];
+  links.forEach(l => {
+    const id = l.getAttribute('href');
+    if (!id || !id.startsWith('#')) return;
+    const el = document.getElementById(id.slice(1));
+    if (el) sectionIds.push(id.slice(1));
+  });
+  if (!sectionIds.length) return;
+
+  const setActive = (id) => {
+    links.forEach(l => l.classList.remove('active'));
+    const match = [...links].find(l => l.getAttribute('href') === '#' + id);
+    if (match) {
+      match.classList.add('active');
+      // Scroll active link into sidebar view
+      const nav = document.getElementById('sidebar-nav-content');
+      if (nav) {
+        const navRect = nav.getBoundingClientRect();
+        const linkRect = match.getBoundingClientRect();
+        if (linkRect.top < navRect.top + 20 || linkRect.bottom > navRect.bottom - 20) {
+          match.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }
+      }
+    }
+  };
+
+  // Set first link active on page load
+  setActive(sectionIds[0]);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) setActive(entry.target.id);
+    });
+  }, { rootMargin: '-10% 0px -82% 0px', threshold: 0 });
+
+  sectionIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+  // Observe the hero-wrap too (id="intro" is on the hero-wrap div)
+  const introEl = document.getElementById('intro');
+  if (introEl && !sectionIds.includes('intro')) observer.observe(introEl);
+}
+
+// ── Section entrance animations ────────────────────────
+function initScrollReveal() {
+  const sections = document.querySelectorAll('.sg-section');
+  const stats = document.querySelectorAll('.hero-stat');
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        sectionObserver.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -40px 0px', threshold: 0.02 });
+
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        statObserver.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -20px 0px', threshold: 0.1 });
+
+  // Fire immediately for anything already visible
+  sections.forEach(s => {
+    const rect = s.getBoundingClientRect();
+    if (rect.top < window.innerHeight) { s.classList.add('visible'); }
+    else { sectionObserver.observe(s); }
+  });
+  stats.forEach(s => {
+    const rect = s.getBoundingClientRect();
+    if (rect.top < window.innerHeight) { s.classList.add('visible'); }
+    else { statObserver.observe(s); }
+  });
+}
+
+// ── Colour strip copy ──────────────────────────────────
+function initColourStrip() {
+  const cells = document.querySelectorAll('.colour-cell');
+  cells.forEach(cell => {
+    cell.setAttribute('tabindex', '0');
+    cell.setAttribute('role', 'button');
+    cell.setAttribute('aria-label', `Copy ${cell.dataset.name} ${cell.dataset.hex}`);
+    const copy = () => {
+      navigator.clipboard.writeText(cell.dataset.hex).then(() => {
+        const orig = cell.querySelector('.colour-cell-label').textContent;
+        cell.querySelector('.colour-cell-label').textContent = 'Copied!';
+        setTimeout(() => { cell.querySelector('.colour-cell-label').textContent = orig; }, 1200);
+      }).catch(() => {});
+    };
+    cell.addEventListener('click', copy);
+    cell.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); copy(); } });
+  });
+}
+
+// ── Hero pill copy ──────────────────────────────────────
+function initHeroPills() {
+  document.querySelectorAll('.hero-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      navigator.clipboard.writeText(pill.dataset.hex).then(() => {
+        const orig = pill.textContent;
+        pill.textContent = '✓ Copied';
+        pill.classList.add('copied');
+        setTimeout(() => {
+          pill.innerHTML = `<span class="hero-pill-dot" style="background:${pill.dataset.hex}"></span>${orig.trim()}`;
+          pill.classList.remove('copied');
+        }, 1400);
+      }).catch(() => {});
+    });
+  });
+}
+
+// ── Sidebar search ─────────────────────────────────────
+// ── Boot ───────────────────────────────────────────────
 window.addEventListener('load', () => {
   [renderHeatmap, renderScorecard, initTimelineChart, initRiskChart,
    initToolsChart, initMonthlyChart, initEffectivenessChart,
@@ -5132,10 +5642,11 @@ window.addEventListener('load', () => {
    initKPICards, initFunnelChart, initGaugeCharts, initDivergingChart,
    initCopyButtons, initSidebarSearch, initSidebarCollapse,
    initWaterfallChart, initScatterChart, initAreaChart,
-   initCalendarHeatmap, initTreemap, initBulletCharts]
+   initCalendarHeatmap, initTreemap, initBulletCharts,
+   initLandmarks, initScrollSpy, initScrollReveal,
+   initColourStrip, initHeroPills]
   .forEach(fn => { try { fn(); } catch(e) { console.warn(fn.name, e); } });
 });
 </script>
 </body>
 </html>
-
