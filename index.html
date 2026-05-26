@@ -324,13 +324,15 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
 .phase-status--active{color:var(--sog-purple)}
 .phase-status-pulse{width:7px;height:7px;border-radius:50%;background:var(--sog-purple);animation:phasePulse 2s ease-in-out infinite}
 @keyframes phasePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.75)}}
-.crit-row{display:flex;align-items:flex-start;gap:8px;margin-bottom:10px}
+.crit-row{display:flex;align-items:flex-start;gap:8px;margin-bottom:14px}
 .crit-icon{width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 .icon-pass{background:var(--green-10);color:#007A6C;border:1px solid var(--green-20)}
 .icon-fail{background:#FEF2F2;color:#C0152A;border:1px solid #FECACA}
 .crit-label{font-size:12px;font-weight:600;color:var(--text);line-height:1.3}
-.crit-sub{font-size:11px;color:var(--charcoal-40);line-height:1.4;margin-top:1px}
-.prog-row{margin-top:5px;margin-bottom:3px}
+.crit-row:has(.icon-fail) .crit-label{color:var(--text-muted)}
+.scorecard-phase .crit-row:has(+.scorecard-phase-footer){margin-bottom:12px}
+.crit-sub{font-size:11px;color:var(--charcoal-40);line-height:1.4;margin-top:4px}
+.prog-row{margin-top:8px;margin-bottom:6px}
 .prog-track{height:5px;background:var(--charcoal-10);border-radius:3px;overflow:hidden}
 .prog-fill{height:100%;border-radius:3px;transition:width .6s cubic-bezier(.4,0,.2,1)}
 .prog-fill--green{background:var(--sog-green)}
@@ -344,9 +346,9 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
 .scorecard-phase--complete{border-top:3px solid var(--sog-green)}
 .scorecard-phase--exit{border-top:3px solid #FF6C0E}
 .scorecard-phase--active{border-top:3px solid var(--sog-purple)}
-.scorecard-phase-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:2px}
+.scorecard-phase-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px}
 .scorecard-phase-name{font-size:14px;font-weight:700;color:var(--text);line-height:1.2}
-.scorecard-phase-dates{font-size:11px;color:var(--charcoal-40);margin-bottom:14px}
+.scorecard-phase-dates{font-size:11px;color:var(--charcoal-40);margin-bottom:16px}
 .scorecard-phase-footer{font-size:11px;color:var(--charcoal-40);padding:10px 0 0;border-top:1px solid var(--border);margin-top:auto}
 /* ── Alert Card components ──────────────────────────── */
 .alert-card-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -462,12 +464,91 @@ body.col-resizing{cursor:col-resize !important;user-select:none}
 .sg-table td{padding:11px 14px;border-bottom:1px solid var(--charcoal-10);color:var(--text);vertical-align:middle}
 .sg-table tr:hover td{background:var(--muted-bg)}
 .sg-table tr:last-child td{border-bottom:none}
+.sg-table-row-link{cursor:pointer}
+.sg-table-row-link:focus-visible td{background:var(--purple-10);outline:2px solid var(--sog-purple);outline-offset:-2px}
 .progress-track{height:8px;background:var(--charcoal-20);border-radius:var(--radius-full);overflow:hidden}
 .progress-fill{height:100%;background:linear-gradient(90deg,var(--sog-purple) 0%,var(--sog-teal) 100%);border-radius:var(--radius-full);transition:width 250ms ease-out}
+/* ── Stepper / Progress Indicator ─────────────────── */
+.stepper-h{display:flex;align-items:flex-start;width:100%}
+.stepper-h .stepper-step{flex:1;display:flex;flex-direction:column;align-items:center;position:relative}
+.stepper-h .stepper-step:not(:last-child)::after{content:'';position:absolute;top:15px;left:calc(50% + 16px);width:calc(100% - 32px);height:2px;background:var(--charcoal-20);z-index:0}
+.stepper-h .stepper-step.stp-done:not(:last-child)::after{background:var(--sog-purple)}
+.stp-node{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;position:relative;z-index:1;flex-shrink:0}
+.stp-node-done{background:var(--sog-purple);border:2px solid var(--sog-purple);color:#fff}
+.stp-node-active{background:var(--sog-purple);border:2px solid var(--sog-purple);color:#fff;box-shadow:0 0 0 4px var(--purple-20)}
+.stp-node-upcoming{background:#fff;border:2px solid var(--charcoal-20);color:var(--charcoal-40)}
+.stp-node-error{background:var(--sog-red);border:2px solid var(--sog-red);color:#fff}
+.stp-node-blue{background:var(--sog-blue);border:2px solid var(--sog-blue);color:#fff}
+.stp-node-teal-act{background:var(--sog-teal);border:2px solid var(--sog-teal);color:#fff;box-shadow:0 0 0 4px var(--teal-20)}
+.stp-label{margin-top:8px;font-size:12px;font-weight:600;color:var(--charcoal-40);text-align:center;white-space:nowrap;line-height:1.3}
+.stp-sublabel{font-size:11px;font-weight:400;color:var(--charcoal-40);text-align:center;margin-top:2px;white-space:nowrap}
+.stepper-h .stepper-step.stp-done .stp-label,.stepper-h .stepper-step.stp-active .stp-label{color:var(--text)}
+.stepper-h .stepper-step.stp-done .stp-sublabel{color:var(--sog-green)}
+.stepper-h .stepper-step.stp-active .stp-sublabel{color:var(--sog-purple)}
+.stepper-v{display:flex;flex-direction:column}
+.stepper-v .stepper-step{display:flex;gap:16px}
+.stepper-v-spine{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:32px}
+.stepper-v-line{width:2px;flex:1;min-height:20px;background:var(--charcoal-20);margin:4px 0}
+.stepper-v .stepper-step.stp-done .stepper-v-line{background:var(--sog-purple)}
+.stepper-v-body{flex:1;padding-bottom:24px;padding-top:4px}
+.stepper-v-title{font-size:14px;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:2px}
+.stepper-v .stepper-step.stp-upcoming .stepper-v-title{color:var(--text-muted)}
+.stepper-v-desc{font-size:13px;color:var(--text-muted);line-height:1.55;margin-top:2px}
+.stepper-v-meta{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:12px;color:var(--text-muted)}
+/* ── Skeleton ─────────────────────────────────────── */
+.skeleton-circle{border-radius:50%!important}
+/* ── Sheet ────────────────────────────────────────── */
+.sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:400;opacity:0;pointer-events:none;transition:opacity .25s;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+.sheet-backdrop.open{opacity:1;pointer-events:all}
+.sheet{position:absolute;top:0;right:0;height:100%;width:480px;max-width:calc(100% - 48px);background:#fff;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:-4px 0 40px rgba(0,0,0,.15);border-left:1px solid var(--border)}
+.sheet-backdrop.open .sheet{transform:translateX(0)}
+.sheet-header{display:flex;align-items:flex-start;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--border);flex-shrink:0;gap:12px}
+.sheet-title{font-size:17px;font-weight:700;color:var(--text);line-height:1.25;flex:1}
+.sheet-subtitle{font-size:12px;color:var(--text-muted);margin-top:2px;font-weight:400}
+.sheet-close{width:32px;height:32px;border-radius:8px;border:none;background:var(--muted-bg);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-muted);transition:background var(--transition-fast),color var(--transition-fast);flex-shrink:0}
+.sheet-close:hover{background:var(--charcoal-20);color:var(--text)}
+.sheet-body{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:20px}
+.sheet-footer{padding:14px 20px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;flex-shrink:0;background:#fff}
+.sheet-section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:10px}
+.sheet-row{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px}
+.sheet-row:last-child{border-bottom:none}
+.sheet-row-label{color:var(--text-muted);flex-shrink:0;padding-right:16px}
+.sheet-row-value{color:var(--text);font-weight:500;text-align:right}
+/* ── Modal ────────────────────────────────────────── */
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .2s;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.modal-backdrop.open{opacity:1;pointer-events:all}
+.modal{background:#fff;border-radius:16px;box-shadow:0 24px 64px rgba(0,0,0,.2);width:100%;max-width:480px;display:flex;flex-direction:column;transform:scale(.96) translateY(8px);transition:transform .25s cubic-bezier(.34,1.56,.64,1);max-height:calc(100vh - 48px)}
+.modal-backdrop.open .modal{transform:scale(1) translateY(0)}
+.modal--sm{max-width:360px}
+.modal--lg{max-width:600px}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--border);flex-shrink:0;gap:12px}
+.modal-title{font-size:17px;font-weight:700;color:var(--text);line-height:1.3;flex:1}
+.modal-close{width:32px;height:32px;border-radius:8px;border:none;background:var(--muted-bg);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-muted);transition:background var(--transition-fast),color var(--transition-fast);flex-shrink:0}
+.modal-close:hover{background:var(--charcoal-20);color:var(--text)}
+.modal-body{padding:20px 24px;flex:1;overflow-y:auto}
+.modal-footer{padding:0 24px 20px;display:flex;gap:8px;justify-content:flex-end;flex-shrink:0}
+.modal-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.modal-icon--danger{background:var(--red-10)}
+.modal-icon--success{background:var(--green-10)}
+.modal-icon--info{background:var(--blue-10)}
 .avatar{border-radius:50%;background:var(--purple-20);color:var(--sog-purple);font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
 .avatar-sm{width:32px;height:32px;font-size:12px}
 .avatar-md{width:40px;height:40px;font-size:14px}
 .avatar-lg{width:64px;height:64px;font-size:22px}
+/* ── Programme Position Timeline ───────────────────── */
+.prog-timeline-outer{position:relative;padding-top:36px}
+.prog-bar{display:flex;width:100%;height:40px;border-radius:9999px;overflow:hidden}
+.prog-phase{display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;letter-spacing:.06em;padding:0 12px;white-space:nowrap;overflow:hidden}
+.prog-today-marker{position:absolute;top:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;z-index:2}
+.prog-today-chip{background:var(--sog-charcoal);color:#fff;font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;white-space:nowrap;line-height:1}
+.prog-today-stem{width:2px;height:10px;background:var(--sog-charcoal)}
+.prog-milestones{position:relative;height:52px;margin-top:8px}
+.prog-milestone{position:absolute;display:flex;flex-direction:column}
+.prog-milestone-date{font-size:12px;font-weight:700;color:var(--text);line-height:1.2}
+.prog-milestone-label{font-size:11px;color:var(--text-muted);line-height:1.3;margin-top:2px}
+.prog-stats{display:flex;gap:0;flex-wrap:wrap;padding-top:16px;border-top:1px solid var(--border);margin-top:8px;font-size:13px;color:var(--text-muted)}
+.prog-stat{padding-right:24px;margin-right:24px;border-right:1px solid var(--border);line-height:1.5}
+.prog-stat:last-child{border-right:none;margin-right:0;padding-right:0}
 #toast-container{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
 .toast{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--sog-charcoal);color:#fff;border-radius:10px;font-size:14px;font-weight:500;box-shadow:0 8px 24px rgba(0,0,0,.15);pointer-events:all;transform:translateX(120%);transition:transform .3s cubic-bezier(.34,1.56,.64,1);min-width:280px;max-width:360px}
 .toast.visible{transform:translateX(0)}
@@ -564,7 +645,7 @@ body.col-resizing{cursor:col-resize !important;user-select:none}
 .btn-glass:hover{background:rgba(255,255,255,.28);border-color:rgba(255,255,255,.65)}
 .btn-glass:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .info-callout{background:var(--blue-10);border:1px solid var(--blue-40);border-radius:10px;padding:16px 20px;margin-bottom:24px;font-size:13px;color:var(--sog-charcoal);line-height:1.6}
-.info-callout strong{color:#1B6FA0}
+.info-callout strong{color:var(--sog-charcoal)}
 .warning-callout{background:#FFF3EA;border:1px solid #FFB380;border-radius:10px;padding:16px 20px;margin-bottom:24px;font-size:13px;color:var(--sog-charcoal);line-height:1.6}
 .warning-callout strong{color:#C2410C}
 .divider{border:none;border-top:1px solid var(--border);margin:40px 0}
@@ -1282,7 +1363,11 @@ input[type="date"].sg-input::-webkit-datetime-edit-year-field:focus{
         <a href="#navigation" class="sidebar-link">Navigation</a>
         <a href="#tables" class="sidebar-link">Data Tables</a>
         <a href="#progress" class="sidebar-link">Progress &amp; Loading</a>
+        <a href="#stepper" class="sidebar-link">Progress Indicator</a>
         <a href="#avatars" class="sidebar-link">Avatars &amp; Identity</a>
+        <a href="#skeleton" class="sidebar-link">Skeleton</a>
+        <a href="#sheet" class="sidebar-link">Sheet</a>
+        <a href="#modal" class="sidebar-link">Modal</a>
       </div>
     </div>
 
@@ -1291,6 +1376,7 @@ input[type="date"].sg-input::-webkit-datetime-edit-year-field:focus{
       <div class="sidebar-group-label" role="button" tabindex="0"><div class="sidebar-group-label-inner"><span class="material-symbols-rounded sidebar-group-icon">auto_awesome_mosaic</span>Patterns</div><svg class="sidebar-chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="sidebar-group-links">
         <a href="#flywheel" class="sidebar-link">Flywheel</a>
+        <a href="#prog-timeline" class="sidebar-link">Programme Position</a>
       </div>
     </div>
 
@@ -3019,14 +3105,69 @@ body { font-family: 'Open Sans', sans-serif; font-size: 14px; }
 
   <div class="sg-sub">
     <div class="sg-sub-title">Border Radius Scale</div>
+    <div class="sg-sub-desc">Five tokens cover every rounding need across the product. Choose by component size and visual weight: tighter radii for compact or inline elements, larger radii for containers and overlays. Never use arbitrary pixel values outside this scale.</div>
     <div class="sg-example">
       <div class="radius-demo">
-        <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div class="radius-box" style="border-radius:4px"></div><div style="font-size:11px;color:var(--text-muted);font-weight:600">sm / 4px</div></div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div class="radius-box" style="border-radius:8px"></div><div style="font-size:11px;color:var(--text-muted);font-weight:600">md / 8px</div></div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div class="radius-box" style="border-radius:12px"></div><div style="font-size:11px;color:var(--text-muted);font-weight:600">lg / 12px</div></div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div class="radius-box" style="border-radius:16px"></div><div style="font-size:11px;color:var(--text-muted);font-weight:600">xl / 16px</div></div>
-        
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="radius-box" style="border-radius:4px"></div>
+          <div style="font-size:11px;color:var(--text-muted);font-weight:600;text-align:center">sm<br>4px</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="radius-box" style="border-radius:8px"></div>
+          <div style="font-size:11px;color:var(--text-muted);font-weight:600;text-align:center">md<br>8px</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="radius-box" style="border-radius:12px"></div>
+          <div style="font-size:11px;color:var(--text-muted);font-weight:600;text-align:center">lg<br>12px</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="radius-box" style="border-radius:16px"></div>
+          <div style="font-size:11px;color:var(--text-muted);font-weight:600;text-align:center">xl<br>16px</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="radius-box" style="border-radius:9999px"></div>
+          <div style="font-size:11px;color:var(--text-muted);font-weight:600;text-align:center">full<br>9999px</div>
+        </div>
       </div>
+    </div>
+
+    <div style="overflow-x:auto;margin-top:20px">
+      <table class="sg-table">
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Value</th>
+            <th>Used on</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code style="background:var(--muted-bg);padding:2px 6px;border-radius:4px;font-size:12px;font-family:'SF Mono',Consolas,monospace">--radius-sm</code></td>
+            <td style="color:var(--text-muted)">4px</td>
+            <td>Inline code chips, small table accents, minor UI detail</td>
+          </tr>
+          <tr>
+            <td><code style="background:var(--muted-bg);padding:2px 6px;border-radius:4px;font-size:12px;font-family:'SF Mono',Consolas,monospace">--radius-md</code></td>
+            <td style="color:var(--text-muted)">8px</td>
+            <td>Buttons (default), text inputs, dropdowns, icon buttons, search fields</td>
+          </tr>
+          <tr>
+            <td><code style="background:var(--muted-bg);padding:2px 6px;border-radius:4px;font-size:12px;font-family:'SF Mono',Consolas,monospace">--radius-lg</code></td>
+            <td style="color:var(--text-muted)">12px</td>
+            <td>Cards, data panels, icon containers, calendar popovers, chart wrappers</td>
+          </tr>
+          <tr>
+            <td><code style="background:var(--muted-bg);padding:2px 6px;border-radius:4px;font-size:12px;font-family:'SF Mono',Consolas,monospace">--radius-xl</code></td>
+            <td style="color:var(--text-muted)">16px</td>
+            <td>Modal dialogs, sheet panels, large overlay containers</td>
+          </tr>
+          <tr>
+            <td><code style="background:var(--muted-bg);padding:2px 6px;border-radius:4px;font-size:12px;font-family:'SF Mono',Consolas,monospace">--radius-full</code></td>
+            <td style="color:var(--text-muted)">9999px</td>
+            <td>Badges, status pills, tag labels. Use <code style="background:var(--muted-bg);padding:1px 4px;border-radius:3px;font-size:11px;font-family:'SF Mono',Consolas,monospace">50%</code> for circular avatars.</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
@@ -5409,12 +5550,12 @@ body { font-family: 'Open Sans', sans-serif; font-size: 14px; }
         <div style="background:#FFF5F5;border:1px solid #F5C0C0;border-radius:var(--radius-lg);padding:13px 15px">
           <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#A31F1F;margin-bottom:8px">Never</div>
           <ul style="list-style:none;display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--text);line-height:1.5">
-            <li>Never use SOG Teal as a heading colour — it is for data and engagement metrics only</li>
-            <li>Never use SOG Orange as a general accent colour — semantic warning only</li>
-            <li>Never apply the gradient to body text — white text on gradient only</li>
+            <li>Never use SOG Teal as a heading colour. It is for data and engagement metrics only</li>
+            <li>Never use SOG Orange as a general accent colour. It is for semantic warnings only</li>
+            <li>Never apply the gradient to body text. Use white text on gradient backgrounds only</li>
             <li>Never use Red, Orange, or Yellow as chart series colours in multi-series charts</li>
             <li>Never mix tint scales from different colour families in the same component</li>
-            <li>Never hardcode hex values — always use CSS custom properties</li>
+            <li>Never hardcode hex values. Always use CSS custom properties</li>
           </ul>
         </div>
       </div>
@@ -6012,20 +6153,18 @@ document.addEventListener('click', e => {
   <div class="sg-sub">
     <div class="sg-sub-title">Multi-step Form Indicator</div>
     <div class="sg-example column">
-      <div class="step-indicator">
-        <div class="step-item">
-          <div class="step-circle done">✓</div>
-          <span class="step-label done">Basic Info</span>
+      <div class="stepper-h" role="list" aria-label="New participant form steps">
+        <div class="stepper-step stp-done" role="listitem">
+          <div class="stp-node stp-node-done"><span class="material-symbols-rounded" style="font-size:16px">check</span></div>
+          <div class="stp-label">Basic Info</div>
         </div>
-        <div class="step-line done"></div>
-        <div class="step-item">
-          <div class="step-circle active">2</div>
-          <span class="step-label active">Programme Details</span>
+        <div class="stepper-step stp-active" role="listitem" aria-current="step">
+          <div class="stp-node stp-node-active">2</div>
+          <div class="stp-label">Programme Details</div>
         </div>
-        <div class="step-line"></div>
-        <div class="step-item">
-          <div class="step-circle pending">3</div>
-          <span class="step-label">Review & Submit</span>
+        <div class="stepper-step stp-upcoming" role="listitem">
+          <div class="stp-node stp-node-upcoming">3</div>
+          <div class="stp-label">Review &amp; Submit</div>
         </div>
       </div>
       <div class="sg-card">
@@ -6245,6 +6384,29 @@ document.addEventListener('click', e => {
 .sg-card-timestamp{ font-size: 12px; color: var(--text-muted); }
 .sg-card-stat     { font-size: 36px; font-weight: 800; color: var(--sog-purple);
                     margin-bottom: 8px; }</pre>
+    </div>
+  </div>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">Card Spacing Anatomy</div>
+    <div class="sg-sub-desc">Every slot in the card hierarchy has a fixed spacing value. Use these tokens consistently — never override with arbitrary pixel values.</div>
+    <div style="overflow-x:auto;margin-top:4px">
+      <table class="sg-table">
+        <thead>
+          <tr><th>Element</th><th>Property</th><th>Token</th><th>Value</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Card container</td><td>padding (all sides)</td><td><code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">space-6</code></td><td style="color:var(--text-muted)">24px</td></tr>
+          <tr><td>Eyebrow → Title</td><td>margin-bottom</td><td><code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">space-1 + 2px</code></td><td style="color:var(--text-muted)">6px</td></tr>
+          <tr><td>Title → below</td><td>margin-bottom</td><td><code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">space-1</code></td><td style="color:var(--text-muted)">4px</td></tr>
+          <tr><td>Meta → next section</td><td>margin-bottom</td><td><code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">space-4</code></td><td style="color:var(--text-muted)">16px</td></tr>
+          <tr><td>Stat value → below</td><td>margin-bottom</td><td><code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">space-2</code></td><td style="color:var(--text-muted)">8px</td></tr>
+          <tr><td>Icon + text (side by side)</td><td>gap</td><td><code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">space-3</code></td><td style="color:var(--text-muted)">12px</td></tr>
+          <tr><td>Badge row</td><td>gap</td><td><code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">space-2</code></td><td style="color:var(--text-muted)">8px</td></tr>
+          <tr><td>Card grid (card to card)</td><td>gap</td><td><code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">space-6</code></td><td style="color:var(--text-muted)">24px</td></tr>
+          <tr><td>Section divider within card</td><td>gap / margin-top</td><td><code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">space-4</code></td><td style="color:var(--text-muted)">16px</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
@@ -6482,6 +6644,90 @@ document.addEventListener('click', e => {
 /* Filled variants */
 .badge-filled      { background: var(--sog-purple); color: #fff; border-color: transparent; }
 .badge-filled-teal { background: var(--sog-teal);   color: #fff; border-color: transparent; }</pre>
+  </div>
+</section>
+
+<!-- =================== PROGRAMME POSITION =================== -->
+<section id="prog-timeline" class="sg-section">
+  <div class="sg-section-label">Patterns</div>
+  <h2 class="sg-section-title">Programme Position</h2>
+  <p class="sg-section-desc">A horizontal timeline that shows a participant's current position within the 24-month SOG programme. It communicates completed phases, the active phase, upcoming milestones, and today's position at a glance. Use it at the top of a participant detail view or case summary panel.</p>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">24-Month Programme Timeline</div>
+    <div class="sg-sub-desc">Phase widths are proportional to duration. The "Today" marker is calculated from the programme start date. Milestone labels sit below the bar at their exact percentage position. The stats row surfaces the most critical dates and counters without requiring the user to read the bar precisely.</div>
+
+    <div class="sg-example column">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:24px">
+
+        <!-- Timeline -->
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:16px">24-Month Programme Timeline</div>
+
+        <div class="prog-timeline-outer">
+          <!-- Today marker — left:24.1% = day 176 of 730 -->
+          <div class="prog-today-marker" style="left:24.1%">
+            <div class="prog-today-chip">&#9660; Today</div>
+            <div class="prog-today-stem"></div>
+          </div>
+
+          <!-- Phase bar -->
+          <div class="prog-bar">
+            <!-- PH 1: 4 months (Dec 2025 – Apr 2026) -->
+            <div class="prog-phase" style="flex:4;background:var(--sog-teal)">PH 1</div>
+            <!-- Phase 2: 11 months (Apr 2026 – Mar 2027) -->
+            <div class="prog-phase" style="flex:11;background:var(--sog-purple)">PHASE 2 — ENGAGING CHANGE</div>
+            <!-- Phase 3: 9 months (Mar 2027 – Dec 2027) -->
+            <div class="prog-phase" style="flex:9;background:var(--sog-teal)">PHASE 3</div>
+          </div>
+
+          <!-- Milestone markers -->
+          <div class="prog-milestones">
+            <div class="prog-milestone" style="left:0">
+              <span class="prog-milestone-date">Dec 2025</span>
+              <span class="prog-milestone-label">Start</span>
+            </div>
+            <div class="prog-milestone" style="left:16.67%;transform:translateX(-50%)">
+              <span class="prog-milestone-date">Apr 2026</span>
+              <span class="prog-milestone-label">Ph 2 launch</span>
+            </div>
+            <div class="prog-milestone" style="left:37.5%;transform:translateX(-50%)">
+              <span class="prog-milestone-date">Sept 2026</span>
+              <span class="prog-milestone-label">M9 &middot; Mid surveys</span>
+            </div>
+            <div class="prog-milestone" style="left:62.5%;transform:translateX(-50%)">
+              <span class="prog-milestone-date">Mar 2027</span>
+              <span class="prog-milestone-label">M15 &middot; Phase 3</span>
+            </div>
+            <div class="prog-milestone" style="left:100%;transform:translateX(-100%)">
+              <span class="prog-milestone-date">Dec 2027</span>
+              <span class="prog-milestone-label">Exit</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats row -->
+        <div class="prog-stats">
+          <div class="prog-stat">Programme start: <strong style="color:var(--text)">1 Dec 2025</strong></div>
+          <div class="prog-stat">Phase 1 end: <strong style="color:var(--text)">21 Apr 2026</strong></div>
+          <div class="prog-stat">Baseline survey deadline: <strong style="color:var(--text)">21 May 2026</strong> <span style="color:var(--sog-orange);font-size:13px" title="Deadline passed">&#9651;</span></div>
+          <div class="prog-stat">Days into programme: <strong style="color:var(--text)">176</strong></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">Usage Rules</div>
+    <div class="info-callout" style="margin-bottom:12px">
+      <strong>Today marker:</strong> Always calculate position as <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">(daysElapsed / totalDays) * 100</code> and apply as a CSS <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">left</code> percentage. Never hardcode the position.
+    </div>
+    <div class="info-callout" style="margin-bottom:12px">
+      <strong>Phase colours:</strong> Phase 1 and Phase 3 use <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">var(--sog-teal)</code>. Phase 2 uses <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">var(--sog-purple)</code>. Do not use other colours for phase segments.
+    </div>
+    <div class="info-callout">
+      <strong>Deadline warnings:</strong> Use the &#9651; triangle symbol in <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">var(--sog-orange)</code> next to any stats row date that has passed or is within 14 days. Do not use red — the triangle is a soft nudge, not an error state.
+    </div>
   </div>
 </section>
 
@@ -6854,6 +7100,28 @@ function renderAlerts(alerts, gridEl) {
         <button class="page-btn" aria-label="Page 5">5</button>
         <button class="page-btn" aria-label="Next page">›</button>
       </div>
+    </div>
+  </div>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">Navigation Spacing Anatomy</div>
+    <div class="sg-sub-desc">Spacing values for every navigation component. Apply these consistently — mixing different padding or gap values across navigation contexts breaks visual rhythm.</div>
+    <div style="overflow-x:auto;margin-top:4px">
+      <table class="sg-table">
+        <thead>
+          <tr><th>Component</th><th>Element</th><th>Property</th><th>Token</th><th>Value</th></tr>
+        </thead>
+        <tbody>
+          <tr><td rowspan="2" style="font-weight:600;vertical-align:top;padding-top:14px">Sidebar nav item</td><td>Item</td><td>padding</td><td><code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">7px 10px</code></td><td style="color:var(--text-muted)">7px top/bottom, 10px left/right</td></tr>
+          <tr><td>Icon + label</td><td>gap</td><td><code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">space-2</code></td><td style="color:var(--text-muted)">8px</td></tr>
+          <tr><td rowspan="2" style="font-weight:600;vertical-align:top;padding-top:14px">Tab bar</td><td>Bar container</td><td>padding</td><td><code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">space-1</code></td><td style="color:var(--text-muted)">4px</td></tr>
+          <tr><td>Tab pills</td><td>gap between pills</td><td><code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">space-0 + 2px</code></td><td style="color:var(--text-muted)">2px</td></tr>
+          <tr><td>Tab pill</td><td>Pill itself</td><td>padding</td><td><code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">6px 16px</code></td><td style="color:var(--text-muted)">6px top/bottom, 16px left/right</td></tr>
+          <tr><td>Breadcrumb</td><td>Items</td><td>gap</td><td><code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">space-1 + 2px</code></td><td style="color:var(--text-muted)">6px</td></tr>
+          <tr><td rowspan="2" style="font-weight:600;vertical-align:top;padding-top:14px">Pagination</td><td>Buttons</td><td>gap between buttons</td><td><code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">space-1</code></td><td style="color:var(--text-muted)">4px</td></tr>
+          <tr><td>Button</td><td>width &amp; height</td><td>32 &times; 32px</td><td style="color:var(--text-muted)">fixed size, not token-derived</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
@@ -8092,6 +8360,72 @@ initResizableColumns('participants-table', 'sog-table-widths');</pre>
     </div>
   </div>
 
+  <div class="sg-sub">
+    <div class="sg-sub-title">Clickable Row Patterns</div>
+    <div class="sg-sub-desc">Use a chevron column to indicate every row is clickable. The affordance is permanent and visible at a glance — no hover or discovery required, including on touch devices. Clicking a row opens a sheet panel with the full record, keeping the table visible in the background for context.</div>
+
+    <div class="sg-example">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;width:100%">
+        <table class="sg-table">
+          <thead>
+            <tr>
+              <th scope="col">Participant</th>
+              <th scope="col">Phase</th>
+              <th scope="col">Status</th>
+              <th scope="col">Risk Score</th>
+              <th scope="col" style="width:36px" aria-label="Open record"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="sg-table-row-link" onclick="openSheet('sheet-participant')" tabindex="0" role="button" aria-label="Open Jordan Davies record">
+              <td>Jordan Davies</td>
+              <td><span class="badge badge-blue">Phase 2</span></td>
+              <td><span class="badge badge-green">Active</span></td>
+              <td>41</td>
+              <td style="text-align:center"><span class="material-symbols-rounded" style="font-size:18px;color:var(--charcoal-40);vertical-align:middle">chevron_right</span></td>
+            </tr>
+            <tr class="sg-table-row-link" onclick="openSheet('sheet-participant')" tabindex="0" role="button" aria-label="Open Marcus Reid record">
+              <td>Marcus Reid</td>
+              <td><span class="badge badge-purple">Phase 1</span></td>
+              <td><span class="badge badge-orange">At Risk</span></td>
+              <td>67</td>
+              <td style="text-align:center"><span class="material-symbols-rounded" style="font-size:18px;color:var(--charcoal-40);vertical-align:middle">chevron_right</span></td>
+            </tr>
+            <tr class="sg-table-row-link" onclick="openSheet('sheet-participant')" tabindex="0" role="button" aria-label="Open Priya Sharma record">
+              <td>Priya Sharma</td>
+              <td><span class="badge badge-teal">Phase 3</span></td>
+              <td><span class="badge badge-green">Active</span></td>
+              <td>22</td>
+              <td style="text-align:center"><span class="material-symbols-rounded" style="font-size:18px;color:var(--charcoal-40);vertical-align:middle">chevron_right</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">Table Spacing Anatomy</div>
+    <div class="sg-sub-desc">Each zone of the table composite has a fixed padding. Never adjust these — the visual rhythm relies on all zones using the same horizontal gutter (20px) so content aligns column-to-column across the panel header, toolbar, and data rows.</div>
+    <div style="overflow-x:auto;margin-top:4px">
+      <table class="sg-table">
+        <thead>
+          <tr><th>Zone</th><th>Property</th><th>Value</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Panel header</td><td>padding</td><td style="color:var(--text-muted)">14px 20px</td><td>14px top/bottom keeps it compact against the table header row</td></tr>
+          <tr><td>Toolbar</td><td>padding</td><td style="color:var(--text-muted)">10px 16px</td><td>Slightly narrower than panel header — toolbar is secondary</td></tr>
+          <tr><td>Toolbar actions</td><td>gap</td><td style="color:var(--text-muted)">8px (space-2)</td><td>Between buttons, dropdowns, and search field</td></tr>
+          <tr><td>Column header cells (th)</td><td>padding</td><td style="color:var(--text-muted)">10px 14px</td><td>Reduced vertical padding keeps the header visually distinct from data rows</td></tr>
+          <tr><td>Data cells (td)</td><td>padding</td><td style="color:var(--text-muted)">11px 14px</td><td>1px taller than header to give data breathing room</td></tr>
+          <tr><td>Table wrapper</td><td>border-radius</td><td style="color:var(--text-muted)">12px (radius-lg)</td><td>Applied to the outer container div, not the table element itself</td></tr>
+          <tr><td>Table in a page</td><td>gap to adjacent elements</td><td style="color:var(--text-muted)">24px (space-6)</td><td>Between the table panel and KPI cards, filters, or other sections</td></tr>
+          <tr><td>Footer strip</td><td>padding</td><td style="color:var(--text-muted)">12px 20px</td><td>Matches the panel header horizontal gutter for alignment</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
 </section>
 
 
@@ -8123,24 +8457,7 @@ initResizableColumns('participants-table', 'sog-table-widths');</pre>
 
   <div class="sg-sub">
     <div class="sg-sub-title">Skeleton Loader</div>
-    <div class="sg-sub-desc">Use when content has a known shape and will fill a defined layout for example, a card grid or table rows. Skeletons reduce perceived loading time by showing the structure before the data arrives. Add <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">aria-busy="true"</code> to the container while loading and remove it when content loads.</div>
-    <div class="sg-example" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
-      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px">
-        <div class="skeleton" style="height:12px;width:60%;margin-bottom:12px"></div>
-        <div class="skeleton" style="height:32px;width:80%;margin-bottom:8px"></div>
-        <div class="skeleton" style="height:10px;width:40%"></div>
-      </div>
-      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px">
-        <div class="skeleton" style="height:12px;width:55%;margin-bottom:12px"></div>
-        <div class="skeleton" style="height:32px;width:70%;margin-bottom:8px"></div>
-        <div class="skeleton" style="height:10px;width:50%"></div>
-      </div>
-      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px">
-        <div class="skeleton" style="height:12px;width:65%;margin-bottom:12px"></div>
-        <div class="skeleton" style="height:32px;width:60%;margin-bottom:8px"></div>
-        <div class="skeleton" style="height:10px;width:35%"></div>
-      </div>
-    </div>
+    <div class="sg-sub-desc">Skeleton loaders show placeholder shapes while content loads, reducing perceived wait time by revealing structure before data arrives. See the dedicated <a href="#skeleton" style="color:var(--sog-purple);font-weight:600;text-decoration:none">Skeleton section</a> for all patterns — list item, KPI card, data table, and participant detail panel — plus implementation guidelines and accessibility requirements.</div>
   </div>
 
   <div class="sg-sub">
@@ -8181,6 +8498,309 @@ initResizableColumns('participants-table', 'sog-table-widths');</pre>
   &lt;span class="spinner" aria-label="Loading"&gt;&lt;/span&gt;
   Saving…
 &lt;/button&gt;</pre>
+  </div>
+</section>
+
+
+
+<!-- =================== STEPPER / PROGRESS INDICATOR =================== -->
+<section id="stepper" class="sg-section">
+  <div class="sg-section-label">Components</div>
+  <h2 class="sg-section-title">Progress Indicator</h2>
+  <p class="sg-section-desc">Also known as a stepper, progress tracker, or steps component. It represents a user's current position within a defined sequence of discrete stages, showing which step in a journey they have reached. This is distinct from a progress bar, which communicates how much of a task is complete. SOG's four programme phases are a natural application of this pattern.</p>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">Horizontal Stepper</div>
+    <div class="sg-sub-desc">Use for short sequences of 2–5 steps shown across the top of a form, wizard, or intake flow. The connector line between completed steps fills with brand purple. The active step gains a focus ring. Always add <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">aria-current="step"</code> to the active item and wrap the list in <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">role="list"</code>.</div>
+    <div class="sg-example" style="display:block">
+      <div class="stepper-h" role="list" aria-label="Referral intake steps">
+        <div class="stepper-step stp-done" role="listitem">
+          <div class="stp-node stp-node-done" aria-label="Step 1: Referral, completed"><span class="material-symbols-rounded ms-filled" style="font-size:16px">check</span></div>
+          <div class="stp-label">Referral</div>
+        </div>
+        <div class="stepper-step stp-active" role="listitem" aria-current="step">
+          <div class="stp-node stp-node-active" aria-label="Step 2: Assessment, current">2</div>
+          <div class="stp-label">Assessment</div>
+        </div>
+        <div class="stepper-step stp-upcoming" role="listitem">
+          <div class="stp-node stp-node-upcoming" aria-label="Step 3: Phase Plan, upcoming">3</div>
+          <div class="stp-label">Phase Plan</div>
+        </div>
+        <div class="stepper-step stp-upcoming" role="listitem">
+          <div class="stp-node stp-node-upcoming" aria-label="Step 4: Enrolment, upcoming">4</div>
+          <div class="stp-label">Enrolment</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">Horizontal with Descriptions</div>
+    <div class="sg-sub-desc">Add a sublabel beneath the step name for context such as a date, duration, or status note. Keep sublabels to a single short line. The horizontal layout does not support wrapping text. Completed sublabels render in green; active sublabels in purple.</div>
+    <div class="sg-example" style="display:block">
+      <div class="stepper-h" role="list" aria-label="Case steps">
+        <div class="stepper-step stp-done" role="listitem">
+          <div class="stp-node stp-node-done" aria-label="Step 1: Initial Meeting, completed"><span class="material-symbols-rounded ms-filled" style="font-size:16px">check</span></div>
+          <div class="stp-label">Initial Meeting</div>
+          <div class="stp-sublabel">12 Mar 2025</div>
+        </div>
+        <div class="stepper-step stp-active" role="listitem" aria-current="step">
+          <div class="stp-node stp-node-active" aria-label="Step 2: Risk Assessment, current">2</div>
+          <div class="stp-label">Risk Assessment</div>
+          <div class="stp-sublabel">In progress</div>
+        </div>
+        <div class="stepper-step stp-upcoming" role="listitem">
+          <div class="stp-node stp-node-upcoming" aria-label="Step 3: Case Review, upcoming">3</div>
+          <div class="stp-label">Case Review</div>
+          <div class="stp-sublabel">w/c 19 Apr</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">Vertical Stepper</div>
+    <div class="sg-sub-desc">Use when steps carry meaningful descriptions, or when showing a participant's history down a sidebar or panel. The vertical layout accommodates multi-line content and degrades gracefully on narrow viewports. The connector line extends from each node downward and fills purple on completed steps.</div>
+    <div class="sg-example" style="display:block;padding:24px 32px">
+      <div class="stepper-v" role="list" aria-label="Programme progress" style="max-width:480px">
+        <div class="stepper-step stp-done" role="listitem">
+          <div class="stepper-v-spine">
+            <div class="stp-node stp-node-done" aria-label="Step 1: Referral, completed"><span class="material-symbols-rounded ms-filled" style="font-size:16px">check</span></div>
+            <div class="stepper-v-line"></div>
+          </div>
+          <div class="stepper-v-body">
+            <div class="stepper-v-title">Initial Referral</div>
+            <div class="stepper-v-desc">Referred by secondary school safeguarding lead. Risk assessment completed, initial score 74. Paperwork and consent forms signed.</div>
+            <div class="stepper-v-meta"><span class="material-symbols-rounded" style="font-size:14px;color:var(--sog-green)">check_circle</span>Completed 14 Feb 2025</div>
+          </div>
+        </div>
+        <div class="stepper-step stp-active" role="listitem" aria-current="step">
+          <div class="stepper-v-spine">
+            <div class="stp-node stp-node-active" aria-label="Step 2: Phase 1, current">2</div>
+            <div class="stepper-v-line"></div>
+          </div>
+          <div class="stepper-v-body">
+            <div class="stepper-v-title">Phase 1: Belonging</div>
+            <div class="stepper-v-desc">Building trust and safety. 6 of 12 sessions completed. Risk score improving: 74 → 58. Key worker: Amara B.</div>
+            <div class="stepper-v-meta"><span class="material-symbols-rounded" style="font-size:14px;color:var(--sog-purple)">pending</span>In progress</div>
+          </div>
+        </div>
+        <div class="stepper-step stp-upcoming" role="listitem">
+          <div class="stepper-v-spine">
+            <div class="stp-node stp-node-upcoming" aria-label="Step 3: Phase 1 Review, upcoming">3</div>
+          </div>
+          <div class="stepper-v-body">
+            <div class="stepper-v-title">Phase 1 Review</div>
+            <div class="stepper-v-desc">Milestone review scheduled once all 12 sessions are complete. Outcome determines readiness for Phase 2.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">SOG Programme Phase Tracker</div>
+    <div class="sg-sub-desc">A phase-coloured variant of the vertical stepper mapped to SOG's four programme stages. Each node uses the phase brand colour (Phase 1 Blue, Phase 2 Teal, Phase 3 Green, Follow-up Purple) and the completed connector inherits that phase colour. Use in participant dashboards, case profiles, and programme reports.</div>
+    <div class="sg-example" style="display:block;padding:24px 32px">
+      <div class="stepper-v" role="list" aria-label="SOG programme phases" style="max-width:460px">
+        <div class="stepper-step stp-done" role="listitem">
+          <div class="stepper-v-spine">
+            <div class="stp-node stp-node-blue" aria-label="Phase 1: Belonging, completed"><span class="material-symbols-rounded ms-filled" style="font-size:16px">check</span></div>
+            <div class="stepper-v-line" style="background:var(--sog-blue)"></div>
+          </div>
+          <div class="stepper-v-body">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
+              <div class="stepper-v-title" style="margin-bottom:0">Phase 1</div>
+              <span class="badge badge-blue">Belonging</span>
+            </div>
+            <div class="stepper-v-desc">12 sessions · Risk score 74 → 41 · Completed 30 Apr 2025</div>
+          </div>
+        </div>
+        <div class="stepper-step stp-active" role="listitem" aria-current="step">
+          <div class="stepper-v-spine">
+            <div class="stp-node stp-node-teal-act" aria-label="Phase 2: Dynamic, current">2</div>
+            <div class="stepper-v-line"></div>
+          </div>
+          <div class="stepper-v-body">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
+              <div class="stepper-v-title" style="margin-bottom:0">Phase 2</div>
+              <span class="badge badge-teal">Dynamic</span>
+            </div>
+            <div class="stepper-v-desc">4 of 10 sessions completed · Risk score 41 · In progress</div>
+            <div class="stepper-v-meta"><span class="material-symbols-rounded" style="font-size:14px;color:var(--sog-teal)">pending</span>In progress · Key worker: Amara B.</div>
+          </div>
+        </div>
+        <div class="stepper-step stp-upcoming" role="listitem">
+          <div class="stepper-v-spine">
+            <div class="stp-node stp-node-upcoming" aria-label="Phase 3: Independence, upcoming">3</div>
+            <div class="stepper-v-line"></div>
+          </div>
+          <div class="stepper-v-body">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
+              <div class="stepper-v-title" style="margin-bottom:0">Phase 3</div>
+              <span class="badge badge-green">Independence</span>
+            </div>
+            <div class="stepper-v-desc">Pending Phase 2 completion and milestone review</div>
+          </div>
+        </div>
+        <div class="stepper-step stp-upcoming" role="listitem">
+          <div class="stepper-v-spine">
+            <div class="stp-node stp-node-upcoming" aria-label="Follow-up: Professional, upcoming"><span class="material-symbols-rounded" style="font-size:14px;color:var(--charcoal-40)">star</span></div>
+          </div>
+          <div class="stepper-v-body">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
+              <div class="stepper-v-title" style="margin-bottom:0">Follow-up</div>
+              <span class="badge badge-purple">Professional</span>
+            </div>
+            <div class="stepper-v-desc">6-month follow-up check-in after programme completion</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">Step States</div>
+    <div class="sg-sub-desc">Four states cover every scenario. Never create a fifth state by repurposing colour. Use these semantic states only.</div>
+    <div class="sg-example" style="gap:40px">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <div class="stp-node stp-node-done"><span class="material-symbols-rounded ms-filled" style="font-size:16px">check</span></div>
+        <div style="font-size:12px;font-weight:700;color:var(--text);text-align:center">Completed</div>
+        <div style="font-size:11px;color:var(--text-muted);text-align:center;line-height:1.5">Step finished<br>successfully</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <div class="stp-node stp-node-active">2</div>
+        <div style="font-size:12px;font-weight:700;color:var(--text);text-align:center">Active</div>
+        <div style="font-size:11px;color:var(--text-muted);text-align:center;line-height:1.5">Current step<br>in progress</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <div class="stp-node stp-node-upcoming">3</div>
+        <div style="font-size:12px;font-weight:700;color:var(--text);text-align:center">Upcoming</div>
+        <div style="font-size:11px;color:var(--text-muted);text-align:center;line-height:1.5">Not yet<br>reached</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <div class="stp-node stp-node-error"><span class="material-symbols-rounded ms-filled" style="font-size:16px">close</span></div>
+        <div style="font-size:12px;font-weight:700;color:var(--sog-red);text-align:center">Error</div>
+        <div style="font-size:11px;color:var(--text-muted);text-align:center;line-height:1.5">Action needed,<br>step blocked</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">When to use</div>
+    <div class="info-callout">Use a <strong>horizontal stepper</strong> for short linear flows (2–5 steps) at the top of a form or wizard. Use a <strong>vertical stepper</strong> when steps have descriptions or when displaying timeline-style history in a panel or sidebar. Use the <strong>SOG Phase Tracker</strong> variant for programme phase progression in participant records and dashboards. Never use a stepper for non-linear flows where users can skip steps freely. Use tabs instead. Never use a progress bar where the intent is "which stage" rather than "how much is complete."</div>
+  </div>
+
+  <div class="code-block collapsed" style="margin-top:16px">
+    <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">HTML</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+    <pre>&lt;!-- Horizontal stepper --&gt;
+&lt;div class="stepper-h" role="list" aria-label="Referral intake steps"&gt;
+  &lt;div class="stepper-step stp-done" role="listitem"&gt;
+    &lt;div class="stp-node stp-node-done" aria-label="Step 1, completed"&gt;
+      &lt;span class="material-symbols-rounded ms-filled" style="font-size:16px"&gt;check&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="stp-label"&gt;Referral&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="stepper-step stp-active" role="listitem" aria-current="step"&gt;
+    &lt;div class="stp-node stp-node-active" aria-label="Step 2, current"&gt;2&lt;/div&gt;
+    &lt;div class="stp-label"&gt;Assessment&lt;/div&gt;
+    &lt;div class="stp-sublabel"&gt;In progress&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="stepper-step stp-upcoming" role="listitem"&gt;
+    &lt;div class="stp-node stp-node-upcoming" aria-label="Step 3, upcoming"&gt;3&lt;/div&gt;
+    &lt;div class="stp-label"&gt;Phase Plan&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Vertical stepper --&gt;
+&lt;div class="stepper-v" role="list" aria-label="Programme progress"&gt;
+  &lt;div class="stepper-step stp-done" role="listitem"&gt;
+    &lt;div class="stepper-v-spine"&gt;
+      &lt;div class="stp-node stp-node-done"&gt;
+        &lt;span class="material-symbols-rounded ms-filled" style="font-size:16px"&gt;check&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="stepper-v-line"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="stepper-v-body"&gt;
+      &lt;div class="stepper-v-title"&gt;Initial Referral&lt;/div&gt;
+      &lt;div class="stepper-v-desc"&gt;Step description here.&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="stepper-step stp-active" role="listitem" aria-current="step"&gt;
+    &lt;div class="stepper-v-spine"&gt;
+      &lt;div class="stp-node stp-node-active"&gt;2&lt;/div&gt;
+      &lt;div class="stepper-v-line"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="stepper-v-body"&gt;
+      &lt;div class="stepper-v-title"&gt;Phase 1: Belonging&lt;/div&gt;
+      &lt;div class="stepper-v-desc"&gt;Step description here.&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="stepper-step stp-upcoming" role="listitem"&gt;
+    &lt;div class="stepper-v-spine"&gt;
+      &lt;div class="stp-node stp-node-upcoming"&gt;3&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="stepper-v-body"&gt;
+      &lt;div class="stepper-v-title"&gt;Phase 1 Review&lt;/div&gt;
+      &lt;div class="stepper-v-desc"&gt;Step description here.&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+  </div>
+  <div class="code-block collapsed" style="margin-top:8px">
+    <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+    <pre>/* Horizontal stepper */
+.stepper-h { display: flex; align-items: flex-start; width: 100%; }
+.stepper-h .stepper-step {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; position: relative;
+}
+.stepper-h .stepper-step:not(:last-child)::after {
+  content: ''; position: absolute; top: 15px;
+  left: calc(50% + 16px); width: calc(100% - 32px);
+  height: 2px; background: var(--charcoal-20); z-index: 0;
+}
+.stepper-h .stepper-step.stp-done:not(:last-child)::after {
+  background: var(--sog-purple);
+}
+
+/* Nodes */
+.stp-node {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; position: relative; z-index: 1;
+}
+.stp-node-done     { background: var(--sog-purple); border: 2px solid var(--sog-purple); color: #fff; }
+.stp-node-active   { background: var(--sog-purple); border: 2px solid var(--sog-purple); color: #fff;
+                     box-shadow: 0 0 0 4px var(--purple-20); }
+.stp-node-upcoming { background: #fff; border: 2px solid var(--charcoal-20); color: var(--charcoal-40); }
+.stp-node-error    { background: var(--sog-red); border: 2px solid var(--sog-red); color: #fff; }
+
+/* Labels */
+.stp-label    { margin-top: 8px; font-size: 12px; font-weight: 600; color: var(--charcoal-40); text-align: center; }
+.stp-sublabel { font-size: 11px; color: var(--charcoal-40); text-align: center; margin-top: 2px; }
+.stepper-h .stepper-step.stp-done .stp-label,
+.stepper-h .stepper-step.stp-active .stp-label  { color: var(--text); }
+.stepper-h .stepper-step.stp-done .stp-sublabel   { color: var(--sog-green); }
+.stepper-h .stepper-step.stp-active .stp-sublabel { color: var(--sog-purple); }
+
+/* Vertical stepper */
+.stepper-v { display: flex; flex-direction: column; }
+.stepper-v .stepper-step { display: flex; gap: 16px; }
+.stepper-v-spine { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 32px; }
+.stepper-v-line  { width: 2px; flex: 1; min-height: 20px; background: var(--charcoal-20); margin: 4px 0; }
+.stepper-v .stepper-step.stp-done .stepper-v-line { background: var(--sog-purple); }
+.stepper-v-body  { flex: 1; padding-bottom: 24px; padding-top: 4px; }
+.stepper-v-title { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.3; }
+.stepper-v .stepper-step.stp-upcoming .stepper-v-title { color: var(--text-muted); }
+.stepper-v-desc  { font-size: 13px; color: var(--text-muted); line-height: 1.55; margin-top: 2px; }
+.stepper-v-meta  { display: inline-flex; align-items: center; gap: 6px;
+                   margin-top: 6px; font-size: 12px; color: var(--text-muted); }
+
+/* Phase-coloured nodes (SOG Phase Tracker) */
+.stp-node-blue     { background: var(--sog-blue); border: 2px solid var(--sog-blue); color: #fff; }
+.stp-node-teal-act { background: var(--sog-teal); border: 2px solid var(--sog-teal); color: #fff;
+                     box-shadow: 0 0 0 4px var(--teal-20); }</pre>
   </div>
 </section>
 
@@ -8271,6 +8891,470 @@ initResizableColumns('participants-table', 'sog-table-widths');</pre>
         <div style="font-size:11px;color:var(--text-muted)">Gradient</div>
       </div>
     </div>
+  </div>
+</section>
+
+
+
+<!-- =================== SKELETON =================== -->
+<section id="skeleton" class="sg-section">
+  <div class="sg-section-label">Components</div>
+  <h2 class="sg-section-title">Skeleton</h2>
+  <p class="sg-section-desc">Skeleton screens replace content with animated placeholder shapes while data loads. They reduce perceived wait time by showing structure before the data arrives. The user can see the layout before any content fills in. Use skeletons whenever content has a predictable shape; use a spinner when the shape is unknown or the wait is very short.</p>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">List Item</div>
+    <div class="sg-sub-desc">Use for participant lists, session logs, or any repeating row-based layout. Pair a circular avatar placeholder with text lines at varying widths. Never use uniform widths, which look artificial and draw attention to the skeleton.</div>
+    <div class="sg-example" style="display:block" aria-busy="true" aria-label="Loading participants">
+      <div style="display:flex;flex-direction:column;gap:10px;max-width:520px">
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:#fff;border:1px solid var(--border);border-radius:10px">
+          <div class="skeleton skeleton-circle" style="width:36px;height:36px;flex-shrink:0"></div>
+          <div style="flex:1"><div class="skeleton" style="height:12px;width:52%;margin-bottom:8px"></div><div class="skeleton" style="height:10px;width:32%"></div></div>
+          <div class="skeleton" style="height:22px;width:58px;border-radius:99px;flex-shrink:0"></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:#fff;border:1px solid var(--border);border-radius:10px">
+          <div class="skeleton skeleton-circle" style="width:36px;height:36px;flex-shrink:0"></div>
+          <div style="flex:1"><div class="skeleton" style="height:12px;width:44%;margin-bottom:8px"></div><div class="skeleton" style="height:10px;width:28%"></div></div>
+          <div class="skeleton" style="height:22px;width:58px;border-radius:99px;flex-shrink:0"></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:#fff;border:1px solid var(--border);border-radius:10px">
+          <div class="skeleton skeleton-circle" style="width:36px;height:36px;flex-shrink:0"></div>
+          <div style="flex:1"><div class="skeleton" style="height:12px;width:60%;margin-bottom:8px"></div><div class="skeleton" style="height:10px;width:38%"></div></div>
+          <div class="skeleton" style="height:22px;width:58px;border-radius:99px;flex-shrink:0"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">KPI Card</div>
+    <div class="sg-sub-desc">Match the skeleton proportions exactly to the real card so the layout shift on load is imperceptible. The large number placeholder should match the font-size of the real metric.</div>
+    <div class="sg-example" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px" aria-busy="true" aria-label="Loading metrics">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+          <div class="skeleton" style="height:11px;width:55%"></div>
+          <div class="skeleton skeleton-circle" style="width:28px;height:28px;flex-shrink:0"></div>
+        </div>
+        <div class="skeleton" style="height:32px;width:55%;margin-bottom:10px"></div>
+        <div class="skeleton" style="height:10px;width:42%"></div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+          <div class="skeleton" style="height:11px;width:48%"></div>
+          <div class="skeleton skeleton-circle" style="width:28px;height:28px;flex-shrink:0"></div>
+        </div>
+        <div class="skeleton" style="height:32px;width:48%;margin-bottom:10px"></div>
+        <div class="skeleton" style="height:10px;width:38%"></div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+          <div class="skeleton" style="height:11px;width:60%"></div>
+          <div class="skeleton skeleton-circle" style="width:28px;height:28px;flex-shrink:0"></div>
+        </div>
+        <div class="skeleton" style="height:32px;width:52%;margin-bottom:10px"></div>
+        <div class="skeleton" style="height:10px;width:48%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">Data Table</div>
+    <div class="sg-sub-desc">Render 4–6 placeholder rows. Do not skeleton the header row, as column labels are static and can load immediately. Use pill-shaped placeholders for badge columns to mirror the real badge shape.</div>
+    <div class="sg-example" style="display:block;overflow-x:auto" aria-busy="true" aria-label="Loading participant data">
+      <table style="width:100%;border-collapse:collapse;min-width:560px">
+        <thead>
+          <tr>
+            <th scope="col" style="padding:10px 14px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;border-bottom:1.5px solid var(--border)">Participant</th>
+            <th scope="col" style="padding:10px 14px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;border-bottom:1.5px solid var(--border)">Phase</th>
+            <th scope="col" style="padding:10px 14px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;border-bottom:1.5px solid var(--border)">Status</th>
+            <th scope="col" style="padding:10px 14px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;border-bottom:1.5px solid var(--border)">Risk</th>
+            <th scope="col" style="padding:10px 14px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;border-bottom:1.5px solid var(--border)">Last Session</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:12px 14px"><div style="display:flex;align-items:center;gap:10px"><div class="skeleton skeleton-circle" style="width:28px;height:28px;flex-shrink:0"></div><div class="skeleton" style="height:11px;width:100px"></div></div></td><td style="padding:12px 14px"><div class="skeleton" style="height:20px;width:62px;border-radius:99px"></div></td><td style="padding:12px 14px"><div class="skeleton" style="height:20px;width:62px;border-radius:99px"></div></td><td style="padding:12px 14px"><div class="skeleton" style="height:11px;width:36px"></div></td><td style="padding:12px 14px"><div class="skeleton" style="height:11px;width:80px"></div></td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:12px 14px"><div style="display:flex;align-items:center;gap:10px"><div class="skeleton skeleton-circle" style="width:28px;height:28px;flex-shrink:0"></div><div class="skeleton" style="height:11px;width:88px"></div></div></td><td style="padding:12px 14px"><div class="skeleton" style="height:20px;width:62px;border-radius:99px"></div></td><td style="padding:12px 14px"><div class="skeleton" style="height:20px;width:62px;border-radius:99px"></div></td><td style="padding:12px 14px"><div class="skeleton" style="height:11px;width:36px"></div></td><td style="padding:12px 14px"><div class="skeleton" style="height:11px;width:80px"></div></td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:12px 14px"><div style="display:flex;align-items:center;gap:10px"><div class="skeleton skeleton-circle" style="width:28px;height:28px;flex-shrink:0"></div><div class="skeleton" style="height:11px;width:112px"></div></div></td><td style="padding:12px 14px"><div class="skeleton" style="height:20px;width:62px;border-radius:99px"></div></td><td style="padding:12px 14px"><div class="skeleton" style="height:20px;width:62px;border-radius:99px"></div></td><td style="padding:12px 14px"><div class="skeleton" style="height:11px;width:36px"></div></td><td style="padding:12px 14px"><div class="skeleton" style="height:11px;width:80px"></div></td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:12px 14px"><div style="display:flex;align-items:center;gap:10px"><div class="skeleton skeleton-circle" style="width:28px;height:28px;flex-shrink:0"></div><div class="skeleton" style="height:11px;width:94px"></div></div></td><td style="padding:12px 14px"><div class="skeleton" style="height:20px;width:62px;border-radius:99px"></div></td><td style="padding:12px 14px"><div class="skeleton" style="height:20px;width:62px;border-radius:99px"></div></td><td style="padding:12px 14px"><div class="skeleton" style="height:11px;width:36px"></div></td><td style="padding:12px 14px"><div class="skeleton" style="height:11px;width:80px"></div></td></tr>
+          <tr><td style="padding:12px 14px"><div style="display:flex;align-items:center;gap:10px"><div class="skeleton skeleton-circle" style="width:28px;height:28px;flex-shrink:0"></div><div class="skeleton" style="height:11px;width:76px"></div></div></td><td style="padding:12px 14px"><div class="skeleton" style="height:20px;width:62px;border-radius:99px"></div></td><td style="padding:12px 14px"><div class="skeleton" style="height:20px;width:62px;border-radius:99px"></div></td><td style="padding:12px 14px"><div class="skeleton" style="height:11px;width:36px"></div></td><td style="padding:12px 14px"><div class="skeleton" style="height:11px;width:80px"></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">Participant Detail Panel</div>
+    <div class="sg-sub-desc">For complex layouts, break the skeleton into named zones mirroring the real structure. Users can recognise the page structure before any data appears, which reduces anxiety during longer loads.</div>
+    <div class="sg-example" style="display:block" aria-busy="true" aria-label="Loading participant details">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;max-width:560px">
+        <div style="padding:20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px">
+          <div class="skeleton skeleton-circle" style="width:48px;height:48px;flex-shrink:0"></div>
+          <div style="flex:1">
+            <div class="skeleton" style="height:14px;width:44%;margin-bottom:10px"></div>
+            <div style="display:flex;gap:8px"><div class="skeleton" style="height:20px;width:62px;border-radius:99px"></div><div class="skeleton" style="height:20px;width:62px;border-radius:99px"></div></div>
+          </div>
+          <div class="skeleton" style="height:32px;width:96px;border-radius:8px;flex-shrink:0"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--border)">
+          <div style="padding:16px 20px;border-right:1px solid var(--border)"><div class="skeleton" style="height:10px;width:60%;margin-bottom:10px"></div><div class="skeleton" style="height:24px;width:40%"></div></div>
+          <div style="padding:16px 20px;border-right:1px solid var(--border)"><div class="skeleton" style="height:10px;width:55%;margin-bottom:10px"></div><div class="skeleton" style="height:24px;width:45%"></div></div>
+          <div style="padding:16px 20px"><div class="skeleton" style="height:10px;width:50%;margin-bottom:10px"></div><div class="skeleton" style="height:24px;width:35%"></div></div>
+        </div>
+        <div style="padding:20px;display:flex;flex-direction:column;gap:9px">
+          <div class="skeleton" style="height:11px;width:28%;margin-bottom:4px"></div>
+          <div class="skeleton" style="height:11px;width:92%"></div>
+          <div class="skeleton" style="height:11px;width:76%"></div>
+          <div class="skeleton" style="height:11px;width:84%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">Implementation Rules</div>
+    <div class="info-callout"><strong>Match structure exactly.</strong> Every skeleton placeholder corresponds 1:1 with a real element — same size, same position. Layout shift on load is disorienting.<br><br><strong>Add <code style="background:rgba(0,0,0,.06);padding:1px 5px;border-radius:3px;font-size:12px">aria-busy="true"</code></strong> to the skeleton container and remove it when content loads. Pair with <code style="background:rgba(0,0,0,.06);padding:1px 5px;border-radius:3px;font-size:12px">aria-label="Loading [content name]"</code>.<br><br><strong>Vary widths.</strong> Never use identical widths on multiple text placeholders — a uniform skeleton looks artificial.<br><br><strong>Use <code style="background:rgba(0,0,0,.06);padding:1px 5px;border-radius:3px;font-size:12px">.skeleton-circle</code></strong> for avatar and icon placeholders — it overrides the default border-radius to 50%.</div>
+  </div>
+
+  <div class="code-block collapsed" style="margin-top:16px">
+    <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">HTML</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+    <pre>&lt;!-- List item skeleton --&gt;
+&lt;div aria-busy="true" aria-label="Loading participants"&gt;
+  &lt;div style="display:flex;align-items:center;gap:12px"&gt;
+    &lt;div class="skeleton skeleton-circle" style="width:36px;height:36px"&gt;&lt;/div&gt;
+    &lt;div style="flex:1"&gt;
+      &lt;div class="skeleton" style="height:12px;width:52%;margin-bottom:8px"&gt;&lt;/div&gt;
+      &lt;div class="skeleton" style="height:10px;width:32%"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="skeleton" style="height:22px;width:58px;border-radius:99px"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Remove aria-busy once data loads --&gt;
+&lt;script&gt;
+  fetchData().then(data =&gt; {
+    container.setAttribute('aria-busy', 'false');
+    container.removeAttribute('aria-label');
+    renderContent(data);
+  });
+&lt;/script&gt;</pre>
+  </div>
+  <div class="code-block collapsed" style="margin-top:8px">
+    <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+    <pre>/* Shimmer skeleton */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 6px;
+}
+.skeleton-circle { border-radius: 50% !important; }
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}</pre>
+  </div>
+</section>
+
+
+
+<!-- =================== SHEET =================== -->
+<section id="sheet" class="sg-section">
+  <div class="sg-section-label">Components</div>
+  <h2 class="sg-section-title">Sheet</h2>
+  <p class="sg-section-desc">A sheet slides in from the right edge of the screen, overlaying the current view without replacing it. Use sheets for contextual detail or supplementary actions that do not require a full page navigation — the user can see and return to the underlying content. Common SOG uses: participant detail, session notes, filter drawers, and export options.</p>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">Interactive Demo</div>
+    <div class="sg-sub-desc">Open a live sheet. Dismiss by clicking the × button, pressing Escape, or clicking the backdrop.</div>
+    <div class="sg-example" style="flex-wrap:wrap;gap:12px">
+      <button class="btn btn-primary" onclick="openSheet('sheet-participant')" style="gap:8px"><span class="material-symbols-rounded" style="font-size:16px">person</span>Participant Detail</button>
+      <button class="btn btn-outline" onclick="openSheet('sheet-filter')" style="gap:8px"><span class="material-symbols-rounded" style="font-size:16px">filter_list</span>Filter Panel</button>
+    </div>
+  </div>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">Width Variants</div>
+    <div class="sg-sub-desc">Three widths cover most use cases. All sheets span full viewport height. On narrow viewports the sheet takes the full width minus a 48px left margin so the user can always see and tap the backdrop to close.</div>
+    <div class="sg-example" style="align-items:stretch;gap:16px">
+      <div style="flex:1;background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;min-height:180px">
+        <div style="padding:12px 14px;border-bottom:1px solid var(--border)"><div style="font-size:12px;font-weight:700;color:var(--text)">Narrow · 320px</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">Filters, quick actions</div></div>
+        <div style="padding:12px 14px;flex:1;display:flex;flex-direction:column;gap:9px"><div class="skeleton" style="height:10px;width:80%"></div><div class="skeleton" style="height:10px;width:65%"></div><div class="skeleton" style="height:10px;width:72%"></div><div class="skeleton" style="height:28px;border-radius:6px;margin-top:8px"></div></div>
+      </div>
+      <div style="flex:1.4;background:#fff;border:2px solid var(--sog-purple);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;min-height:180px">
+        <div style="padding:12px 14px;border-bottom:1px solid var(--border)"><div style="font-size:12px;font-weight:700;color:var(--sog-purple)">Standard · 480px ✦</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">Participant detail, notes</div></div>
+        <div style="padding:12px 14px;flex:1;display:flex;flex-direction:column;gap:9px"><div style="display:flex;gap:10px;margin-bottom:4px"><div class="skeleton skeleton-circle" style="width:32px;height:32px;flex-shrink:0"></div><div style="flex:1"><div class="skeleton" style="height:11px;width:55%;margin-bottom:7px"></div><div class="skeleton" style="height:10px;width:40%"></div></div></div><div class="skeleton" style="height:10px;width:90%"></div><div class="skeleton" style="height:10px;width:70%"></div></div>
+      </div>
+      <div style="flex:1.8;background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;min-height:180px">
+        <div style="padding:12px 14px;border-bottom:1px solid var(--border)"><div style="font-size:12px;font-weight:700;color:var(--text)">Wide · 640px</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">Forms, reports</div></div>
+        <div style="padding:12px 14px;flex:1;display:flex;flex-direction:column;gap:9px"><div class="skeleton" style="height:10px;width:75%"></div><div class="skeleton" style="height:56px;border-radius:8px;margin-top:4px"></div><div class="skeleton" style="height:10px;width:60%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">Anatomy</div>
+    <div class="sg-sub-desc">Every sheet uses the same four-zone structure. Only the body scrolls. The header and footer remain fixed so the title and primary actions stay accessible regardless of content length.</div>
+    <div class="sg-example" style="gap:32px;flex-wrap:wrap;align-items:flex-start">
+      <div style="width:240px;flex-shrink:0;background:#fff;border:1.5px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08)">
+        <div style="padding:14px 16px;border-bottom:2px solid var(--sog-purple);background:var(--purple-10);display:flex;align-items:center;justify-content:space-between">
+          <div><div style="font-size:12px;font-weight:700;color:var(--text)">Sheet Title</div><div style="font-size:10px;color:var(--text-muted);margin-top:1px">Subtitle / context</div></div>
+          <div style="width:24px;height:24px;border-radius:6px;background:var(--muted-bg);display:flex;align-items:center;justify-content:center"><span class="material-symbols-rounded" style="font-size:13px;color:var(--text-muted)">close</span></div>
+        </div>
+        <div style="padding:14px 16px;display:flex;flex-direction:column;gap:8px;min-height:110px;border-bottom:1.5px dashed var(--charcoal-20)">
+          <div class="skeleton" style="height:10px;width:82%"></div><div class="skeleton" style="height:10px;width:66%"></div><div class="skeleton" style="height:10px;width:74%"></div><div class="skeleton" style="height:10px;width:58%"></div><div class="skeleton" style="height:10px;width:70%"></div>
+        </div>
+        <div style="padding:12px 16px;display:flex;gap:8px;justify-content:flex-end;background:var(--muted-bg)">
+          <div style="height:26px;width:56px;border-radius:6px;border:1px solid var(--border);background:#fff"></div>
+          <div style="height:26px;width:76px;border-radius:6px;background:var(--sog-purple)"></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:24px;padding-top:6px">
+        <div style="display:flex;align-items:flex-start;gap:12px"><div style="width:10px;height:10px;border-radius:2px;background:var(--sog-purple);flex-shrink:0;margin-top:4px"></div><div><div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px">Header — fixed</div><div style="font-size:12px;color:var(--text-muted);line-height:1.5">Title, optional subtitle, close button. Always visible at the top.</div></div></div>
+        <div style="display:flex;align-items:flex-start;gap:12px"><div style="width:10px;height:10px;border-radius:2px;background:var(--charcoal-20);flex-shrink:0;margin-top:4px"></div><div><div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px">Body — scrollable</div><div style="font-size:12px;color:var(--text-muted);line-height:1.5">All content, sections, and forms. Scrolls independently of header/footer.</div></div></div>
+        <div style="display:flex;align-items:flex-start;gap:12px"><div style="width:10px;height:10px;border-radius:2px;background:var(--charcoal-10);flex-shrink:0;margin-top:4px;border:1px solid var(--border)"></div><div><div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px">Footer — fixed</div><div style="font-size:12px;color:var(--text-muted);line-height:1.5">Primary and secondary actions, right-aligned. Always within reach.</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">When to use</div>
+    <div class="info-callout">Use a <strong>sheet</strong> when the user needs contextual detail without losing their place. For example, viewing a participant's history while staying on the participant list. Use a <strong>modal</strong> instead when you need the user's full attention or a definitive decision before they can continue. Never use a sheet for destructive confirmations. Keep sheet content focused. If it requires more than three content sections, consider a dedicated page instead.</div>
+  </div>
+
+  <div class="code-block collapsed" style="margin-top:16px">
+    <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">HTML</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+    <pre>&lt;!-- Trigger --&gt;
+&lt;button class="btn btn-primary" onclick="openSheet('my-sheet')"&gt;Open Sheet&lt;/button&gt;
+
+&lt;!-- Sheet overlay --&gt;
+&lt;div id="my-sheet" class="sheet-backdrop" role="dialog"
+     aria-modal="true" aria-labelledby="my-sheet-title"&gt;
+  &lt;div class="sheet"&gt;
+    &lt;div class="sheet-header"&gt;
+      &lt;div&gt;
+        &lt;div class="sheet-title" id="my-sheet-title"&gt;Sheet Title&lt;/div&gt;
+        &lt;div class="sheet-subtitle"&gt;Optional subtitle&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;button class="sheet-close" onclick="closeSheet('my-sheet')" aria-label="Close"&gt;
+        &lt;span class="material-symbols-rounded" style="font-size:18px"&gt;close&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="sheet-body"&gt;
+      &lt;!-- scrollable content --&gt;
+    &lt;/div&gt;
+    &lt;div class="sheet-footer"&gt;
+      &lt;button class="btn btn-ghost" onclick="closeSheet('my-sheet')"&gt;Cancel&lt;/button&gt;
+      &lt;button class="btn btn-primary"&gt;Save Changes&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+  </div>
+  <div class="code-block collapsed" style="margin-top:8px">
+    <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+    <pre>.sheet-backdrop {
+  position: fixed; inset: 0; background: rgba(0,0,0,.4);
+  z-index: 400; opacity: 0; pointer-events: none;
+  transition: opacity .25s; backdrop-filter: blur(2px);
+}
+.sheet-backdrop.open { opacity: 1; pointer-events: all; }
+
+.sheet {
+  position: fixed; top: 0; right: 0; height: 100%;
+  width: 480px; max-width: calc(100vw - 48px);
+  background: #fff; z-index: 401;
+  transform: translateX(100%);
+  transition: transform .35s cubic-bezier(.4,0,.2,1);
+  display: flex; flex-direction: column;
+  box-shadow: -4px 0 40px rgba(0,0,0,.15);
+}
+.sheet.open        { transform: translateX(0); }
+.sheet-header      { display: flex; align-items: flex-start; justify-content: space-between;
+                     padding: 18px 20px; border-bottom: 1px solid var(--border);
+                     flex-shrink: 0; gap: 12px; }
+.sheet-body        { flex: 1; overflow-y: auto; padding: 20px; }
+.sheet-footer      { padding: 14px 20px; border-top: 1px solid var(--border);
+                     display: flex; gap: 8px; justify-content: flex-end; flex-shrink: 0; }</pre>
+  </div>
+  <div class="code-block collapsed" style="margin-top:8px">
+    <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">JS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+    <pre>function openSheet(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeSheet(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+// Backdrop click closes sheet
+document.querySelectorAll('.sheet-backdrop').forEach(el => {
+  el.addEventListener('click', e => {
+    if (e.target === el) closeSheet(el.id);
+  });
+});
+// Escape key closes all open sheets
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape')
+    document.querySelectorAll('.sheet-backdrop.open')
+      .forEach(el => closeSheet(el.id));
+});</pre>
+  </div>
+</section>
+
+
+
+<!-- =================== MODAL =================== -->
+<section id="modal" class="sg-section">
+  <div class="sg-section-label">Components</div>
+  <h2 class="sg-section-title">Modal</h2>
+  <p class="sg-section-desc">Modals interrupt the current flow to require attention or a decision before the user can continue. Use them sparingly. Every modal is an interruption. Reserve modals for confirmations, destructive actions, and focused forms where the user must respond before proceeding. For contextual detail that does not require a decision, use a Sheet instead.</p>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">Interactive Demos</div>
+    <div class="sg-sub-desc">Three common modal patterns in the SOG system. Each demo shows the entrance animation, backdrop blur, and dismiss interactions.</div>
+    <div class="sg-example" style="flex-wrap:wrap;gap:12px">
+      <button class="btn btn-primary" onclick="openModal('modal-confirm')">Confirmation</button>
+      <button class="btn btn-danger" onclick="openModal('modal-destructive')">Destructive Action</button>
+      <button class="btn btn-outline" onclick="openModal('modal-form')" style="gap:8px"><span class="material-symbols-rounded" style="font-size:16px">edit_note</span>Log Session</button>
+    </div>
+  </div>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">Size Variants</div>
+    <div class="sg-sub-desc">Three widths cover the full range of modal content. All modals are vertically centred and constrained to <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">calc(100vh - 48px)</code> so they never exceed the viewport.</div>
+    <div class="sg-example" style="align-items:stretch;gap:16px;flex-wrap:wrap">
+      <div style="flex:1;min-width:160px;background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column">
+        <div style="padding:14px 16px;border-bottom:1px solid var(--border)"><div style="font-size:12px;font-weight:700;color:var(--text)">Small · 360px</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">Confirmations, yes/no prompts</div></div>
+        <div style="padding:14px 16px;flex:1;font-size:11px;color:var(--text-muted);line-height:1.5">Single-question prompts, short alerts, simple confirmations with one paragraph of explanation.</div>
+        <div style="padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end"><div style="height:26px;width:56px;border-radius:6px;border:1px solid var(--border)"></div><div style="height:26px;width:70px;border-radius:6px;background:var(--sog-purple)"></div></div>
+      </div>
+      <div style="flex:1.35;min-width:200px;background:#fff;border:2px solid var(--sog-purple);border-radius:12px;overflow:hidden;display:flex;flex-direction:column">
+        <div style="padding:14px 16px;border-bottom:1px solid var(--border)"><div style="font-size:12px;font-weight:700;color:var(--sog-purple)">Default · 480px ✦</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">Most modals, short forms</div></div>
+        <div style="padding:14px 16px;flex:1;font-size:11px;color:var(--text-muted);line-height:1.5">Confirmations with detail, 1–3 field forms, info dialogs, SOG session log, destructive actions with consequences listed.</div>
+        <div style="padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end"><div style="height:26px;width:56px;border-radius:6px;border:1px solid var(--border)"></div><div style="height:26px;width:70px;border-radius:6px;background:var(--sog-purple)"></div></div>
+      </div>
+      <div style="flex:1.7;min-width:220px;background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column">
+        <div style="padding:14px 16px;border-bottom:1px solid var(--border)"><div style="font-size:12px;font-weight:700;color:var(--text)">Large · 600px</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">Multi-field forms, rich content</div></div>
+        <div style="padding:14px 16px;flex:1;font-size:11px;color:var(--text-muted);line-height:1.5">Complex forms with 4+ fields, document preview, data entry that requires more horizontal space than the default modal provides.</div>
+        <div style="padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end"><div style="height:26px;width:56px;border-radius:6px;border:1px solid var(--border)"></div><div style="height:26px;width:70px;border-radius:6px;background:var(--sog-purple)"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">Anatomy</div>
+    <div class="sg-sub-desc">Every modal has four parts. The backdrop always blurs and dims. The container holds all content and animates in on a spring curve. The close button is mandatory. Never remove it.</div>
+    <div class="sg-example" style="gap:32px;flex-wrap:wrap;align-items:flex-start">
+      <div style="width:260px;flex-shrink:0;background:#fff;border:1.5px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.12)">
+        <div style="padding:16px 18px;border-bottom:2px solid var(--sog-purple);background:var(--purple-10);display:flex;align-items:center;justify-content:space-between">
+          <span style="font-size:13px;font-weight:700;color:var(--text)">Modal Title</span>
+          <div style="width:24px;height:24px;border-radius:6px;background:var(--muted-bg);display:flex;align-items:center;justify-content:center"><span class="material-symbols-rounded" style="font-size:13px;color:var(--text-muted)">close</span></div>
+        </div>
+        <div style="padding:16px 18px;display:flex;flex-direction:column;gap:8px;border-bottom:1.5px dashed var(--charcoal-20)">
+          <div class="skeleton" style="height:10px;width:90%"></div>
+          <div class="skeleton" style="height:10px;width:76%"></div>
+          <div class="skeleton" style="height:10px;width:84%"></div>
+          <div class="skeleton" style="height:10px;width:68%"></div>
+        </div>
+        <div style="padding:14px 18px;display:flex;gap:8px;justify-content:flex-end;background:var(--muted-bg)">
+          <div style="height:26px;width:54px;border-radius:6px;border:1px solid var(--border);background:#fff"></div>
+          <div style="height:26px;width:72px;border-radius:6px;background:var(--sog-purple)"></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:22px;padding-top:6px">
+        <div style="display:flex;align-items:flex-start;gap:12px"><div style="width:10px;height:10px;border-radius:2px;background:var(--sog-purple);flex-shrink:0;margin-top:4px"></div><div><div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px">Backdrop</div><div style="font-size:12px;color:var(--text-muted);line-height:1.5">Fixed overlay: rgba(0,0,0,.45) + backdrop-filter blur. Click to close.</div></div></div>
+        <div style="display:flex;align-items:flex-start;gap:12px"><div style="width:10px;height:10px;border-radius:2px;background:var(--purple-10);flex-shrink:0;margin-top:4px;border:1.5px solid var(--sog-purple)"></div><div><div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px">Header</div><div style="font-size:12px;color:var(--text-muted);line-height:1.5">Title + close button. Always visible. Never omit the close button.</div></div></div>
+        <div style="display:flex;align-items:flex-start;gap:12px"><div style="width:10px;height:10px;border-radius:2px;background:var(--charcoal-20);flex-shrink:0;margin-top:4px"></div><div><div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px">Body</div><div style="font-size:12px;color:var(--text-muted);line-height:1.5">Scrollable content. Max-height is capped so it never overflows the viewport.</div></div></div>
+        <div style="display:flex;align-items:flex-start;gap:12px"><div style="width:10px;height:10px;border-radius:2px;background:var(--charcoal-10);flex-shrink:0;margin-top:4px;border:1px solid var(--border)"></div><div><div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px">Footer</div><div style="font-size:12px;color:var(--text-muted);line-height:1.5">Actions right-aligned. Primary action rightmost. Cancel/dismiss always present.</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">When to use</div>
+    <div class="info-callout">Use a <strong>modal</strong> when the user must respond before continuing: confirmations, destructive actions, required input. Use a <strong>sheet</strong> for contextual detail that does not demand a decision. Use an <strong>alert or toast</strong> for non-blocking feedback. Never nest a modal inside another modal. Never open a modal as the result of another modal. Use a multi-step form or wizard instead. Always support Escape, the close button, and backdrop click as dismiss mechanisms.</div>
+  </div>
+
+  <div class="code-block collapsed" style="margin-top:16px">
+    <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">HTML</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+    <pre>&lt;!-- Trigger --&gt;
+&lt;button class="btn btn-primary" onclick="openModal('my-modal')"&gt;Open Modal&lt;/button&gt;
+
+&lt;!-- Modal --&gt;
+&lt;div id="my-modal" class="modal-backdrop" role="dialog"
+     aria-modal="true" aria-labelledby="my-modal-title"&gt;
+  &lt;div class="modal"&gt;
+    &lt;div class="modal-header"&gt;
+      &lt;span class="modal-title" id="my-modal-title"&gt;Modal Title&lt;/span&gt;
+      &lt;button class="modal-close" onclick="closeModal('my-modal')" aria-label="Close"&gt;
+        &lt;span class="material-symbols-rounded" style="font-size:18px"&gt;close&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="modal-body"&gt;
+      &lt;p&gt;Modal content here.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="modal-footer"&gt;
+      &lt;button class="btn btn-ghost" onclick="closeModal('my-modal')"&gt;Cancel&lt;/button&gt;
+      &lt;button class="btn btn-primary"&gt;Confirm&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Destructive variant — swap btn-primary for btn-danger --&gt;
+&lt;!-- Small variant  — add class modal--sm to .modal --&gt;
+&lt;!-- Large variant  — add class modal--lg to .modal --&gt;</pre>
+  </div>
+  <div class="code-block collapsed" style="margin-top:8px">
+    <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+    <pre>.modal-backdrop {
+  position: fixed; inset: 0; background: rgba(0,0,0,.45);
+  z-index: 500; display: flex; align-items: center; justify-content: center;
+  padding: 24px; opacity: 0; pointer-events: none;
+  transition: opacity .2s; backdrop-filter: blur(3px);
+}
+.modal-backdrop.open { opacity: 1; pointer-events: all; }
+
+.modal {
+  background: #fff; border-radius: 16px;
+  box-shadow: 0 24px 64px rgba(0,0,0,.2);
+  width: 100%; max-width: 480px;
+  display: flex; flex-direction: column;
+  transform: scale(.96) translateY(8px);
+  transition: transform .25s cubic-bezier(.34,1.56,.64,1);
+  max-height: calc(100vh - 48px); overflow: hidden;
+}
+.modal-backdrop.open .modal { transform: scale(1) translateY(0); }
+.modal--sm { max-width: 360px; }
+.modal--lg { max-width: 600px; }
+
+.modal-header { display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 24px; border-bottom: 1px solid var(--border); flex-shrink: 0; gap: 12px; }
+.modal-body   { padding: 20px 24px; flex: 1; overflow-y: auto; }
+.modal-footer { padding: 0 24px 20px; display: flex; gap: 8px;
+  justify-content: flex-end; flex-shrink: 0; }</pre>
+  </div>
+  <div class="code-block collapsed" style="margin-top:8px">
+    <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">JS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+    <pre>function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+// Backdrop click closes modal
+document.querySelectorAll('.modal-backdrop').forEach(el => {
+  el.addEventListener('click', e => {
+    if (e.target === el) closeModal(el.id);
+  });
+});
+// Escape closes all open modals
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape')
+    document.querySelectorAll('.modal-backdrop.open')
+      .forEach(el => closeModal(el.id));
+});</pre>
   </div>
 </section>
 
@@ -9739,30 +10823,34 @@ renderEngagementHeatmap('heatmap-container', {
     <div class="sg-sub-title">Criterion Row</div>
     <div class="sg-sub-desc">The atomic unit of the scorecard. Each row combines a pass/fail status icon with a labelled criterion and optional sub-text. The icon is always 16px and uses a tint circle filled red for fail, green for pass never raw colour or Unicode symbols. Sub-text appears beneath the label for context (dates, notes, measurements).</div>
 
-    <div class="sg-example" style="flex-direction:column;gap:0;display:block;padding:20px 24px">
-      <div class="crit-row">
-        <div class="crit-icon icon-pass" aria-label="Pass">
-          <svg width="8" height="8" viewBox="0 0 10 10" fill="none" aria-hidden="true"><polyline points="1.5 5 3.8 7.5 8.5 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div class="sg-example" style="padding:0;overflow:hidden;display:block">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;max-width:400px">
+        <div style="padding:20px 24px">
+          <div class="crit-row">
+            <div class="crit-icon icon-pass" aria-label="Pass">
+              <svg width="8" height="8" viewBox="0 0 10 10" fill="none" aria-hidden="true"><polyline points="1.5 5 3.8 7.5 8.5 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div><div class="crit-label">Interventions conducted</div><div class="crit-sub">6 of 3 target</div></div>
+          </div>
+          <div class="crit-row">
+            <div class="crit-icon icon-pass" aria-label="Pass">
+              <svg width="8" height="8" viewBox="0 0 10 10" fill="none" aria-hidden="true"><polyline points="1.5 5 3.8 7.5 8.5 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div><div class="crit-label">Risk baseline recorded</div><div class="crit-sub">Score captured 14 May 2025</div></div>
+          </div>
+          <div class="crit-row">
+            <div class="crit-icon icon-fail" aria-label="Fail">
+              <svg width="8" height="8" viewBox="0 0 10 10" fill="none" aria-hidden="true"><line x1="2.5" y1="2.5" x2="7.5" y2="7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="7.5" y1="2.5" x2="2.5" y2="7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <div><div class="crit-label">MI Techniques sessions</div><div class="crit-sub">0 of 2 target</div></div>
+          </div>
+          <div class="crit-row" style="margin-bottom:0">
+            <div class="crit-icon icon-fail" aria-label="Fail">
+              <svg width="8" height="8" viewBox="0 0 10 10" fill="none" aria-hidden="true"><line x1="2.5" y1="2.5" x2="7.5" y2="7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="7.5" y1="2.5" x2="2.5" y2="7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <div><div class="crit-label">Stage 6 Phase Session reached</div><div class="crit-sub">Not yet reached</div></div>
+          </div>
         </div>
-        <div><div class="crit-label">Interventions conducted</div><div class="crit-sub">6 of 3 target</div></div>
-      </div>
-      <div class="crit-row">
-        <div class="crit-icon icon-pass" aria-label="Pass">
-          <svg width="8" height="8" viewBox="0 0 10 10" fill="none" aria-hidden="true"><polyline points="1.5 5 3.8 7.5 8.5 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <div><div class="crit-label">Risk baseline recorded</div><div class="crit-sub">Score captured 14 May 2025</div></div>
-      </div>
-      <div class="crit-row">
-        <div class="crit-icon icon-fail" aria-label="Fail">
-          <svg width="8" height="8" viewBox="0 0 10 10" fill="none" aria-hidden="true"><line x1="2.5" y1="2.5" x2="7.5" y2="7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="7.5" y1="2.5" x2="2.5" y2="7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </div>
-        <div><div class="crit-label">MI Techniques sessions</div><div class="crit-sub">0 of 2 target</div></div>
-      </div>
-      <div class="crit-row" style="margin-bottom:0">
-        <div class="crit-icon icon-fail" aria-label="Fail">
-          <svg width="8" height="8" viewBox="0 0 10 10" fill="none" aria-hidden="true"><line x1="2.5" y1="2.5" x2="7.5" y2="7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="7.5" y1="2.5" x2="2.5" y2="7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </div>
-        <div><div class="crit-label">Stage 6 Phase Session reached</div><div class="crit-sub">Not yet reached</div></div>
       </div>
     </div>
 
@@ -9792,14 +10880,14 @@ renderEngagementHeatmap('heatmap-container', {
     </div>
     <div class="code-block collapsed" style="margin-top:8px">
       <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
-      <pre>.crit-row   { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 10px; }
+      <pre>.crit-row   { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 14px; }
 .crit-icon  { width: 16px; height: 16px; border-radius: 50%;
               display: flex; align-items: center; justify-content: center;
               flex-shrink: 0; margin-top: 1px; }
 .icon-pass  { background: var(--green-10); color: #007A6C; border: 1px solid var(--green-20); }
 .icon-fail  { background: #FEF2F2;         color: #C0152A; border: 1px solid #FECACA; }
 .crit-label { font-size: 12px; font-weight: 600; color: var(--text); line-height: 1.3; }
-.crit-sub   { font-size: 11px; color: var(--charcoal-40); line-height: 1.4; margin-top: 1px; }</pre>
+.crit-sub   { font-size: 11px; color: var(--charcoal-40); line-height: 1.4; margin-top: 4px; }</pre>
     </div>
   </div>
 
@@ -9808,21 +10896,25 @@ renderEngagementHeatmap('heatmap-container', {
     <div class="sg-sub-title">Progress Row</div>
     <div class="sg-sub-desc">An annotated progress bar indented beneath a criterion row, showing numeric progress toward a target. The fill animates in on scroll via IntersectionObserver this gives the scorecard a data-loading feel without being gratuitous. Use green fill for criteria in progress, purple fill for phase-level metrics. Always show a left-aligned annotation beneath the bar.</div>
 
-    <div class="sg-example" style="flex-direction:column;gap:0;display:block;padding:20px 24px">
-      <div class="crit-row">
-        <div class="crit-icon icon-pass" aria-label="Pass"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" aria-hidden="true"><polyline points="1.5 5 3.8 7.5 8.5 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div style="flex:1">
-          <div class="crit-label">Safety Score YP ≥ 80</div>
-          <div class="prog-row"><div class="prog-track"><div class="prog-fill prog-fill--green sg-animate-bar" style="width:0" data-w="96%"></div></div></div>
-          <div class="prog-note">96 / 100</div>
-        </div>
-      </div>
-      <div class="crit-row" style="margin-bottom:0">
-        <div class="crit-icon icon-pass" aria-label="Pass"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" aria-hidden="true"><polyline points="1.5 5 3.8 7.5 8.5 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div style="flex:1">
-          <div class="crit-label">Stage 6 sessions ≥ 2</div>
-          <div class="prog-row"><div class="prog-track"><div class="prog-fill prog-fill--purple sg-animate-bar" style="width:0" data-w="100%"></div></div></div>
-          <div class="prog-note">4 session(s)</div>
+    <div class="sg-example" style="padding:0;overflow:hidden;display:block">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;max-width:400px">
+        <div style="padding:20px 24px">
+          <div class="crit-row">
+            <div class="crit-icon icon-pass" aria-label="Pass"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" aria-hidden="true"><polyline points="1.5 5 3.8 7.5 8.5 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div style="flex:1">
+              <div class="crit-label">Safety Score YP ≥ 80</div>
+              <div class="prog-row"><div class="prog-track"><div class="prog-fill prog-fill--green sg-animate-bar" style="width:0" data-w="96%"></div></div></div>
+              <div class="prog-note">96 / 100</div>
+            </div>
+          </div>
+          <div class="crit-row" style="margin-bottom:0">
+            <div class="crit-icon icon-pass" aria-label="Pass"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" aria-hidden="true"><polyline points="1.5 5 3.8 7.5 8.5 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div style="flex:1">
+              <div class="crit-label">Stage 6 sessions ≥ 2</div>
+              <div class="prog-row"><div class="prog-track"><div class="prog-fill prog-fill--purple sg-animate-bar" style="width:0" data-w="100%"></div></div></div>
+              <div class="prog-note">4 session(s)</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -9846,7 +10938,7 @@ renderEngagementHeatmap('heatmap-container', {
     </div>
     <div class="code-block collapsed" style="margin-top:8px">
       <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
-      <pre>.prog-row          { margin-top: 5px; margin-bottom: 3px; }
+      <pre>.prog-row          { margin-top: 8px; margin-bottom: 6px; }
 .prog-track        { height: 5px; background: var(--charcoal-10);
                      border-radius: 3px; overflow: hidden; }
 .prog-fill         { height: 100%; border-radius: 3px;
@@ -12282,8 +13374,8 @@ function initDatePickers() {
     const SHORT_MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     const DAYS = ['Mo','Tu','We','Th','Fr','Sa','Su'];
 
-    // Default selected date
-    let selected = new Date(2024, 2, 1); // 1 Mar 2024
+    // Default selected date — read data-init="YYYY-MM-DD" if present, else fall back to hardcoded
+    let selected = btn.dataset.init ? new Date(btn.dataset.init) : new Date(2024, 2, 1);
     let view = new Date(selected);
 
     function fmt(d) {
@@ -12621,6 +13713,266 @@ function demoSort(col) {
   if (footer) footer.textContent = `Sorted by ${colLabels[col]}, ${currentDir === 'asc' ? 'ascending' : 'descending'} · Click any column header to sort`;
 }
 
+// ── Modal ─────────────────────────────────────────────
+function openModal(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => {
+    const f = el.querySelector('button:not(.modal-close),input,select,textarea');
+    (f || el.querySelector('.modal-close'))?.focus();
+  }, 50);
+}
+function closeModal(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── Sheet ─────────────────────────────────────────────
+function openSheet(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => el.querySelector('.sheet-close')?.focus(), 50);
+}
+function closeSheet(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Backdrop click & Escape
+document.querySelectorAll('.modal-backdrop').forEach(el =>
+  el.addEventListener('click', e => { if (e.target === el) closeModal(el.id); })
+);
+document.querySelectorAll('.sheet-backdrop').forEach(el =>
+  el.addEventListener('click', e => { if (e.target === el) closeSheet(el.id); })
+);
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  document.querySelectorAll('.modal-backdrop.open').forEach(el => closeModal(el.id));
+  document.querySelectorAll('.sheet-backdrop.open').forEach(el => closeSheet(el.id));
+});
+
 </script>
+
+<!-- =================== SHEET OVERLAYS =================== -->
+<div id="sheet-participant" class="sheet-backdrop" role="dialog" aria-modal="true" aria-labelledby="sheet-participant-title">
+  <div class="sheet">
+    <div class="sheet-header">
+      <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:0">
+        <div class="avatar avatar-lg" style="background:var(--blue-20);color:var(--sog-blue);font-size:20px;flex-shrink:0">JD</div>
+        <div style="min-width:0">
+          <div class="sheet-title" id="sheet-participant-title">Jordan Davies</div>
+          <div class="sheet-subtitle" style="margin-bottom:6px">Participant · Ref #2024-0118</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <span class="badge badge-blue">Phase 2</span>
+            <span class="badge badge-green" role="status">✓ Active</span>
+          </div>
+        </div>
+      </div>
+      <button class="sheet-close" onclick="closeSheet('sheet-participant')" aria-label="Close participant sheet" style="flex-shrink:0;align-self:flex-start"><span class="material-symbols-rounded" style="font-size:18px">close</span></button>
+    </div>
+    <div class="sheet-body">
+      <div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:20px">
+          <div style="background:#fff;padding:14px;text-align:center"><div style="font-size:11px;color:var(--text-muted);margin-bottom:4px">Risk Score</div><div style="font-size:22px;font-weight:700;color:var(--sog-teal)">41</div></div>
+          <div style="background:#fff;padding:14px;text-align:center"><div style="font-size:11px;color:var(--text-muted);margin-bottom:4px">Sessions</div><div style="font-size:22px;font-weight:700;color:var(--text)">16</div></div>
+          <div style="background:#fff;padding:14px;text-align:center"><div style="font-size:11px;color:var(--text-muted);margin-bottom:4px">Days Active</div><div style="font-size:22px;font-weight:700;color:var(--text)">112</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="sheet-section-label">Case Details</div>
+        <div style="background:var(--muted-bg);border-radius:10px;overflow:hidden">
+          <div class="sheet-row" style="padding:10px 14px"><span class="sheet-row-label">Key Worker</span><span class="sheet-row-value">Amara Boateng</span></div>
+          <div class="sheet-row" style="padding:10px 14px"><span class="sheet-row-label">Referral Date</span><span class="sheet-row-value">14 Feb 2025</span></div>
+          <div class="sheet-row" style="padding:10px 14px"><span class="sheet-row-label">Referral Source</span><span class="sheet-row-value">School Safeguarding</span></div>
+          <div class="sheet-row" style="padding:10px 14px;border-bottom:none"><span class="sheet-row-label">Programme</span><span class="sheet-row-value">Intensive Support</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="sheet-section-label">Recent Sessions</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:12px 14px;background:var(--muted-bg);border-radius:10px">
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--sog-teal);margin-top:5px;flex-shrink:0"></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px">Session 16 — Dynamic phase work</div><div style="font-size:12px;color:var(--text-muted)">22 May 2025 · 60 min · Risk: 41 → 39</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:12px 14px;background:var(--muted-bg);border-radius:10px">
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--sog-teal);margin-top:5px;flex-shrink:0"></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px">Session 15 — Goal setting review</div><div style="font-size:12px;color:var(--text-muted)">15 May 2025 · 45 min · Risk: 44 → 41</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:12px 14px;background:var(--muted-bg);border-radius:10px">
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--charcoal-40);margin-top:5px;flex-shrink:0"></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px">Session 14 — Family engagement</div><div style="font-size:12px;color:var(--text-muted)">8 May 2025 · 90 min · Risk: 47 → 44</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sheet-footer">
+      <button class="btn btn-ghost" onclick="closeSheet('sheet-participant')">Close</button>
+      <button class="btn btn-outline" style="gap:6px"><span class="material-symbols-rounded" style="font-size:15px">edit</span>Edit Profile</button>
+      <button class="btn btn-primary" style="gap:6px"><span class="material-symbols-rounded" style="font-size:15px">add</span>Log Session</button>
+    </div>
+  </div>
+</div>
+
+<div id="sheet-filter" class="sheet-backdrop" role="dialog" aria-modal="true" aria-labelledby="sheet-filter-title">
+  <div class="sheet" style="width:360px">
+    <div class="sheet-header">
+      <div class="sheet-title" id="sheet-filter-title">Filter Participants</div>
+      <button class="sheet-close" onclick="closeSheet('sheet-filter')" aria-label="Close filter panel"><span class="material-symbols-rounded" style="font-size:18px">close</span></button>
+    </div>
+    <div class="sheet-body" style="overflow:visible">
+      <div>
+        <div class="sheet-section-label">Programme Phase</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <label style="display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer"><input type="checkbox" checked style="accent-color:var(--sog-purple);width:16px;height:16px">Phase 1 — Belonging</label>
+          <label style="display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer"><input type="checkbox" checked style="accent-color:var(--sog-purple);width:16px;height:16px">Phase 2 — Dynamic</label>
+          <label style="display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer"><input type="checkbox" style="accent-color:var(--sog-purple);width:16px;height:16px">Phase 3 — Independence</label>
+          <label style="display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer"><input type="checkbox" style="accent-color:var(--sog-purple);width:16px;height:16px">Follow-up</label>
+        </div>
+      </div>
+      <div>
+        <div class="sheet-section-label">Status</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <label style="display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer"><input type="checkbox" checked style="accent-color:var(--sog-purple);width:16px;height:16px">Active</label>
+          <label style="display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer"><input type="checkbox" checked style="accent-color:var(--sog-purple);width:16px;height:16px">At Risk</label>
+          <label style="display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer"><input type="checkbox" style="accent-color:var(--sog-purple);width:16px;height:16px">High Risk</label>
+          <label style="display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer"><input type="checkbox" style="accent-color:var(--sog-purple);width:16px;height:16px">On Hold</label>
+        </div>
+      </div>
+      <div>
+        <div class="sheet-section-label">Risk Score Range</div>
+        <div style="display:flex;gap:10px;align-items:center">
+          <input type="number" value="0" min="0" max="100" style="flex:1;padding:8px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;color:var(--text);outline:none" aria-label="Minimum risk score">
+          <span style="font-size:12px;color:var(--text-muted);flex-shrink:0">to</span>
+          <input type="number" value="100" min="0" max="100" style="flex:1;padding:8px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;color:var(--text);outline:none" aria-label="Maximum risk score">
+        </div>
+      </div>
+      <div>
+        <div class="sheet-section-label">Key Worker</div>
+        <div class="sg-dropdown" id="dd-filter-worker">
+          <button class="sg-dropdown-trigger" onclick="toggleDropdown('dd-filter-worker')" aria-haspopup="listbox" aria-expanded="false">
+            <span class="sg-dropdown-label">All key workers</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="sg-dropdown-menu" role="listbox" aria-label="Key worker">
+            <li class="sg-dropdown-item sg-dropdown-item--selected" role="option" aria-selected="true" onclick="selectOption('dd-filter-worker', this, 'All key workers')">All key workers</li>
+            <li class="sg-dropdown-item" role="option" aria-selected="false" onclick="selectOption('dd-filter-worker', this, 'Amara Boateng')">Amara Boateng</li>
+            <li class="sg-dropdown-item" role="option" aria-selected="false" onclick="selectOption('dd-filter-worker', this, 'David Osei')">David Osei</li>
+            <li class="sg-dropdown-item" role="option" aria-selected="false" onclick="selectOption('dd-filter-worker', this, 'Priya Sharma')">Priya Sharma</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="sheet-footer">
+      <button class="btn btn-ghost" onclick="closeSheet('sheet-filter')">Clear All</button>
+      <button class="btn btn-primary" onclick="closeSheet('sheet-filter')">Apply Filters</button>
+    </div>
+  </div>
+</div>
+
+<!-- =================== MODAL OVERLAYS =================== -->
+<div id="modal-confirm" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-confirm-title">
+  <div class="modal modal--sm">
+    <div class="modal-header">
+      <span class="modal-title" id="modal-confirm-title">Mark Phase 1 Complete?</span>
+      <button class="modal-close" onclick="closeModal('modal-confirm')" aria-label="Close"><span class="material-symbols-rounded" style="font-size:18px">close</span></button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:14px;color:var(--text-muted);line-height:1.6;margin:0">This will mark Phase 1 as complete for <strong style="color:var(--text)">Jordan Davies</strong> and notify the case supervisor. Phase 2 will become available immediately.</p>
+    </div>
+    <div class="modal-footer" style="padding-top:4px">
+      <button class="btn btn-ghost" onclick="closeModal('modal-confirm')">Cancel</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-confirm')">Mark Complete</button>
+    </div>
+  </div>
+</div>
+
+<div id="modal-destructive" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-destructive-title">
+  <div class="modal modal--sm">
+    <div class="modal-header">
+      <span class="modal-title" id="modal-destructive-title">Remove Participant</span>
+      <button class="modal-close" onclick="closeModal('modal-destructive')" aria-label="Close"><span class="material-symbols-rounded" style="font-size:18px">close</span></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-icon modal-icon--danger"><span class="material-symbols-rounded ms-filled" style="font-size:24px;color:var(--sog-red)">warning</span></div>
+      <p style="font-size:14px;color:var(--text);font-weight:600;margin:0 0 8px">Are you sure you want to remove Jordan Davies?</p>
+      <p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin:0">All session logs and records will be archived. This action cannot be undone without contacting a system administrator.</p>
+    </div>
+    <div class="modal-footer" style="padding-top:4px">
+      <button class="btn btn-ghost" onclick="closeModal('modal-destructive')">Cancel</button>
+      <button class="btn btn-danger" onclick="closeModal('modal-destructive')">Remove Participant</button>
+    </div>
+  </div>
+</div>
+
+<div id="modal-form" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-form-title">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title" id="modal-form-title">Log Session</span>
+      <button class="modal-close" onclick="closeModal('modal-form')" aria-label="Close"><span class="material-symbols-rounded" style="font-size:18px">close</span></button>
+    </div>
+    <div class="modal-body" style="display:flex;flex-direction:column;gap:16px;overflow:visible">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div>
+          <label style="display:block;font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px">Session Date</label>
+          <div class="sg-datepicker-wrap" id="dp-modal-date">
+            <button type="button" class="sg-datepicker-input" id="dp-modal-date-btn" aria-haspopup="dialog" aria-expanded="false" data-init="2025-05-26">26 May 2025</button>
+            <div class="sg-datepicker-cal" id="dp-modal-date-cal" role="dialog" aria-label="Choose session date"></div>
+          </div>
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px">Duration</label>
+          <div class="sg-dropdown" id="dd-modal-duration">
+            <button class="sg-dropdown-trigger" onclick="toggleDropdown('dd-modal-duration')" aria-haspopup="listbox" aria-expanded="false">
+              <span class="sg-dropdown-label">45 minutes</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <ul class="sg-dropdown-menu" role="listbox" aria-label="Session duration">
+              <li class="sg-dropdown-item" role="option" aria-selected="false" onclick="selectOption('dd-modal-duration', this, '30 minutes')">30 minutes</li>
+              <li class="sg-dropdown-item sg-dropdown-item--selected" role="option" aria-selected="true" onclick="selectOption('dd-modal-duration', this, '45 minutes')">45 minutes</li>
+              <li class="sg-dropdown-item" role="option" aria-selected="false" onclick="selectOption('dd-modal-duration', this, '60 minutes')">60 minutes</li>
+              <li class="sg-dropdown-item" role="option" aria-selected="false" onclick="selectOption('dd-modal-duration', this, '90 minutes')">90 minutes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div>
+        <label style="display:block;font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px">Session Type</label>
+        <div class="sg-dropdown" id="dd-modal-type">
+          <button class="sg-dropdown-trigger" onclick="toggleDropdown('dd-modal-type')" aria-haspopup="listbox" aria-expanded="false">
+            <span class="sg-dropdown-label">1:1 Keyworker Session</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="sg-dropdown-menu" role="listbox" aria-label="Session type">
+            <li class="sg-dropdown-item sg-dropdown-item--selected" role="option" aria-selected="true" onclick="selectOption('dd-modal-type', this, '1:1 Keyworker Session')">1:1 Keyworker Session</li>
+            <li class="sg-dropdown-item" role="option" aria-selected="false" onclick="selectOption('dd-modal-type', this, 'Group Session')">Group Session</li>
+            <li class="sg-dropdown-item" role="option" aria-selected="false" onclick="selectOption('dd-modal-type', this, 'Family Engagement')">Family Engagement</li>
+            <li class="sg-dropdown-item" role="option" aria-selected="false" onclick="selectOption('dd-modal-type', this, 'Crisis Intervention')">Crisis Intervention</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <label style="display:block;font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px" for="sess-risk">Risk Score after session <span style="font-weight:400;color:var(--text-muted)">(0–100)</span></label>
+        <input id="sess-risk" type="number" min="0" max="100" placeholder="e.g. 38" style="width:100%;padding:8px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;color:var(--text);outline:none">
+      </div>
+      <div>
+        <label style="display:block;font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px" for="sess-notes">Session Notes</label>
+        <textarea id="sess-notes" rows="3" placeholder="Key themes, progress, concerns, next steps…" style="width:100%;padding:8px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;color:var(--text);outline:none;resize:vertical;line-height:1.5"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer" style="padding-top:16px">
+      <button class="btn btn-ghost" onclick="closeModal('modal-form')">Cancel</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-form')">Save Session</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
