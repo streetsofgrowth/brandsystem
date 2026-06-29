@@ -36,8 +36,9 @@ body{font-family:'Open Sans',sans-serif;font-size:14px;color:#323E48;background:
   --teal-10:#E6F5F7;--teal-20:#CCEAEE;--teal-40:#99D5DD;--teal-70:#4DB5C3;
   --green-10:#E6F7F5;--green-20:#CCEFEB;--green-40:#99DFD7;--green-70:#4DC7B9;
   --charcoal-10:#EBECED;--charcoal-20:#D6D8DA;--charcoal-40:#ADB2B6;--charcoal-70:#70787F;
-  --red-10:#FEE8EA;--red-20:#FDD4D7;--red-40:#FAA9AE;
-  --orange-10:#FFF0E7;--orange-40:#FFC49F;
+  --red-10:#FEE8EA;--red-20:#FDD4D7;--red-40:#FAA9AE;--red-70:#F76872;
+  --orange-10:#FFF0E7;--orange-20:#FFE2CF;--orange-40:#FFC49F;--orange-70:#FF9856;
+  --yellow-10:#FEFAE6;--yellow-20:#FCF5CC;--yellow-40:#FAEB99;--yellow-70:#F6DC4D;
   --bg:#fff;--surface:#fff;--muted-bg:#F5F5F7;--border:#E2E4E6;
   --text:#323E48;--text-muted:#70787F;--primary:#625D9C;
   --radius-sm:4px;--radius-md:8px;--radius-lg:12px;--radius-xl:16px;--radius-full:9999px;
@@ -46,6 +47,11 @@ body{font-family:'Open Sans',sans-serif;font-size:14px;color:#323E48;background:
   --transition-fast:.15s cubic-bezier(.4,0,.2,1);
   --transition-med:.25s cubic-bezier(.4,0,.2,1);
   --transition-spring:.35s cubic-bezier(.34,1.56,.64,1);
+  /* ── Semantic tokens ───────────────────────────────── */
+  --color-error:var(--sog-red);--color-error-bg:var(--red-10);--color-error-border:var(--red-40);--color-error-text:var(--red-s1);
+  --color-warning:var(--sog-orange);--color-warning-bg:var(--orange-10);--color-warning-border:var(--orange-40);--color-warning-text:var(--orange-s2);
+  --color-caution-bg:var(--yellow-10);--color-caution-border:var(--yellow-40);--color-caution-text:#854D0E;
+  --color-success:var(--sog-green);--color-success-bg:var(--green-10);--color-success-border:var(--green-40);--color-success-text:#007A6C;
 }
 
 /* ── Layout ────────────────────────────────────────── */
@@ -313,38 +319,38 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
 .kpi-card.green .kpi-change{background:var(--green-10);color:var(--sog-green)}
 .kpi-card.teal .kpi-change{background:var(--teal-10);color:var(--sog-teal)}
 .kpi-desc{font-size:11px;color:var(--text-muted);line-height:1.5}
-.badge{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;padding:3px 10px;border-radius:var(--radius-full)}
-.badge-purple{background:var(--purple-10);color:var(--sog-purple)}
-.badge-blue{background:var(--blue-10);color:#1B6FA0}
-.badge-sky{background:var(--sky-10);color:#2A7FAA}
-.badge-teal{background:var(--teal-10);color:#007080}
-.badge-green{background:var(--green-10);color:#007A6C}
-.badge-charcoal{background:var(--charcoal-10);color:var(--sog-charcoal)}
-.badge-red{background:#FEF2F2;color:#B91C1C}
-.badge-orange{background:#FFF3EA;color:#C2410C}
-.badge-yellow{background:#FEFCE8;color:#854D0E}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;padding:3px 10px;border-radius:var(--radius-full);border:1px solid transparent}
+.badge-purple{background:var(--purple-10);border-color:var(--purple-40);color:var(--sog-purple)}
+.badge-blue{background:var(--blue-10);border-color:var(--blue-40);color:#1B6FA0}
+.badge-sky{background:var(--sky-10);border-color:var(--sky-40);color:#2A7FAA}
+.badge-teal{background:var(--teal-10);border-color:var(--teal-40);color:#007080}
+.badge-green{background:var(--green-10);border-color:var(--green-40);color:#007A6C}
+.badge-charcoal{background:var(--charcoal-10);border-color:var(--charcoal-40);color:var(--sog-charcoal)}
+.badge-red{background:var(--red-10);border-color:var(--red-40);color:var(--sog-red)}
+.badge-orange{background:var(--orange-10);border-color:var(--orange-40);color:var(--sog-orange)}
+.badge-yellow{background:var(--yellow-10);border-color:var(--yellow-40);color:#854D0E}
 .badge-filled{background:var(--sog-purple);color:#fff}
 .badge-filled-teal{background:var(--sog-teal);color:#fff}
 .sg-alert{display:flex;gap:12px;padding:14px 16px;border-radius:10px;border:1px solid;margin-bottom:12px}
 .sg-alert-default{background:var(--purple-10);border-color:var(--purple-40);color:var(--sog-charcoal)}
 .sg-alert-info{background:var(--blue-10);border-color:var(--blue-40);color:var(--sog-charcoal)}
 .sg-alert-success{background:var(--green-10);border-color:var(--green-40);color:var(--sog-charcoal)}
-.sg-alert-warning{background:#FEFCE8;border-color:#FDE68A;color:var(--sog-charcoal)}
-.sg-alert-danger{background:#FEF2F2;border-color:#FECACA;color:var(--sog-charcoal)}
+.sg-alert-warning{background:var(--color-caution-bg);border-color:var(--color-caution-border);color:var(--sog-charcoal)}
+.sg-alert-danger{background:var(--color-error-bg);border-color:var(--color-error-border);color:var(--sog-charcoal)}
 .sg-alert-icon{font-size:18px;flex-shrink:0;margin-top:1px}
 .sg-alert-title{font-weight:700;font-size:14px;margin-bottom:2px}
 .sg-alert-body{font-size:13px;opacity:.85}
 /* ── Phase Scorecard components ────────────────────── */
 .phase-status{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;white-space:nowrap}
 .phase-status--complete{color:#007A6C}
-.phase-status--exit{color:#B34D08}
+.phase-status--exit{color:var(--color-warning-text)}
 .phase-status--active{color:var(--sog-purple)}
 .phase-status-pulse{width:7px;height:7px;border-radius:50%;background:var(--sog-purple);animation:phasePulse 2s ease-in-out infinite}
 @keyframes phasePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.75)}}
 .crit-row{display:flex;align-items:flex-start;gap:8px;margin-bottom:14px}
 .crit-icon{width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 .icon-pass{background:var(--green-10);color:#007A6C;border:1px solid var(--green-20)}
-.icon-fail{background:#FEF2F2;color:#C0152A;border:1px solid #FECACA}
+.icon-fail{background:var(--color-error-bg);color:var(--color-error-text);border:1px solid var(--color-error-border)}
 .crit-label{font-size:12px;font-weight:600;color:var(--text);line-height:1.3}
 .crit-row:has(.icon-fail) .crit-label{color:var(--text-muted)}
 .scorecard-phase .crit-row:has(+.scorecard-phase-footer){margin-bottom:12px}
@@ -355,13 +361,13 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
 .prog-fill--green{background:var(--sog-green)}
 .prog-fill--purple{background:var(--sog-purple)}
 .prog-note{font-size:11px;color:var(--charcoal-40)}
-.phase-warn-banner{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:#B34D08;background:#FFF3EA;border:1px solid #FFB380;border-radius:6px;padding:6px 10px}
+.phase-warn-banner{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--color-warning-text);background:var(--color-warning-bg);border:1px solid var(--color-warning-border);border-radius:6px;padding:6px 10px}
 .phase-footer-strip{font-size:11px;color:var(--charcoal-40);padding:10px 18px;background:var(--muted-bg);border-top:1px solid var(--border);margin-top:auto}
 .scorecard-phase-grid{display:grid;grid-template-columns:repeat(3,1fr)}
 .scorecard-phase{padding:18px 20px;border-right:1px solid var(--border);display:flex;flex-direction:column}
 .scorecard-phase:last-child{border-right:none}
 .scorecard-phase--complete{border-top:3px solid var(--sog-green)}
-.scorecard-phase--exit{border-top:3px solid #FF6C0E}
+.scorecard-phase--exit{border-top:3px solid var(--color-warning)}
 .scorecard-phase--active{border-top:3px solid var(--sog-purple)}
 .scorecard-phase-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px}
 .scorecard-phase-name{font-size:14px;font-weight:700;color:var(--text);line-height:1.2}
@@ -371,13 +377,13 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
 .alert-card-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .alert-card{border-radius:10px;padding:13px 14px;border:1px solid;display:flex;flex-direction:column;gap:0;transition:transform .15s ease-out,box-shadow .15s ease-out}
 .alert-card:hover{transform:translateY(-2px)}
-.alert-card--critical{background:#FEF2F2;border-color:#FECACA}
-.alert-card--critical:hover{box-shadow:0 4px 16px rgba(192,21,42,.12)}
-.alert-card--warning{background:#FFF3EA;border-color:#FFB380}
+.alert-card--critical{background:var(--color-error-bg);border-color:var(--color-error-border)}
+.alert-card--critical:hover{box-shadow:0 4px 16px rgba(243,39,53,.12)}
+.alert-card--warning{background:var(--color-warning-bg);border-color:var(--color-warning-border)}
 .alert-card--warning:hover{box-shadow:0 4px 16px rgba(255,108,14,.12)}
 .alert-card-icon{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:9px;flex-shrink:0}
-.alert-icon--critical{background:#F32735}
-.alert-icon--warning{background:transparent;border:1.5px solid #FF6C0E}
+.alert-icon--critical{background:var(--color-error)}
+.alert-icon--warning{background:transparent;border:1.5px solid var(--color-warning)}
 .alert-card-title{font-size:12px;font-weight:700;color:var(--text);margin-bottom:5px;line-height:1.2}
 .alert-card-detail{font-size:11px;color:var(--text-muted);line-height:1.55}
 .alert-card-detail strong{color:var(--text);font-weight:600}
@@ -395,14 +401,14 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
 .gauge-card{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;background:var(--muted-bg);border:1px solid var(--border);border-radius:10px;padding:16px 8px}
 .gauge-label{font-size:12px;color:var(--text-muted);text-align:center;font-weight:600;line-height:1.3}
 /* Warning callout — semantic variant for threshold breaches */
-.threshold-callout{display:flex;align-items:flex-start;gap:10px;background:#FFF3EA;border:1px solid #FFB380;border-radius:8px;padding:11px 14px;font-size:12px;color:var(--text);line-height:1.5}
+.threshold-callout{display:flex;align-items:flex-start;gap:10px;background:var(--color-warning-bg);border:1px solid var(--color-warning-border);border-radius:8px;padding:11px 14px;font-size:12px;color:var(--text);line-height:1.5}
 .threshold-callout-icon{flex-shrink:0;margin-top:1px;color:var(--sog-orange)}
 .threshold-callout strong{color:var(--sog-orange)}
 .table-panel-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--muted-bg);border-bottom:1px solid var(--border)}
 .tph-left{display:flex;align-items:center;gap:10px}
 .tph-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .tph-icon-default{background:var(--purple-10);border:1px solid var(--purple-20)}
-.tph-icon-warning{background:#FFF3EA;border:1px solid #FFB380}
+.tph-icon-warning{background:var(--color-warning-bg);border:1px solid var(--color-warning-border)}
 .tph-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--sog-purple)}
 .tph-title--warning{color:var(--text)}
 .tph-meta{font-size:12px;color:var(--text-muted)}
@@ -459,7 +465,7 @@ body.col-resizing{cursor:col-resize !important;user-select:none}
 .risk-chip{display:inline-flex;align-items:center;justify-content:center;min-width:32px;height:24px;padding:0 6px;border-radius:4px;font-size:12px;font-weight:700}
 .risk-low{background:var(--green-10);color:#007A6C;border:1px solid var(--green-20)}
 .risk-med{background:var(--blue-10);color:#1B6FA0;border:1px solid var(--blue-20)}
-.risk-hi{background:#FEF2F2;color:#C0152A;border:1px solid #FECACA}
+.risk-hi{background:var(--color-error-bg);color:var(--color-error-text);border:1px solid var(--color-error-border)}
 .risk-unscored{background:var(--muted-bg);color:var(--charcoal-40);border:1px solid var(--border)}
 .risk-chip-sm{font-size:10px;height:18px;min-width:22px;padding:0 4px}
 .cell-muted{color:var(--text-muted);font-size:13px}
@@ -497,6 +503,7 @@ body.col-resizing{cursor:col-resize !important;user-select:none}
 .stp-node-upcoming{background:#fff;border:2px solid var(--charcoal-20);color:var(--charcoal-40)}
 .stp-node-error{background:var(--sog-red);border:2px solid var(--sog-red);color:#fff}
 .stp-node-blue{background:var(--sog-blue);border:2px solid var(--sog-blue);color:#fff}
+.stp-node-blue-act{background:var(--sog-blue);border:2px solid var(--sog-blue);color:#fff;box-shadow:0 0 0 4px var(--blue-20)}
 .stp-node-teal-act{background:var(--sog-teal);border:2px solid var(--sog-teal);color:#fff;box-shadow:0 0 0 4px var(--teal-20)}
 .stp-label{margin-top:8px;font-size:12px;font-weight:600;color:var(--charcoal-40);text-align:center;white-space:nowrap;line-height:1.3}
 .stp-sublabel{font-size:11px;font-weight:400;color:var(--charcoal-40);text-align:center;margin-top:2px;white-space:nowrap}
@@ -510,6 +517,7 @@ body.col-resizing{cursor:col-resize !important;user-select:none}
 .stepper-v-line{display:none}
 .stepper-v .stp-node{box-shadow:0 0 0 3px var(--muted-bg)}
 .stepper-v .stp-node-active{box-shadow:0 0 0 3px var(--muted-bg),0 0 0 7px var(--purple-20)}
+.stepper-v .stp-node-blue-act{box-shadow:0 0 0 3px var(--muted-bg),0 0 0 7px var(--blue-20)}
 .stepper-v .stp-node-teal-act{box-shadow:0 0 0 3px var(--muted-bg),0 0 0 7px var(--teal-20)}
 .stepper-v-body{flex:1;padding-bottom:24px;padding-top:4px}
 .stepper-v-title{font-size:14px;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:2px}
@@ -556,32 +564,49 @@ body.col-resizing{cursor:col-resize !important;user-select:none}
 .avatar-sm{width:32px;height:32px;font-size:12px}
 .avatar-md{width:40px;height:40px;font-size:14px}
 .avatar-lg{width:64px;height:64px;font-size:22px}
-/* ── Programme Position Timeline ───────────────────── */
-.prog-timeline-outer{position:relative;padding-top:36px}
-.prog-bar{display:flex;width:100%;height:40px;border-radius:9999px;overflow:hidden;gap:2px}
-.prog-phase{display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;letter-spacing:.08em;padding:0 12px;white-space:nowrap;overflow:hidden}
-.prog-phase:first-child{border-radius:9999px 0 0 9999px}
-.prog-phase:last-child{border-radius:0 9999px 9999px 0}
-.prog-today-marker{position:absolute;top:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;z-index:2}
-.prog-today-chip{background:var(--sog-charcoal);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;white-space:nowrap;line-height:1;display:flex;align-items:center;gap:5px}
-.prog-today-stem{width:2px;height:8px;background:var(--sog-charcoal)}
-.prog-milestones{position:relative;min-height:52px;margin-top:0}
-.prog-milestone{position:absolute;top:0;display:flex;flex-direction:column;padding-top:14px}
-.prog-milestone::before{content:'';position:absolute;top:0;left:0;width:1px;height:10px;background:var(--charcoal-20)}
-.prog-milestone.center{align-items:center}
-.prog-milestone.center::before{left:50%;transform:translateX(-50%)}
-.prog-milestone.right{align-items:flex-end}
-.prog-milestone.right::before{left:auto;right:0}
-.prog-milestone-date{font-size:12px;font-weight:700;color:var(--text);line-height:1.2;white-space:nowrap}
-.prog-milestone-label{font-size:11px;color:var(--text-muted);line-height:1.3;margin-top:2px;white-space:nowrap}
-.prog-phase-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
-.prog-legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted)}
-.prog-legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
-.prog-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding-top:16px;border-top:1px solid var(--border);margin-top:4px}
-.prog-stat{display:flex;flex-direction:column;gap:2px}
-.prog-stat-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted)}
-.prog-stat-value{font-size:13px;font-weight:600;color:var(--text)}
-.prog-stat-flag{color:var(--sog-orange);margin-left:3px}
+/* ── Programme Timeline (Progress Tracker) ──────── */
+.pt-card{background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.06),0 1px 3px rgba(0,0,0,.04)}
+.pt-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.pt-name{font-size:18px;font-weight:700;color:var(--text)}
+.pt-id{font-size:12px;color:var(--text-muted);margin-top:2px}
+.pt-meta-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.pt-meta-card{background:var(--muted-bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;transition:border-color 150ms ease}
+.pt-meta-card:hover{border-color:rgba(0,0,0,.2)}
+.pt-meta-label{font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.pt-meta-value{font-size:15px;font-weight:600;color:var(--text)}
+.pt-pip{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--sog-blue);vertical-align:middle;margin-right:4px}
+.pt-bar-wrap{margin:0}
+.pt-bar-outer{position:relative}
+.pt-phase-track{display:flex;height:20px;border-radius:10px;overflow:visible;gap:2px}
+.pt-phase-seg{height:100%;border-radius:5px;flex-shrink:0}
+.pt-relapse-marker{position:absolute;top:10px;transform:translate(-50%,-50%) rotate(45deg);width:12px;height:12px;border-radius:2px;background:var(--sog-red);border:1.5px solid #fff;z-index:3}
+.pt-now-ring{position:absolute;top:10px;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;background:var(--blue-10);z-index:3}
+.pt-now-marker{position:absolute;top:10px;transform:translate(-50%,-50%);width:18px;height:18px;border-radius:50%;background:var(--sog-blue);border:2px solid #fff;z-index:4}
+.pt-marker-row{position:relative;height:24px;margin-top:8px}
+.pt-marker-label{position:absolute;transform:translateX(-50%);font-size:10px;white-space:nowrap;color:var(--text-muted)}
+.pt-marker-now{color:var(--sog-blue);font-weight:600}
+.pt-marker-relapse{color:var(--sog-red);font-weight:600}
+.pt-phase-labels{display:flex;margin-top:12px}
+.pt-phase-label{display:flex;flex-direction:column;align-items:center;text-align:center}
+.pt-phase-name{font-size:13px;font-weight:600}
+.pt-phase-dur{font-size:10px;color:var(--text-muted)}
+.ptc-card{background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.06),0 1px 3px rgba(0,0,0,.04)}
+.ptc-title{font-size:16px;font-weight:700;color:var(--text)}
+.ptc-subtitle{font-size:12px;color:var(--text-muted);margin-top:2px;margin-bottom:16px}
+.ptc-col-head{display:grid;grid-template-columns:150px 1fr 110px;gap:14px;padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:2px}
+.ptc-col-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted)}
+.ptc-row{display:grid;grid-template-columns:150px 1fr 110px;gap:14px;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)}
+.ptc-row:last-child{border-bottom:none}
+.ptc-name{font-size:13px;font-weight:600;color:var(--text)}
+.ptc-id{font-size:11px;color:var(--text-muted)}
+.ptc-bar-cell{min-width:0;position:relative;height:20px;display:flex;align-items:center}
+.ptc-bar-track{display:flex;height:8px;border-radius:4px;overflow:visible;gap:1px;width:100%}
+.ptc-bar-seg{height:100%;border-radius:3px;flex-shrink:0}
+.ptc-now-dot{position:absolute;top:10px;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;border:2px solid #fff;z-index:4}
+.ptc-relapse-dot{position:absolute;top:10px;transform:translate(-50%,-50%) rotate(45deg);width:7px;height:7px;border-radius:1px;background:var(--sog-red);border:1px solid #fff;z-index:3}
+.ptc-phase{font-size:12px;font-weight:600;line-height:1.3}
+.ptc-month{font-size:11px;color:var(--text-muted)}
+
 #toast-container{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
 .toast{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--sog-charcoal);color:#fff;border-radius:10px;font-size:14px;font-weight:500;box-shadow:0 8px 24px rgba(0,0,0,.15);pointer-events:all;transform:translateX(120%);transition:transform .3s cubic-bezier(.34,1.56,.64,1);min-width:280px;max-width:360px}
 .toast.visible{transform:translateX(0)}
@@ -688,8 +713,8 @@ body.col-resizing{cursor:col-resize !important;user-select:none}
 .btn-glass:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .info-callout{background:var(--blue-10);border:1px solid var(--blue-40);border-radius:10px;padding:16px 20px;margin-bottom:24px;font-size:13px;color:var(--sog-charcoal);line-height:1.6}
 .info-callout strong{color:var(--sog-charcoal)}
-.warning-callout{background:#FFF3EA;border:1px solid #FFB380;border-radius:10px;padding:16px 20px;margin-bottom:24px;font-size:13px;color:var(--sog-charcoal);line-height:1.6}
-.warning-callout strong{color:#C2410C}
+.warning-callout{background:var(--color-warning-bg);border:1px solid var(--color-warning-border);border-radius:10px;padding:16px 20px;margin-bottom:24px;font-size:13px;color:var(--sog-charcoal);line-height:1.6}
+.warning-callout strong{color:var(--color-warning-text)}
 .divider{border:none;border-top:1px solid var(--border);margin:40px 0}
 .type-specimen{padding:16px 0;border-bottom:1px solid var(--border)}
 .type-specimen:last-child{border-bottom:none}
@@ -770,9 +795,9 @@ body.col-resizing{cursor:col-resize !important;user-select:none}
 .flow-node{padding:8px 14px;border-radius:6px;font-size:12px;font-weight:600;border:1.5px solid}
 .flow-node.referral{background:var(--blue-10);border-color:var(--blue-40);color:#1B6FA0}
 .flow-node.active{background:var(--green-10);border-color:var(--green-40);color:#007A6C}
-.flow-node.on-hold{background:#FEFCE8;border-color:#FDE68A;color:#854D0E}
+.flow-node.on-hold{background:var(--color-caution-bg);border-color:var(--color-caution-border);color:var(--color-caution-text)}
 .flow-node.closed{background:var(--charcoal-10);border-color:var(--charcoal-40);color:var(--text-muted)}
-.flow-node.at-risk{background:#FEF2F2;border-color:#FECACA;color:#B91C1C}
+.flow-node.at-risk{background:var(--color-error-bg);border-color:var(--color-error-border);color:var(--color-error-text)}
 .flow-arrow{color:var(--text-muted);font-size:14px}
 .focus-demo-btn{padding:10px 20px;background:var(--sog-purple);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer}
 .focus-demo-btn:focus-visible{outline:2px solid var(--sog-purple);outline-offset:2px}
@@ -1343,24 +1368,15 @@ input[type="date"].sg-input::-webkit-datetime-edit-year-field:focus{
 @media(max-width:900px){.phase-card{grid-template-columns:140px 1fr 190px}}
 @media(max-width:560px){.phase-card{grid-template-columns:1fr;grid-template-rows:auto auto auto}}
 .phase-header{padding:16px;display:flex;flex-direction:column;gap:8px;justify-content:center}
-.phase-1 .phase-header{background:var(--purple-10)}
-.phase-2 .phase-header{background:var(--blue-10)}
-.phase-3 .phase-header{background:var(--red-10)}
-.phase-4 .phase-header{background:var(--teal-10)}
-.phase-5 .phase-header{background:var(--green-10)}
-.phase-num{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:4px 12px;border-radius:var(--radius-full);border:none;background:#fff;align-self:flex-start;white-space:nowrap}
-.phase-1 .phase-num{color:var(--sog-purple)}
-.phase-2 .phase-num{color:var(--sog-blue)}
-.phase-3 .phase-num{color:var(--sog-red)}
-.phase-4 .phase-num{color:var(--sog-teal)}
-.phase-5 .phase-num{color:var(--sog-green)}
+.phase-1 .phase-header{background:var(--sog-purple)}
+.phase-2 .phase-header{background:var(--sog-blue)}
+.phase-3 .phase-header{background:var(--sog-red)}
+.phase-4 .phase-header{background:var(--sog-teal)}
+.phase-5 .phase-header{background:var(--sog-green)}
+.phase-num{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:4px 12px;border-radius:var(--radius-full);background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.9);align-self:flex-start;white-space:nowrap}
 .phase-title{font-size:14px;font-weight:700;color:var(--text);line-height:1.3}
-.phase-1 .phase-header .phase-title{color:var(--sog-purple);margin-top:0}
-.phase-2 .phase-header .phase-title{color:var(--sog-blue);margin-top:0}
-.phase-3 .phase-header .phase-title{color:var(--sog-red);margin-top:0}
-.phase-4 .phase-header .phase-title{color:var(--sog-teal);margin-top:0}
-.phase-5 .phase-header .phase-title{color:var(--sog-green);margin-top:0}
-.phase-months{font-size:11px;color:var(--text-muted)}
+.phase-header .phase-title{color:#fff;margin-top:0}
+.phase-months{font-size:11px;color:rgba(255,255,255,.7)}
 .phase-body{padding:16px;display:flex;align-items:center}
 .phase-focus{font-size:13px;color:var(--text-muted);line-height:1.6}
 .phase-footer{padding:12px 16px;display:flex;flex-direction:column;gap:8px;justify-content:center}
@@ -2552,7 +2568,7 @@ input[type="date"].sg-input::-webkit-datetime-edit-year-field:focus{
 
   <div class="sg-sub">
     <div class="sg-sub-title">Tint Scales</div>
-    <div class="sg-sub-desc">Each primary colour has four precomputed tints (10%, 20%, 40%, 70%). Use these for backgrounds, hover states, badges, and subtle UI elements. Never mix tints from different colour families in the same component.</div>
+    <div class="sg-sub-desc">Each colour has four precomputed tints (10%, 20%, 40%, 70%). Use these for backgrounds, hover states, badges, and subtle UI elements. Never mix tints from different colour families in the same component.</div>
 
     <h3 class="colour-scale-label">Purple</h3>
     <div class="tint-strip">
@@ -2606,6 +2622,33 @@ input[type="date"].sg-input::-webkit-datetime-edit-year-field:focus{
       <div class="tint-cell" style="background:#ADB2B6;color:#323E48">40%</div>
       <div class="tint-cell" style="background:#70787F;color:#fff">70%</div>
       <div class="tint-cell" style="background:#323E48;color:#fff">100%</div>
+    </div>
+
+    <h3 class="colour-scale-label">Red</h3>
+    <div class="tint-strip">
+      <div class="tint-cell" style="background:#FEE8EA;color:#F32735">10%</div>
+      <div class="tint-cell" style="background:#FDD4D7;color:#F32735">20%</div>
+      <div class="tint-cell" style="background:#FAA9AE;color:#CF212D">40%</div>
+      <div class="tint-cell" style="background:#F76872;color:#fff">70%</div>
+      <div class="tint-cell" style="background:#F32735;color:#fff">100%</div>
+    </div>
+
+    <h3 class="colour-scale-label">Orange</h3>
+    <div class="tint-strip">
+      <div class="tint-cell" style="background:#FFF0E7;color:#FF6C0E">10%</div>
+      <div class="tint-cell" style="background:#FFE2CF;color:#FF6C0E">20%</div>
+      <div class="tint-cell" style="background:#FFC49F;color:#D95C0C">40%</div>
+      <div class="tint-cell" style="background:#FF9856;color:#fff">70%</div>
+      <div class="tint-cell" style="background:#FF6C0E;color:#fff">100%</div>
+    </div>
+
+    <h3 class="colour-scale-label">Yellow</h3>
+    <div class="tint-strip">
+      <div class="tint-cell" style="background:#FEFAE6;color:#9D8500">10%</div>
+      <div class="tint-cell" style="background:#FCF5CC;color:#9D8500">20%</div>
+      <div class="tint-cell" style="background:#FAEB99;color:#9D8500">40%</div>
+      <div class="tint-cell" style="background:#F6DC4D;color:#3D3300">70%</div>
+      <div class="tint-cell" style="background:#F2CD00;color:#323E48">100%</div>
     </div>
   </div>
 
@@ -2661,11 +2704,38 @@ input[type="date"].sg-input::-webkit-datetime-edit-year-field:focus{
       <div class="tint-cell" style="background:#171C20;color:#fff">+40% Black</div>
       <div class="tint-cell" style="background:#0D1012;color:#fff">+70% Black</div>
     </div>
+
+    <h3 class="colour-scale-label">Red</h3>
+    <div class="tint-strip">
+      <div class="tint-cell" style="background:#F32735;color:#fff">Base</div>
+      <div class="tint-cell" style="background:#CF212D;color:#fff">+10% Black</div>
+      <div class="tint-cell" style="background:#9E1922;color:#fff">+20% Black</div>
+      <div class="tint-cell" style="background:#6D1218;color:#fff">+40% Black</div>
+      <div class="tint-cell" style="background:#3D0A0D;color:#fff">+70% Black</div>
+    </div>
+
+    <h3 class="colour-scale-label">Orange</h3>
+    <div class="tint-strip">
+      <div class="tint-cell" style="background:#FF6C0E;color:#fff">Base</div>
+      <div class="tint-cell" style="background:#D95C0C;color:#fff">+10% Black</div>
+      <div class="tint-cell" style="background:#A64609;color:#fff">+20% Black</div>
+      <div class="tint-cell" style="background:#733106;color:#fff">+40% Black</div>
+      <div class="tint-cell" style="background:#401B04;color:#fff">+70% Black</div>
+    </div>
+
+    <h3 class="colour-scale-label">Yellow</h3>
+    <div class="tint-strip">
+      <div class="tint-cell" style="background:#F2CD00;color:#323E48">Base</div>
+      <div class="tint-cell" style="background:#CEAE00;color:#323E48">+10% Black</div>
+      <div class="tint-cell" style="background:#9D8500;color:#fff">+20% Black</div>
+      <div class="tint-cell" style="background:#6D5C00;color:#fff">+40% Black</div>
+      <div class="tint-cell" style="background:#3D3300;color:#fff">+70% Black</div>
+    </div>
   </div>
 
   <div class="sg-sub">
     <div class="sg-sub-title">Tone Scales</div>
-    <div class="sg-sub-desc">Tones are created by mixing each colour with mid-grey, producing muted, desaturated variants. Use tones for disabled states, secondary content on coloured surfaces, and subtle decorative fills. Rule: tints for backgrounds and surfaces, shades for hover and pressed states, tones for disabled and greyscale-adjacent contexts. Never mix tints from different colour families in the same component.rere the full saturation would feel too bold. Five levels per colour: 10%, 20%, 40%, 70%, and 100% grey added. Rule: use tints for backgrounds and UI surfaces, shades for hover and pressed states, and tones for disabled states and greyscale-adjacent contexts. Never mix scales from different colour families in the same component.</div>
+    <div class="sg-sub-desc">Tones are created by mixing each colour with mid-grey, producing muted, desaturated variants. Use tones for disabled states, secondary content on coloured surfaces, and subtle decorative fills. Four levels per colour: 10%, 20%, 40%, and 70% grey added. Rule: use tints for backgrounds and UI surfaces, shades for hover and pressed states, and tones for disabled states and greyscale-adjacent contexts. Never mix scales from different colour families in the same component.</div>
 
     <h3 class="colour-scale-label">Purple</h3>
     <div class="tint-strip">
@@ -2714,6 +2784,33 @@ input[type="date"].sg-input::-webkit-datetime-edit-year-field:focus{
       <div class="tint-cell" style="background:#595F64;color:#fff">+20% Grey</div>
       <div class="tint-cell" style="background:#6D7072;color:#fff">+40% Grey</div>
       <div class="tint-cell" style="background:#78797A;color:#fff">+70% Grey</div>
+    </div>
+
+    <h3 class="colour-scale-label">Red</h3>
+    <div class="tint-strip">
+      <div class="tint-cell" style="background:#F32735;color:#fff">Base</div>
+      <div class="tint-cell" style="background:#D43F49;color:#fff">+10% Grey</div>
+      <div class="tint-cell" style="background:#BA545B;color:#fff">+20% Grey</div>
+      <div class="tint-cell" style="background:#9B6B6F;color:#fff">+40% Grey</div>
+      <div class="tint-cell" style="background:#8C7779;color:#fff">+70% Grey</div>
+    </div>
+
+    <h3 class="colour-scale-label">Orange</h3>
+    <div class="tint-strip">
+      <div class="tint-cell" style="background:#FF6C0E;color:#fff">Base</div>
+      <div class="tint-cell" style="background:#DD712D;color:#fff">+10% Grey</div>
+      <div class="tint-cell" style="background:#C07647;color:#fff">+20% Grey</div>
+      <div class="tint-cell" style="background:#9E7B66;color:#fff">+40% Grey</div>
+      <div class="tint-cell" style="background:#8D7E75;color:#fff">+70% Grey</div>
+    </div>
+
+    <h3 class="colour-scale-label">Yellow</h3>
+    <div class="tint-strip">
+      <div class="tint-cell" style="background:#F2CD00;color:#323E48">Base</div>
+      <div class="tint-cell" style="background:#D4B922;color:#323E48">+10% Grey</div>
+      <div class="tint-cell" style="background:#B9A740;color:#323E48">+20% Grey</div>
+      <div class="tint-cell" style="background:#9B9262;color:#fff">+40% Grey</div>
+      <div class="tint-cell" style="background:#8B8873;color:#fff">+70% Grey</div>
     </div>
   </div>
 
@@ -2779,6 +2876,12 @@ input[type="date"].sg-input::-webkit-datetime-edit-year-field:focus{
   --green-40: #99DFD7;  --green-70: #4DC7B9;
   --charcoal-10: #EBECED; --charcoal-20: #D6D8DA;
   --charcoal-40: #ADB2B6; --charcoal-70: #70787F;
+  --red-10: #FEE8EA;     --red-20: #FDD4D7;
+  --red-40: #FAA9AE;     --red-70: #F76872;
+  --orange-10: #FFF0E7;  --orange-20: #FFE2CF;
+  --orange-40: #FFC49F;  --orange-70: #FF9856;
+  --yellow-10: #FEFAE6;  --yellow-20: #FCF5CC;
+  --yellow-40: #FAEB99;  --yellow-70: #F6DC4D;
 
   /* Shades (+ black) */
   --purple-s1: #534F85; --purple-s2: #403C65; --purple-s3: #2C2A46; --purple-s4: #191727;
@@ -2787,6 +2890,9 @@ input[type="date"].sg-input::-webkit-datetime-edit-year-field:focus{
   --teal-s1: #007F90;   --teal-s2: #00616E;   --teal-s3: #00434C;   --teal-s4: #00252A;
   --green-s1: #009583;  --green-s2: #007264;  --green-s3: #004F45;  --green-s4: #002C27;
   --charcoal-s1: #2B353D; --charcoal-s2: #21282F; --charcoal-s3: #171C20; --charcoal-s4: #0D1012;
+  --red-s1: #CF212D;     --red-s2: #9E1922;     --red-s3: #6D1218;     --red-s4: #3D0A0D;
+  --orange-s1: #D95C0C;  --orange-s2: #A64609;  --orange-s3: #733106;  --orange-s4: #401B04;
+  --yellow-s1: #CEAE00;  --yellow-s2: #9D8500;  --yellow-s3: #6D5C00;  --yellow-s4: #3D3300;
 
   /* Tones (+ grey) */
   --purple-t1: #6A6695; --purple-t2: #716F8E; --purple-t3: #797787; --purple-t4: #7D7D83;
@@ -2795,6 +2901,22 @@ input[type="date"].sg-input::-webkit-datetime-edit-year-field:focus{
   --teal-t1: #20909F;   --teal-t2: #408B95;   --teal-t3: #60858A;   --teal-t4: #738284;
   --green-t1: #20A394;  --green-t2: #40988D;  --green-t3: #608C87;  --green-t4: #738583;
   --charcoal-t1: #464F56; --charcoal-t2: #595F64; --charcoal-t3: #6D7072; --charcoal-t4: #78797A;
+  --red-t1: #D43F49;     --red-t2: #BA545B;     --red-t3: #9B6B6F;     --red-t4: #8C7779;
+  --orange-t1: #DD712D;  --orange-t2: #C07647;  --orange-t3: #9E7B66;  --orange-t4: #8D7E75;
+  --yellow-t1: #D4B922;  --yellow-t2: #B9A740;  --yellow-t3: #9B9262;  --yellow-t4: #8B8873;
+
+  /* Semantic */
+  --color-error: var(--sog-red);       --color-error-bg: var(--red-10);
+  --color-error-border: var(--red-40); --color-error-text: var(--red-s1);
+
+  --color-warning: var(--sog-orange);         --color-warning-bg: var(--orange-10);
+  --color-warning-border: var(--orange-40);   --color-warning-text: var(--orange-s2);
+
+  --color-caution-bg: var(--yellow-10);       --color-caution-border: var(--yellow-40);
+  --color-caution-text: #854D0E;
+
+  --color-success: var(--sog-green);          --color-success-bg: var(--green-10);
+  --color-success-border: var(--green-40);    --color-success-text: #007A6C;
 }</pre>
     </div>
   </div>
@@ -6921,7 +7043,7 @@ document.addEventListener('click', e => {
   <!-- ─── Phase Card ─── -->
   <div class="sg-sub">
     <div class="sg-sub-title">Phase Card</div>
-    <div class="sg-sub-desc">A three-column card for programme phase documentation. The left header column uses a 10% brand colour tint; the centre body column holds the phase description; the right footer column (same tint) lists tools and activities. Add a colour class (<code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">.phase-1</code> through <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">.phase-5</code>) to the outer container to apply the correct tint and text colour.</div>
+    <div class="sg-sub-desc">A three-column card for programme phase documentation. The left header column uses the full brand colour with white text; the centre body column holds the phase description; the right footer column uses the 10% tint and lists tools and activities. Add a colour class (<code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">.phase-1</code> through <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">.phase-5</code>) to the outer container. Phase 3 (Relapse/Crisis) uses Red — include a warning icon inside <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">.phase-num</code> to signal severity.</div>
     <div class="sg-example column" style="padding:24px;gap:8px">
       <div class="phase-card phase-1">
         <div class="phase-header">
@@ -6960,6 +7082,62 @@ document.addEventListener('click', e => {
           </div>
         </div>
       </div>
+      <div class="phase-card phase-3">
+        <div class="phase-header">
+          <div class="phase-num"><span class="material-symbols-rounded ms-filled" style="font-size:13px!important">warning</span>Relapse</div>
+          <div class="phase-title">Crisis &amp; Relapse</div>
+          <div class="phase-months">Months 13–15</div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-focus">External stressors triggered a temporary regression. Intensive support deployed. Risk score spiked then was swiftly managed through rapid response protocols.</div>
+        </div>
+        <div class="phase-footer">
+          <div class="phase-tools-label">Tools &amp; Activities</div>
+          <div class="phase-tools">
+            <span class="phase-tool">Crisis 1:1s</span>
+            <span class="phase-tool">Wheel of Life</span>
+            <span class="phase-tool">Vision/Reality</span>
+            <span class="phase-tool">Stages of Change</span>
+          </div>
+        </div>
+      </div>
+      <div class="phase-card phase-4">
+        <div class="phase-header">
+          <div class="phase-num">Phase 3</div>
+          <div class="phase-title">Advancing</div>
+          <div class="phase-months">Months 16–24</div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-focus">Sustained recovery and consolidation following crisis. Strong upward momentum with participant demonstrating resilience and autonomous coping strategies.</div>
+        </div>
+        <div class="phase-footer">
+          <div class="phase-tools-label">Tools &amp; Activities</div>
+          <div class="phase-tools">
+            <span class="phase-tool">Applications</span>
+            <span class="phase-tool">Interview Skills</span>
+            <span class="phase-tool">Mock Assessment</span>
+            <span class="phase-tool">Graduation</span>
+          </div>
+        </div>
+      </div>
+      <div class="phase-card phase-5">
+        <div class="phase-header">
+          <div class="phase-num">Post Programme</div>
+          <div class="phase-title">Sustained Outcomes</div>
+          <div class="phase-months">Months 25–37</div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-focus">Risk fully eliminated. All indices reaching ceiling. Participant transitioning to independence with ongoing light-touch support and community integration.</div>
+        </div>
+        <div class="phase-footer">
+          <div class="phase-tools-label">Tools &amp; Activities</div>
+          <div class="phase-tools">
+            <span class="phase-tool">Check-ins</span>
+            <span class="phase-tool">Community referrals</span>
+            <span class="phase-tool">Employment support</span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="code-block collapsed" style="margin-top:16px">
@@ -6995,29 +7173,38 @@ document.addEventListener('click', e => {
 .phase-footer { padding: 12px 16px; display: flex; flex-direction: column;
                 gap: 8px; justify-content: center; }
 
-/* Tint variants — apply to .phase-card container */
-.phase-1 .phase-header, .phase-1 .phase-footer { background: var(--purple-10); }
-.phase-2 .phase-header, .phase-2 .phase-footer { background: var(--blue-10); }
-.phase-3 .phase-header, .phase-3 .phase-footer { background: var(--red-10); }
-.phase-4 .phase-header, .phase-4 .phase-footer { background: var(--teal-10); }
-.phase-5 .phase-header, .phase-5 .phase-footer { background: var(--green-10); }
+/* Header — full brand colour per phase */
+.phase-1 .phase-header { background: var(--sog-purple); }
+.phase-2 .phase-header { background: var(--sog-blue); }
+.phase-3 .phase-header { background: var(--sog-red); }
+.phase-4 .phase-header { background: var(--sog-teal); }
+.phase-5 .phase-header { background: var(--sog-green); }
 
-/* Phase badge */
+/* Footer — 10% tint per phase */
+.phase-1 .phase-footer { background: var(--purple-10); }
+.phase-2 .phase-footer { background: var(--blue-10); }
+.phase-3 .phase-footer { background: var(--red-10); }
+.phase-4 .phase-footer { background: var(--teal-10); }
+.phase-5 .phase-footer { background: var(--green-10); }
+
+/* Phase badge — semi-transparent white pill on coloured header */
 .phase-num  { display: inline-flex; align-items: center; gap: 4px; font-size: 11px;
               font-weight: 600; padding: 4px 12px; border-radius: var(--radius-full);
-              background: #fff; align-self: flex-start; white-space: nowrap; }
-.phase-1 .phase-num  { color: var(--sog-purple); }
-.phase-2 .phase-num  { color: var(--sog-blue); }
+              background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3);
+              color: rgba(255,255,255,.9); align-self: flex-start; white-space: nowrap; }
 
-/* Phase title */
-.phase-title { font-size: 14px; font-weight: 700; line-height: 1.3; }
-.phase-1 .phase-header .phase-title { color: var(--sog-purple); }
-.phase-2 .phase-header .phase-title { color: var(--sog-blue); }
+/* Phase title + months — white on coloured header */
+.phase-header .phase-title { color: #fff; margin-top: 0; }
+.phase-months { font-size: 11px; color: rgba(255,255,255,.7); }
 
-/* Tool badges */
+/* Tool badges — white pill, brand-coloured text */
 .phase-tool  { font-size: 11px; font-weight: 600; padding: 3px 10px;
                border-radius: var(--radius-full); background: #fff; }
 .phase-1 .phase-tool { color: var(--sog-purple); }
+.phase-2 .phase-tool { color: var(--sog-blue); }
+.phase-3 .phase-tool { color: var(--sog-red); }
+.phase-4 .phase-tool { color: var(--sog-teal); }
+.phase-5 .phase-tool { color: var(--sog-green); }
 .phase-2 .phase-tool { color: var(--sog-blue); }</pre>
     </div>
   </div>
@@ -7250,12 +7437,13 @@ document.addEventListener('click', e => {
 
   <div class="sg-sub">
     <div class="sg-sub-title">Phase Badges</div>
-    <div class="sg-sub-desc">Phase badges indicate which programme phase a participant is currently in. The colour mapping follows the SOG phase colour system: Phase 1 = Blue (Belonging), Phase 2 = Teal (Dynamic), Phase 3 = Green (Independence), Follow-up = Purple (Professional). Never use a phase badge to indicate a risk level use a risk chip or status badge instead.</div>
+    <div class="sg-sub-desc">Phase badges indicate which programme phase a participant is currently in. The colour mapping follows the SOG phase colour system: Phase 1 = Purple (Professional), Phase 2 = Blue (Belonging), Phase 3 = Teal (Dynamic), Follow-up = Green (Independence), Relapse = Red. Never use a phase badge to indicate a numeric risk level — use a risk chip or status badge instead.</div>
     <div class="sg-example">
-      <span class="badge badge-blue">Phase 1</span>
-      <span class="badge badge-teal">Phase 2</span>
-      <span class="badge badge-green">Phase 3</span>
-      <span class="badge badge-purple">Follow-up</span>
+      <span class="badge badge-purple">Phase 1</span>
+      <span class="badge badge-blue">Phase 2</span>
+      <span class="badge badge-teal">Phase 3</span>
+      <span class="badge badge-green">Follow-up</span>
+      <span class="badge badge-red">Relapse</span>
     </div>
   </div>
 
@@ -7285,6 +7473,13 @@ document.addEventListener('click', e => {
 &lt;span class="badge badge-green"&gt;Independence&lt;/span&gt;
 &lt;span class="badge badge-sky"&gt;Collaborative&lt;/span&gt;
 
+&lt;!-- Phase badge --&gt;
+&lt;span class="badge badge-purple"&gt;Phase 1&lt;/span&gt;
+&lt;span class="badge badge-blue"&gt;Phase 2&lt;/span&gt;
+&lt;span class="badge badge-teal"&gt;Phase 3&lt;/span&gt;
+&lt;span class="badge badge-green"&gt;Follow-up&lt;/span&gt;
+&lt;span class="badge badge-red"&gt;Relapse&lt;/span&gt;
+
 &lt;!-- Status badge with ARIA --&gt;
 &lt;span class="badge badge-orange" role="status" aria-label="At Risk"&gt;
   ⚠ At Risk
@@ -7305,13 +7500,15 @@ document.addEventListener('click', e => {
 }
 
 /* Tinted variants: -10 bg, -40 border, brand text */
-.badge-purple { background: var(--purple-10); border-color: var(--purple-40); color: var(--sog-purple); }
-.badge-blue   { background: var(--blue-10);   border-color: var(--blue-40);   color: var(--sog-blue);   }
-.badge-teal   { background: var(--teal-10);   border-color: var(--teal-40);   color: var(--sog-teal);   }
-.badge-green  { background: var(--green-10);  border-color: var(--green-40);  color: var(--sog-green);  }
-.badge-sky    { background: var(--sky-10);    border-color: var(--sky-40);    color: var(--sog-sky);    }
-.badge-orange { background: var(--orange-10); border-color: var(--orange-40); color: var(--sog-orange); }
-.badge-red    { background: var(--red-10);    border-color: var(--red-40);    color: var(--sog-red);    }
+.badge-purple  { background: var(--purple-10);   border-color: var(--purple-40);   color: var(--sog-purple);   }
+.badge-blue    { background: var(--blue-10);     border-color: var(--blue-40);     color: var(--sog-blue);     }
+.badge-teal    { background: var(--teal-10);     border-color: var(--teal-40);     color: var(--sog-teal);     }
+.badge-green   { background: var(--green-10);    border-color: var(--green-40);    color: var(--sog-green);    }
+.badge-sky     { background: var(--sky-10);      border-color: var(--sky-40);      color: var(--sog-sky);      }
+.badge-charcoal{ background: var(--charcoal-10); border-color: var(--charcoal-40); color: var(--sog-charcoal); }
+.badge-red     { background: var(--red-10);      border-color: var(--red-40);      color: var(--sog-red);      }
+.badge-orange  { background: var(--orange-10);   border-color: var(--orange-40);   color: var(--sog-orange);   }
+.badge-yellow  { background: var(--yellow-10);   border-color: var(--yellow-40);   color: #854D0E;             }
 
 /* Filled variants */
 .badge-filled      { background: var(--sog-purple); color: #fff; border-color: transparent; }
@@ -7323,87 +7520,88 @@ document.addEventListener('click', e => {
 <section id="prog-timeline" class="sg-section">
   <div class="sg-section-label">Patterns</div>
   <h2 class="sg-section-title">Programme Position</h2>
-  <p class="sg-section-desc">A horizontal timeline that shows a participant's current position within the 24-month SOG programme. It communicates completed phases, the active phase, upcoming milestones, and today's position at a glance. Use it at the top of a participant detail view or case summary panel.</p>
+  <p class="sg-section-desc">A compact progress tracker that shows a participant's current position within the 24-month SOG programme. The bar visualises three equal phase segments with relapse events marked as orange diamonds and the current month as a pulsing blue dot. Use at the top of a participant detail view or case summary panel.</p>
 
   <div class="sg-sub">
     <div class="sg-sub-title">24-Month Programme Timeline</div>
-    <div class="sg-sub-desc">Phase widths are proportional to duration. The "Today" marker is calculated from the programme start date. Milestone labels sit below the bar at their exact percentage position. The stats row surfaces the most critical dates and counters without requiring the user to read the bar precisely.</div>
+    <div class="sg-sub-desc">Phase segments are equal thirds of the 24-month bar. Marker positions are calculated as <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">(month / 24) × 100%</code>. Active phase is full opacity; future phases dim to 35%. Relapse is an event on the bar; it does not reset or rewind the phase.</div>
 
     <div class="sg-example column" style="padding:32px 40px">
-      <div style="background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.06),0 1px 3px rgba(0,0,0,.04)">
+      <div class="pt-card">
 
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:16px">Programme Position</div>
-
-        <div class="prog-timeline-outer">
-
-          <!-- Today marker — Month 6 of 24 = 25% -->
-          <div class="prog-today-marker" style="left:25%">
-            <div class="prog-today-chip">
-              <span class="material-symbols-rounded ms-filled" style="font-size:12px!important;color:#fff">today</span>
-              Month 6
-            </div>
-            <div class="prog-today-stem"></div>
+        <!-- Header -->
+        <div class="pt-header">
+          <div>
+            <div class="pt-name">Marcus T.</div>
+            <div class="pt-id">Programme ID: SOG-2024-0041</div>
           </div>
-
-          <!-- Phase bar — colours match the AIM+ Journey phase system -->
-          <div class="prog-bar">
-            <!-- Phase 1: Months 1–3 (12.5%) -->
-            <div class="prog-phase" style="flex:3;background:var(--sog-purple)">Phase 1</div>
-            <!-- Phase 2: Months 4–12 (37.5%) -->
-            <div class="prog-phase" style="flex:9;background:var(--sog-blue)">Phase 2</div>
-            <!-- Relapse: Months 13–15 (12.5%) -->
-            <div class="prog-phase" style="flex:3;background:var(--sog-red)">Relapse</div>
-            <!-- Phase 3: Months 16–24 (37.5%) -->
-            <div class="prog-phase" style="flex:9;background:var(--sog-teal)">Phase 3</div>
+          <div style="display:flex;gap:6px">
+            <span class="badge badge-blue">● Active</span>
+            <span class="badge badge-red">⚠ 2 relapses</span>
           </div>
-
-          <!-- Milestone markers — tick aligns to bar position -->
-          <div class="prog-milestones">
-            <div class="prog-milestone" style="left:0">
-              <span class="prog-milestone-date">Jan 2025</span>
-              <span class="prog-milestone-label">Start</span>
-            </div>
-            <div class="prog-milestone center" style="left:37.5%">
-              <span class="prog-milestone-date">Oct 2025</span>
-              <span class="prog-milestone-label">M9 &middot; Mid review</span>
-            </div>
-            <div class="prog-milestone center" style="left:62.5%">
-              <span class="prog-milestone-date">Apr 2026</span>
-              <span class="prog-milestone-label">M15 &middot; Phase 3</span>
-            </div>
-            <div class="prog-milestone right" style="left:100%">
-              <span class="prog-milestone-date">Dec 2026</span>
-              <span class="prog-milestone-label">Exit</span>
-            </div>
-          </div>
-
         </div>
 
-        <!-- Phase legend -->
-        <div class="prog-phase-legend">
-          <div class="prog-legend-item"><div class="prog-legend-dot" style="background:var(--sog-purple)"></div>Phase 1 · Initiating</div>
-          <div class="prog-legend-item"><div class="prog-legend-dot" style="background:var(--sog-blue)"></div>Phase 2 · Engaging</div>
-          <div class="prog-legend-item"><div class="prog-legend-dot" style="background:var(--sog-red)"></div>Relapse Period</div>
-          <div class="prog-legend-item"><div class="prog-legend-dot" style="background:var(--sog-teal)"></div>Phase 3 · Advancing</div>
+        <!-- Meta row -->
+        <div class="pt-meta-row">
+          <div class="pt-meta-card">
+            <div class="pt-meta-label">Start date</div>
+            <div class="pt-meta-value">3 Mar 2024</div>
+          </div>
+          <div class="pt-meta-card">
+            <div class="pt-meta-label">Current phase</div>
+            <div class="pt-meta-value" style="color:var(--sog-blue)">Phase 2</div>
+          </div>
+          <div class="pt-meta-card">
+            <div class="pt-meta-label">Month</div>
+            <div class="pt-meta-value"><span class="pt-pip"></span>14 of 24</div>
+          </div>
+          <div class="pt-meta-card">
+            <div class="pt-meta-label">Mid survey due</div>
+            <div class="pt-meta-value" style="color:var(--color-warning-text)">3 Sep 2025</div>
+          </div>
         </div>
 
-        <!-- Stats row -->
-        <div class="prog-stats">
-          <div class="prog-stat">
-            <span class="prog-stat-label">Programme start</span>
-            <span class="prog-stat-value">Jan 2025</span>
+        <!-- Progress bar -->
+        <div class="pt-bar-wrap">
+          <div class="pt-bar-outer">
+            <div class="pt-phase-track">
+              <!-- Phase 1: complete — full opacity purple -->
+              <div class="pt-phase-seg" style="width:33.3%;background:var(--sog-purple)"></div>
+              <!-- Phase 2: active — full opacity blue -->
+              <div class="pt-phase-seg" style="width:33.3%;background:var(--sog-blue)"></div>
+              <!-- Phase 3: upcoming — dimmed teal -->
+              <div class="pt-phase-seg" style="width:33.4%;background:var(--sog-teal);opacity:0.35"></div>
+            </div>
+            <!-- Relapse M5: (5/24)×100 = 20.83% -->
+            <div class="pt-relapse-marker" style="left:20.83%"></div>
+            <!-- Relapse M11: (11/24)×100 = 45.83% -->
+            <div class="pt-relapse-marker" style="left:45.83%"></div>
+            <!-- Now M14: (14/24)×100 = 58.33% -->
+            <div class="pt-now-ring" style="left:58.33%"></div>
+            <div class="pt-now-marker" style="left:58.33%"></div>
           </div>
-          <div class="prog-stat">
-            <span class="prog-stat-label">Current phase</span>
-            <span class="prog-stat-value" style="color:var(--sog-blue)">Phase 2 — Engaging</span>
+          <!-- Marker labels -->
+          <div class="pt-marker-row">
+            <span class="pt-marker-label" style="left:0%;transform:none">Start</span>
+            <span class="pt-marker-label pt-marker-relapse" style="left:20.83%">◆ M5</span>
+            <span class="pt-marker-label pt-marker-relapse" style="left:45.83%">◆ M11</span>
+            <span class="pt-marker-label pt-marker-now" style="left:58.33%">↑ Now</span>
+            <span class="pt-marker-label" style="left:100%;transform:translateX(-100%)">End</span>
           </div>
-          <div class="prog-stat">
-            <span class="prog-stat-label">Mid survey deadline</span>
-            <span class="prog-stat-value">Oct 2025 <span class="prog-stat-flag" title="Approaching">&#9651;</span></span>
-          </div>
-          <div class="prog-stat">
-            <span class="prog-stat-label">Month</span>
-            <span class="prog-stat-value">6 of 24</span>
+          <!-- Phase labels -->
+          <div class="pt-phase-labels">
+            <div class="pt-phase-label" style="width:33.3%">
+              <span class="pt-phase-name" style="color:var(--sog-purple)">Phase 1: Engagement</span>
+              <span class="pt-phase-dur">Months 1–8</span>
+            </div>
+            <div class="pt-phase-label" style="width:33.3%">
+              <span class="pt-phase-name" style="color:var(--sog-blue)">Phase 2: Engaging</span>
+              <span class="pt-phase-dur">Months 9–16</span>
+            </div>
+            <div class="pt-phase-label" style="width:33.4%">
+              <span class="pt-phase-name" style="color:var(--text-muted)">Phase 3: Advancing</span>
+              <span class="pt-phase-dur">Months 17–24</span>
+            </div>
           </div>
         </div>
 
@@ -7411,18 +7609,688 @@ document.addEventListener('click', e => {
     </div>
   </div>
 
+  <div class="code-block collapsed" style="margin-top:16px">
+    <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">HTML</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+    <pre>&lt;div class="pt-card"&gt;
+
+  &lt;!-- Header --&gt;
+  &lt;div class="pt-header"&gt;
+    &lt;div&gt;
+      &lt;div class="pt-name"&gt;Marcus T.&lt;/div&gt;
+      &lt;div class="pt-id"&gt;Programme ID: SOG-2024-0041&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div style="display:flex;gap:6px"&gt;
+      &lt;span class="badge badge-blue"&gt;● Active&lt;/span&gt;
+      &lt;span class="badge badge-red"&gt;⚠ 2 relapses&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Meta row --&gt;
+  &lt;div class="pt-meta-row"&gt;
+    &lt;div class="pt-meta-card"&gt;
+      &lt;div class="pt-meta-label"&gt;Start date&lt;/div&gt;
+      &lt;div class="pt-meta-value"&gt;3 Mar 2024&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="pt-meta-card"&gt;
+      &lt;div class="pt-meta-label"&gt;Current phase&lt;/div&gt;
+      &lt;div class="pt-meta-value" style="color:var(--sog-blue)"&gt;Phase 2&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="pt-meta-card"&gt;
+      &lt;div class="pt-meta-label"&gt;Month&lt;/div&gt;
+      &lt;div class="pt-meta-value"&gt;&lt;span class="pt-pip"&gt;&lt;/span&gt;14 of 24&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="pt-meta-card"&gt;
+      &lt;div class="pt-meta-label"&gt;Mid survey due&lt;/div&gt;
+      &lt;div class="pt-meta-value" style="color:var(--color-warning-text)"&gt;3 Sep 2025&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Progress bar --&gt;
+  &lt;div class="pt-bar-wrap"&gt;
+    &lt;div class="pt-bar-outer"&gt;
+      &lt;div class="pt-phase-track"&gt;
+        &lt;div class="pt-phase-seg" style="width:33.3%;background:var(--sog-purple)"&gt;&lt;/div&gt;
+        &lt;div class="pt-phase-seg" style="width:33.3%;background:var(--sog-blue)"&gt;&lt;/div&gt;
+        &lt;div class="pt-phase-seg" style="width:33.4%;background:var(--sog-teal);opacity:0.35"&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;!-- Positions: (month / 24) × 100% --&gt;
+      &lt;div class="pt-relapse-marker" style="left:20.83%"&gt;&lt;/div&gt;
+      &lt;div class="pt-relapse-marker" style="left:45.83%"&gt;&lt;/div&gt;
+      &lt;div class="pt-now-ring"     style="left:58.33%"&gt;&lt;/div&gt;
+      &lt;div class="pt-now-marker"   style="left:58.33%"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="pt-marker-row"&gt;
+      &lt;span class="pt-marker-label" style="left:0%;transform:none"&gt;Start&lt;/span&gt;
+      &lt;span class="pt-marker-label pt-marker-relapse" style="left:20.83%"&gt;◆ M5&lt;/span&gt;
+      &lt;span class="pt-marker-label pt-marker-relapse" style="left:45.83%"&gt;◆ M11&lt;/span&gt;
+      &lt;span class="pt-marker-label pt-marker-now"     style="left:58.33%"&gt;↑ Now&lt;/span&gt;
+      &lt;span class="pt-marker-label" style="left:100%;transform:translateX(-100%)"&gt;End&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="pt-phase-labels" style="margin-top:10px"&gt;
+      &lt;div class="pt-phase-label" style="width:33.3%"&gt;
+        &lt;span class="pt-phase-name" style="color:var(--sog-purple)"&gt;Phase 1: Engagement&lt;/span&gt;
+        &lt;span class="pt-phase-dur"&gt;Months 1–8&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="pt-phase-label" style="width:33.3%"&gt;
+        &lt;span class="pt-phase-name" style="color:var(--sog-blue)"&gt;Phase 2: Engaging&lt;/span&gt;
+        &lt;span class="pt-phase-dur"&gt;Months 9–16&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="pt-phase-label" style="width:33.4%"&gt;
+        &lt;span class="pt-phase-name" style="color:var(--text-muted)"&gt;Phase 3: Advancing&lt;/span&gt;
+        &lt;span class="pt-phase-dur"&gt;Months 17–24&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre>
+  </div>
+  <div class="code-block collapsed" style="margin-top:8px">
+    <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+    <pre>.pt-card { background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04); }
+.pt-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.pt-name { font-size: 18px; font-weight: 700; color: var(--text); }
+.pt-id { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.pt-meta-row  { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 20px; }
+.pt-meta-card { background: var(--muted-bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; transition: border-color 150ms ease; }
+.pt-meta-card:hover { border-color: rgba(0,0,0,.2); }
+.pt-meta-label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+.pt-meta-value { font-size: 15px; font-weight: 500; color: var(--text); }
+.pt-pip { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--sog-blue); vertical-align: middle; margin-right: 4px; }
+.pt-bar-outer { position: relative; }
+.pt-phase-track { display: flex; height: 20px; border-radius: 10px; overflow: visible; gap: 2px; }
+.pt-phase-seg { height: 100%; border-radius: 5px; flex-shrink: 0; }
+.pt-relapse-marker { position: absolute; top: 10px; transform: translate(-50%,-50%) rotate(45deg); width: 12px; height: 12px; border-radius: 2px; background: var(--sog-red); border: 1.5px solid #fff; z-index: 3; }
+.pt-now-ring   { position: absolute; top: 10px; transform: translate(-50%,-50%); width: 30px; height: 30px; border-radius: 50%; background: var(--blue-10); z-index: 3; }
+.pt-now-marker { position: absolute; top: 10px; transform: translate(-50%,-50%); width: 18px; height: 18px; border-radius: 50%; background: var(--sog-blue); border: 2px solid #fff; z-index: 4; }
+.pt-marker-row  { position: relative; height: 24px; margin-top: 8px; }
+.pt-marker-label { position: absolute; transform: translateX(-50%); font-size: 10px; white-space: nowrap; color: var(--text-muted); }
+.pt-marker-now     { color: var(--sog-blue);   font-weight: 600; }
+.pt-marker-relapse { color: var(--sog-red); font-weight: 600; }
+.pt-phase-labels { display: flex; margin-top: 12px; }
+.pt-phase-label  { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.pt-phase-name { font-size: 13px; font-weight: 600; }
+.pt-phase-dur  { font-size: 10px; color: var(--text-muted); }
+</pre>
+  </div>
+
+  <!-- ── Alternative: Phase 4 ─────────────────────────────────── -->
+  <div class="sg-sub" style="margin-top:24px">
+    <div class="sg-sub-title">With Post-Programme Follow-up</div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;line-height:1.55">Extends the bar to 36 months with Phase 3 active and the follow-up period greyed out. Bar positions recalculate as <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">(month / 36) × 100</code>.</p>
+
+    <div class="sg-example column" style="padding:32px 40px">
+    <div class="pt-card">
+
+      <div class="pt-header">
+        <div>
+          <div class="pt-name">Marcus T.</div>
+          <div class="pt-id">Programme ID: SOG-2024-0041</div>
+        </div>
+        <div style="display:flex;gap:6px">
+          <span class="badge badge-blue">● Active</span>
+          <span class="badge badge-red">⚠ 2 relapses</span>
+        </div>
+      </div>
+
+      <div class="pt-meta-row">
+        <div class="pt-meta-card">
+          <div class="pt-meta-label">Start date</div>
+          <div class="pt-meta-value">3 Mar 2024</div>
+        </div>
+        <div class="pt-meta-card">
+          <div class="pt-meta-label">Current phase</div>
+          <div class="pt-meta-value" style="color:var(--sog-teal)">Phase 3</div>
+        </div>
+        <div class="pt-meta-card">
+          <div class="pt-meta-label">Month</div>
+          <div class="pt-meta-value"><span class="pt-pip" style="background:var(--sog-teal)"></span>20 of 36</div>
+        </div>
+        <div class="pt-meta-card">
+          <div class="pt-meta-label">Programme end</div>
+          <div class="pt-meta-value">3 Mar 2026</div>
+        </div>
+      </div>
+
+      <div class="pt-bar-wrap">
+        <div class="pt-bar-outer">
+          <div class="pt-phase-track">
+            <!-- Phase 1: 8/36 = 22.22% — complete -->
+            <div class="pt-phase-seg" style="width:22.22%;background:var(--sog-purple)"></div>
+            <!-- Phase 2: 8/36 = 22.22% — complete -->
+            <div class="pt-phase-seg" style="width:22.22%;background:var(--sog-blue)"></div>
+            <!-- Phase 3: 8/36 = 22.22% — active -->
+            <div class="pt-phase-seg" style="width:22.22%;background:var(--sog-teal)"></div>
+            <!-- Phase 4: 12/36 = 33.33% — upcoming -->
+            <div class="pt-phase-seg" style="width:33.33%;background:var(--sog-green);opacity:0.2"></div>
+          </div>
+          <!-- Relapse M5: (5/36)×100 = 13.89% -->
+          <div class="pt-relapse-marker" style="left:13.89%"></div>
+          <!-- Relapse M11: (11/36)×100 = 30.56% -->
+          <div class="pt-relapse-marker" style="left:30.56%"></div>
+          <!-- Now M20: (20/36)×100 = 55.56% -->
+          <div class="pt-now-ring" style="left:55.56%"></div>
+          <div class="pt-now-marker" style="left:55.56%"></div>
+        </div>
+        <div class="pt-marker-row">
+          <span class="pt-marker-label" style="left:0%;transform:none">Start</span>
+          <span class="pt-marker-label pt-marker-relapse" style="left:13.89%">◆ M5</span>
+          <span class="pt-marker-label pt-marker-relapse" style="left:30.56%">◆ M11</span>
+          <span class="pt-marker-label pt-marker-now" style="left:55.56%">↑ Now</span>
+          <span class="pt-marker-label" style="left:100%;transform:translateX(-100%)">End</span>
+        </div>
+        <div class="pt-phase-labels">
+          <div class="pt-phase-label" style="width:22.22%">
+            <span class="pt-phase-name" style="color:var(--sog-purple)">Phase 1: Engagement</span>
+            <span class="pt-phase-dur">Months 1–8</span>
+          </div>
+          <div class="pt-phase-label" style="width:22.22%">
+            <span class="pt-phase-name" style="color:var(--sog-blue)">Phase 2: Engaging</span>
+            <span class="pt-phase-dur">Months 9–16</span>
+          </div>
+          <div class="pt-phase-label" style="width:22.22%">
+            <span class="pt-phase-name" style="color:var(--sog-teal)">Phase 3: Advancing</span>
+            <span class="pt-phase-dur">Months 17–24</span>
+          </div>
+          <div class="pt-phase-label" style="width:33.33%">
+            <span class="pt-phase-name" style="color:var(--text-muted)">Post Programme Follow-up</span>
+            <span class="pt-phase-dur">Months 25–36</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    </div>
+    <div class="code-block collapsed" style="margin-top:16px">
+      <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">HTML</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+      <pre>&lt;div class="pt-card"&gt;
+
+  &lt;div class="pt-header"&gt;
+    &lt;div&gt;
+      &lt;div class="pt-name"&gt;Marcus T.&lt;/div&gt;
+      &lt;div class="pt-id"&gt;Programme ID: SOG-2024-0041&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div style="display:flex;gap:6px"&gt;
+      &lt;span class="badge badge-blue"&gt;● Active&lt;/span&gt;
+      &lt;span class="badge badge-red"&gt;⚠ 2 relapses&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="pt-meta-row"&gt;
+    &lt;div class="pt-meta-card"&gt;
+      &lt;div class="pt-meta-label"&gt;Start date&lt;/div&gt;
+      &lt;div class="pt-meta-value"&gt;3 Mar 2024&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="pt-meta-card"&gt;
+      &lt;div class="pt-meta-label"&gt;Current phase&lt;/div&gt;
+      &lt;div class="pt-meta-value" style="color:var(--sog-teal)"&gt;Phase 3&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="pt-meta-card"&gt;
+      &lt;div class="pt-meta-label"&gt;Month&lt;/div&gt;
+      &lt;div class="pt-meta-value"&gt;&lt;span class="pt-pip" style="background:var(--sog-teal)"&gt;&lt;/span&gt;20 of 36&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="pt-meta-card"&gt;
+      &lt;div class="pt-meta-label"&gt;Programme end&lt;/div&gt;
+      &lt;div class="pt-meta-value"&gt;3 Mar 2026&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Progress bar: positions use (month / 36) × 100% --&gt;
+  &lt;div class="pt-bar-wrap"&gt;
+    &lt;div class="pt-bar-outer"&gt;
+      &lt;div class="pt-phase-track"&gt;
+        &lt;div class="pt-phase-seg" style="width:22.22%;background:var(--sog-purple)"&gt;&lt;/div&gt;
+        &lt;div class="pt-phase-seg" style="width:22.22%;background:var(--sog-blue)"&gt;&lt;/div&gt;
+        &lt;div class="pt-phase-seg" style="width:22.22%;background:var(--sog-teal)"&gt;&lt;/div&gt;
+        &lt;div class="pt-phase-seg" style="width:33.33%;background:var(--sog-green);opacity:0.2"&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="pt-relapse-marker" style="left:13.89%"&gt;&lt;/div&gt;
+      &lt;div class="pt-relapse-marker" style="left:30.56%"&gt;&lt;/div&gt;
+      &lt;div class="pt-now-ring"     style="left:55.56%"&gt;&lt;/div&gt;
+      &lt;div class="pt-now-marker"   style="left:55.56%"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="pt-marker-row"&gt;
+      &lt;span class="pt-marker-label" style="left:0%;transform:none"&gt;Start&lt;/span&gt;
+      &lt;span class="pt-marker-label pt-marker-relapse" style="left:13.89%"&gt;◆ M5&lt;/span&gt;
+      &lt;span class="pt-marker-label pt-marker-relapse" style="left:30.56%"&gt;◆ M11&lt;/span&gt;
+      &lt;span class="pt-marker-label pt-marker-now"     style="left:55.56%"&gt;↑ Now&lt;/span&gt;
+      &lt;span class="pt-marker-label" style="left:100%;transform:translateX(-100%)"&gt;End&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="pt-phase-labels"&gt;
+      &lt;div class="pt-phase-label" style="width:22.22%"&gt;
+        &lt;span class="pt-phase-name" style="color:var(--sog-purple)"&gt;Phase 1: Engagement&lt;/span&gt;
+        &lt;span class="pt-phase-dur"&gt;Months 1–8&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="pt-phase-label" style="width:22.22%"&gt;
+        &lt;span class="pt-phase-name" style="color:var(--sog-blue)"&gt;Phase 2: Engaging&lt;/span&gt;
+        &lt;span class="pt-phase-dur"&gt;Months 9–16&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="pt-phase-label" style="width:22.22%"&gt;
+        &lt;span class="pt-phase-name" style="color:var(--sog-teal)"&gt;Phase 3: Advancing&lt;/span&gt;
+        &lt;span class="pt-phase-dur"&gt;Months 17–24&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="pt-phase-label" style="width:33.33%"&gt;
+        &lt;span class="pt-phase-name" style="color:var(--text-muted)"&gt;Post Programme Follow-up&lt;/span&gt;
+        &lt;span class="pt-phase-dur"&gt;Months 25–36&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre>
+    </div>
+    <div class="code-block collapsed" style="margin-top:8px">
+      <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+      <pre>/* Uses identical pt-* classes as the 24-month card. */
+/* The only difference is 4 segments and (month / 36) × 100% for positions. */
+
+.pt-phase-seg { height: 100%; border-radius: 5px; flex-shrink: 0; }
+
+/* Post-programme follow-up segment */
+/* width: 33.33%; background: var(--sog-green); opacity: 0.2 — upcoming */
+/* width: 33.33%; background: var(--sog-green)              — active     */</pre>
+    </div>
+  </div>
+
+  <!-- ── Cohort: 24-month ──────────────────────────────────────── -->
+  <div class="sg-sub" style="margin-top:24px">
+    <div class="sg-sub-title">Cohort View</div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;line-height:1.55">All participants on a shared 24-month scale. Bar positions use <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">(month / 24) × 100</code>.</p>
+
+    <div class="sg-example column" style="padding:32px 40px">
+    <div class="ptc-card">
+      <div style="margin-bottom:14px">
+        <div class="ptc-title">Key Worker: D. Okafor</div>
+        <div class="ptc-subtitle">5 participants · 24-month programme</div>
+      </div>
+      <div class="ptc-col-head">
+        <div class="ptc-col-label">Participant</div>
+        <div class="ptc-col-label">Progress</div>
+        <div class="ptc-col-label">Phase / Month</div>
+      </div>
+
+      <!-- Marcus T. — M14, Phase 2, 2 relapses -->
+      <div class="ptc-row">
+        <div>
+          <div class="ptc-name">Marcus T.</div>
+          <div class="ptc-id">SOG-2024-0041 <span style="color:var(--sog-red);font-weight:600">⚠ ×2</span></div>
+        </div>
+        <div class="ptc-bar-cell">
+          <div class="ptc-bar-track">
+            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-purple)"></div>
+            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-blue)"></div>
+            <div class="ptc-bar-seg" style="width:33.4%;background:var(--sog-teal);opacity:.35"></div>
+          </div>
+          <div class="ptc-relapse-dot" style="left:20.83%"></div>
+          <div class="ptc-relapse-dot" style="left:45.83%"></div>
+          <div class="ptc-now-dot" style="left:58.33%;background:var(--sog-blue)"></div>
+        </div>
+        <div>
+          <div class="ptc-phase" style="color:var(--sog-blue)">Phase 2: Engaging</div>
+          <div class="ptc-month">Month 14 of 24</div>
+        </div>
+      </div>
+
+      <!-- Aisha K. — M6, Phase 1, 0 relapses -->
+      <div class="ptc-row">
+        <div>
+          <div class="ptc-name">Aisha K.</div>
+          <div class="ptc-id">SOG-2024-0055</div>
+        </div>
+        <div class="ptc-bar-cell">
+          <div class="ptc-bar-track">
+            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-purple)"></div>
+            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-blue);opacity:.35"></div>
+            <div class="ptc-bar-seg" style="width:33.4%;background:var(--sog-teal);opacity:.35"></div>
+          </div>
+          <div class="ptc-now-dot" style="left:25%;background:var(--sog-purple)"></div>
+        </div>
+        <div>
+          <div class="ptc-phase" style="color:var(--sog-purple)">Phase 1: Engagement</div>
+          <div class="ptc-month">Month 6 of 24</div>
+        </div>
+      </div>
+
+      <!-- Darius M. — M19, Phase 3, 1 relapse -->
+      <div class="ptc-row">
+        <div>
+          <div class="ptc-name">Darius M.</div>
+          <div class="ptc-id">SOG-2023-0089 <span style="color:var(--sog-red);font-weight:600">⚠ ×1</span></div>
+        </div>
+        <div class="ptc-bar-cell">
+          <div class="ptc-bar-track">
+            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-purple)"></div>
+            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-blue)"></div>
+            <div class="ptc-bar-seg" style="width:33.4%;background:var(--sog-teal)"></div>
+          </div>
+          <div class="ptc-relapse-dot" style="left:33.33%"></div>
+          <div class="ptc-now-dot" style="left:79.17%;background:var(--sog-teal)"></div>
+        </div>
+        <div>
+          <div class="ptc-phase" style="color:var(--sog-teal)">Phase 3: Advancing</div>
+          <div class="ptc-month">Month 19 of 24</div>
+        </div>
+      </div>
+
+      <!-- Jordan S. — M9, Phase 2, 0 relapses -->
+      <div class="ptc-row">
+        <div>
+          <div class="ptc-name">Jordan S.</div>
+          <div class="ptc-id">SOG-2024-0063</div>
+        </div>
+        <div class="ptc-bar-cell">
+          <div class="ptc-bar-track">
+            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-purple)"></div>
+            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-blue)"></div>
+            <div class="ptc-bar-seg" style="width:33.4%;background:var(--sog-teal);opacity:.35"></div>
+          </div>
+          <div class="ptc-now-dot" style="left:37.5%;background:var(--sog-blue)"></div>
+        </div>
+        <div>
+          <div class="ptc-phase" style="color:var(--sog-blue)">Phase 2: Engaging</div>
+          <div class="ptc-month">Month 9 of 24</div>
+        </div>
+      </div>
+
+      <!-- Priya N. — M3, Phase 1, 0 relapses -->
+      <div class="ptc-row">
+        <div>
+          <div class="ptc-name">Priya N.</div>
+          <div class="ptc-id">SOG-2025-0012</div>
+        </div>
+        <div class="ptc-bar-cell">
+          <div class="ptc-bar-track">
+            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-purple)"></div>
+            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-blue);opacity:.35"></div>
+            <div class="ptc-bar-seg" style="width:33.4%;background:var(--sog-teal);opacity:.35"></div>
+          </div>
+          <div class="ptc-now-dot" style="left:12.5%;background:var(--sog-purple)"></div>
+        </div>
+        <div>
+          <div class="ptc-phase" style="color:var(--sog-purple)">Phase 1: Engagement</div>
+          <div class="ptc-month">Month 3 of 24</div>
+        </div>
+      </div>
+
+    </div>
+    </div>
+    <div class="code-block collapsed" style="margin-top:16px">
+      <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">HTML</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+      <pre>&lt;div class="ptc-card"&gt;
+  &lt;div style="margin-bottom:14px"&gt;
+    &lt;div class="ptc-title"&gt;Key Worker: D. Okafor&lt;/div&gt;
+    &lt;div class="ptc-subtitle"&gt;5 participants · 24-month programme&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="ptc-col-head"&gt;
+    &lt;div class="ptc-col-label"&gt;Participant&lt;/div&gt;
+    &lt;div class="ptc-col-label"&gt;Progress&lt;/div&gt;
+    &lt;div class="ptc-col-label"&gt;Phase / Month&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Row: positions use (month / 24) × 100% --&gt;
+  &lt;div class="ptc-row"&gt;
+    &lt;div&gt;
+      &lt;div class="ptc-name"&gt;Marcus T.&lt;/div&gt;
+      &lt;div class="ptc-id"&gt;SOG-2024-0041 &lt;span style="color:var(--sog-red);font-weight:600"&gt;⚠ ×2&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="ptc-bar-cell"&gt;
+      &lt;div class="ptc-bar-track"&gt;
+        &lt;div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-purple)"&gt;&lt;/div&gt;
+        &lt;div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-blue)"&gt;&lt;/div&gt;
+        &lt;div class="ptc-bar-seg" style="width:33.4%;background:var(--sog-teal);opacity:.35"&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="ptc-relapse-dot" style="left:20.83%"&gt;&lt;/div&gt;
+      &lt;div class="ptc-relapse-dot" style="left:45.83%"&gt;&lt;/div&gt;
+      &lt;div class="ptc-now-dot" style="left:58.33%;background:var(--sog-blue)"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;div class="ptc-phase" style="color:var(--sog-blue)"&gt;Phase 2: Engaging&lt;/div&gt;
+      &lt;div class="ptc-month"&gt;Month 14 of 24&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Repeat ptc-row for each participant --&gt;
+&lt;/div&gt;</pre>
+    </div>
+    <div class="code-block collapsed" style="margin-top:8px">
+      <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+      <pre>.ptc-card { background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04); }
+.ptc-title { font-size: 16px; font-weight: 700; color: var(--text); }
+.ptc-subtitle { font-size: 12px; color: var(--text-muted); margin-top: 2px; margin-bottom: 16px; }
+.ptc-col-head { display: grid; grid-template-columns: 150px 1fr 110px; gap: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); margin-bottom: 2px; }
+.ptc-col-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); }
+.ptc-row { display: grid; grid-template-columns: 150px 1fr 110px; gap: 14px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); }
+.ptc-row:last-child { border-bottom: none; }
+.ptc-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.ptc-id { font-size: 11px; color: var(--text-muted); }
+.ptc-bar-cell { min-width: 0; position: relative; height: 20px; display: flex; align-items: center; }
+.ptc-bar-track { display: flex; height: 8px; border-radius: 4px; overflow: visible; gap: 1px; width: 100%; }
+.ptc-bar-seg { height: 100%; border-radius: 3px; flex-shrink: 0; }
+.ptc-now-dot { position: absolute; top: 10px; transform: translate(-50%,-50%); width: 12px; height: 12px; border-radius: 50%; border: 2px solid #fff; z-index: 4; }
+.ptc-relapse-dot { position: absolute; top: 10px; transform: translate(-50%,-50%) rotate(45deg); width: 7px; height: 7px; border-radius: 1px; background: var(--sog-red); border: 1px solid #fff; z-index: 3; }
+.ptc-phase { font-size: 12px; font-weight: 600; line-height: 1.3; }
+.ptc-month { font-size: 11px; color: var(--text-muted); }</pre>
+    </div>
+  </div>
+
+  <!-- ── Cohort: 36-month with post-programme ───────────────────── -->
+  <div class="sg-sub" style="margin-top:24px">
+    <div class="sg-sub-title">Cohort View with Post-Programme Follow-up</div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;line-height:1.55">All participants on a shared 36-month scale including the follow-up period. Bar positions use <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">(month / 36) × 100</code>.</p>
+
+    <div class="sg-example column" style="padding:32px 40px">
+    <div class="ptc-card">
+      <div style="margin-bottom:14px">
+        <div class="ptc-title">Key Worker: D. Okafor</div>
+        <div class="ptc-subtitle">5 participants · 24-month programme + 12-month follow-up</div>
+      </div>
+      <div class="ptc-col-head">
+        <div class="ptc-col-label">Participant</div>
+        <div class="ptc-col-label">Progress</div>
+        <div class="ptc-col-label">Phase / Month</div>
+      </div>
+
+      <!-- Marcus T. — M20, Phase 3, 2 relapses -->
+      <div class="ptc-row">
+        <div>
+          <div class="ptc-name">Marcus T.</div>
+          <div class="ptc-id">SOG-2024-0041 <span style="color:var(--sog-red);font-weight:600">⚠ ×2</span></div>
+        </div>
+        <div class="ptc-bar-cell">
+          <div class="ptc-bar-track">
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-purple)"></div>
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-blue)"></div>
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-teal)"></div>
+            <div class="ptc-bar-seg" style="width:33.33%;background:var(--sog-green);opacity:.2"></div>
+          </div>
+          <div class="ptc-relapse-dot" style="left:13.89%"></div>
+          <div class="ptc-relapse-dot" style="left:30.56%"></div>
+          <div class="ptc-now-dot" style="left:55.56%;background:var(--sog-teal)"></div>
+        </div>
+        <div>
+          <div class="ptc-phase" style="color:var(--sog-teal)">Phase 3: Advancing</div>
+          <div class="ptc-month">Month 20 of 36</div>
+        </div>
+      </div>
+
+      <!-- Liam O. — M28, Post-programme, 1 relapse -->
+      <div class="ptc-row">
+        <div>
+          <div class="ptc-name">Liam O.</div>
+          <div class="ptc-id">SOG-2023-0071 <span style="color:var(--sog-red);font-weight:600">⚠ ×1</span></div>
+        </div>
+        <div class="ptc-bar-cell">
+          <div class="ptc-bar-track">
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-purple)"></div>
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-blue)"></div>
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-teal)"></div>
+            <div class="ptc-bar-seg" style="width:33.33%;background:var(--sog-green)"></div>
+          </div>
+          <div class="ptc-relapse-dot" style="left:16.67%"></div>
+          <div class="ptc-now-dot" style="left:77.78%;background:var(--sog-green)"></div>
+        </div>
+        <div>
+          <div class="ptc-phase" style="color:var(--sog-green)">Post Programme</div>
+          <div class="ptc-month">Month 28 of 36</div>
+        </div>
+      </div>
+
+      <!-- Aisha K. — M14, Phase 2, 0 relapses -->
+      <div class="ptc-row">
+        <div>
+          <div class="ptc-name">Aisha K.</div>
+          <div class="ptc-id">SOG-2024-0055</div>
+        </div>
+        <div class="ptc-bar-cell">
+          <div class="ptc-bar-track">
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-purple)"></div>
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-blue)"></div>
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-teal);opacity:.35"></div>
+            <div class="ptc-bar-seg" style="width:33.33%;background:var(--sog-green);opacity:.2"></div>
+          </div>
+          <div class="ptc-now-dot" style="left:38.89%;background:var(--sog-blue)"></div>
+        </div>
+        <div>
+          <div class="ptc-phase" style="color:var(--sog-blue)">Phase 2: Engaging</div>
+          <div class="ptc-month">Month 14 of 36</div>
+        </div>
+      </div>
+
+      <!-- Darius M. — M31, Post-programme, 0 relapses -->
+      <div class="ptc-row">
+        <div>
+          <div class="ptc-name">Darius M.</div>
+          <div class="ptc-id">SOG-2023-0089</div>
+        </div>
+        <div class="ptc-bar-cell">
+          <div class="ptc-bar-track">
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-purple)"></div>
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-blue)"></div>
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-teal)"></div>
+            <div class="ptc-bar-seg" style="width:33.33%;background:var(--sog-green)"></div>
+          </div>
+          <div class="ptc-now-dot" style="left:86.11%;background:var(--sog-green)"></div>
+        </div>
+        <div>
+          <div class="ptc-phase" style="color:var(--sog-green)">Post Programme</div>
+          <div class="ptc-month">Month 31 of 36</div>
+        </div>
+      </div>
+
+      <!-- Jordan S. — M9, Phase 2, 1 relapse -->
+      <div class="ptc-row">
+        <div>
+          <div class="ptc-name">Jordan S.</div>
+          <div class="ptc-id">SOG-2024-0063 <span style="color:var(--sog-red);font-weight:600">⚠ ×1</span></div>
+        </div>
+        <div class="ptc-bar-cell">
+          <div class="ptc-bar-track">
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-purple)"></div>
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-blue)"></div>
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-teal);opacity:.35"></div>
+            <div class="ptc-bar-seg" style="width:33.33%;background:var(--sog-green);opacity:.2"></div>
+          </div>
+          <div class="ptc-relapse-dot" style="left:11.11%"></div>
+          <div class="ptc-now-dot" style="left:25%;background:var(--sog-blue)"></div>
+        </div>
+        <div>
+          <div class="ptc-phase" style="color:var(--sog-blue)">Phase 2: Engaging</div>
+          <div class="ptc-month">Month 9 of 36</div>
+        </div>
+      </div>
+
+    </div>
+    </div>
+    <div class="code-block collapsed" style="margin-top:16px">
+      <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">HTML</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+      <pre>&lt;div class="ptc-card"&gt;
+  &lt;div style="margin-bottom:14px"&gt;
+    &lt;div class="ptc-title"&gt;Key Worker: D. Okafor&lt;/div&gt;
+    &lt;div class="ptc-subtitle"&gt;5 participants · 24-month programme + 12-month follow-up&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="ptc-col-head"&gt;
+    &lt;div class="ptc-col-label"&gt;Participant&lt;/div&gt;
+    &lt;div class="ptc-col-label"&gt;Progress&lt;/div&gt;
+    &lt;div class="ptc-col-label"&gt;Phase / Month&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Row: positions use (month / 36) × 100% --&gt;
+  &lt;div class="ptc-row"&gt;
+    &lt;div&gt;
+      &lt;div class="ptc-name"&gt;Marcus T.&lt;/div&gt;
+      &lt;div class="ptc-id"&gt;SOG-2024-0041 &lt;span style="color:var(--sog-red);font-weight:600"&gt;⚠ ×2&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="ptc-bar-cell"&gt;
+      &lt;div class="ptc-bar-track"&gt;
+        &lt;div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-purple)"&gt;&lt;/div&gt;
+        &lt;div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-blue)"&gt;&lt;/div&gt;
+        &lt;div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-teal)"&gt;&lt;/div&gt;
+        &lt;div class="ptc-bar-seg" style="width:33.33%;background:var(--sog-green);opacity:.2"&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="ptc-relapse-dot" style="left:13.89%"&gt;&lt;/div&gt;
+      &lt;div class="ptc-relapse-dot" style="left:30.56%"&gt;&lt;/div&gt;
+      &lt;div class="ptc-now-dot" style="left:55.56%;background:var(--sog-teal)"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;div class="ptc-phase" style="color:var(--sog-teal)"&gt;Phase 3: Advancing&lt;/div&gt;
+      &lt;div class="ptc-month"&gt;Month 20 of 36&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Post-programme row example --&gt;
+  &lt;div class="ptc-row"&gt;
+    &lt;div&gt;
+      &lt;div class="ptc-name"&gt;Liam O.&lt;/div&gt;
+      &lt;div class="ptc-id"&gt;SOG-2023-0071 &lt;span style="color:var(--sog-red);font-weight:600"&gt;⚠ ×1&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="ptc-bar-cell"&gt;
+      &lt;div class="ptc-bar-track"&gt;
+        &lt;div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-purple)"&gt;&lt;/div&gt;
+        &lt;div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-blue)"&gt;&lt;/div&gt;
+        &lt;div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-teal)"&gt;&lt;/div&gt;
+        &lt;div class="ptc-bar-seg" style="width:33.33%;background:var(--sog-green)"&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="ptc-relapse-dot" style="left:16.67%"&gt;&lt;/div&gt;
+      &lt;div class="ptc-now-dot" style="left:77.78%;background:var(--sog-green)"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;div class="ptc-phase" style="color:var(--sog-green)"&gt;Post Programme&lt;/div&gt;
+      &lt;div class="ptc-month"&gt;Month 28 of 36&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Repeat ptc-row for each participant --&gt;
+&lt;/div&gt;</pre>
+    </div>
+    <div class="code-block collapsed" style="margin-top:8px">
+      <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+      <pre>/* Uses identical ptc-* CSS as the Cohort View above. */
+/* The only difference is 4 bar segments and (month / 36) × 100% for positions. */
+
+/* Post-programme segment states */
+/* Upcoming: background: var(--sog-green); opacity: 0.2 */
+/* Active:   background: var(--sog-green)               */
+
+/* Now-dot colour for post-programme participant */
+/* background: var(--sog-green) */</pre>
+    </div>
+  </div>
+
   <div class="sg-sub">
     <div class="sg-sub-title">Usage Rules</div>
     <div class="info-callout" style="margin-bottom:12px">
-      <strong>Today marker:</strong> Always calculate position as <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">(daysElapsed / totalDays) * 100</code> and apply as a CSS <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">left</code> percentage. Never hardcode the position.
+      <strong>Bar positions:</strong> Always calculate as <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">(month / 24) × 100</code> applied as a CSS <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">left</code> percentage. Never hardcode positions.
     </div>
     <div class="info-callout" style="margin-bottom:12px">
-      <strong>Phase colours:</strong> Phase 1 and Phase 3 use <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">var(--sog-teal)</code>. Phase 2 uses <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">var(--sog-purple)</code>. Do not use other colours for phase segments.
+      <strong>Phase colours:</strong> Phase 1 = <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">var(--sog-purple)</code>. Phase 2 = <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">var(--sog-blue)</code>. Phase 3 = <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">var(--sog-teal)</code> at <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">opacity: 0.35</code> until active. Do not use red as a phase segment — relapse is an event marker, not a phase.
+    </div>
+    <div class="info-callout" style="margin-bottom:12px">
+      <strong>Relapse markers:</strong> Red diamonds (<code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">var(--sog-red)</code>, <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">rotate(45deg)</code>) placed at their exact month position on the bar. No phase reset — the bar does not rewind. The header badge shows the total relapse count.
     </div>
     <div class="info-callout">
-      <strong>Deadline warnings:</strong> Use the &#9651; triangle symbol in <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">var(--sog-orange)</code> next to any stats row date that has passed or is within 14 days. Do not use red — the triangle is a soft nudge, not an error state.
+      <strong>Survey urgency:</strong> Flag any survey within 12 weeks of today as <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">pt-s-soon</code> and colour the meta card date <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">var(--color-warning-text)</code>. Post-programme surveys use <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">pt-s-upcoming</code> with the label "Post-programme".
     </div>
   </div>
+
+
 </section>
 
 
@@ -7559,7 +8427,7 @@ document.addEventListener('click', e => {
       <pre>.alert-card-icon  { width: 24px; height: 24px; border-radius: 50%;
                     display: flex; align-items: center; justify-content: center; }
 .alert-icon--critical { background: var(--sog-red); }
-.alert-icon--warning  { background: transparent; border: 1.5px solid #FF6C0E; }</pre>
+.alert-icon--warning  { background: transparent; border: 1.5px solid var(--color-warning); }</pre>
     </div>
   </div>
 
@@ -7618,13 +8486,13 @@ document.addEventListener('click', e => {
 }
 .alert-card:hover { transform: translateY(-2px); }
 .alert-card--critical {
-  background: #FEF2F2; border-color: #FECACA;
+  background: var(--color-error-bg); border-color: var(--color-error-border);
 }
 .alert-card--critical:hover {
-  box-shadow: 0 4px 16px rgba(192, 21, 42, .12);
+  box-shadow: 0 4px 16px rgba(243, 39, 53, .12);
 }
 .alert-card--warning {
-  background: #FFF3EA; border-color: #FFB380;
+  background: var(--color-warning-bg); border-color: var(--color-warning-border);
 }
 .alert-card--warning:hover {
   box-shadow: 0 4px 16px rgba(255, 108, 14, .12);
@@ -7907,7 +8775,7 @@ function renderAlerts(alerts, gridEl) {
 .tph-icon   { width: 28px; height: 28px; border-radius: 7px;
               display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .tph-icon-default { background: var(--purple-10); border: 1px solid var(--purple-20); }
-.tph-icon-warning { background: #FFF3EA;          border: 1px solid #FFB380; }
+.tph-icon-warning { background: var(--color-warning-bg); border: 1px solid var(--color-warning-border); }
 .tph-title          { font-size: 12px; font-weight: 700; text-transform: uppercase;
                       letter-spacing: .09em; color: var(--sog-purple); }
 .tph-title--warning { color: var(--text); }  /* modifier — overrides purple */
@@ -7959,7 +8827,7 @@ function renderAlerts(alerts, gridEl) {
             <tbody>
               <tr>
                 <td><div style="display:flex;align-items:center;gap:10px"><div class="avatar avatar-sm">JS</div><div><div style="font-weight:600;font-size:13px">Jordan Smith</div><div style="font-size:11px;color:var(--text-muted)">YP-2024-0142</div></div></div></td>
-                <td><span class="badge badge-teal">Phase 2</span></td>
+                <td><span class="badge badge-blue">Phase 2</span></td>
                 <td><span class="badge badge-green">Active</span></td>
                 <td>Sarah Mitchell</td>
                 <td class="cell-muted">12 Mar 2024</td>
@@ -7967,7 +8835,7 @@ function renderAlerts(alerts, gridEl) {
               </tr>
               <tr>
                 <td><div style="display:flex;align-items:center;gap:10px"><div class="avatar avatar-sm" style="background:var(--blue-20);color:var(--sog-blue)">AK</div><div><div style="font-weight:600;font-size:13px">Amara Kofi</div><div style="font-size:11px;color:var(--text-muted)">YP-2024-0138</div></div></div></td>
-                <td><span class="badge badge-blue">Phase 1</span></td>
+                <td><span class="badge badge-purple">Phase 1</span></td>
                 <td><span class="badge badge-green">Active</span></td>
                 <td>Tom Waverly</td>
                 <td class="cell-muted">11 Mar 2024</td>
@@ -7975,7 +8843,7 @@ function renderAlerts(alerts, gridEl) {
               </tr>
               <tr>
                 <td><div style="display:flex;align-items:center;gap:10px"><div class="avatar avatar-sm" style="background:var(--teal-20);color:var(--sog-teal)">MO</div><div><div style="font-weight:600;font-size:13px">Marcus Obi</div><div style="font-size:11px;color:var(--text-muted)">YP-2024-0129</div></div></div></td>
-                <td><span class="badge badge-green">Phase 3</span></td>
+                <td><span class="badge badge-teal">Phase 3</span></td>
                 <td><span class="badge badge-orange">At Risk</span></td>
                 <td>Sarah Mitchell</td>
                 <td class="cell-muted">8 Mar 2024</td>
@@ -7983,7 +8851,7 @@ function renderAlerts(alerts, gridEl) {
               </tr>
               <tr>
                 <td><div style="display:flex;align-items:center;gap:10px"><div class="avatar avatar-sm" style="background:var(--green-20);color:var(--sog-green)">LR</div><div><div style="font-weight:600;font-size:13px">Lena Rodrigues</div><div style="font-size:11px;color:var(--text-muted)">YP-2024-0115</div></div></div></td>
-                <td><span class="badge badge-purple">Follow-up</span></td>
+                <td><span class="badge badge-green">Follow-up</span></td>
                 <td><span class="badge badge-charcoal">Closed</span></td>
                 <td>Tom Waverly</td>
                 <td class="cell-muted">2 Feb 2024</td>
@@ -7991,7 +8859,7 @@ function renderAlerts(alerts, gridEl) {
               </tr>
               <tr>
                 <td><div style="display:flex;align-items:center;gap:10px"><div class="avatar avatar-sm" style="background:#FEF2F2;color:var(--sog-red)">DT</div><div><div style="font-weight:600;font-size:13px">Dani Torres</div><div style="font-size:11px;color:var(--text-muted)">YP-2024-0151</div></div></div></td>
-                <td><span class="badge badge-blue">Phase 1</span></td>
+                <td><span class="badge badge-purple">Phase 1</span></td>
                 <td><span class="badge badge-red">High Risk</span></td>
                 <td>James Cole</td>
                 <td class="cell-muted">13 Mar 2024</td>
@@ -8032,7 +8900,7 @@ function renderAlerts(alerts, gridEl) {
     &lt;tbody&gt;
       &lt;tr&gt;
         &lt;td&gt;Jordan Smith&lt;/td&gt;
-        &lt;td&gt;&lt;span class="badge badge-teal"&gt;Phase 2&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;span class="badge badge-blue"&gt;Phase 2&lt;/span&gt;&lt;/td&gt;
         &lt;td&gt;&lt;span class="badge badge-green"&gt;Active&lt;/span&gt;&lt;/td&gt;
         &lt;td&gt;Sarah Mitchell&lt;/td&gt;
         &lt;td class="cell-muted"&gt;12 Mar 2024&lt;/td&gt;
@@ -8119,7 +8987,7 @@ function renderAlerts(alerts, gridEl) {
 /* 4px radius distinguishes chips (data) from badges (labels) */
 .risk-low      { background: var(--green-10); color: #007A6C; border: 1px solid var(--green-20); }
 .risk-med      { background: var(--blue-10);  color: #1B6FA0; border: 1px solid var(--blue-20); }
-.risk-hi       { background: #FEF2F2;         color: #C0152A; border: 1px solid #FECACA; }
+.risk-hi       { background: var(--color-error-bg); color: var(--color-error-text); border: 1px solid var(--color-error-border); }
 .risk-unscored { background: var(--muted-bg); color: var(--charcoal-40); border: 1px solid var(--border); }
 
 /* Small variant — use only in table footer legends */
@@ -8285,8 +9153,8 @@ function riskClass(score) {
         <table class="sg-table">
           <thead><tr><th scope="col">Participant</th><th scope="col">Phase</th><th scope="col">Status</th><th scope="col">Risk Score</th></tr></thead>
           <tbody>
-            <tr><td><span style="font-weight:600">Marcus Obi</span></td><td><span class="badge badge-green">Phase 3</span></td><td><span class="badge badge-orange">At Risk</span></td><td><span class="risk-chip risk-hi">82</span></td></tr>
-            <tr><td><span style="font-weight:600">Dani Torres</span></td><td><span class="badge badge-blue">Phase 1</span></td><td><span class="badge badge-red">At Risk</span></td><td><span class="risk-chip risk-hi">91</span></td></tr>
+            <tr><td><span style="font-weight:600">Marcus Obi</span></td><td><span class="badge badge-teal">Phase 3</span></td><td><span class="badge badge-orange">At Risk</span></td><td><span class="risk-chip risk-hi">82</span></td></tr>
+            <tr><td><span style="font-weight:600">Dani Torres</span></td><td><span class="badge badge-purple">Phase 1</span></td><td><span class="badge badge-red">At Risk</span></td><td><span class="risk-chip risk-hi">91</span></td></tr>
           </tbody>
         </table>
 
@@ -8484,11 +9352,11 @@ function renderFilterChips() {
             </tr>
           </thead>
           <tbody id="sort-demo-body">
-            <tr><td><span style="font-weight:600">Amara Kofi</span></td><td><span class="badge badge-blue">Phase 1</span></td><td><span class="risk-chip risk-low">3</span></td><td class="cell-muted">11 Mar 2024</td></tr>
-            <tr><td><span style="font-weight:600">Lena Rodrigues</span></td><td><span class="badge badge-purple">Follow-up</span></td><td><span class="risk-chip risk-low">18</span></td><td class="cell-muted">2 Feb 2024</td></tr>
-            <tr><td><span style="font-weight:600">Jordan Smith</span></td><td><span class="badge badge-teal">Phase 2</span></td><td><span class="risk-chip risk-hi">58</span></td><td class="cell-muted">12 Mar 2024</td></tr>
-            <tr><td><span style="font-weight:600">Marcus Obi</span></td><td><span class="badge badge-green">Phase 3</span></td><td><span class="risk-chip risk-hi">82</span></td><td class="cell-muted">8 Mar 2024</td></tr>
-            <tr><td><span style="font-weight:600">Dani Torres</span></td><td><span class="badge badge-blue">Phase 1</span></td><td><span class="risk-chip risk-hi">91</span></td><td class="cell-muted">13 Mar 2024</td></tr>
+            <tr><td><span style="font-weight:600">Amara Kofi</span></td><td><span class="badge badge-purple">Phase 1</span></td><td><span class="risk-chip risk-low">3</span></td><td class="cell-muted">11 Mar 2024</td></tr>
+            <tr><td><span style="font-weight:600">Lena Rodrigues</span></td><td><span class="badge badge-green">Follow-up</span></td><td><span class="risk-chip risk-low">18</span></td><td class="cell-muted">2 Feb 2024</td></tr>
+            <tr><td><span style="font-weight:600">Jordan Smith</span></td><td><span class="badge badge-blue">Phase 2</span></td><td><span class="risk-chip risk-hi">58</span></td><td class="cell-muted">12 Mar 2024</td></tr>
+            <tr><td><span style="font-weight:600">Marcus Obi</span></td><td><span class="badge badge-teal">Phase 3</span></td><td><span class="risk-chip risk-hi">82</span></td><td class="cell-muted">8 Mar 2024</td></tr>
+            <tr><td><span style="font-weight:600">Dani Torres</span></td><td><span class="badge badge-purple">Phase 1</span></td><td><span class="risk-chip risk-hi">91</span></td><td class="cell-muted">13 Mar 2024</td></tr>
           </tbody>
         </table>
         <div class="table-footer"><span style="font-size:12px;color:var(--text-muted)">Sorted by Risk Score, ascending · Click any column header to sort</span></div>
@@ -8630,21 +9498,21 @@ function sortTable(col, tbody, getValue) {
             <tbody>
               <tr>
                 <td style="padding:10px 16px;font-size:13px;border-bottom:1px solid var(--border);overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><span style="font-weight:600">Amara Kofi</span></td>
-                <td style="padding:10px 16px;font-size:13px;border-bottom:1px solid var(--border);overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><span class="badge badge-blue">Phase 1</span></td>
+                <td style="padding:10px 16px;font-size:13px;border-bottom:1px solid var(--border);overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><span class="badge badge-purple">Phase 1</span></td>
                 <td style="padding:10px 16px;font-size:13px;border-bottom:1px solid var(--border);overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><span class="badge badge-green">Active</span></td>
                 <td style="padding:10px 16px;font-size:13px;border-bottom:1px solid var(--border);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text-muted)">11 Mar 2024</td>
                 <td style="padding:10px 16px;font-size:13px;border-bottom:1px solid var(--border)"><span class="risk-chip risk-low">3</span></td>
               </tr>
               <tr>
                 <td style="padding:10px 16px;font-size:13px;border-bottom:1px solid var(--border);overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><span style="font-weight:600">Jordan Smith</span></td>
-                <td style="padding:10px 16px;font-size:13px;border-bottom:1px solid var(--border);overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><span class="badge badge-teal">Phase 2</span></td>
+                <td style="padding:10px 16px;font-size:13px;border-bottom:1px solid var(--border);overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><span class="badge badge-blue">Phase 2</span></td>
                 <td style="padding:10px 16px;font-size:13px;border-bottom:1px solid var(--border);overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><span class="badge badge-orange">At risk</span></td>
                 <td style="padding:10px 16px;font-size:13px;border-bottom:1px solid var(--border);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text-muted)">12 Mar 2024</td>
                 <td style="padding:10px 16px;font-size:13px;border-bottom:1px solid var(--border)"><span class="risk-chip risk-hi">58</span></td>
               </tr>
               <tr>
                 <td style="padding:10px 16px;font-size:13px;border-bottom:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><span style="font-weight:600">Marcus Obi</span></td>
-                <td style="padding:10px 16px;font-size:13px;border-bottom:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><span class="badge badge-green">Phase 3</span></td>
+                <td style="padding:10px 16px;font-size:13px;border-bottom:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><span class="badge badge-teal">Phase 3</span></td>
                 <td style="padding:10px 16px;font-size:13px;border-bottom:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><span class="badge badge-orange">At risk</span></td>
                 <td style="padding:10px 16px;font-size:13px;border-bottom:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text-muted)">8 Mar 2024</td>
                 <td style="padding:10px 16px;font-size:13px;border-bottom:none"><span class="risk-chip risk-hi">82</span></td>
@@ -9294,34 +10162,34 @@ initResizableColumns('participants-table', 'sog-table-widths');</pre>
 
   <div class="sg-sub">
     <div class="sg-sub-title">SOG Programme Phase Tracker</div>
-    <div class="sg-sub-desc">A phase-coloured variant of the vertical stepper mapped to SOG's four programme stages. Each node uses the phase brand colour (Phase 1 Blue, Phase 2 Teal, Phase 3 Green, Follow-up Purple) and the completed connector inherits that phase colour. Use in participant dashboards, case profiles, and programme reports.</div>
+    <div class="sg-sub-desc">A phase-coloured variant of the vertical stepper mapped to SOG's four programme stages. Each node uses the phase brand colour (Phase 1 Purple, Phase 2 Blue, Phase 3 Teal, Follow-up Green) and the completed connector inherits that phase colour. Use in participant dashboards, case profiles, and programme reports.</div>
     <div class="sg-example" style="display:block;padding:24px 32px">
       <div class="stepper-v" role="list" aria-label="SOG programme phases" style="max-width:460px">
         <div class="stepper-step stp-done" role="listitem">
           <div class="stepper-v-spine">
-            <div class="stp-node stp-node-blue" aria-label="Phase 1: Belonging, completed"><span class="material-symbols-rounded ms-filled" style="font-size:16px">check</span></div>
-            <div class="stepper-v-line" style="background:var(--sog-blue)"></div>
+            <div class="stp-node stp-node-done" aria-label="Phase 1: Belonging, completed"><span class="material-symbols-rounded ms-filled" style="font-size:16px">check</span></div>
+            <div class="stepper-v-line" style="background:var(--sog-purple)"></div>
           </div>
           <div class="stepper-v-body">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
               <div class="stepper-v-title" style="margin-bottom:0">Phase 1</div>
-              <span class="badge badge-blue">Belonging</span>
+              <span class="badge badge-purple">Belonging</span>
             </div>
             <div class="stepper-v-desc">12 sessions · Risk score 74 → 41 · Completed 30 Apr 2025</div>
           </div>
         </div>
         <div class="stepper-step stp-active" role="listitem" aria-current="step">
           <div class="stepper-v-spine">
-            <div class="stp-node stp-node-teal-act" aria-label="Phase 2: Dynamic, current">2</div>
+            <div class="stp-node stp-node-blue-act" aria-label="Phase 2: Dynamic, current">2</div>
             <div class="stepper-v-line"></div>
           </div>
           <div class="stepper-v-body">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
               <div class="stepper-v-title" style="margin-bottom:0">Phase 2</div>
-              <span class="badge badge-teal">Dynamic</span>
+              <span class="badge badge-blue">Dynamic</span>
             </div>
             <div class="stepper-v-desc">4 of 10 sessions completed · Risk score 41 · In progress</div>
-            <div class="stepper-v-meta"><span class="material-symbols-rounded" style="font-size:14px;color:var(--sog-teal)">pending</span>In progress · Key worker: Amara B.</div>
+            <div class="stepper-v-meta"><span class="material-symbols-rounded" style="font-size:14px;color:var(--sog-blue)">pending</span>In progress · Key worker: Amara B.</div>
           </div>
         </div>
         <div class="stepper-step stp-upcoming" role="listitem">
@@ -9332,7 +10200,7 @@ initResizableColumns('participants-table', 'sog-table-widths');</pre>
           <div class="stepper-v-body">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
               <div class="stepper-v-title" style="margin-bottom:0">Phase 3</div>
-              <span class="badge badge-green">Independence</span>
+              <span class="badge badge-teal">Independence</span>
             </div>
             <div class="stepper-v-desc">Pending Phase 2 completion and milestone review</div>
           </div>
@@ -9344,7 +10212,7 @@ initResizableColumns('participants-table', 'sog-table-widths');</pre>
           <div class="stepper-v-body">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
               <div class="stepper-v-title" style="margin-bottom:0">Follow-up</div>
-              <span class="badge badge-purple">Professional</span>
+              <span class="badge badge-green">Professional</span>
             </div>
             <div class="stepper-v-desc">6-month follow-up check-in after programme completion</div>
           </div>
@@ -9498,8 +10366,10 @@ initResizableColumns('participants-table', 'sog-table-widths');</pre>
                    margin-top: 6px; font-size: 12px; color: var(--text-muted); }
 
 /* Phase-coloured nodes (SOG Phase Tracker) */
-.stp-node-blue     { background: var(--sog-blue); border: 2px solid var(--sog-blue); color: #fff; }
-.stp-node-teal-act { background: var(--sog-teal); border: 2px solid var(--sog-teal); color: #fff; }</pre>
+.stp-node-blue-act { background: var(--sog-blue); border: 2px solid var(--sog-blue); color: #fff; }
+.stepper-v .stp-node-blue-act { box-shadow: 0 0 0 3px var(--muted-bg), 0 0 0 7px var(--blue-20); }
+.stp-node-teal-act { background: var(--sog-teal); border: 2px solid var(--sog-teal); color: #fff; }
+.stepper-v .stp-node-teal-act { box-shadow: 0 0 0 3px var(--muted-bg), 0 0 0 7px var(--teal-20); }</pre>
   </div>
 </section>
 
@@ -10629,13 +11499,13 @@ Chart.defaults.scale.border.dash                = [4, 4];</pre>
     datasets: [{
       label: 'Phase 1',
       data: [{ x: '2024-01-08', y: 1, r: 8 }, { x: '2024-01-22', y: 1, r: 12 }],
-      backgroundColor: 'rgba(65,151,203,0.7)',
-      borderColor: '#4197CB'
+      backgroundColor: 'rgba(98,93,156,0.7)',
+      borderColor: '#625D9C'
     }, {
       label: 'Phase 2',
       data: [{ x: '2024-02-05', y: 2, r: 14 }, { x: '2024-02-19', y: 2, r: 10 }],
-      backgroundColor: 'rgba(0,149,169,0.7)',
-      borderColor: '#0095A9'
+      backgroundColor: 'rgba(65,151,203,0.7)',
+      borderColor: '#4197CB'
     }]
   },
   options: {
@@ -10844,7 +11714,7 @@ new Chart(document.getElementById('chart-risk-canvas'), {
 
   <div class="sg-sub" style="margin-top:40px">
     <div class="sg-sub-title">Encoding guide</div>
-    <div class="sg-sub-desc">Grouped mode: two bars side by side per month SOG Purple for sessions, SOG Teal for active participants. Stacked mode: bars subdivided by phase Phase 1 (blue), Phase 2 (teal), Phase 3 (green). Use grouped when comparing two different metrics; use stacked when showing composition of a single metric. Always show a legend.</div>
+    <div class="sg-sub-desc">Grouped mode: two bars side by side per month SOG Purple for sessions, SOG Teal for active participants. Stacked mode: bars subdivided by phase Phase 1 (purple), Phase 2 (blue), Phase 3 (teal). Use grouped when comparing two different metrics; use stacked when showing composition of a single metric. Always show a legend.</div>
   </div>
 
   <div class="sg-sub">
@@ -11309,7 +12179,7 @@ if (gap &gt; THRESHOLD) {
       <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
       <pre>.threshold-callout {
   display: flex; align-items: flex-start; gap: 10px;
-  background: #FFF3EA; border: 1px solid #FFB380;
+  background: var(--color-warning-bg); border: 1px solid var(--color-warning-border);
   border-radius: 8px; padding: 11px 14px;
   font-size: 12px; color: var(--text); line-height: 1.5;
 }
@@ -11543,7 +12413,7 @@ renderEngagementHeatmap('heatmap-container', {
   font-size: 11px; font-weight: 700; white-space: nowrap;
 }
 .phase-status--complete { color: #007A6C; }
-.phase-status--exit     { color: #B34D08; }
+.phase-status--exit     { color: var(--color-warning-text); }
 .phase-status--active   { color: var(--sog-purple); }
 
 /* Pulsing dot for Active state */
@@ -11629,7 +12499,7 @@ renderEngagementHeatmap('heatmap-container', {
               display: flex; align-items: center; justify-content: center;
               flex-shrink: 0; margin-top: 1px; }
 .icon-pass  { background: var(--green-10); color: #007A6C; border: 1px solid var(--green-20); }
-.icon-fail  { background: #FEF2F2;         color: #C0152A; border: 1px solid #FECACA; }
+.icon-fail  { background: var(--color-error-bg); color: var(--color-error-text); border: 1px solid var(--color-error-border); }
 .crit-label { font-size: 12px; font-weight: 600; color: var(--text); line-height: 1.3; }
 .crit-sub   { font-size: 11px; color: var(--charcoal-40); line-height: 1.4; margin-top: 4px; }</pre>
     </div>
@@ -11763,8 +12633,8 @@ function initProgressBars() {
       <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
       <pre>.phase-warn-banner {
   display: flex; align-items: center; gap: 6px;
-  font-size: 11px; font-weight: 600; color: #B34D08;
-  background: #FFF3EA; border: 1px solid #FFB380;
+  font-size: 11px; font-weight: 600; color: var(--color-warning-text);
+  background: var(--color-warning-bg); border: 1px solid var(--color-warning-border);
   border-radius: 6px; padding: 6px 10px;
 }</pre>
     </div>
@@ -12278,7 +13148,7 @@ stages.forEach((stage, i) => {
   const bar = document.createElement('div');
   bar.style.cssText = `
     width:${pct}%;margin:0 auto 4px;
-    background:${i < 3 ? '#625D9C' : i < 5 ? '#4197CB' : '#00AF9A'};
+    background:${i < 4 ? '#625D9C' : i < 5 ? '#4197CB' : i < 6 ? '#0095A9' : '#00AF9A'};
     border-radius:4px;padding:8px 12px;
     display:flex;justify-content:space-between;align-items:center;
     color:#fff;font-size:13px;font-weight:600;
@@ -12522,7 +13392,7 @@ new Chart(document.getElementById('chart-waterfall-canvas'), {
 
   <div class="sg-sub" style="margin-top:40px">
     <div class="sg-sub-title">Encoding guide</div>
-    <div class="sg-sub-desc">Each point is one participant. X axis = sessions attended. Y axis = outcome score improvement. Point radius = 4px. Colour encodes phase (Phase 1 blue, Phase 2 teal, Phase 3 green). A linear regression line (SOG Purple, 60% opacity) shows the overall trend.</div>
+    <div class="sg-sub-desc">Each point is one participant. X axis = sessions attended. Y axis = outcome score improvement. Point radius = 4px. Colour encodes phase (Phase 1 purple, Phase 2 blue, Phase 3 teal). A linear regression line (SOG Purple, 60% opacity) shows the overall trend.</div>
   </div>
 
   <div class="sg-sub">
@@ -13123,7 +13993,7 @@ function renderScorecard() {
   const el = document.getElementById('scorecard-container');
   if (!el) return;
   const phases = [
-    { name:'Phase 1', label:'Engage & Assess', pct:83, badge:'badge-blue',
+    { name:'Phase 1', label:'Engage & Assess', pct:83, badge:'badge-purple',
       milestones:[
         { t:'Minimum 3 interventions completed', done:true },
         { t:'Risk baseline recorded', done:true },
@@ -13132,7 +14002,7 @@ function renderScorecard() {
         { t:'Safety Survey completed', done:true },
         { t:'Phase Session 1 conducted', done:false },
       ]},
-    { name:'Phase 2', label:'Develop & Grow', pct:50, badge:'badge-teal',
+    { name:'Phase 2', label:'Develop & Grow', pct:50, badge:'badge-blue',
       milestones:[
         { t:'Minimum 2 MI Technique sessions', done:true },
         { t:'Minimum 2 CBS/CBT sessions', done:true },
@@ -13141,7 +14011,7 @@ function renderScorecard() {
         { t:'Goal Planning session conducted', done:false },
         { t:'Phase Session 2 conducted', done:false },
       ]},
-    { name:'Phase 3', label:'Equip & Sustain', pct:17, badge:'badge-green',
+    { name:'Phase 3', label:'Equip & Sustain', pct:17, badge:'badge-teal',
       milestones:[
         { t:'Stage 6 Phase Session achieved', done:true },
         { t:'Employment/Education plan in place', done:false },
@@ -14734,6 +15604,7 @@ document.addEventListener('keydown', e => {
   document.querySelectorAll('.modal-backdrop.open').forEach(el => closeModal(el.id));
   document.querySelectorAll('.sheet-backdrop.open').forEach(el => closeSheet(el.id));
 });
+
 
 </script>
 
