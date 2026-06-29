@@ -372,6 +372,7 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
 .scorecard-phase--followup .prog-fill--phase{background:var(--sog-green)}
 .prog-note{font-size:11px;color:var(--text-muted)}
 .phase-warn-banner{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--color-warning-text);background:var(--color-warning-bg);border:1px solid var(--color-warning-border);border-radius:6px;padding:6px 10px}
+.phase-warn-banner--critical{color:var(--color-error-text);background:var(--color-error-bg);border-color:var(--color-error-border)}
 .phase-footer-strip{font-size:11px;color:var(--text-muted);padding:10px 18px;background:var(--muted-bg);border-top:1px solid var(--border);margin-top:auto}
 .scorecard-phase-grid{display:grid;grid-template-columns:repeat(3,1fr)}
 .scorecard-phase{padding:18px 20px;border-right:1px solid var(--border);display:flex;flex-direction:column}
@@ -12617,7 +12618,7 @@ function initProgressBars() {
   <!-- ── 4. Inline Warning Banner ──────────────────────────────── -->
   <div class="sg-sub">
     <div class="sg-sub-title">Inline Warning Banner</div>
-    <div class="sg-sub-desc">A compact contextual warning for use inside a phase column not a full-width alert. Use only for qualifying events that changed the phase outcome: stage triggers, early exits, clinical escalations. The banner always names the specific event. It uses orange semantically a phase with no qualifying events never shows a banner regardless of how many criteria failed.</div>
+    <div class="sg-sub-desc">A compact contextual warning for use inside a phase column not a full-width alert. Use only for qualifying events that changed the phase outcome. Two variants: the default (orange) for stage triggers and early exits — events that occurred and are managed; the critical modifier (red) for escalations that require immediate action, such as a clinical review. The banner always names the specific event. A phase with no qualifying events never shows a banner regardless of how many criteria failed.</div>
 
     <div class="sg-example" style="flex-direction:column;gap:10px;align-items:stretch">
       <div style="display:flex;flex-direction:column;gap:6px">
@@ -12629,7 +12630,7 @@ function initProgressBars() {
       </div>
       <div style="display:flex;flex-direction:column;gap:6px">
         <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em">Risk escalation</div>
-        <div class="phase-warn-banner" role="note">
+        <div class="phase-warn-banner phase-warn-banner--critical" role="note">
           <span class="material-symbols-rounded ms-filled" style="font-size:14px!important" aria-hidden="true">warning</span>
           Risk escalation: clinical review required
         </div>
@@ -12638,15 +12639,15 @@ function initProgressBars() {
 
     <div class="code-block collapsed" style="margin-top:12px">
       <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">HTML</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
-      <pre>&lt;!-- Stage trigger --&gt;
+      <pre>&lt;!-- Stage trigger (warning / orange) --&gt;
 &lt;div class="phase-warn-banner" role="note"&gt;
   &lt;span class="material-symbols-rounded ms-filled"
         style="font-size:14px!important" aria-hidden="true"&gt;bolt&lt;/span&gt;
   Stage 6 triggered: early exit
 &lt;/div&gt;
 
-&lt;!-- Risk escalation --&gt;
-&lt;div class="phase-warn-banner" role="note"&gt;
+&lt;!-- Risk escalation (critical / red) --&gt;
+&lt;div class="phase-warn-banner phase-warn-banner--critical" role="note"&gt;
   &lt;span class="material-symbols-rounded ms-filled"
         style="font-size:14px!important" aria-hidden="true"&gt;warning&lt;/span&gt;
   Risk escalation: clinical review required
@@ -12659,6 +12660,12 @@ function initProgressBars() {
   font-size: 11px; font-weight: 600; color: var(--color-warning-text);
   background: var(--color-warning-bg); border: 1px solid var(--color-warning-border);
   border-radius: 6px; padding: 6px 10px;
+}
+/* Critical variant — risk escalations and clinical actions */
+.phase-warn-banner--critical {
+  color: var(--color-error-text);
+  background: var(--color-error-bg);
+  border-color: var(--color-error-border);
 }</pre>
     </div>
   </div>
