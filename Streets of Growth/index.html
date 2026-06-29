@@ -12581,9 +12581,13 @@ renderEngagementHeatmap('heatmap-container', {
                      border-radius: 3px; overflow: hidden; }
 .prog-fill         { height: 100%; border-radius: 3px;
                      transition: width .6s cubic-bezier(.4,0,.2,1); }
-.prog-fill--green  { background: var(--sog-green); }
-.prog-fill--purple { background: var(--sog-purple); }
-.prog-note         { font-size: 11px; color: var(--charcoal-40); }
+.prog-fill--green  { background: var(--sog-green); }   /* post-programme context only */
+.prog-fill--phase  { /* inherits from scorecard-phase--p* parent */ }
+.scorecard-phase--p1 .prog-fill--phase { background: var(--sog-purple); }
+.scorecard-phase--p2 .prog-fill--phase { background: var(--sog-blue); }
+.scorecard-phase--p3 .prog-fill--phase { background: var(--sog-teal); }
+.scorecard-phase--followup .prog-fill--phase { background: var(--sog-green); }
+.prog-note         { font-size: 11px; color: var(--text-muted); }
 
 @media (prefers-reduced-motion: reduce) {
   .prog-fill { transition: none; }
@@ -12723,7 +12727,7 @@ function initProgressBars() {
               </div>
             </div>
             <div class="scorecard-phase-dates">14 May 2025 → 12 Aug 2025</div>
-            <div class="crit-row"><div class="crit-icon icon-pass" aria-label="Pass"><span class="material-symbols-rounded ms-filled" style="font-size:10px!important" aria-hidden="true">check</span></div><div style="flex:1"><div class="crit-label">Interventions conducted</div><div class="prog-row"><div class="prog-track"><div class="prog-fill prog-fill--green sg-animate-bar" style="width:0" data-w="100%"></div></div></div><div class="prog-note">6 of 3 target</div></div></div>
+            <div class="crit-row"><div class="crit-icon icon-pass" aria-label="Pass"><span class="material-symbols-rounded ms-filled" style="font-size:10px!important" aria-hidden="true">check</span></div><div style="flex:1"><div class="crit-label">Interventions conducted</div><div class="prog-row"><div class="prog-track"><div class="prog-fill prog-fill--phase sg-animate-bar" style="width:0" data-w="100%"></div></div></div><div class="prog-note">6 of 3 target</div></div></div>
             <div class="crit-row"><div class="crit-icon icon-pass" aria-label="Pass"><span class="material-symbols-rounded ms-filled" style="font-size:10px!important" aria-hidden="true">check</span></div><div><div class="crit-label">Risk baseline recorded</div><div class="crit-sub">Score captured</div></div></div>
             <div class="crit-row"><div class="crit-icon icon-pass" aria-label="Pass"><span class="material-symbols-rounded ms-filled" style="font-size:10px!important" aria-hidden="true">check</span></div><div><div class="crit-label">Consistent engagement (gap ≤ 30d)</div><div class="crit-sub">Max gap: 13 days</div></div></div>
             <div class="scorecard-phase-footer">Window: 90 days · 6 interactions</div>
@@ -12743,8 +12747,8 @@ function initProgressBars() {
               <span class="material-symbols-rounded ms-filled" style="font-size:12px!important" aria-hidden="true">bolt</span>
               Stage 6 triggered: early exit
             </div>
-            <div class="crit-row"><div class="crit-icon icon-fail" aria-label="Fail"><span class="material-symbols-rounded ms-filled" style="font-size:10px!important" aria-hidden="true">close</span></div><div style="flex:1"><div class="crit-label">MI Techniques sessions</div><div class="prog-row"><div class="prog-track"><div class="prog-fill prog-fill--green sg-animate-bar" style="width:0" data-w="2%"></div></div></div><div class="prog-note">0 of 2 target</div></div></div>
-            <div class="crit-row"><div class="crit-icon icon-pass" aria-label="Pass"><span class="material-symbols-rounded ms-filled" style="font-size:10px!important" aria-hidden="true">check</span></div><div style="flex:1"><div class="crit-label">CBS Techniques sessions</div><div class="prog-row"><div class="prog-track"><div class="prog-fill prog-fill--green sg-animate-bar" style="width:0" data-w="100%"></div></div></div><div class="prog-note">5 of 2 target</div></div></div>
+            <div class="crit-row"><div class="crit-icon icon-fail" aria-label="Fail"><span class="material-symbols-rounded ms-filled" style="font-size:10px!important" aria-hidden="true">close</span></div><div style="flex:1"><div class="crit-label">MI Techniques sessions</div><div class="prog-row"><div class="prog-track"><div class="prog-fill prog-fill--phase sg-animate-bar" style="width:0" data-w="2%"></div></div></div><div class="prog-note">0 of 2 target</div></div></div>
+            <div class="crit-row"><div class="crit-icon icon-pass" aria-label="Pass"><span class="material-symbols-rounded ms-filled" style="font-size:10px!important" aria-hidden="true">check</span></div><div style="flex:1"><div class="crit-label">CBS Techniques sessions</div><div class="prog-row"><div class="prog-track"><div class="prog-fill prog-fill--phase sg-animate-bar" style="width:0" data-w="100%"></div></div></div><div class="prog-note">5 of 2 target</div></div></div>
             <div class="crit-row"><div class="crit-icon icon-pass" aria-label="Pass"><span class="material-symbols-rounded ms-filled" style="font-size:10px!important" aria-hidden="true">check</span></div><div><div class="crit-label">Risk trend declining</div><div class="crit-sub">28.4 → 5.6</div></div></div>
             <div class="crit-row"><div class="crit-icon icon-fail" aria-label="Fail"><span class="material-symbols-rounded ms-filled" style="font-size:10px!important" aria-hidden="true">close</span></div><div><div class="crit-label">Self Efficacy survey completed</div><div class="crit-sub">Not recorded</div></div></div>
             <div class="scorecard-phase-footer">Window: 197 of max 365 days · 6 interactions</div>
@@ -12760,8 +12764,8 @@ function initProgressBars() {
               </div>
             </div>
             <div class="scorecard-phase-dates">25 Feb 2026 → ongoing</div>
-            <div class="crit-row"><div class="crit-icon icon-pass" aria-label="Pass"><span class="material-symbols-rounded ms-filled" style="font-size:10px!important" aria-hidden="true">check</span></div><div style="flex:1"><div class="crit-label">Risk avg (last 5) ≤ 10</div><div class="prog-row"><div class="prog-track"><div class="prog-fill prog-fill--green sg-animate-bar" style="width:0" data-w="56%"></div></div></div><div class="prog-note">5.6 (target ≤ 10)</div></div></div>
-            <div class="crit-row"><div class="crit-icon icon-pass" aria-label="Pass"><span class="material-symbols-rounded ms-filled" style="font-size:10px!important" aria-hidden="true">check</span></div><div style="flex:1"><div class="crit-label">Safety Score YP ≥ 80</div><div class="prog-row"><div class="prog-track"><div class="prog-fill prog-fill--green sg-animate-bar" style="width:0" data-w="96%"></div></div></div><div class="prog-note">96 / 100</div></div></div>
+            <div class="crit-row"><div class="crit-icon icon-pass" aria-label="Pass"><span class="material-symbols-rounded ms-filled" style="font-size:10px!important" aria-hidden="true">check</span></div><div style="flex:1"><div class="crit-label">Risk avg (last 5) ≤ 10</div><div class="prog-row"><div class="prog-track"><div class="prog-fill prog-fill--phase sg-animate-bar" style="width:0" data-w="56%"></div></div></div><div class="prog-note">5.6 (target ≤ 10)</div></div></div>
+            <div class="crit-row"><div class="crit-icon icon-pass" aria-label="Pass"><span class="material-symbols-rounded ms-filled" style="font-size:10px!important" aria-hidden="true">check</span></div><div style="flex:1"><div class="crit-label">Safety Score YP ≥ 80</div><div class="prog-row"><div class="prog-track"><div class="prog-fill prog-fill--phase sg-animate-bar" style="width:0" data-w="96%"></div></div></div><div class="prog-note">96 / 100</div></div></div>
             <div class="crit-row"><div class="crit-icon icon-pass" aria-label="Pass"><span class="material-symbols-rounded ms-filled" style="font-size:10px!important" aria-hidden="true">check</span></div><div style="flex:1"><div class="crit-label">Stage 6 sessions ≥ 2</div><div class="prog-row"><div class="prog-track"><div class="prog-fill prog-fill--phase sg-animate-bar" style="width:0" data-w="100%"></div></div></div><div class="prog-note">4 session(s)</div></div></div>
             <div class="crit-row"><div class="crit-icon icon-pass" aria-label="Pass"><span class="material-symbols-rounded ms-filled" style="font-size:10px!important" aria-hidden="true">check</span></div><div><div class="crit-label">Engagement maintained (≤ 60d)</div><div class="crit-sub">Last contact: 19 days ago</div></div></div>
             <div class="scorecard-phase-footer">5 interactions in Phase 3</div>
