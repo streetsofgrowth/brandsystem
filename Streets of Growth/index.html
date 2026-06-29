@@ -346,6 +346,12 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
 .phase-status--exit{color:var(--color-warning-text)}
 .phase-status--active{color:var(--sog-purple)}
 .phase-status-pulse{width:7px;height:7px;border-radius:50%;background:var(--sog-purple);animation:phasePulse 2s ease-in-out infinite}
+.scorecard-phase--p2 .phase-status--active{color:var(--sog-blue)}
+.scorecard-phase--p2 .phase-status-pulse{background:var(--sog-blue)}
+.scorecard-phase--p3 .phase-status--active{color:var(--sog-teal)}
+.scorecard-phase--p3 .phase-status-pulse{background:var(--sog-teal)}
+.scorecard-phase--followup .phase-status--active{color:var(--sog-green)}
+.scorecard-phase--followup .phase-status-pulse{background:var(--sog-green)}
 @keyframes phasePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.75)}}
 .crit-row{display:flex;align-items:flex-start;gap:8px;margin-bottom:14px}
 .crit-icon{width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
@@ -360,15 +366,20 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
 .prog-fill{height:100%;border-radius:3px;transition:width .6s cubic-bezier(.4,0,.2,1)}
 .prog-fill--green{background:var(--sog-green)}
 .prog-fill--purple{background:var(--sog-purple)}
+.scorecard-phase--p1 .prog-fill--phase{background:var(--sog-purple)}
+.scorecard-phase--p2 .prog-fill--phase{background:var(--sog-blue)}
+.scorecard-phase--p3 .prog-fill--phase{background:var(--sog-teal)}
+.scorecard-phase--followup .prog-fill--phase{background:var(--sog-green)}
 .prog-note{font-size:11px;color:var(--charcoal-40)}
 .phase-warn-banner{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--color-warning-text);background:var(--color-warning-bg);border:1px solid var(--color-warning-border);border-radius:6px;padding:6px 10px}
 .phase-footer-strip{font-size:11px;color:var(--charcoal-40);padding:10px 18px;background:var(--muted-bg);border-top:1px solid var(--border);margin-top:auto}
 .scorecard-phase-grid{display:grid;grid-template-columns:repeat(3,1fr)}
 .scorecard-phase{padding:18px 20px;border-right:1px solid var(--border);display:flex;flex-direction:column}
 .scorecard-phase:last-child{border-right:none}
-.scorecard-phase--complete{border-top:3px solid var(--sog-green)}
-.scorecard-phase--exit{border-top:3px solid var(--color-warning)}
-.scorecard-phase--active{border-top:3px solid var(--sog-purple)}
+.scorecard-phase--p1{border-top:3px solid var(--sog-purple)}
+.scorecard-phase--p2{border-top:3px solid var(--sog-blue)}
+.scorecard-phase--p3{border-top:3px solid var(--sog-teal)}
+.scorecard-phase--followup{border-top:3px solid var(--sog-green)}
 .scorecard-phase-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px}
 .scorecard-phase-name{font-size:14px;font-weight:700;color:var(--text);line-height:1.2}
 .scorecard-phase-dates{font-size:11px;color:var(--charcoal-40);margin-bottom:16px}
@@ -12414,14 +12425,22 @@ renderEngagementHeatmap('heatmap-container', {
 }
 .phase-status--complete { color: #007A6C; }
 .phase-status--exit     { color: var(--color-warning-text); }
-.phase-status--active   { color: var(--sog-purple); }
+.phase-status--active   { color: var(--sog-purple); } /* Phase 1 default */
 
-/* Pulsing dot for Active state */
+/* Pulsing dot for Active state — colour inherits from phase identity */
 .phase-status-pulse {
   width: 7px; height: 7px; border-radius: 50%;
-  background: var(--sog-purple);
+  background: var(--sog-purple); /* Phase 1 default */
   animation: phasePulse 2s ease-in-out infinite;
 }
+
+/* Phase identity overrides — always wrap the phase column in scorecard-phase--p* */
+.scorecard-phase--p2 .phase-status--active  { color: var(--sog-blue); }
+.scorecard-phase--p2 .phase-status-pulse    { background: var(--sog-blue); }
+.scorecard-phase--p3 .phase-status--active  { color: var(--sog-teal); }
+.scorecard-phase--p3 .phase-status-pulse    { background: var(--sog-teal); }
+.scorecard-phase--followup .phase-status--active { color: var(--sog-green); }
+.scorecard-phase--followup .phase-status-pulse   { background: var(--sog-green); }
 @keyframes phasePulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50%       { opacity: .5; transform: scale(.75); }
@@ -12684,7 +12703,7 @@ function initProgressBars() {
         <div class="scorecard-phase-grid">
 
           <!-- Phase 1: complete -->
-          <div class="scorecard-phase scorecard-phase--complete">
+          <div class="scorecard-phase scorecard-phase--p1 scorecard-phase--complete">
             <div class="scorecard-phase-head">
               <span class="scorecard-phase-name">Phase 1</span>
               <div class="phase-status phase-status--complete" role="status">
@@ -12700,7 +12719,7 @@ function initProgressBars() {
           </div>
 
           <!-- Phase 2: early exit -->
-          <div class="scorecard-phase scorecard-phase--exit">
+          <div class="scorecard-phase scorecard-phase--p2 scorecard-phase--exit">
             <div class="scorecard-phase-head">
               <span class="scorecard-phase-name">Phase 2</span>
               <div class="phase-status phase-status--exit" role="status">
@@ -12721,7 +12740,7 @@ function initProgressBars() {
           </div>
 
           <!-- Phase 3: active -->
-          <div class="scorecard-phase scorecard-phase--active">
+          <div class="scorecard-phase scorecard-phase--p3 scorecard-phase--active">
             <div class="scorecard-phase-head">
               <span class="scorecard-phase-name">Phase 3: Maintenance</span>
               <div class="phase-status phase-status--active" role="status">
@@ -12732,7 +12751,7 @@ function initProgressBars() {
             <div class="scorecard-phase-dates">25 Feb 2026 → ongoing</div>
             <div class="crit-row"><div class="crit-icon icon-pass" aria-label="Pass"><span class="material-symbols-rounded ms-filled" style="font-size:10px!important" aria-hidden="true">check</span></div><div style="flex:1"><div class="crit-label">Risk avg (last 5) ≤ 10</div><div class="prog-row"><div class="prog-track"><div class="prog-fill prog-fill--green sg-animate-bar" style="width:0" data-w="56%"></div></div></div><div class="prog-note">5.6 (target ≤ 10)</div></div></div>
             <div class="crit-row"><div class="crit-icon icon-pass" aria-label="Pass"><span class="material-symbols-rounded ms-filled" style="font-size:10px!important" aria-hidden="true">check</span></div><div style="flex:1"><div class="crit-label">Safety Score YP ≥ 80</div><div class="prog-row"><div class="prog-track"><div class="prog-fill prog-fill--green sg-animate-bar" style="width:0" data-w="96%"></div></div></div><div class="prog-note">96 / 100</div></div></div>
-            <div class="crit-row"><div class="crit-icon icon-pass" aria-label="Pass"><span class="material-symbols-rounded ms-filled" style="font-size:10px!important" aria-hidden="true">check</span></div><div style="flex:1"><div class="crit-label">Stage 6 sessions ≥ 2</div><div class="prog-row"><div class="prog-track"><div class="prog-fill prog-fill--purple sg-animate-bar" style="width:0" data-w="100%"></div></div></div><div class="prog-note">4 session(s)</div></div></div>
+            <div class="crit-row"><div class="crit-icon icon-pass" aria-label="Pass"><span class="material-symbols-rounded ms-filled" style="font-size:10px!important" aria-hidden="true">check</span></div><div style="flex:1"><div class="crit-label">Stage 6 sessions ≥ 2</div><div class="prog-row"><div class="prog-track"><div class="prog-fill prog-fill--phase sg-animate-bar" style="width:0" data-w="100%"></div></div></div><div class="prog-note">4 session(s)</div></div></div>
             <div class="crit-row"><div class="crit-icon icon-pass" aria-label="Pass"><span class="material-symbols-rounded ms-filled" style="font-size:10px!important" aria-hidden="true">check</span></div><div><div class="crit-label">Engagement maintained (≤ 60d)</div><div class="crit-sub">Last contact: 19 days ago</div></div></div>
             <div class="scorecard-phase-footer">5 interactions in Phase 3</div>
           </div>
