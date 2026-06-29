@@ -341,16 +341,16 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
 .sg-alert-title{font-weight:700;font-size:14px;margin-bottom:2px}
 .sg-alert-body{font-size:13px;opacity:.85}
 /* ── Phase Scorecard components ────────────────────── */
-.phase-status{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;white-space:nowrap}
-.phase-status--complete{color:#007A6C}
-.phase-status--exit{color:var(--color-warning-text)}
-.phase-status--active{color:var(--sog-purple)}
+.phase-status{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:3px 10px;border-radius:var(--radius-full);border:1px solid transparent;white-space:nowrap}
+.phase-status--complete{background:var(--green-10);border-color:var(--green-40);color:#007A6C}
+.phase-status--exit{background:var(--orange-10);border-color:var(--orange-40);color:var(--sog-orange)}
+.phase-status--active{background:var(--purple-10);border-color:var(--purple-40);color:var(--sog-purple)}
 .phase-status-pulse{width:7px;height:7px;border-radius:50%;background:var(--sog-purple);animation:phasePulse 2s ease-in-out infinite}
-.scorecard-phase--p2 .phase-status--active{color:var(--sog-blue)}
+.scorecard-phase--p2 .phase-status--active{background:var(--blue-10);border-color:var(--blue-40);color:#1B6FA0}
 .scorecard-phase--p2 .phase-status-pulse{background:var(--sog-blue)}
-.scorecard-phase--p3 .phase-status--active{color:var(--sog-teal)}
+.scorecard-phase--p3 .phase-status--active{background:var(--teal-10);border-color:var(--teal-40);color:#007080}
 .scorecard-phase--p3 .phase-status-pulse{background:var(--sog-teal)}
-.scorecard-phase--followup .phase-status--active{color:var(--sog-green)}
+.scorecard-phase--followup .phase-status--active{background:var(--green-10);border-color:var(--green-40);color:#007A6C}
 .scorecard-phase--followup .phase-status-pulse{background:var(--sog-green)}
 @keyframes phasePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.75)}}
 .crit-row{display:flex;align-items:flex-start;gap:8px;margin-bottom:14px}
@@ -12427,9 +12427,9 @@ renderEngagementHeatmap('heatmap-container', {
   display: inline-flex; align-items: center; gap: 5px;
   font-size: 11px; font-weight: 700; white-space: nowrap;
 }
-.phase-status--complete { color: #007A6C; }
-.phase-status--exit     { color: var(--color-warning-text); }
-.phase-status--active   { color: var(--sog-purple); } /* Phase 1 default */
+.phase-status--complete { background: var(--green-10);  border-color: var(--green-40);  color: #007A6C; }
+.phase-status--exit     { background: var(--orange-10); border-color: var(--orange-40); color: var(--sog-orange); }
+.phase-status--active   { background: var(--purple-10); border-color: var(--purple-40); color: var(--sog-purple); }
 
 /* Pulsing dot for Active state — colour inherits from phase identity */
 .phase-status-pulse {
@@ -12439,11 +12439,11 @@ renderEngagementHeatmap('heatmap-container', {
 }
 
 /* Phase identity overrides — always wrap the phase column in scorecard-phase--p* */
-.scorecard-phase--p2 .phase-status--active  { color: var(--sog-blue); }
-.scorecard-phase--p2 .phase-status-pulse    { background: var(--sog-blue); }
-.scorecard-phase--p3 .phase-status--active  { color: var(--sog-teal); }
-.scorecard-phase--p3 .phase-status-pulse    { background: var(--sog-teal); }
-.scorecard-phase--followup .phase-status--active { color: var(--sog-green); }
+.scorecard-phase--p2 .phase-status--active { background: var(--blue-10); border-color: var(--blue-40); color: #1B6FA0; }
+.scorecard-phase--p2 .phase-status-pulse   { background: var(--sog-blue); }
+.scorecard-phase--p3 .phase-status--active { background: var(--teal-10); border-color: var(--teal-40); color: #007080; }
+.scorecard-phase--p3 .phase-status-pulse   { background: var(--sog-teal); }
+.scorecard-phase--followup .phase-status--active { background: var(--green-10); border-color: var(--green-40); color: #007A6C; }
 .scorecard-phase--followup .phase-status-pulse   { background: var(--sog-green); }
 @keyframes phasePulse {
   0%, 100% { opacity: 1; transform: scale(1); }
