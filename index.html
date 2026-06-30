@@ -14153,8 +14153,8 @@ function initTimelineChart() {
           callbacks:{label:c=>' '+c.dataset.label+' — session: '+c.raw.r+' min'}}
       },
       scales:{
-        x:{type:'time',time:{unit:'month',displayFormats:{month:'MMM'}},grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'Open Sans',size:11},color:'#ADB2B6'}},
-        y:{min:0,max:4,grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'Open Sans',size:11},color:'#ADB2B6',stepSize:1,
+        x:{type:'time',time:{unit:'month',displayFormats:{month:'MMM'}},grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'Open Sans',size:11},color:'#70787F'}},
+        y:{min:0,max:4,grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'Open Sans',size:11},color:'#70787F',stepSize:1,
           callback:v=>['Intervention','Group Session','Phase Session','Assessment'][Math.floor(v)]??''}}
       }
     }
@@ -14184,8 +14184,8 @@ function initRiskChart() {
         tooltip:{backgroundColor:'#323E48',titleColor:'#fff',bodyColor:'rgba(255,255,255,.8)',footerColor:'rgba(255,255,255,.4)',padding:12,cornerRadius:8,titleFont:{size:12,weight:'700'},bodyFont:{size:12},footerFont:{size:10,weight:'600'},usePointStyle:true,boxWidth:8,boxHeight:8,boxPadding:4}
       },
       scales:{
-        x:{grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'Open Sans',size:11},color:'#ADB2B6'}},
-        y:{min:0,max:100,grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'Open Sans',size:11},color:'#ADB2B6'}}
+        x:{grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'Open Sans',size:11},color:'#70787F'}},
+        y:{min:0,max:100,grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'Open Sans',size:11},color:'#70787F'}}
       }
     }
   });
@@ -14210,8 +14210,8 @@ function initToolsChart() {
           callbacks:{label:c=>' '+c.raw+' sessions ('+Math.round(c.raw/85*100)+'%)'}}
       },
       scales:{
-        x:{min:0,grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'Open Sans',size:11},color:'#ADB2B6'}},
-        y:{grid:{display:false},ticks:{font:{family:'Open Sans',size:12},color:'#323E48'}}
+        x:{min:0,grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'Open Sans',size:11},color:'#70787F'}},
+        y:{grid:{display:false},ticks:{font:{family:'Open Sans',size:11},color:'#70787F'}}
       }
     }
   });
@@ -14240,8 +14240,8 @@ function initMonthlyChart() {
         tooltip:{backgroundColor:'#323E48',titleColor:'#fff',bodyColor:'rgba(255,255,255,.8)',footerColor:'rgba(255,255,255,.4)',padding:12,cornerRadius:8,titleFont:{size:12,weight:'700'},bodyFont:{size:12},footerFont:{size:10,weight:'600'},usePointStyle:true,boxWidth:8,boxHeight:8,boxPadding:4}
       },
       scales:{
-        x:{stacked:false,grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'Open Sans',size:11},color:'#ADB2B6'}},
-        y:{stacked:false,grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'Open Sans',size:11},color:'#ADB2B6'}}
+        x:{stacked:false,grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'Open Sans',size:11},color:'#70787F'}},
+        y:{stacked:false,grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'Open Sans',size:11},color:'#70787F'}}
       }
     }
   });
@@ -14283,9 +14283,9 @@ function initEffectivenessChart() {
         tooltip:{backgroundColor:'#323E48',titleColor:'#fff',bodyColor:'rgba(255,255,255,.8)',footerColor:'rgba(255,255,255,.4)',padding:12,cornerRadius:8,titleFont:{size:12,weight:'700'},bodyFont:{size:12},footerFont:{size:10,weight:'600'},usePointStyle:true,boxWidth:8,boxHeight:8,boxPadding:4}
       },
       scales:{
-        x:{grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'Open Sans',size:10},color:'#ADB2B6',maxRotation:45,maxTicksLimit:12}},
-        y:{min:0,max:100,position:'left',grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'Open Sans',size:11},color:'#ADB2B6'},title:{display:true,text:'Score (0–100)',font:{family:'Open Sans',size:11},color:'#ADB2B6'}},
-        y1:{min:0,max:40,position:'right',grid:{drawOnChartArea:false},ticks:{font:{family:'Open Sans',size:11},color:'#ADB2B6'},title:{display:true,text:'Self-Efficacy (0–40)',font:{family:'Open Sans',size:11},color:'#ADB2B6'}}
+        x:{grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'Open Sans',size:10},color:'#70787F',maxRotation:45,maxTicksLimit:12}},
+        y:{min:0,max:100,position:'left',grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'Open Sans',size:11},color:'#70787F'},title:{display:true,text:'Score (0–100)',font:{family:'Open Sans',size:11},color:'#70787F'}},
+        y1:{min:0,max:40,position:'right',grid:{drawOnChartArea:false},ticks:{font:{family:'Open Sans',size:11},color:'#70787F'},title:{display:true,text:'Self-Efficacy (0–40)',font:{family:'Open Sans',size:11},color:'#70787F'}}
       }
     }
   });
@@ -14390,9 +14390,9 @@ function initRadarChart() {
       scales: {
         r: {
           min: 0, max: 100,
-          ticks: { stepSize: 20, font: { family: 'Open Sans', size: 10 }, color: '#ADB2B6', backdropColor: 'transparent' },
+          ticks: { stepSize: 20, font: { family: 'Open Sans', size: 10 }, color: '#70787F', backdropColor: 'transparent' },
           grid: { color: 'rgba(0,0,0,.04)' },
-          pointLabels: { font: { family: 'Open Sans', size: 12 }, color: '#323E48' }
+          pointLabels: { font: { family: 'Open Sans', size: 12 }, color: '#70787F' }
         }
       }
     }
@@ -14543,11 +14543,11 @@ function initDivergingChart() {
         }
       },
       scales: {
-        x: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'Open Sans', size: 11 }, color: '#ADB2B6',
+        x: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { family: 'Open Sans', size: 11 }, color: '#70787F',
             callback: v => (v > 0 ? '+' : '') + v },
-          title: { display: true, text: 'Score change (intake to exit)', font: { family: 'Open Sans', size: 11 }, color: '#ADB2B6' }
+          title: { display: true, text: 'Score change (intake to exit)', font: { family: 'Open Sans', size: 11 }, color: '#70787F' }
         },
-        y: { grid: { display: false }, ticks: { font: { family: 'Open Sans', size: 12 }, color: '#323E48' } }
+        y: { grid: { display: false }, ticks: { font: { family: 'Open Sans', size: 11 }, color: '#70787F' } }
       }
     }
   });
@@ -14844,10 +14844,10 @@ function initScatterChart() {
         tooltip:{ backgroundColor:'#323E48', titleColor:'#fff', bodyColor:'rgba(255,255,255,.8)', footerColor:'rgba(255,255,255,.4)', padding:12, cornerRadius:8, titleFont:{size:12,weight:'700'}, bodyFont:{size:12}, footerFont:{size:10,weight:'600'}, usePointStyle:true, boxWidth:8, boxHeight:8, boxPadding:4, callbacks:{ label: c => ` ${c.raw.x} sessions → +${c.raw.y} pts improvement` } }
       },
       scales: {
-        x: { title:{ display:true, text:'Sessions Attended', color:'#ADB2B6', font:{size:11} },
-             min:0, max:20, grid:{ color:'rgba(0,0,0,.04)' }, ticks:{ color:'#ADB2B6', font:{size:11} } },
-        y: { title:{ display:true, text:'Outcome Score Improvement (pts)', color:'#ADB2B6', font:{size:11} },
-             min:0, max:40, grid:{ color:'rgba(0,0,0,.04)' }, ticks:{ color:'#ADB2B6', font:{size:11} } }
+        x: { title:{ display:true, text:'Sessions Attended', color:'#70787F', font:{size:11} },
+             min:0, max:20, grid:{ color:'rgba(0,0,0,.04)' }, ticks:{ color:'#70787F', font:{size:11} } },
+        y: { title:{ display:true, text:'Outcome Score Improvement (pts)', color:'#70787F', font:{size:11} },
+             min:0, max:40, grid:{ color:'rgba(0,0,0,.04)' }, ticks:{ color:'#70787F', font:{size:11} } }
       }
     }
   });
@@ -14879,9 +14879,9 @@ function initAreaChart() {
         tooltip:{ backgroundColor:'#323E48', titleColor:'#fff', bodyColor:'rgba(255,255,255,.8)', footerColor:'rgba(255,255,255,.4)', padding:12, cornerRadius:8, titleFont:{size:12,weight:'700'}, bodyFont:{size:12}, footerFont:{size:10,weight:'600'}, usePointStyle:true, boxWidth:8, boxHeight:8, boxPadding:4 }
       },
       scales: {
-        x:{ grid:{ display:false }, ticks:{ color:'#ADB2B6', font:{size:11} } },
+        x:{ grid:{ display:false }, ticks:{ color:'#70787F', font:{size:11} } },
         y:{ min:0, grid:{ color:'rgba(0,0,0,.04)' },
-            ticks:{ color:'#ADB2B6', font:{size:11}, callback: v => v >= 1000 ? (v/1000).toFixed(1)+'k' : v } }
+            ticks:{ color:'#70787F', font:{size:11}, callback: v => v >= 1000 ? (v/1000).toFixed(1)+'k' : v } }
       }
     }
   });
