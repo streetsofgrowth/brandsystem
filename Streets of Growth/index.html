@@ -665,11 +665,11 @@ body.col-resizing{cursor:col-resize !important;user-select:none}
 .hm-table th{padding:6px 10px;background:var(--muted-bg);font-weight:700;text-transform:uppercase;font-size:10px;letter-spacing:.05em;color:var(--text-muted);white-space:nowrap;border:1px solid var(--border)}
 .hm-table td{width:44px;height:40px;text-align:center;font-weight:600;border:1px solid var(--border);font-size:12px}
 .hm-table .row-label{text-align:left;padding:0 12px;white-space:nowrap;font-weight:600;color:var(--text);background:var(--muted-bg);width:60px}
-.hm-0{background:var(--charcoal-10);color:var(--text-muted)}
-.hm-1{background:var(--teal-10);color:#007080}
-.hm-2{background:var(--teal-20);color:#006070}
-.hm-3{background:var(--teal-40);color:#005060}
-.hm-4{background:var(--sog-teal);color:#fff}
+.hm-0{background:var(--muted-bg);color:var(--text-muted)}
+.hm-1{background:var(--purple-10);color:var(--sog-purple)}
+.hm-2{background:var(--purple-40);color:var(--sog-charcoal)}
+.hm-3{background:var(--purple-70);color:#fff}
+.hm-4{background:var(--sog-purple);color:#fff}
 .hm-legend{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:12px;color:var(--text-muted)}
 .hm-legend-cell{width:24px;height:18px;border-radius:3px;border:1px solid var(--border)}
 .scorecard-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -12302,7 +12302,7 @@ if (gap &gt; THRESHOLD) {
   <div class="chart-card" role="figure" aria-labelledby="heatmap-title" aria-describedby="heatmap-desc">
     <div class="chart-head">
       <div id="heatmap-title" class="chart-title">Participant Engagement by Week: Q1 2024</div>
-      <div id="heatmap-desc" class="chart-desc">Each cell = one participant × one week. Darker purple = higher engagement score. White = no contact.</div>
+      <div id="heatmap-desc" class="chart-desc">Each cell = one participant × one month. Deeper purple = higher engagement score. Grey = no contact.</div>
     </div>
     <div class="chart-body">
       <div id="heatmap-container" style="padding:8px 0;overflow-x:auto"></div>
@@ -12311,7 +12311,7 @@ if (gap &gt; THRESHOLD) {
 
   <div class="sg-sub" style="margin-top:40px">
     <div class="sg-sub-title">Encoding guide</div>
-    <div class="sg-sub-desc">Rows = participants (or cohorts), columns = weeks (or intervention types). Cell colour encodes engagement score using a single-hue ramp: white (0) → purple-10 → purple-40 → SOG Purple (maximum). Cells are 28px × 28px with 2px gaps. Row and column labels are 11px charcoal text. A colour scale legend appears below the grid.</div>
+    <div class="sg-sub-desc">Rows = participants (or cohorts), columns = time periods (or intervention types). Cell colour encodes engagement score using a five-stop purple ramp drawn from the brand token system: muted-bg (0, no contact) → purple-10 → purple-40 → purple-70 → SOG Purple (maximum). Solid token colours are used at every stop — not alpha transparency — so cells render consistently on any background. Cells are 44px × 40px with 1px borders. Row and column labels are 11px charcoal text.</div>
   </div>
 
   <div class="sg-sub">
@@ -12328,33 +12328,35 @@ if (gap &gt; THRESHOLD) {
     <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">JS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
     <pre>// Engagement heatmap — pure HTML/CSS grid, no canvas
 function renderEngagementHeatmap(containerId, data) {
-  // data: { participants: string[], weeks: string[], values: number[][] }
+  // data: { participants: string[], periods: string[], values: number[][] }
   const container = document.getElementById(containerId);
   if (!container) return;
 
-  const max = Math.max(...data.values.flat());
+  // Five-stop purple ramp using brand tokens (no alpha transparency)
+  const RAMP = ['#F5F6F7','#F0EFF6','#C0BED7','#918DB9','#625D9C'];
+  const TEXT = ['#70787F','#625D9C','#323E48','#fff','#fff'];
+  const max  = Math.max(...data.values.flat());
 
-  let html = '<div style="display:grid;gap:4px">';
+  let html = '&lt;div style="display:grid;gap:4px"&gt;';
   data.participants.forEach((name, row) => {
-    html += '<div style="display:flex;align-items:center;gap:6px">';
-    html += `<span style="font-size:11px;color:var(--text-muted);width:100px;text-align:right;flex-shrink:0">${name}</span>`;
-    data.weeks.forEach((week, col) => {
-      const v = data.values[row][col];
-      const alpha = v === 0 ? 0 : 0.15 + (v / max) * 0.85;
-      const bg = v === 0 ? 'var(--muted-bg)' : `rgba(98,93,156,${alpha.toFixed(2)})`;
-      html += `<div style="width:28px;height:28px;border-radius:4px;background:${bg}"
-                    title="${name}: ${week} — ${v} sessions"
-                    role="img" aria-label="${name} week ${week}: ${v} sessions"></div>`;
+    html += '&lt;div style="display:flex;align-items:center;gap:6px"&gt;';
+    html += `&lt;span style="font-size:11px;color:var(--text-muted);width:100px;text-align:right;flex-shrink:0"&gt;${name}&lt;/span&gt;`;
+    data.periods.forEach((period, col) => {
+      const v    = data.values[row][col];
+      const stop = v === 0 ? 0 : Math.max(1, Math.ceil((v / max) * 4));
+      html += `&lt;div style="width:28px;height:28px;border-radius:4px;background:${RAMP[stop]};color:${TEXT[stop]}"
+                    title="${name}: ${period} — ${v} sessions"
+                    role="img" aria-label="${name} ${period}: ${v} sessions"&gt;&lt;/div&gt;`;
     });
-    html += '</div>';
+    html += '&lt;/div&gt;';
   });
-  html += '</div>';
+  html += '&lt;/div&gt;';
   container.innerHTML = html;
 }
 
 renderEngagementHeatmap('heatmap-container', {
   participants: ['Jordan Smith', 'Amara Kofi', 'Marcus Obi'],
-  weeks: ['W1','W2','W3','W4','W5','W6','W7','W8'],
+  periods: ['W1','W2','W3','W4','W5','W6','W7','W8'],
   values: [[3,2,0,4,3,1,0,3],[1,3,2,3,0,4,3,2],[2,0,3,1,2,3,2,0]]
 });</pre>
   </div>
@@ -12363,8 +12365,8 @@ renderEngagementHeatmap('heatmap-container', {
     <pre>/* Engagement heatmap — grid layout */
 #heatmap-container { overflow-x: auto; padding: 4px 0; }
 
-/* Colour ramp: white → purple-10 → purple-40 → SOG Purple
-   Applied inline via JS alpha channel on rgba(98,93,156, α) */
+/* Five-stop purple ramp — solid brand tokens, no alpha transparency.
+   Applied as inline background by JS using RAMP[] index. */
 /* Legend */
 .heatmap-legend {
   display: flex; align-items: center; gap: 6px;
