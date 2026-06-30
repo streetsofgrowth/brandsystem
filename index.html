@@ -335,9 +335,14 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
 .sg-alert-default{background:var(--purple-10);border-color:var(--purple-40);color:var(--sog-charcoal)}
 .sg-alert-info{background:var(--blue-10);border-color:var(--blue-40);color:var(--sog-charcoal)}
 .sg-alert-success{background:var(--green-10);border-color:var(--green-40);color:var(--sog-charcoal)}
-.sg-alert-warning{background:var(--color-caution-bg);border-color:var(--color-caution-border);color:var(--sog-charcoal)}
+.sg-alert-warning{background:var(--color-warning-bg);border-color:var(--color-warning-border);color:var(--sog-charcoal)}
 .sg-alert-danger{background:var(--color-error-bg);border-color:var(--color-error-border);color:var(--sog-charcoal)}
 .sg-alert-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.sg-alert-default .sg-alert-icon{color:var(--sog-purple)}
+.sg-alert-info    .sg-alert-icon{color:#1B6FA0}
+.sg-alert-success .sg-alert-icon{color:#007A6C}
+.sg-alert-warning .sg-alert-icon{color:var(--color-warning-text)}
+.sg-alert-danger  .sg-alert-icon{color:var(--sog-red)}
 .sg-alert-title{font-weight:700;font-size:14px;margin-bottom:2px}
 .sg-alert-body{font-size:13px;opacity:.85}
 /* ── Phase Scorecard components ────────────────────── */
