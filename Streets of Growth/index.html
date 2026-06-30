@@ -14987,7 +14987,7 @@ function initBulletCharts() {
       ranges:[{end:60,bg:'rgba(243,39,53,0.1)'},{end:80,bg:'rgba(242,205,0,0.15)'},{end:100,bg:'rgba(0,175,154,0.12)'}] },
     { label:'Programme Completion Rate',  actual:84,  target:85,  max:100, unit:'%',    color:'#0095A9',
       ranges:[{end:60,bg:'rgba(243,39,53,0.1)'},{end:75,bg:'rgba(242,205,0,0.15)'},{end:100,bg:'rgba(0,175,154,0.12)'}] },
-    { label:'Average Engagement Score',   actual:7.2, target:8.0, max:10,  unit:'/10',  color:'#00AF9A',
+    { label:'Average Engagement Score',   actual:7.2, target:8.0, max:10,  unit:'/10',  color:'#FF6C0E',
       ranges:[{end:5,bg:'rgba(243,39,53,0.1)'},{end:7,bg:'rgba(242,205,0,0.15)'},{end:10,bg:'rgba(0,175,154,0.12)'}] },
     { label:'Referral to Enrolment',      actual:12,  target:10,  max:30,  unit:' days',color:'#4197CB',
       ranges:[{end:10,bg:'rgba(0,175,154,0.12)'},{end:20,bg:'rgba(242,205,0,0.15)'},{end:30,bg:'rgba(243,39,53,0.1)'}] },
@@ -15014,7 +15014,7 @@ function initBulletCharts() {
     </div>`;
   }).join('');
   el.innerHTML = rows + `<div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:14px;font-size:11px;color:var(--text-muted)">
-    <div style="display:flex;align-items:center;gap:6px"><div style="width:20px;height:8px;background:#625D9C;border-radius:2px;opacity:.88"></div>Actual value</div>
+    <div style="display:flex;align-items:center;gap:6px"><div style="width:20px;height:8px;border-radius:2px;background:linear-gradient(to right,#625D9C 25%,#0095A9 25%,#0095A9 50%,#FF6C0E 50%,#FF6C0E 75%,#4197CB 75%)"></div>Actual value</div>
     <div style="display:flex;align-items:center;gap:6px"><div style="width:3px;height:14px;background:#323E48;border-radius:1px"></div>Target</div>
     <div style="display:flex;align-items:center;gap:6px"><div style="width:20px;height:8px;background:rgba(0,175,154,0.15);border:1px solid rgba(0,175,154,0.35);border-radius:2px"></div>On track</div>
     <div style="display:flex;align-items:center;gap:6px"><div style="width:20px;height:8px;background:rgba(242,205,0,0.2);border:1px solid rgba(242,205,0,0.5);border-radius:2px"></div>Caution</div>
