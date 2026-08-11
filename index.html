@@ -200,6 +200,13 @@ html.theme-dark .dl-item:hover{border-color:#8B85C4;background:rgba(145,141,185,
 html.theme-dark .dl-title{color:#F0EFF7}
 html.theme-dark .dl-ico{background:rgba(145,141,185,.22);color:#C4BEE6}
 html.theme-dark .dl-type{background:rgba(0,0,0,.25)}
+.dl-note{display:flex;gap:10px;align-items:flex-start;margin:0 16px 20px;padding:14px 16px;border-radius:12px;background:var(--purple-10);font-size:12px;line-height:1.5;color:var(--text)}
+.dl-note .material-symbols-rounded{font-size:20px;color:var(--sog-purple);flex-shrink:0}
+.dl-note strong{color:var(--sog-purple)}
+.dl-note a{color:var(--sog-purple);font-weight:600}
+html.theme-dark .dl-note{background:rgba(145,141,185,.18);color:#E9E7F2}
+html.theme-dark .dl-note strong,html.theme-dark .dl-note a{color:#C4BEE6}
+html.theme-dark .dl-note .material-symbols-rounded{color:#C4BEE6}
 
 /* ── Dark theme (toggled via html.theme-dark) ─────────── */
 html.theme-dark body,html.theme-dark #page-wrapper,html.theme-dark #content{background:#16141F}
@@ -1676,6 +1683,10 @@ input[type="date"].sg-input::-webkit-datetime-edit-year-field:focus{
         <span class="dl-meta"><span class="dl-title">Illustration Icons</span><span class="dl-desc">Streets of Growth presentation illustration icon set.</span></span>
         <span class="dl-tag"><span class="dl-type">ZIP</span><span class="material-symbols-rounded dl-dl">download</span></span>
       </a>
+    </div>
+    <div class="dl-note">
+      <span class="material-symbols-rounded">verified_user</span>
+      <span><strong>External use &mdash; approval required.</strong> If you are outside Streets of Growth, any materials you create using these assets must be signed off before use. Please send your work to <a href="mailto:salik@streetsofgrowth.org">salik@streetsofgrowth.org</a> for approval.</span>
     </div>
   </div>
 </div>
