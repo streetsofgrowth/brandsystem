@@ -15419,16 +15419,13 @@ function initGradientCards() {
     const nameEl = body.querySelector('div');
     const name = nameEl ? nameEl.textContent.trim() : '';
 
-    // Dark or light label text based on the gradient's starting colour
-    const firstHex = ((preview.getAttribute('style') || '').match(/#[0-9A-Fa-f]{6}/) || ['#333333'])[0];
-    const h = firstHex.slice(1);
-    const r = parseInt(h.slice(0, 2), 16), g = parseInt(h.slice(2, 4), 16), b = parseInt(h.slice(4, 6), 16);
-    const textCol = ((r * 299 + g * 587 + b * 114) / 1000) > 150 ? '#323E48' : '#fff';
+    const textCol = '#fff';
 
-    // Move the name onto the preview
+    // Move the name onto the preview (centred)
     preview.style.position = 'relative';
     preview.style.display = 'flex';
-    preview.style.alignItems = 'flex-end';
+    preview.style.alignItems = 'center';
+    preview.style.justifyContent = 'center';
     preview.style.padding = '14px 16px';
     preview.removeAttribute('aria-hidden');
     const nm = document.createElement('span');
