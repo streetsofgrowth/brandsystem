@@ -14816,10 +14816,18 @@ function initSidebarSearch() {
 
 // ── Sidebar Collapsible Groups ────────────────────────────────
 function initSidebarCollapse() {
-  const STORE_KEY = 'sog-sidebar-collapsed';
-  const stored = JSON.parse(localStorage.getItem(STORE_KEY) || '{}');
+  const STORE_KEY = 'sog-sidebar-collapsed-v2';
+  const groups = document.querySelectorAll('.sidebar-group');
+  let stored = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
 
-  document.querySelectorAll('.sidebar-group').forEach((group, i) => {
+  // First landing (no saved state): keep only the first group (Company) open.
+  if (!stored) {
+    stored = {};
+    groups.forEach((g, i) => { stored[i] = (i !== 0); });
+    localStorage.setItem(STORE_KEY, JSON.stringify(stored));
+  }
+
+  groups.forEach((group, i) => {
     const label = group.querySelector('.sidebar-group-label');
     if (!label) return;
 
