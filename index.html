@@ -147,6 +147,31 @@ body{font-family:'Open Sans',sans-serif;font-size:14px;color:#323E48;background:
   background:var(--purple-10);color:var(--sog-purple);font-weight:600;
 }
 .sidebar-sub-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--charcoal-40);padding:10px 16px 3px;pointer-events:none;user-select:none}
+/* ── Sidebar theme toggle button ─────────────────────── */
+.sidebar-theme-toggle{margin-left:auto;background:none;border:none;cursor:pointer;color:var(--text-muted);padding:4px;border-radius:6px;display:flex;align-items:center;flex-shrink:0;transition:background var(--transition-fast),color var(--transition-fast)}
+.sidebar-theme-toggle:hover{background:var(--charcoal-10);color:var(--sog-purple)}
+.sidebar-theme-toggle:focus-visible{outline:2px solid var(--sog-purple);outline-offset:2px}
+.sidebar-theme-toggle .material-symbols-rounded{font-size:18px}
+/* ── Sidebar dark theme (applied via .sb-dark) ───────── */
+#sidebar.sb-dark{background:linear-gradient(180deg,#302C4E 0%,#262341 100%);border-color:rgba(255,255,255,.06)}
+#sidebar.sb-dark .sidebar-header{border-bottom-color:rgba(255,255,255,.08)}
+#sidebar.sb-dark .sidebar-wordmark{color:#fff}
+#sidebar.sb-dark .sidebar-wordmark span{color:#9591B3}
+#sidebar.sb-dark .sidebar-search-icon{color:#968FBE}
+#sidebar.sb-dark .sidebar-search-input{background:#221E36;border-color:#3A3556;color:#E9E7F2}
+#sidebar.sb-dark .sidebar-search-input::placeholder{color:#968FBE}
+#sidebar.sb-dark .sidebar-search-input:focus{background:#221E36;border-color:var(--sog-purple)}
+#sidebar.sb-dark .sidebar-search-clear{color:#968FBE}
+#sidebar.sb-dark .sidebar-search-clear:hover{color:#fff}
+#sidebar.sb-dark .sidebar-group-label{color:#F0EFF7}
+#sidebar.sb-dark .sidebar-group-label:hover{color:#B7B4CE}
+#sidebar.sb-dark .sidebar-group-icon{color:#918DB9}
+#sidebar.sb-dark .sidebar-sub-label{color:#968FBE}
+#sidebar.sb-dark .sidebar-link{color:#C4C0DE}
+#sidebar.sb-dark .sidebar-link:hover{background:rgba(145,141,185,.18);color:#F0EFF7}
+#sidebar.sb-dark .sidebar-link.active{background:rgba(145,141,185,.30);color:#E4E1F4;box-shadow:inset 0 0 0 1px rgba(160,155,205,.35)}
+#sidebar.sb-dark .sidebar-theme-toggle{color:#C4C0DE}
+#sidebar.sb-dark .sidebar-theme-toggle:hover{background:rgba(145,141,185,.18);color:#fff}
 .sidebar-link--sub{padding-left:24px;font-size:12px}
 
 /* Print section + Pres spec responsive grids */
@@ -1558,6 +1583,7 @@ input[type="date"].sg-input::-webkit-datetime-edit-year-field:focus{
         <svg width="24" height="24" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><g><polygon fill="#fff" points="352 235.7 352 349.9 143.8 349.9 143.8 321 154 321 129.5 278.5 105 321 115.2 321 115.2 378.5 143.8 378.5 143.8 378.5 352 378.5 380.5 349.9 380.5 235.7 352 235.7"/><polygon fill="#fff" points="380.5 179 380.5 121.5 352 121.5 352 121.5 143.8 121.5 115.2 150.1 115.2 264.3 143.8 264.3 143.8 150.1 352 150.1 352 179 341.7 179 366.2 221.5 390.8 179 380.5 179"/></g><g><rect fill="#5eb3e4" x="229.4" y="235.7" width="94.4" height="28.5"/><rect fill="#00af9a" x="172.3" y="292.8" width="151.5" height="28.5"/><rect fill="#625d9c" x="172.3" y="178.6" width="151.5" height="28.5"/><polygon fill="#4197cb" points="200.9 235.7 172.3 264.3 172.3 178.6 200.9 207.2 200.9 235.7"/><polygon fill="#0095a9" points="323.8 321.4 295.2 292.8 295.2 264.3 323.8 235.7 323.8 321.4"/></g></svg>
       </div>
       <div class="sidebar-wordmark">Streets of Growth<span>Brand & UX/UI Style Guide</span></div>
+      <button id="sidebar-theme-toggle" class="sidebar-theme-toggle" type="button" aria-label="Switch sidebar to dark mode" aria-pressed="false"><span class="material-symbols-rounded">dark_mode</span></button>
     </div>
     <div class="sidebar-search">
       <span class="material-symbols-rounded sidebar-search-icon">search</span>
@@ -15385,6 +15411,28 @@ function initTintCells() {
   });
 }
 
+// ── Sidebar light/dark theme toggle (persisted) ──────────────
+function initSidebarTheme() {
+  const sb = document.getElementById('sidebar');
+  const btn = document.getElementById('sidebar-theme-toggle');
+  if (!sb || !btn) return;
+  const icon = btn.querySelector('.material-symbols-rounded');
+  const apply = (dark) => {
+    sb.classList.toggle('sb-dark', dark);
+    if (icon) icon.textContent = dark ? 'light_mode' : 'dark_mode';
+    btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+    btn.setAttribute('aria-label', dark ? 'Switch sidebar to light mode' : 'Switch sidebar to dark mode');
+  };
+  let saved = null;
+  try { saved = localStorage.getItem('sogSidebarTheme'); } catch (e) {}
+  apply(saved === 'dark');
+  btn.addEventListener('click', () => {
+    const dark = !sb.classList.contains('sb-dark');
+    apply(dark);
+    try { localStorage.setItem('sogSidebarTheme', dark ? 'dark' : 'light'); } catch (e) {}
+  });
+}
+
 // ── Table outer frame - wrap each .sg-table so the table code stays clean ──
 function initTableFrames() {
   document.querySelectorAll('table.sg-table').forEach(t => {
@@ -15676,7 +15724,7 @@ window.addEventListener('load', () => {
    initCalendarHeatmap, initTreemap, initBulletCharts,
    initLandmarks, initScrollSpy, initScrollReveal,
    initProgressBars,
-   initColourStrip, initHeroPills, initTintCells, initSwatchCards, initGradientCards, initTableFrames, initImageFallbacks,
+   initColourStrip, initHeroPills, initTintCells, initSwatchCards, initGradientCards, initTableFrames, initSidebarTheme, initImageFallbacks,
    initGradPills, initDatePickers, initPagination,
    initTimelineChart, initRiskChart, initToolsChart,
    initMonthlyChart, initEffectivenessChart]
