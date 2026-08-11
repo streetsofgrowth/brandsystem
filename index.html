@@ -165,6 +165,42 @@ html.theme-dark #topbar .topbar-logo{color:#fff}
 .tb-toggle:focus-visible,.tb-btn:focus-visible{outline:2px solid var(--sog-purple);outline-offset:2px}
 .tb-toggle .material-symbols-rounded{font-size:20px}
 
+/* ── Downloads modal ─────────────────────────────────── */
+.dl-overlay{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(20,18,28,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.dl-overlay.open{display:flex;animation:dlFade .18s ease-out}
+@keyframes dlFade{from{opacity:0}to{opacity:1}}
+.dl-modal{width:100%;max-width:560px;max-height:calc(100vh - 40px);overflow-y:auto;background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.3);animation:dlPop .2s cubic-bezier(.2,.8,.3,1)}
+@keyframes dlPop{from{transform:translateY(12px) scale(.98);opacity:0}to{transform:none;opacity:1}}
+.dl-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:24px 24px 12px}
+.dl-head h2{font-size:20px;font-weight:700;color:var(--sog-charcoal);margin:0 0 4px;line-height:1.2}
+.dl-head p{font-size:13px;color:var(--text-muted);margin:0;line-height:1.5}
+.dl-close{flex-shrink:0;width:34px;height:34px;border:none;background:none;border-radius:8px;cursor:pointer;color:var(--text-muted);display:inline-flex;align-items:center;justify-content:center;transition:background .15s,color .15s}
+.dl-close:hover{background:var(--charcoal-10);color:var(--sog-purple)}
+.dl-list{padding:8px 16px 20px;display:flex;flex-direction:column;gap:8px}
+.dl-item{display:flex;align-items:center;gap:14px;padding:13px 16px;border:1px solid var(--border);border-radius:12px;text-decoration:none;color:inherit;background:#fff;transition:border-color .15s,background .15s,transform .15s}
+.dl-item:hover{border-color:var(--sog-purple);background:var(--purple-10);transform:translateY(-1px)}
+.dl-item:focus-visible{outline:2px solid var(--sog-purple);outline-offset:2px}
+.dl-ico{flex-shrink:0;width:44px;height:44px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;background:var(--purple-10);color:var(--sog-purple)}
+.dl-ico .material-symbols-rounded{font-size:24px}
+.dl-meta{flex:1;min-width:0;display:flex;flex-direction:column}
+.dl-title{font-size:14px;font-weight:600;color:var(--sog-charcoal);margin-bottom:2px}
+.dl-desc{font-size:12px;color:var(--text-muted);line-height:1.45}
+.dl-tag{flex-shrink:0;display:inline-flex;align-items:center;gap:8px}
+.dl-type{font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--text-muted);background:var(--muted-bg);padding:3px 8px;border-radius:6px}
+.dl-tag .dl-dl{font-size:20px;color:var(--text-muted);transition:color .15s}
+.dl-item:hover .dl-dl,.dl-item:hover .dl-type{color:var(--sog-purple)}
+/* dark theme */
+html.theme-dark .dl-modal{background:#221E36;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+html.theme-dark .dl-head h2{color:#F0EFF7}
+html.theme-dark .dl-head p,html.theme-dark .dl-desc,html.theme-dark .dl-type,html.theme-dark .dl-tag .dl-dl{color:#B7B4CE}
+html.theme-dark .dl-close{color:#C4C0DE}
+html.theme-dark .dl-close:hover{background:rgba(145,141,185,.18);color:#fff}
+html.theme-dark .dl-item{background:#2A2543;border-color:#3A3556;color:#E9E7F2}
+html.theme-dark .dl-item:hover{border-color:#8B85C4;background:rgba(145,141,185,.18)}
+html.theme-dark .dl-title{color:#F0EFF7}
+html.theme-dark .dl-ico{background:rgba(145,141,185,.22);color:#C4BEE6}
+html.theme-dark .dl-type{background:rgba(0,0,0,.25)}
+
 /* ── Dark theme (toggled via html.theme-dark) ─────────── */
 html.theme-dark body,html.theme-dark #page-wrapper,html.theme-dark #content{background:#16141F}
 html.theme-dark #topbar{background:rgba(22,20,31,.82);border-bottom-color:rgba(255,255,255,.08)}
@@ -1599,10 +1635,50 @@ input[type="date"].sg-input::-webkit-datetime-edit-year-field:focus{
       <button id="sidebar-search-clear" class="sidebar-search-clear" aria-label="Clear search">×</button>
     </div>
   <div class="topbar-actions">
-    <a href="SOG Logos.zip" download="SOG Logos.zip" class="tb-btn tb-btn--primary"><span class="material-symbols-rounded">download</span>Download Logo Pack</a>
+    <button id="downloads-btn" type="button" class="tb-btn tb-btn--primary" aria-haspopup="dialog"><span class="material-symbols-rounded">download</span>Download Assets</button>
     <button id="theme-toggle" class="tb-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="material-symbols-rounded">dark_mode</span></button>
   </div>
 </header>
+
+<!-- ── Downloads modal ─────────────────────────────────── -->
+<div class="dl-overlay" id="downloads-overlay" role="dialog" aria-modal="true" aria-labelledby="dl-title">
+  <div class="dl-modal">
+    <div class="dl-head">
+      <div>
+        <h2 id="dl-title">Brand Asset Downloads</h2>
+        <p>Official Streets of Growth files. Please use the original artwork &mdash; do not recreate or alter.</p>
+      </div>
+      <button class="dl-close" type="button" data-dl-close aria-label="Close"><span class="material-symbols-rounded">close</span></button>
+    </div>
+    <div class="dl-list">
+      <a class="dl-item" href="SOG Logos.zip" download="SOG Logos.zip">
+        <span class="dl-ico"><span class="material-symbols-rounded">image</span></span>
+        <span class="dl-meta"><span class="dl-title">Logo Pack</span><span class="dl-desc">Full logo suite in every approved variant &mdash; SVG, PNG &amp; EPS.</span></span>
+        <span class="dl-tag"><span class="dl-type">ZIP</span><span class="material-symbols-rounded dl-dl">download</span></span>
+      </a>
+      <a class="dl-item" href="SOG-PowerPoint-Template-2026.pptx" download="SOG PowerPoint Template 2026.pptx">
+        <span class="dl-ico"><span class="material-symbols-rounded">co_present</span></span>
+        <span class="dl-meta"><span class="dl-title">PowerPoint Template</span><span class="dl-desc">Branded 2026 slide master for decks and presentations.</span></span>
+        <span class="dl-tag"><span class="dl-type">PPTX</span><span class="material-symbols-rounded dl-dl">download</span></span>
+      </a>
+      <a class="dl-item" href="Open-Sans-Fonts.zip" download="Open Sans Fonts.zip">
+        <span class="dl-ico"><span class="material-symbols-rounded">font_download</span></span>
+        <span class="dl-meta"><span class="dl-title">Brand Fonts</span><span class="dl-desc">Open Sans (static weights) &mdash; the Streets of Growth typeface.</span></span>
+        <span class="dl-tag"><span class="dl-type">ZIP</span><span class="material-symbols-rounded dl-dl">download</span></span>
+      </a>
+      <a class="dl-item" href="SOG-Monogram-Graphics.zip" download="SOG Monogram Graphics.zip">
+        <span class="dl-ico"><span class="material-symbols-rounded">grid_view</span></span>
+        <span class="dl-meta"><span class="dl-title">Monogram Pattern Graphics</span><span class="dl-desc">Monogram pattern artwork for backgrounds and accents.</span></span>
+        <span class="dl-tag"><span class="dl-type">ZIP</span><span class="material-symbols-rounded dl-dl">download</span></span>
+      </a>
+      <a class="dl-item" href="SOG-Illustration-Icons.zip" download="SOG Illustration Icons.zip">
+        <span class="dl-ico"><span class="material-symbols-rounded">auto_awesome</span></span>
+        <span class="dl-meta"><span class="dl-title">Illustration Icons</span><span class="dl-desc">Streets of Growth presentation illustration icon set.</span></span>
+        <span class="dl-tag"><span class="dl-type">ZIP</span><span class="material-symbols-rounded dl-dl">download</span></span>
+      </a>
+    </div>
+  </div>
+</div>
 
 <div id="page-wrapper">
 
@@ -15464,6 +15540,30 @@ function initSidebarTheme() {
 }
 
 // ── Move each sidebar group's icon onto its section page headers ──
+// ── Downloads modal: open/close, backdrop + Escape ──
+function initDownloadsModal() {
+  const btn = document.getElementById('downloads-btn');
+  const overlay = document.getElementById('downloads-overlay');
+  if (!btn || !overlay) return;
+  const open = () => {
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    const c = overlay.querySelector('.dl-close');
+    if (c) c.focus();
+  };
+  const close = () => {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    btn.focus();
+  };
+  btn.addEventListener('click', open);
+  overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+  overlay.querySelectorAll('[data-dl-close]').forEach(el => el.addEventListener('click', close));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) close();
+  });
+}
+
 // ── Sidebar: give each top-level (non-sub) link its own icon.
 //    Nested items keep their bullet (.sidebar-link--sub::before); group
 //    labels stay text-only. ──
@@ -15788,7 +15888,7 @@ window.addEventListener('load', () => {
    initCalendarHeatmap, initTreemap, initBulletCharts,
    initLandmarks, initScrollSpy, initScrollReveal,
    initProgressBars,
-   initColourStrip, initHeroPills, initTintCells, initSwatchCards, initGradientCards, initTableFrames, initSidebarTheme, initSidebarLinkIcons, initImageFallbacks,
+   initColourStrip, initHeroPills, initTintCells, initSwatchCards, initGradientCards, initTableFrames, initSidebarTheme, initSidebarLinkIcons, initDownloadsModal, initImageFallbacks,
    initGradPills, initDatePickers, initPagination,
    initTimelineChart, initRiskChart, initToolsChart,
    initMonthlyChart, initEffectivenessChart]
