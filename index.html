@@ -122,7 +122,7 @@ body{font-family:'Open Sans',sans-serif;font-size:14px;color:#323E48;background:
 }
 .sidebar-group-label:hover{color:var(--sog-purple)}
 .sidebar-group-label-inner{display:flex;align-items:center;gap:6px;flex:1}
-.sidebar-group-icon{font-size:14px;color:var(--sog-purple);flex-shrink:0}
+.sidebar-group-icon{display:none}
 .sidebar-chevron{font-size:18px;opacity:.4;flex-shrink:0;transition:transform var(--transition-med)}
 .sidebar-group.collapsed .sidebar-chevron{transform:rotate(-90deg)}
 .sidebar-group-links{
@@ -187,7 +187,8 @@ html.theme-dark .sidebar-sub-label{color:#968FBE}
 html.theme-dark .sidebar-link{color:#C4C0DE}
 html.theme-dark .sidebar-link:hover{background:rgba(145,141,185,.18);color:#F0EFF7}
 html.theme-dark .sidebar-link.active{background:rgba(145,141,185,.30);color:#E4E1F4;box-shadow:inset 0 0 0 1px rgba(160,155,205,.35)}
-.sidebar-link--sub{padding-left:24px;font-size:12px}
+.sidebar-link--sub{padding-left:22px;font-size:12px}
+.sidebar-link--sub::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.4;flex-shrink:0}
 
 /* Print section + Pres spec responsive grids */
 .logo-print-grid{display:grid;grid-template-columns:2fr 3fr;gap:24px;align-items:start}
@@ -211,6 +212,8 @@ html.theme-dark .sidebar-link.active{background:rgba(145,141,185,.30);color:#E4E
 /* ── Typography tokens ─────────────────────────────── */
 .sg-section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--sog-purple);margin-bottom:8px}
 .sg-section-title{font-size:34px;font-weight:700;color:var(--sog-charcoal);margin-bottom:12px;line-height:1.15;letter-spacing:-.01em}
+.sg-section-title.has-icon{display:flex;align-items:center;gap:12px}
+.section-title-icon{color:var(--sog-purple);font-size:.78em;flex-shrink:0}
 .sg-section-desc{font-size:16px;color:var(--text-muted);max-width:none;line-height:1.65;margin-bottom:48px}
 .sg-sub{margin-bottom:48px}
 .sg-sub-title{font-size:18px;font-weight:600;color:var(--sog-charcoal);margin-bottom:6px}
@@ -15448,6 +15451,27 @@ function initSidebarTheme() {
   });
 }
 
+// ── Move each sidebar group's icon onto its section page headers ──
+function initSectionHeaderIcons() {
+  document.querySelectorAll('.sidebar-group').forEach(group => {
+    const iconEl = group.querySelector('.sidebar-group-icon');
+    const name = iconEl ? iconEl.textContent.trim() : '';
+    if (!name) return;
+    group.querySelectorAll('.sidebar-link[href^="#"]').forEach(link => {
+      const sec = document.getElementById(link.getAttribute('href').slice(1));
+      if (!sec) return;
+      const title = sec.querySelector('.sg-section-title');
+      if (!title || title.classList.contains('has-icon')) return;
+      const ic = document.createElement('span');
+      ic.className = 'material-symbols-rounded section-title-icon';
+      ic.textContent = name;
+      ic.setAttribute('aria-hidden', 'true');
+      title.insertBefore(ic, title.firstChild);
+      title.classList.add('has-icon');
+    });
+  });
+}
+
 // ── Table outer frame - wrap each .sg-table so the table code stays clean ──
 function initTableFrames() {
   document.querySelectorAll('table.sg-table').forEach(t => {
@@ -15739,7 +15763,7 @@ window.addEventListener('load', () => {
    initCalendarHeatmap, initTreemap, initBulletCharts,
    initLandmarks, initScrollSpy, initScrollReveal,
    initProgressBars,
-   initColourStrip, initHeroPills, initTintCells, initSwatchCards, initGradientCards, initTableFrames, initSidebarTheme, initImageFallbacks,
+   initColourStrip, initHeroPills, initTintCells, initSwatchCards, initGradientCards, initTableFrames, initSidebarTheme, initSectionHeaderIcons, initImageFallbacks,
    initGradPills, initDatePickers, initPagination,
    initTimelineChart, initRiskChart, initToolsChart,
    initMonthlyChart, initEffectivenessChart]
