@@ -187,6 +187,8 @@ html.theme-dark .sidebar-sub-label{color:#968FBE}
 html.theme-dark .sidebar-link{color:#C4C0DE}
 html.theme-dark .sidebar-link:hover{background:rgba(145,141,185,.18);color:#F0EFF7}
 html.theme-dark .sidebar-link.active{background:rgba(145,141,185,.30);color:#E4E1F4;box-shadow:inset 0 0 0 1px rgba(160,155,205,.35)}
+.sidebar-link-icon{font-size:18px;flex-shrink:0;opacity:.75}
+.sidebar-link:hover .sidebar-link-icon,.sidebar-link.active .sidebar-link-icon{opacity:1;color:var(--sog-purple)}
 .sidebar-link--sub{padding-left:22px;font-size:12px}
 .sidebar-link--sub::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.4;flex-shrink:0}
 
@@ -212,8 +214,6 @@ html.theme-dark .sidebar-link.active{background:rgba(145,141,185,.30);color:#E4E
 /* ── Typography tokens ─────────────────────────────── */
 .sg-section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--sog-purple);margin-bottom:8px}
 .sg-section-title{font-size:34px;font-weight:700;color:var(--sog-charcoal);margin-bottom:12px;line-height:1.15;letter-spacing:-.01em}
-.sg-section-title.has-icon{display:flex;align-items:center;gap:12px}
-.section-title-icon{color:var(--sog-purple);font-size:.78em;flex-shrink:0}
 .sg-section-desc{font-size:16px;color:var(--text-muted);max-width:none;line-height:1.65;margin-bottom:48px}
 .sg-sub{margin-bottom:48px}
 .sg-sub-title{font-size:18px;font-weight:600;color:var(--sog-charcoal);margin-bottom:6px}
@@ -14781,7 +14781,10 @@ function initSidebarSearch() {
       let groupHasMatch = false;
 
       links.forEach(link => {
-        const text = link.textContent.toLowerCase();
+        // Read label text only (skip the injected icon span's ligature text)
+        let text = '';
+        link.childNodes.forEach(n => { if (n.nodeType === 3) text += n.textContent; });
+        text = text.toLowerCase();
         const match = !q || text.includes(q);
         link.classList.toggle('search-hidden', !match);
         if (match) groupHasMatch = true;
@@ -15452,23 +15455,36 @@ function initSidebarTheme() {
 }
 
 // ── Move each sidebar group's icon onto its section page headers ──
-function initSectionHeaderIcons() {
-  document.querySelectorAll('.sidebar-group').forEach(group => {
-    const iconEl = group.querySelector('.sidebar-group-icon');
-    const name = iconEl ? iconEl.textContent.trim() : '';
+// ── Sidebar: give each top-level (non-sub) link its own icon.
+//    Nested items keep their bullet (.sidebar-link--sub::before); group
+//    labels stay text-only. ──
+function initSidebarLinkIcons() {
+  const map = {
+    // Company
+    '#intro': 'home', '#who-we-are': 'groups', '#vision-purpose': 'explore', '#values': 'volunteer_activism',
+    // Foundations
+    '#logo': 'branding_watermark', '#color': 'palette', '#gradients': 'gradient',
+    '#typography': 'text_fields', '#spacing': 'grid_4x4', '#icons': 'apps',
+    '#icon-illustrations': 'auto_awesome', '#patterns': 'rule', '#accessibility': 'accessibility_new',
+    // Components
+    '#buttons': 'smart_button', '#forms': 'edit_note', '#cards': 'view_agenda', '#timeline': 'timeline',
+    '#badges': 'sell', '#alerts': 'campaign', '#alerts-flags': 'flag', '#navigation': 'menu',
+    '#tables': 'table_chart', '#progress': 'progress_activity', '#stepper': 'linear_scale',
+    '#avatars': 'account_circle', '#skeleton': 'dashboard_customize', '#sheet': 'vertical_split', '#modal': 'web_asset',
+    // Patterns
+    '#flywheel': 'autorenew', '#prog-timeline': 'route',
+    // Data Visualisation
+    '#dataviz': 'insights'
+  };
+  document.querySelectorAll('.sidebar-link:not(.sidebar-link--sub)').forEach(link => {
+    if (link.querySelector('.sidebar-link-icon')) return;
+    const name = map[link.getAttribute('href')];
     if (!name) return;
-    group.querySelectorAll('.sidebar-link[href^="#"]').forEach(link => {
-      const sec = document.getElementById(link.getAttribute('href').slice(1));
-      if (!sec) return;
-      const title = sec.querySelector('.sg-section-title');
-      if (!title || title.classList.contains('has-icon')) return;
-      const ic = document.createElement('span');
-      ic.className = 'material-symbols-rounded section-title-icon';
-      ic.textContent = name;
-      ic.setAttribute('aria-hidden', 'true');
-      title.insertBefore(ic, title.firstChild);
-      title.classList.add('has-icon');
-    });
+    const ic = document.createElement('span');
+    ic.className = 'material-symbols-rounded sidebar-link-icon';
+    ic.textContent = name;
+    ic.setAttribute('aria-hidden', 'true');
+    link.insertBefore(ic, link.firstChild);
   });
 }
 
@@ -15763,7 +15779,7 @@ window.addEventListener('load', () => {
    initCalendarHeatmap, initTreemap, initBulletCharts,
    initLandmarks, initScrollSpy, initScrollReveal,
    initProgressBars,
-   initColourStrip, initHeroPills, initTintCells, initSwatchCards, initGradientCards, initTableFrames, initSidebarTheme, initSectionHeaderIcons, initImageFallbacks,
+   initColourStrip, initHeroPills, initTintCells, initSwatchCards, initGradientCards, initTableFrames, initSidebarTheme, initSidebarLinkIcons, initImageFallbacks,
    initGradPills, initDatePickers, initPagination,
    initTimelineChart, initRiskChart, initToolsChart,
    initMonthlyChart, initEffectivenessChart]
