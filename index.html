@@ -7721,785 +7721,6 @@ document.addEventListener('click', e => {
   </div>
 </section>
 
-<!-- =================== PROGRAMME POSITION =================== -->
-<section id="prog-timeline" class="sg-section">
-  <div class="sg-section-label">Patterns</div>
-  <h2 class="sg-section-title">Programme Position</h2>
-  <p class="sg-section-desc">A compact progress tracker that shows a participant's current position within the 24-month SOG programme. The bar visualises three equal phase segments with relapse events marked as orange diamonds and the current month as a pulsing blue dot. Use at the top of a participant detail view or case summary panel.</p>
-
-  <div class="sg-sub">
-    <div class="sg-sub-title">24-Month Programme Timeline</div>
-    <div class="sg-sub-desc">Phase segments are equal thirds of the 24-month bar. Marker positions are calculated as <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">(month / 24) × 100%</code>. Active phase is full opacity; future phases dim to 35%. Relapse is an event on the bar; it does not reset or rewind the phase.</div>
-
-    <div class="sg-example column" style="padding:32px 40px">
-      <div class="pt-card">
-
-        <!-- Header -->
-        <div class="pt-header">
-          <div>
-            <div class="pt-name">Marcus T.</div>
-            <div class="pt-id">Programme ID: SOG-2024-0041</div>
-          </div>
-          <div style="display:flex;gap:6px">
-            <span class="badge badge-blue">● Active</span>
-            <span class="badge badge-red">⚠ 2 relapses</span>
-          </div>
-        </div>
-
-        <!-- Meta row -->
-        <div class="pt-meta-row">
-          <div class="pt-meta-card">
-            <div class="pt-meta-label">Start date</div>
-            <div class="pt-meta-value">3 Mar 2024</div>
-          </div>
-          <div class="pt-meta-card">
-            <div class="pt-meta-label">Current phase</div>
-            <div class="pt-meta-value" style="color:var(--sog-blue)">Phase 2</div>
-          </div>
-          <div class="pt-meta-card">
-            <div class="pt-meta-label">Month</div>
-            <div class="pt-meta-value"><span class="pt-pip"></span>14 of 24</div>
-          </div>
-          <div class="pt-meta-card">
-            <div class="pt-meta-label">Mid survey due</div>
-            <div class="pt-meta-value" style="color:var(--color-warning-text)">3 Sep 2025</div>
-          </div>
-        </div>
-
-        <!-- Progress bar -->
-        <div class="pt-bar-wrap">
-          <div class="pt-bar-outer">
-            <div class="pt-phase-track">
-              <!-- Phase 1: complete - full opacity purple -->
-              <div class="pt-phase-seg" style="width:33.3%;background:var(--sog-purple)"></div>
-              <!-- Phase 2: active - full opacity blue -->
-              <div class="pt-phase-seg" style="width:33.3%;background:var(--sog-blue)"></div>
-              <!-- Phase 3: upcoming - dimmed teal -->
-              <div class="pt-phase-seg" style="width:33.4%;background:var(--sog-teal);opacity:0.35"></div>
-            </div>
-            <!-- Relapse M5: (5/24)×100 = 20.83% -->
-            <div class="pt-relapse-marker" style="left:20.83%"></div>
-            <!-- Relapse M11: (11/24)×100 = 45.83% -->
-            <div class="pt-relapse-marker" style="left:45.83%"></div>
-            <!-- Now M14: (14/24)×100 = 58.33% -->
-            <div class="pt-now-ring" style="left:58.33%"></div>
-            <div class="pt-now-marker" style="left:58.33%"></div>
-          </div>
-          <!-- Marker labels -->
-          <div class="pt-marker-row">
-            <span class="pt-marker-label" style="left:0%;transform:none">Start</span>
-            <span class="pt-marker-label pt-marker-relapse" style="left:20.83%">◆ M5</span>
-            <span class="pt-marker-label pt-marker-relapse" style="left:45.83%">◆ M11</span>
-            <span class="pt-marker-label pt-marker-now" style="left:58.33%">↑ Now</span>
-            <span class="pt-marker-label" style="left:100%;transform:translateX(-100%)">End</span>
-          </div>
-          <!-- Phase labels -->
-          <div class="pt-phase-labels">
-            <div class="pt-phase-label" style="width:33.3%">
-              <span class="pt-phase-name" style="color:var(--sog-purple)">Phase 1: Engagement</span>
-              <span class="pt-phase-dur">Months 1–8</span>
-            </div>
-            <div class="pt-phase-label" style="width:33.3%">
-              <span class="pt-phase-name" style="color:var(--sog-blue)">Phase 2: Engaging</span>
-              <span class="pt-phase-dur">Months 9–16</span>
-            </div>
-            <div class="pt-phase-label" style="width:33.4%">
-              <span class="pt-phase-name" style="color:var(--text-muted)">Phase 3: Advancing</span>
-              <span class="pt-phase-dur">Months 17–24</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <div class="code-block collapsed" style="margin-top:16px">
-    <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">HTML</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
-    <pre>&lt;div class="pt-card"&gt;
-
-  &lt;!-- Header --&gt;
-  &lt;div class="pt-header"&gt;
-    &lt;div&gt;
-      &lt;div class="pt-name"&gt;Marcus T.&lt;/div&gt;
-      &lt;div class="pt-id"&gt;Programme ID: SOG-2024-0041&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div style="display:flex;gap:6px"&gt;
-      &lt;span class="badge badge-blue"&gt;● Active&lt;/span&gt;
-      &lt;span class="badge badge-red"&gt;⚠ 2 relapses&lt;/span&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Meta row --&gt;
-  &lt;div class="pt-meta-row"&gt;
-    &lt;div class="pt-meta-card"&gt;
-      &lt;div class="pt-meta-label"&gt;Start date&lt;/div&gt;
-      &lt;div class="pt-meta-value"&gt;3 Mar 2024&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="pt-meta-card"&gt;
-      &lt;div class="pt-meta-label"&gt;Current phase&lt;/div&gt;
-      &lt;div class="pt-meta-value" style="color:var(--sog-blue)"&gt;Phase 2&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="pt-meta-card"&gt;
-      &lt;div class="pt-meta-label"&gt;Month&lt;/div&gt;
-      &lt;div class="pt-meta-value"&gt;&lt;span class="pt-pip"&gt;&lt;/span&gt;14 of 24&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="pt-meta-card"&gt;
-      &lt;div class="pt-meta-label"&gt;Mid survey due&lt;/div&gt;
-      &lt;div class="pt-meta-value" style="color:var(--color-warning-text)"&gt;3 Sep 2025&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Progress bar --&gt;
-  &lt;div class="pt-bar-wrap"&gt;
-    &lt;div class="pt-bar-outer"&gt;
-      &lt;div class="pt-phase-track"&gt;
-        &lt;div class="pt-phase-seg" style="width:33.3%;background:var(--sog-purple)"&gt;&lt;/div&gt;
-        &lt;div class="pt-phase-seg" style="width:33.3%;background:var(--sog-blue)"&gt;&lt;/div&gt;
-        &lt;div class="pt-phase-seg" style="width:33.4%;background:var(--sog-teal);opacity:0.35"&gt;&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;!-- Positions: (month / 24) × 100% --&gt;
-      &lt;div class="pt-relapse-marker" style="left:20.83%"&gt;&lt;/div&gt;
-      &lt;div class="pt-relapse-marker" style="left:45.83%"&gt;&lt;/div&gt;
-      &lt;div class="pt-now-ring"     style="left:58.33%"&gt;&lt;/div&gt;
-      &lt;div class="pt-now-marker"   style="left:58.33%"&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="pt-marker-row"&gt;
-      &lt;span class="pt-marker-label" style="left:0%;transform:none"&gt;Start&lt;/span&gt;
-      &lt;span class="pt-marker-label pt-marker-relapse" style="left:20.83%"&gt;◆ M5&lt;/span&gt;
-      &lt;span class="pt-marker-label pt-marker-relapse" style="left:45.83%"&gt;◆ M11&lt;/span&gt;
-      &lt;span class="pt-marker-label pt-marker-now"     style="left:58.33%"&gt;↑ Now&lt;/span&gt;
-      &lt;span class="pt-marker-label" style="left:100%;transform:translateX(-100%)"&gt;End&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div class="pt-phase-labels" style="margin-top:10px"&gt;
-      &lt;div class="pt-phase-label" style="width:33.3%"&gt;
-        &lt;span class="pt-phase-name" style="color:var(--sog-purple)"&gt;Phase 1: Engagement&lt;/span&gt;
-        &lt;span class="pt-phase-dur"&gt;Months 1–8&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div class="pt-phase-label" style="width:33.3%"&gt;
-        &lt;span class="pt-phase-name" style="color:var(--sog-blue)"&gt;Phase 2: Engaging&lt;/span&gt;
-        &lt;span class="pt-phase-dur"&gt;Months 9–16&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div class="pt-phase-label" style="width:33.4%"&gt;
-        &lt;span class="pt-phase-name" style="color:var(--text-muted)"&gt;Phase 3: Advancing&lt;/span&gt;
-        &lt;span class="pt-phase-dur"&gt;Months 17–24&lt;/span&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-&lt;/div&gt;</pre>
-  </div>
-  <div class="code-block collapsed" style="margin-top:8px">
-    <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
-    <pre>.pt-card { background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04); }
-.pt-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-.pt-name { font-size: 18px; font-weight: 700; color: var(--text); }
-.pt-id { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-.pt-meta-row  { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 20px; }
-.pt-meta-card { background: var(--muted-bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; transition: border-color 150ms ease; }
-.pt-meta-card:hover { border-color: rgba(0,0,0,.2); }
-.pt-meta-label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
-.pt-meta-value { font-size: 15px; font-weight: 500; color: var(--text); }
-.pt-pip { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--sog-blue); vertical-align: middle; margin-right: 4px; }
-.pt-bar-outer { position: relative; }
-.pt-phase-track { display: flex; height: 20px; border-radius: 10px; overflow: visible; gap: 2px; }
-.pt-phase-seg { height: 100%; border-radius: 5px; flex-shrink: 0; }
-.pt-relapse-marker { position: absolute; top: 10px; transform: translate(-50%,-50%) rotate(45deg); width: 12px; height: 12px; border-radius: 2px; background: var(--sog-red); border: 1.5px solid #fff; z-index: 3; }
-.pt-now-ring   { position: absolute; top: 10px; transform: translate(-50%,-50%); width: 30px; height: 30px; border-radius: 50%; background: var(--blue-10); z-index: 3; }
-.pt-now-marker { position: absolute; top: 10px; transform: translate(-50%,-50%); width: 18px; height: 18px; border-radius: 50%; background: var(--sog-blue); border: 2px solid #fff; z-index: 4; }
-.pt-marker-row  { position: relative; height: 24px; margin-top: 8px; }
-.pt-marker-label { position: absolute; transform: translateX(-50%); font-size: 10px; white-space: nowrap; color: var(--text-muted); }
-.pt-marker-now     { color: var(--sog-blue);   font-weight: 600; }
-.pt-marker-relapse { color: var(--sog-red); font-weight: 600; }
-.pt-phase-labels { display: flex; margin-top: 12px; }
-.pt-phase-label  { display: flex; flex-direction: column; align-items: center; text-align: center; }
-.pt-phase-name { font-size: 13px; font-weight: 600; }
-.pt-phase-dur  { font-size: 10px; color: var(--text-muted); }
-</pre>
-  </div>
-
-  <!-- ── Alternative: Phase 4 ─────────────────────────────────── -->
-  <div class="sg-sub" style="margin-top:24px">
-    <div class="sg-sub-title">With Post-Programme Follow-up</div>
-    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;line-height:1.55">Extends the bar to 36 months with Phase 3 active and the follow-up period greyed out. Bar positions recalculate as <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">(month / 36) × 100</code>.</p>
-
-    <div class="sg-example column" style="padding:32px 40px">
-    <div class="pt-card">
-
-      <div class="pt-header">
-        <div>
-          <div class="pt-name">Marcus T.</div>
-          <div class="pt-id">Programme ID: SOG-2024-0041</div>
-        </div>
-        <div style="display:flex;gap:6px">
-          <span class="badge badge-blue">● Active</span>
-          <span class="badge badge-red">⚠ 2 relapses</span>
-        </div>
-      </div>
-
-      <div class="pt-meta-row">
-        <div class="pt-meta-card">
-          <div class="pt-meta-label">Start date</div>
-          <div class="pt-meta-value">3 Mar 2024</div>
-        </div>
-        <div class="pt-meta-card">
-          <div class="pt-meta-label">Current phase</div>
-          <div class="pt-meta-value" style="color:var(--sog-teal)">Phase 3</div>
-        </div>
-        <div class="pt-meta-card">
-          <div class="pt-meta-label">Month</div>
-          <div class="pt-meta-value"><span class="pt-pip" style="background:var(--sog-teal)"></span>20 of 36</div>
-        </div>
-        <div class="pt-meta-card">
-          <div class="pt-meta-label">Programme end</div>
-          <div class="pt-meta-value">3 Mar 2026</div>
-        </div>
-      </div>
-
-      <div class="pt-bar-wrap">
-        <div class="pt-bar-outer">
-          <div class="pt-phase-track">
-            <!-- Phase 1: 8/36 = 22.22% - complete -->
-            <div class="pt-phase-seg" style="width:22.22%;background:var(--sog-purple)"></div>
-            <!-- Phase 2: 8/36 = 22.22% - complete -->
-            <div class="pt-phase-seg" style="width:22.22%;background:var(--sog-blue)"></div>
-            <!-- Phase 3: 8/36 = 22.22% - active -->
-            <div class="pt-phase-seg" style="width:22.22%;background:var(--sog-teal)"></div>
-            <!-- Phase 4: 12/36 = 33.33% - upcoming -->
-            <div class="pt-phase-seg" style="width:33.33%;background:var(--sog-green);opacity:0.2"></div>
-          </div>
-          <!-- Relapse M5: (5/36)×100 = 13.89% -->
-          <div class="pt-relapse-marker" style="left:13.89%"></div>
-          <!-- Relapse M11: (11/36)×100 = 30.56% -->
-          <div class="pt-relapse-marker" style="left:30.56%"></div>
-          <!-- Now M20: (20/36)×100 = 55.56% -->
-          <div class="pt-now-ring" style="left:55.56%"></div>
-          <div class="pt-now-marker" style="left:55.56%"></div>
-        </div>
-        <div class="pt-marker-row">
-          <span class="pt-marker-label" style="left:0%;transform:none">Start</span>
-          <span class="pt-marker-label pt-marker-relapse" style="left:13.89%">◆ M5</span>
-          <span class="pt-marker-label pt-marker-relapse" style="left:30.56%">◆ M11</span>
-          <span class="pt-marker-label pt-marker-now" style="left:55.56%">↑ Now</span>
-          <span class="pt-marker-label" style="left:100%;transform:translateX(-100%)">End</span>
-        </div>
-        <div class="pt-phase-labels">
-          <div class="pt-phase-label" style="width:22.22%">
-            <span class="pt-phase-name" style="color:var(--sog-purple)">Phase 1: Engagement</span>
-            <span class="pt-phase-dur">Months 1–8</span>
-          </div>
-          <div class="pt-phase-label" style="width:22.22%">
-            <span class="pt-phase-name" style="color:var(--sog-blue)">Phase 2: Engaging</span>
-            <span class="pt-phase-dur">Months 9–16</span>
-          </div>
-          <div class="pt-phase-label" style="width:22.22%">
-            <span class="pt-phase-name" style="color:var(--sog-teal)">Phase 3: Advancing</span>
-            <span class="pt-phase-dur">Months 17–24</span>
-          </div>
-          <div class="pt-phase-label" style="width:33.33%">
-            <span class="pt-phase-name" style="color:var(--text-muted)">Post Programme Follow-up</span>
-            <span class="pt-phase-dur">Months 25–36</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    </div>
-    <div class="code-block collapsed" style="margin-top:16px">
-      <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">HTML</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
-      <pre>&lt;div class="pt-card"&gt;
-
-  &lt;div class="pt-header"&gt;
-    &lt;div&gt;
-      &lt;div class="pt-name"&gt;Marcus T.&lt;/div&gt;
-      &lt;div class="pt-id"&gt;Programme ID: SOG-2024-0041&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div style="display:flex;gap:6px"&gt;
-      &lt;span class="badge badge-blue"&gt;● Active&lt;/span&gt;
-      &lt;span class="badge badge-red"&gt;⚠ 2 relapses&lt;/span&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;div class="pt-meta-row"&gt;
-    &lt;div class="pt-meta-card"&gt;
-      &lt;div class="pt-meta-label"&gt;Start date&lt;/div&gt;
-      &lt;div class="pt-meta-value"&gt;3 Mar 2024&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="pt-meta-card"&gt;
-      &lt;div class="pt-meta-label"&gt;Current phase&lt;/div&gt;
-      &lt;div class="pt-meta-value" style="color:var(--sog-teal)"&gt;Phase 3&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="pt-meta-card"&gt;
-      &lt;div class="pt-meta-label"&gt;Month&lt;/div&gt;
-      &lt;div class="pt-meta-value"&gt;&lt;span class="pt-pip" style="background:var(--sog-teal)"&gt;&lt;/span&gt;20 of 36&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="pt-meta-card"&gt;
-      &lt;div class="pt-meta-label"&gt;Programme end&lt;/div&gt;
-      &lt;div class="pt-meta-value"&gt;3 Mar 2026&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Progress bar: positions use (month / 36) × 100% --&gt;
-  &lt;div class="pt-bar-wrap"&gt;
-    &lt;div class="pt-bar-outer"&gt;
-      &lt;div class="pt-phase-track"&gt;
-        &lt;div class="pt-phase-seg" style="width:22.22%;background:var(--sog-purple)"&gt;&lt;/div&gt;
-        &lt;div class="pt-phase-seg" style="width:22.22%;background:var(--sog-blue)"&gt;&lt;/div&gt;
-        &lt;div class="pt-phase-seg" style="width:22.22%;background:var(--sog-teal)"&gt;&lt;/div&gt;
-        &lt;div class="pt-phase-seg" style="width:33.33%;background:var(--sog-green);opacity:0.2"&gt;&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class="pt-relapse-marker" style="left:13.89%"&gt;&lt;/div&gt;
-      &lt;div class="pt-relapse-marker" style="left:30.56%"&gt;&lt;/div&gt;
-      &lt;div class="pt-now-ring"     style="left:55.56%"&gt;&lt;/div&gt;
-      &lt;div class="pt-now-marker"   style="left:55.56%"&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="pt-marker-row"&gt;
-      &lt;span class="pt-marker-label" style="left:0%;transform:none"&gt;Start&lt;/span&gt;
-      &lt;span class="pt-marker-label pt-marker-relapse" style="left:13.89%"&gt;◆ M5&lt;/span&gt;
-      &lt;span class="pt-marker-label pt-marker-relapse" style="left:30.56%"&gt;◆ M11&lt;/span&gt;
-      &lt;span class="pt-marker-label pt-marker-now"     style="left:55.56%"&gt;↑ Now&lt;/span&gt;
-      &lt;span class="pt-marker-label" style="left:100%;transform:translateX(-100%)"&gt;End&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div class="pt-phase-labels"&gt;
-      &lt;div class="pt-phase-label" style="width:22.22%"&gt;
-        &lt;span class="pt-phase-name" style="color:var(--sog-purple)"&gt;Phase 1: Engagement&lt;/span&gt;
-        &lt;span class="pt-phase-dur"&gt;Months 1–8&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div class="pt-phase-label" style="width:22.22%"&gt;
-        &lt;span class="pt-phase-name" style="color:var(--sog-blue)"&gt;Phase 2: Engaging&lt;/span&gt;
-        &lt;span class="pt-phase-dur"&gt;Months 9–16&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div class="pt-phase-label" style="width:22.22%"&gt;
-        &lt;span class="pt-phase-name" style="color:var(--sog-teal)"&gt;Phase 3: Advancing&lt;/span&gt;
-        &lt;span class="pt-phase-dur"&gt;Months 17–24&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div class="pt-phase-label" style="width:33.33%"&gt;
-        &lt;span class="pt-phase-name" style="color:var(--text-muted)"&gt;Post Programme Follow-up&lt;/span&gt;
-        &lt;span class="pt-phase-dur"&gt;Months 25–36&lt;/span&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-&lt;/div&gt;</pre>
-    </div>
-    <div class="code-block collapsed" style="margin-top:8px">
-      <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
-      <pre>/* Uses identical pt-* classes as the 24-month card. */
-/* The only difference is 4 segments and (month / 36) × 100% for positions. */
-
-.pt-phase-seg { height: 100%; border-radius: 5px; flex-shrink: 0; }
-
-/* Post-programme follow-up segment */
-/* width: 33.33%; background: var(--sog-green); opacity: 0.2 - upcoming */
-/* width: 33.33%; background: var(--sog-green)              - active     */</pre>
-    </div>
-  </div>
-
-  <!-- ── Cohort: 24-month ──────────────────────────────────────── -->
-  <div class="sg-sub" style="margin-top:24px">
-    <div class="sg-sub-title">Cohort View</div>
-    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;line-height:1.55">All participants on a shared 24-month scale. Bar positions use <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">(month / 24) × 100</code>.</p>
-
-    <div class="sg-example column" style="padding:32px 40px">
-    <div class="ptc-card">
-      <div style="margin-bottom:14px">
-        <div class="ptc-title">Key Worker: D. Okafor</div>
-        <div class="ptc-subtitle">5 participants · 24-month programme</div>
-      </div>
-      <div class="ptc-col-head">
-        <div class="ptc-col-label">Participant</div>
-        <div class="ptc-col-label">Progress</div>
-        <div class="ptc-col-label">Phase / Month</div>
-      </div>
-
-      <!-- Marcus T. - M14, Phase 2, 2 relapses -->
-      <div class="ptc-row">
-        <div>
-          <div class="ptc-name">Marcus T.</div>
-          <div class="ptc-id">SOG-2024-0041 <span style="color:var(--sog-red);font-weight:600">⚠ ×2</span></div>
-        </div>
-        <div class="ptc-bar-cell">
-          <div class="ptc-bar-track">
-            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-purple)"></div>
-            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-blue)"></div>
-            <div class="ptc-bar-seg" style="width:33.4%;background:var(--sog-teal);opacity:.35"></div>
-          </div>
-          <div class="ptc-relapse-dot" style="left:20.83%"></div>
-          <div class="ptc-relapse-dot" style="left:45.83%"></div>
-          <div class="ptc-now-dot" style="left:58.33%;background:var(--sog-blue)"></div>
-        </div>
-        <div>
-          <div class="ptc-phase" style="color:var(--sog-blue)">Phase 2: Engaging</div>
-          <div class="ptc-month">Month 14 of 24</div>
-        </div>
-      </div>
-
-      <!-- Aisha K. - M6, Phase 1, 0 relapses -->
-      <div class="ptc-row">
-        <div>
-          <div class="ptc-name">Aisha K.</div>
-          <div class="ptc-id">SOG-2024-0055</div>
-        </div>
-        <div class="ptc-bar-cell">
-          <div class="ptc-bar-track">
-            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-purple)"></div>
-            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-blue);opacity:.35"></div>
-            <div class="ptc-bar-seg" style="width:33.4%;background:var(--sog-teal);opacity:.35"></div>
-          </div>
-          <div class="ptc-now-dot" style="left:25%;background:var(--sog-purple)"></div>
-        </div>
-        <div>
-          <div class="ptc-phase" style="color:var(--sog-purple)">Phase 1: Engagement</div>
-          <div class="ptc-month">Month 6 of 24</div>
-        </div>
-      </div>
-
-      <!-- Darius M. - M19, Phase 3, 1 relapse -->
-      <div class="ptc-row">
-        <div>
-          <div class="ptc-name">Darius M.</div>
-          <div class="ptc-id">SOG-2023-0089 <span style="color:var(--sog-red);font-weight:600">⚠ ×1</span></div>
-        </div>
-        <div class="ptc-bar-cell">
-          <div class="ptc-bar-track">
-            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-purple)"></div>
-            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-blue)"></div>
-            <div class="ptc-bar-seg" style="width:33.4%;background:var(--sog-teal)"></div>
-          </div>
-          <div class="ptc-relapse-dot" style="left:33.33%"></div>
-          <div class="ptc-now-dot" style="left:79.17%;background:var(--sog-teal)"></div>
-        </div>
-        <div>
-          <div class="ptc-phase" style="color:var(--sog-teal)">Phase 3: Advancing</div>
-          <div class="ptc-month">Month 19 of 24</div>
-        </div>
-      </div>
-
-      <!-- Jordan S. - M9, Phase 2, 0 relapses -->
-      <div class="ptc-row">
-        <div>
-          <div class="ptc-name">Jordan S.</div>
-          <div class="ptc-id">SOG-2024-0063</div>
-        </div>
-        <div class="ptc-bar-cell">
-          <div class="ptc-bar-track">
-            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-purple)"></div>
-            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-blue)"></div>
-            <div class="ptc-bar-seg" style="width:33.4%;background:var(--sog-teal);opacity:.35"></div>
-          </div>
-          <div class="ptc-now-dot" style="left:37.5%;background:var(--sog-blue)"></div>
-        </div>
-        <div>
-          <div class="ptc-phase" style="color:var(--sog-blue)">Phase 2: Engaging</div>
-          <div class="ptc-month">Month 9 of 24</div>
-        </div>
-      </div>
-
-      <!-- Priya N. - M3, Phase 1, 0 relapses -->
-      <div class="ptc-row">
-        <div>
-          <div class="ptc-name">Priya N.</div>
-          <div class="ptc-id">SOG-2025-0012</div>
-        </div>
-        <div class="ptc-bar-cell">
-          <div class="ptc-bar-track">
-            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-purple)"></div>
-            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-blue);opacity:.35"></div>
-            <div class="ptc-bar-seg" style="width:33.4%;background:var(--sog-teal);opacity:.35"></div>
-          </div>
-          <div class="ptc-now-dot" style="left:12.5%;background:var(--sog-purple)"></div>
-        </div>
-        <div>
-          <div class="ptc-phase" style="color:var(--sog-purple)">Phase 1: Engagement</div>
-          <div class="ptc-month">Month 3 of 24</div>
-        </div>
-      </div>
-
-    </div>
-    </div>
-    <div class="code-block collapsed" style="margin-top:16px">
-      <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">HTML</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
-      <pre>&lt;div class="ptc-card"&gt;
-  &lt;div style="margin-bottom:14px"&gt;
-    &lt;div class="ptc-title"&gt;Key Worker: D. Okafor&lt;/div&gt;
-    &lt;div class="ptc-subtitle"&gt;5 participants · 24-month programme&lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class="ptc-col-head"&gt;
-    &lt;div class="ptc-col-label"&gt;Participant&lt;/div&gt;
-    &lt;div class="ptc-col-label"&gt;Progress&lt;/div&gt;
-    &lt;div class="ptc-col-label"&gt;Phase / Month&lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Row: positions use (month / 24) × 100% --&gt;
-  &lt;div class="ptc-row"&gt;
-    &lt;div&gt;
-      &lt;div class="ptc-name"&gt;Marcus T.&lt;/div&gt;
-      &lt;div class="ptc-id"&gt;SOG-2024-0041 &lt;span style="color:var(--sog-red);font-weight:600"&gt;⚠ ×2&lt;/span&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="ptc-bar-cell"&gt;
-      &lt;div class="ptc-bar-track"&gt;
-        &lt;div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-purple)"&gt;&lt;/div&gt;
-        &lt;div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-blue)"&gt;&lt;/div&gt;
-        &lt;div class="ptc-bar-seg" style="width:33.4%;background:var(--sog-teal);opacity:.35"&gt;&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class="ptc-relapse-dot" style="left:20.83%"&gt;&lt;/div&gt;
-      &lt;div class="ptc-relapse-dot" style="left:45.83%"&gt;&lt;/div&gt;
-      &lt;div class="ptc-now-dot" style="left:58.33%;background:var(--sog-blue)"&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div&gt;
-      &lt;div class="ptc-phase" style="color:var(--sog-blue)"&gt;Phase 2: Engaging&lt;/div&gt;
-      &lt;div class="ptc-month"&gt;Month 14 of 24&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Repeat ptc-row for each participant --&gt;
-&lt;/div&gt;</pre>
-    </div>
-    <div class="code-block collapsed" style="margin-top:8px">
-      <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
-      <pre>.ptc-card { background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04); }
-.ptc-title { font-size: 16px; font-weight: 700; color: var(--text); }
-.ptc-subtitle { font-size: 12px; color: var(--text-muted); margin-top: 2px; margin-bottom: 16px; }
-.ptc-col-head { display: grid; grid-template-columns: 150px 1fr 110px; gap: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); margin-bottom: 2px; }
-.ptc-col-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); }
-.ptc-row { display: grid; grid-template-columns: 150px 1fr 110px; gap: 14px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); }
-.ptc-row:last-child { border-bottom: none; }
-.ptc-name { font-size: 13px; font-weight: 600; color: var(--text); }
-.ptc-id { font-size: 11px; color: var(--text-muted); }
-.ptc-bar-cell { min-width: 0; position: relative; height: 20px; display: flex; align-items: center; }
-.ptc-bar-track { display: flex; height: 8px; border-radius: 4px; overflow: visible; gap: 1px; width: 100%; }
-.ptc-bar-seg { height: 100%; border-radius: 3px; flex-shrink: 0; }
-.ptc-now-dot { position: absolute; top: 10px; transform: translate(-50%,-50%); width: 12px; height: 12px; border-radius: 50%; border: 2px solid #fff; z-index: 4; }
-.ptc-relapse-dot { position: absolute; top: 10px; transform: translate(-50%,-50%) rotate(45deg); width: 7px; height: 7px; border-radius: 1px; background: var(--sog-red); border: 1px solid #fff; z-index: 3; }
-.ptc-phase { font-size: 12px; font-weight: 600; line-height: 1.3; }
-.ptc-month { font-size: 11px; color: var(--text-muted); }</pre>
-    </div>
-  </div>
-
-  <!-- ── Cohort: 36-month with post-programme ───────────────────── -->
-  <div class="sg-sub" style="margin-top:24px">
-    <div class="sg-sub-title">Cohort View with Post-Programme Follow-up</div>
-    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;line-height:1.55">All participants on a shared 36-month scale including the follow-up period. Bar positions use <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">(month / 36) × 100</code>.</p>
-
-    <div class="sg-example column" style="padding:32px 40px">
-    <div class="ptc-card">
-      <div style="margin-bottom:14px">
-        <div class="ptc-title">Key Worker: D. Okafor</div>
-        <div class="ptc-subtitle">5 participants · 24-month programme + 12-month follow-up</div>
-      </div>
-      <div class="ptc-col-head">
-        <div class="ptc-col-label">Participant</div>
-        <div class="ptc-col-label">Progress</div>
-        <div class="ptc-col-label">Phase / Month</div>
-      </div>
-
-      <!-- Marcus T. - M20, Phase 3, 2 relapses -->
-      <div class="ptc-row">
-        <div>
-          <div class="ptc-name">Marcus T.</div>
-          <div class="ptc-id">SOG-2024-0041 <span style="color:var(--sog-red);font-weight:600">⚠ ×2</span></div>
-        </div>
-        <div class="ptc-bar-cell">
-          <div class="ptc-bar-track">
-            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-purple)"></div>
-            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-blue)"></div>
-            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-teal)"></div>
-            <div class="ptc-bar-seg" style="width:33.33%;background:var(--sog-green);opacity:.2"></div>
-          </div>
-          <div class="ptc-relapse-dot" style="left:13.89%"></div>
-          <div class="ptc-relapse-dot" style="left:30.56%"></div>
-          <div class="ptc-now-dot" style="left:55.56%;background:var(--sog-teal)"></div>
-        </div>
-        <div>
-          <div class="ptc-phase" style="color:var(--sog-teal)">Phase 3: Advancing</div>
-          <div class="ptc-month">Month 20 of 36</div>
-        </div>
-      </div>
-
-      <!-- Liam O. - M28, Post-programme, 1 relapse -->
-      <div class="ptc-row">
-        <div>
-          <div class="ptc-name">Liam O.</div>
-          <div class="ptc-id">SOG-2023-0071 <span style="color:var(--sog-red);font-weight:600">⚠ ×1</span></div>
-        </div>
-        <div class="ptc-bar-cell">
-          <div class="ptc-bar-track">
-            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-purple)"></div>
-            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-blue)"></div>
-            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-teal)"></div>
-            <div class="ptc-bar-seg" style="width:33.33%;background:var(--sog-green)"></div>
-          </div>
-          <div class="ptc-relapse-dot" style="left:16.67%"></div>
-          <div class="ptc-now-dot" style="left:77.78%;background:var(--sog-green)"></div>
-        </div>
-        <div>
-          <div class="ptc-phase" style="color:var(--sog-green)">Post Programme</div>
-          <div class="ptc-month">Month 28 of 36</div>
-        </div>
-      </div>
-
-      <!-- Aisha K. - M14, Phase 2, 0 relapses -->
-      <div class="ptc-row">
-        <div>
-          <div class="ptc-name">Aisha K.</div>
-          <div class="ptc-id">SOG-2024-0055</div>
-        </div>
-        <div class="ptc-bar-cell">
-          <div class="ptc-bar-track">
-            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-purple)"></div>
-            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-blue)"></div>
-            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-teal);opacity:.35"></div>
-            <div class="ptc-bar-seg" style="width:33.33%;background:var(--sog-green);opacity:.2"></div>
-          </div>
-          <div class="ptc-now-dot" style="left:38.89%;background:var(--sog-blue)"></div>
-        </div>
-        <div>
-          <div class="ptc-phase" style="color:var(--sog-blue)">Phase 2: Engaging</div>
-          <div class="ptc-month">Month 14 of 36</div>
-        </div>
-      </div>
-
-      <!-- Darius M. - M31, Post-programme, 0 relapses -->
-      <div class="ptc-row">
-        <div>
-          <div class="ptc-name">Darius M.</div>
-          <div class="ptc-id">SOG-2023-0089</div>
-        </div>
-        <div class="ptc-bar-cell">
-          <div class="ptc-bar-track">
-            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-purple)"></div>
-            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-blue)"></div>
-            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-teal)"></div>
-            <div class="ptc-bar-seg" style="width:33.33%;background:var(--sog-green)"></div>
-          </div>
-          <div class="ptc-now-dot" style="left:86.11%;background:var(--sog-green)"></div>
-        </div>
-        <div>
-          <div class="ptc-phase" style="color:var(--sog-green)">Post Programme</div>
-          <div class="ptc-month">Month 31 of 36</div>
-        </div>
-      </div>
-
-      <!-- Jordan S. - M9, Phase 2, 1 relapse -->
-      <div class="ptc-row">
-        <div>
-          <div class="ptc-name">Jordan S.</div>
-          <div class="ptc-id">SOG-2024-0063 <span style="color:var(--sog-red);font-weight:600">⚠ ×1</span></div>
-        </div>
-        <div class="ptc-bar-cell">
-          <div class="ptc-bar-track">
-            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-purple)"></div>
-            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-blue)"></div>
-            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-teal);opacity:.35"></div>
-            <div class="ptc-bar-seg" style="width:33.33%;background:var(--sog-green);opacity:.2"></div>
-          </div>
-          <div class="ptc-relapse-dot" style="left:11.11%"></div>
-          <div class="ptc-now-dot" style="left:25%;background:var(--sog-blue)"></div>
-        </div>
-        <div>
-          <div class="ptc-phase" style="color:var(--sog-blue)">Phase 2: Engaging</div>
-          <div class="ptc-month">Month 9 of 36</div>
-        </div>
-      </div>
-
-    </div>
-    </div>
-    <div class="code-block collapsed" style="margin-top:16px">
-      <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">HTML</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
-      <pre>&lt;div class="ptc-card"&gt;
-  &lt;div style="margin-bottom:14px"&gt;
-    &lt;div class="ptc-title"&gt;Key Worker: D. Okafor&lt;/div&gt;
-    &lt;div class="ptc-subtitle"&gt;5 participants · 24-month programme + 12-month follow-up&lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class="ptc-col-head"&gt;
-    &lt;div class="ptc-col-label"&gt;Participant&lt;/div&gt;
-    &lt;div class="ptc-col-label"&gt;Progress&lt;/div&gt;
-    &lt;div class="ptc-col-label"&gt;Phase / Month&lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Row: positions use (month / 36) × 100% --&gt;
-  &lt;div class="ptc-row"&gt;
-    &lt;div&gt;
-      &lt;div class="ptc-name"&gt;Marcus T.&lt;/div&gt;
-      &lt;div class="ptc-id"&gt;SOG-2024-0041 &lt;span style="color:var(--sog-red);font-weight:600"&gt;⚠ ×2&lt;/span&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="ptc-bar-cell"&gt;
-      &lt;div class="ptc-bar-track"&gt;
-        &lt;div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-purple)"&gt;&lt;/div&gt;
-        &lt;div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-blue)"&gt;&lt;/div&gt;
-        &lt;div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-teal)"&gt;&lt;/div&gt;
-        &lt;div class="ptc-bar-seg" style="width:33.33%;background:var(--sog-green);opacity:.2"&gt;&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class="ptc-relapse-dot" style="left:13.89%"&gt;&lt;/div&gt;
-      &lt;div class="ptc-relapse-dot" style="left:30.56%"&gt;&lt;/div&gt;
-      &lt;div class="ptc-now-dot" style="left:55.56%;background:var(--sog-teal)"&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div&gt;
-      &lt;div class="ptc-phase" style="color:var(--sog-teal)"&gt;Phase 3: Advancing&lt;/div&gt;
-      &lt;div class="ptc-month"&gt;Month 20 of 36&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Post-programme row example --&gt;
-  &lt;div class="ptc-row"&gt;
-    &lt;div&gt;
-      &lt;div class="ptc-name"&gt;Liam O.&lt;/div&gt;
-      &lt;div class="ptc-id"&gt;SOG-2023-0071 &lt;span style="color:var(--sog-red);font-weight:600"&gt;⚠ ×1&lt;/span&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="ptc-bar-cell"&gt;
-      &lt;div class="ptc-bar-track"&gt;
-        &lt;div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-purple)"&gt;&lt;/div&gt;
-        &lt;div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-blue)"&gt;&lt;/div&gt;
-        &lt;div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-teal)"&gt;&lt;/div&gt;
-        &lt;div class="ptc-bar-seg" style="width:33.33%;background:var(--sog-green)"&gt;&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class="ptc-relapse-dot" style="left:16.67%"&gt;&lt;/div&gt;
-      &lt;div class="ptc-now-dot" style="left:77.78%;background:var(--sog-green)"&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div&gt;
-      &lt;div class="ptc-phase" style="color:var(--sog-green)"&gt;Post Programme&lt;/div&gt;
-      &lt;div class="ptc-month"&gt;Month 28 of 36&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Repeat ptc-row for each participant --&gt;
-&lt;/div&gt;</pre>
-    </div>
-    <div class="code-block collapsed" style="margin-top:8px">
-      <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
-      <pre>/* Uses identical ptc-* CSS as the Cohort View above. */
-/* The only difference is 4 bar segments and (month / 36) × 100% for positions. */
-
-/* Post-programme segment states */
-/* Upcoming: background: var(--sog-green); opacity: 0.2 */
-/* Active:   background: var(--sog-green)               */
-
-/* Now-dot colour for post-programme participant */
-/* background: var(--sog-green) */</pre>
-    </div>
-  </div>
-
-  <div class="sg-sub">
-    <div class="sg-sub-title">Usage Rules</div>
-    <div class="info-callout" style="margin-bottom:12px">
-      <strong>Bar positions:</strong> Always calculate as <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">(month / 24) × 100</code> applied as a CSS <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">left</code> percentage. Never hardcode positions.
-    </div>
-    <div class="info-callout" style="margin-bottom:12px">
-      <strong>Phase colours:</strong> Phase 1 = <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">var(--sog-purple)</code>. Phase 2 = <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">var(--sog-blue)</code>. Phase 3 = <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">var(--sog-teal)</code> at <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">opacity: 0.35</code> until active. Do not use red as a phase segment - relapse is an event marker, not a phase.
-    </div>
-    <div class="info-callout" style="margin-bottom:12px">
-      <strong>Relapse markers:</strong> Red diamonds (<code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">var(--sog-red)</code>, <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">rotate(45deg)</code>) placed at their exact month position on the bar. No phase reset - the bar does not rewind. The header badge shows the total relapse count.
-    </div>
-    <div class="info-callout">
-      <strong>Survey urgency:</strong> Flag any survey within 12 weeks of today as <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">pt-s-soon</code> and colour the meta card date <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">var(--color-warning-text)</code>. Post-programme surveys use <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">pt-s-upcoming</code> with the label "Post-programme".
-    </div>
-  </div>
-
-
-</section>
-
-
-
 <!-- =================== ALERTS =================== -->
 <section id="alerts" class="sg-section">
   <div class="sg-section-label">Components</div>
@@ -11466,6 +10687,785 @@ document.querySelectorAll('.ring-node').forEach(node => {
       </div>
     </div>
   </div>
+
+</section>
+
+
+
+<!-- =================== PROGRAMME POSITION =================== -->
+<section id="prog-timeline" class="sg-section">
+  <div class="sg-section-label">Patterns</div>
+  <h2 class="sg-section-title">Programme Position</h2>
+  <p class="sg-section-desc">A compact progress tracker that shows a participant's current position within the 24-month SOG programme. The bar visualises three equal phase segments with relapse events marked as orange diamonds and the current month as a pulsing blue dot. Use at the top of a participant detail view or case summary panel.</p>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">24-Month Programme Timeline</div>
+    <div class="sg-sub-desc">Phase segments are equal thirds of the 24-month bar. Marker positions are calculated as <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">(month / 24) × 100%</code>. Active phase is full opacity; future phases dim to 35%. Relapse is an event on the bar; it does not reset or rewind the phase.</div>
+
+    <div class="sg-example column" style="padding:32px 40px">
+      <div class="pt-card">
+
+        <!-- Header -->
+        <div class="pt-header">
+          <div>
+            <div class="pt-name">Marcus T.</div>
+            <div class="pt-id">Programme ID: SOG-2024-0041</div>
+          </div>
+          <div style="display:flex;gap:6px">
+            <span class="badge badge-blue">● Active</span>
+            <span class="badge badge-red">⚠ 2 relapses</span>
+          </div>
+        </div>
+
+        <!-- Meta row -->
+        <div class="pt-meta-row">
+          <div class="pt-meta-card">
+            <div class="pt-meta-label">Start date</div>
+            <div class="pt-meta-value">3 Mar 2024</div>
+          </div>
+          <div class="pt-meta-card">
+            <div class="pt-meta-label">Current phase</div>
+            <div class="pt-meta-value" style="color:var(--sog-blue)">Phase 2</div>
+          </div>
+          <div class="pt-meta-card">
+            <div class="pt-meta-label">Month</div>
+            <div class="pt-meta-value"><span class="pt-pip"></span>14 of 24</div>
+          </div>
+          <div class="pt-meta-card">
+            <div class="pt-meta-label">Mid survey due</div>
+            <div class="pt-meta-value" style="color:var(--color-warning-text)">3 Sep 2025</div>
+          </div>
+        </div>
+
+        <!-- Progress bar -->
+        <div class="pt-bar-wrap">
+          <div class="pt-bar-outer">
+            <div class="pt-phase-track">
+              <!-- Phase 1: complete - full opacity purple -->
+              <div class="pt-phase-seg" style="width:33.3%;background:var(--sog-purple)"></div>
+              <!-- Phase 2: active - full opacity blue -->
+              <div class="pt-phase-seg" style="width:33.3%;background:var(--sog-blue)"></div>
+              <!-- Phase 3: upcoming - dimmed teal -->
+              <div class="pt-phase-seg" style="width:33.4%;background:var(--sog-teal);opacity:0.35"></div>
+            </div>
+            <!-- Relapse M5: (5/24)×100 = 20.83% -->
+            <div class="pt-relapse-marker" style="left:20.83%"></div>
+            <!-- Relapse M11: (11/24)×100 = 45.83% -->
+            <div class="pt-relapse-marker" style="left:45.83%"></div>
+            <!-- Now M14: (14/24)×100 = 58.33% -->
+            <div class="pt-now-ring" style="left:58.33%"></div>
+            <div class="pt-now-marker" style="left:58.33%"></div>
+          </div>
+          <!-- Marker labels -->
+          <div class="pt-marker-row">
+            <span class="pt-marker-label" style="left:0%;transform:none">Start</span>
+            <span class="pt-marker-label pt-marker-relapse" style="left:20.83%">◆ M5</span>
+            <span class="pt-marker-label pt-marker-relapse" style="left:45.83%">◆ M11</span>
+            <span class="pt-marker-label pt-marker-now" style="left:58.33%">↑ Now</span>
+            <span class="pt-marker-label" style="left:100%;transform:translateX(-100%)">End</span>
+          </div>
+          <!-- Phase labels -->
+          <div class="pt-phase-labels">
+            <div class="pt-phase-label" style="width:33.3%">
+              <span class="pt-phase-name" style="color:var(--sog-purple)">Phase 1: Engagement</span>
+              <span class="pt-phase-dur">Months 1–8</span>
+            </div>
+            <div class="pt-phase-label" style="width:33.3%">
+              <span class="pt-phase-name" style="color:var(--sog-blue)">Phase 2: Engaging</span>
+              <span class="pt-phase-dur">Months 9–16</span>
+            </div>
+            <div class="pt-phase-label" style="width:33.4%">
+              <span class="pt-phase-name" style="color:var(--text-muted)">Phase 3: Advancing</span>
+              <span class="pt-phase-dur">Months 17–24</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="code-block collapsed" style="margin-top:16px">
+    <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">HTML</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+    <pre>&lt;div class="pt-card"&gt;
+
+  &lt;!-- Header --&gt;
+  &lt;div class="pt-header"&gt;
+    &lt;div&gt;
+      &lt;div class="pt-name"&gt;Marcus T.&lt;/div&gt;
+      &lt;div class="pt-id"&gt;Programme ID: SOG-2024-0041&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div style="display:flex;gap:6px"&gt;
+      &lt;span class="badge badge-blue"&gt;● Active&lt;/span&gt;
+      &lt;span class="badge badge-red"&gt;⚠ 2 relapses&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Meta row --&gt;
+  &lt;div class="pt-meta-row"&gt;
+    &lt;div class="pt-meta-card"&gt;
+      &lt;div class="pt-meta-label"&gt;Start date&lt;/div&gt;
+      &lt;div class="pt-meta-value"&gt;3 Mar 2024&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="pt-meta-card"&gt;
+      &lt;div class="pt-meta-label"&gt;Current phase&lt;/div&gt;
+      &lt;div class="pt-meta-value" style="color:var(--sog-blue)"&gt;Phase 2&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="pt-meta-card"&gt;
+      &lt;div class="pt-meta-label"&gt;Month&lt;/div&gt;
+      &lt;div class="pt-meta-value"&gt;&lt;span class="pt-pip"&gt;&lt;/span&gt;14 of 24&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="pt-meta-card"&gt;
+      &lt;div class="pt-meta-label"&gt;Mid survey due&lt;/div&gt;
+      &lt;div class="pt-meta-value" style="color:var(--color-warning-text)"&gt;3 Sep 2025&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Progress bar --&gt;
+  &lt;div class="pt-bar-wrap"&gt;
+    &lt;div class="pt-bar-outer"&gt;
+      &lt;div class="pt-phase-track"&gt;
+        &lt;div class="pt-phase-seg" style="width:33.3%;background:var(--sog-purple)"&gt;&lt;/div&gt;
+        &lt;div class="pt-phase-seg" style="width:33.3%;background:var(--sog-blue)"&gt;&lt;/div&gt;
+        &lt;div class="pt-phase-seg" style="width:33.4%;background:var(--sog-teal);opacity:0.35"&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;!-- Positions: (month / 24) × 100% --&gt;
+      &lt;div class="pt-relapse-marker" style="left:20.83%"&gt;&lt;/div&gt;
+      &lt;div class="pt-relapse-marker" style="left:45.83%"&gt;&lt;/div&gt;
+      &lt;div class="pt-now-ring"     style="left:58.33%"&gt;&lt;/div&gt;
+      &lt;div class="pt-now-marker"   style="left:58.33%"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="pt-marker-row"&gt;
+      &lt;span class="pt-marker-label" style="left:0%;transform:none"&gt;Start&lt;/span&gt;
+      &lt;span class="pt-marker-label pt-marker-relapse" style="left:20.83%"&gt;◆ M5&lt;/span&gt;
+      &lt;span class="pt-marker-label pt-marker-relapse" style="left:45.83%"&gt;◆ M11&lt;/span&gt;
+      &lt;span class="pt-marker-label pt-marker-now"     style="left:58.33%"&gt;↑ Now&lt;/span&gt;
+      &lt;span class="pt-marker-label" style="left:100%;transform:translateX(-100%)"&gt;End&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="pt-phase-labels" style="margin-top:10px"&gt;
+      &lt;div class="pt-phase-label" style="width:33.3%"&gt;
+        &lt;span class="pt-phase-name" style="color:var(--sog-purple)"&gt;Phase 1: Engagement&lt;/span&gt;
+        &lt;span class="pt-phase-dur"&gt;Months 1–8&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="pt-phase-label" style="width:33.3%"&gt;
+        &lt;span class="pt-phase-name" style="color:var(--sog-blue)"&gt;Phase 2: Engaging&lt;/span&gt;
+        &lt;span class="pt-phase-dur"&gt;Months 9–16&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="pt-phase-label" style="width:33.4%"&gt;
+        &lt;span class="pt-phase-name" style="color:var(--text-muted)"&gt;Phase 3: Advancing&lt;/span&gt;
+        &lt;span class="pt-phase-dur"&gt;Months 17–24&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre>
+  </div>
+  <div class="code-block collapsed" style="margin-top:8px">
+    <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+    <pre>.pt-card { background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04); }
+.pt-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.pt-name { font-size: 18px; font-weight: 700; color: var(--text); }
+.pt-id { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.pt-meta-row  { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 20px; }
+.pt-meta-card { background: var(--muted-bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; transition: border-color 150ms ease; }
+.pt-meta-card:hover { border-color: rgba(0,0,0,.2); }
+.pt-meta-label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+.pt-meta-value { font-size: 15px; font-weight: 500; color: var(--text); }
+.pt-pip { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--sog-blue); vertical-align: middle; margin-right: 4px; }
+.pt-bar-outer { position: relative; }
+.pt-phase-track { display: flex; height: 20px; border-radius: 10px; overflow: visible; gap: 2px; }
+.pt-phase-seg { height: 100%; border-radius: 5px; flex-shrink: 0; }
+.pt-relapse-marker { position: absolute; top: 10px; transform: translate(-50%,-50%) rotate(45deg); width: 12px; height: 12px; border-radius: 2px; background: var(--sog-red); border: 1.5px solid #fff; z-index: 3; }
+.pt-now-ring   { position: absolute; top: 10px; transform: translate(-50%,-50%); width: 30px; height: 30px; border-radius: 50%; background: var(--blue-10); z-index: 3; }
+.pt-now-marker { position: absolute; top: 10px; transform: translate(-50%,-50%); width: 18px; height: 18px; border-radius: 50%; background: var(--sog-blue); border: 2px solid #fff; z-index: 4; }
+.pt-marker-row  { position: relative; height: 24px; margin-top: 8px; }
+.pt-marker-label { position: absolute; transform: translateX(-50%); font-size: 10px; white-space: nowrap; color: var(--text-muted); }
+.pt-marker-now     { color: var(--sog-blue);   font-weight: 600; }
+.pt-marker-relapse { color: var(--sog-red); font-weight: 600; }
+.pt-phase-labels { display: flex; margin-top: 12px; }
+.pt-phase-label  { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.pt-phase-name { font-size: 13px; font-weight: 600; }
+.pt-phase-dur  { font-size: 10px; color: var(--text-muted); }
+</pre>
+  </div>
+
+  <!-- ── Alternative: Phase 4 ─────────────────────────────────── -->
+  <div class="sg-sub" style="margin-top:24px">
+    <div class="sg-sub-title">With Post-Programme Follow-up</div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;line-height:1.55">Extends the bar to 36 months with Phase 3 active and the follow-up period greyed out. Bar positions recalculate as <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">(month / 36) × 100</code>.</p>
+
+    <div class="sg-example column" style="padding:32px 40px">
+    <div class="pt-card">
+
+      <div class="pt-header">
+        <div>
+          <div class="pt-name">Marcus T.</div>
+          <div class="pt-id">Programme ID: SOG-2024-0041</div>
+        </div>
+        <div style="display:flex;gap:6px">
+          <span class="badge badge-blue">● Active</span>
+          <span class="badge badge-red">⚠ 2 relapses</span>
+        </div>
+      </div>
+
+      <div class="pt-meta-row">
+        <div class="pt-meta-card">
+          <div class="pt-meta-label">Start date</div>
+          <div class="pt-meta-value">3 Mar 2024</div>
+        </div>
+        <div class="pt-meta-card">
+          <div class="pt-meta-label">Current phase</div>
+          <div class="pt-meta-value" style="color:var(--sog-teal)">Phase 3</div>
+        </div>
+        <div class="pt-meta-card">
+          <div class="pt-meta-label">Month</div>
+          <div class="pt-meta-value"><span class="pt-pip" style="background:var(--sog-teal)"></span>20 of 36</div>
+        </div>
+        <div class="pt-meta-card">
+          <div class="pt-meta-label">Programme end</div>
+          <div class="pt-meta-value">3 Mar 2026</div>
+        </div>
+      </div>
+
+      <div class="pt-bar-wrap">
+        <div class="pt-bar-outer">
+          <div class="pt-phase-track">
+            <!-- Phase 1: 8/36 = 22.22% - complete -->
+            <div class="pt-phase-seg" style="width:22.22%;background:var(--sog-purple)"></div>
+            <!-- Phase 2: 8/36 = 22.22% - complete -->
+            <div class="pt-phase-seg" style="width:22.22%;background:var(--sog-blue)"></div>
+            <!-- Phase 3: 8/36 = 22.22% - active -->
+            <div class="pt-phase-seg" style="width:22.22%;background:var(--sog-teal)"></div>
+            <!-- Phase 4: 12/36 = 33.33% - upcoming -->
+            <div class="pt-phase-seg" style="width:33.33%;background:var(--sog-green);opacity:0.2"></div>
+          </div>
+          <!-- Relapse M5: (5/36)×100 = 13.89% -->
+          <div class="pt-relapse-marker" style="left:13.89%"></div>
+          <!-- Relapse M11: (11/36)×100 = 30.56% -->
+          <div class="pt-relapse-marker" style="left:30.56%"></div>
+          <!-- Now M20: (20/36)×100 = 55.56% -->
+          <div class="pt-now-ring" style="left:55.56%"></div>
+          <div class="pt-now-marker" style="left:55.56%"></div>
+        </div>
+        <div class="pt-marker-row">
+          <span class="pt-marker-label" style="left:0%;transform:none">Start</span>
+          <span class="pt-marker-label pt-marker-relapse" style="left:13.89%">◆ M5</span>
+          <span class="pt-marker-label pt-marker-relapse" style="left:30.56%">◆ M11</span>
+          <span class="pt-marker-label pt-marker-now" style="left:55.56%">↑ Now</span>
+          <span class="pt-marker-label" style="left:100%;transform:translateX(-100%)">End</span>
+        </div>
+        <div class="pt-phase-labels">
+          <div class="pt-phase-label" style="width:22.22%">
+            <span class="pt-phase-name" style="color:var(--sog-purple)">Phase 1: Engagement</span>
+            <span class="pt-phase-dur">Months 1–8</span>
+          </div>
+          <div class="pt-phase-label" style="width:22.22%">
+            <span class="pt-phase-name" style="color:var(--sog-blue)">Phase 2: Engaging</span>
+            <span class="pt-phase-dur">Months 9–16</span>
+          </div>
+          <div class="pt-phase-label" style="width:22.22%">
+            <span class="pt-phase-name" style="color:var(--sog-teal)">Phase 3: Advancing</span>
+            <span class="pt-phase-dur">Months 17–24</span>
+          </div>
+          <div class="pt-phase-label" style="width:33.33%">
+            <span class="pt-phase-name" style="color:var(--text-muted)">Post Programme Follow-up</span>
+            <span class="pt-phase-dur">Months 25–36</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    </div>
+    <div class="code-block collapsed" style="margin-top:16px">
+      <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">HTML</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+      <pre>&lt;div class="pt-card"&gt;
+
+  &lt;div class="pt-header"&gt;
+    &lt;div&gt;
+      &lt;div class="pt-name"&gt;Marcus T.&lt;/div&gt;
+      &lt;div class="pt-id"&gt;Programme ID: SOG-2024-0041&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div style="display:flex;gap:6px"&gt;
+      &lt;span class="badge badge-blue"&gt;● Active&lt;/span&gt;
+      &lt;span class="badge badge-red"&gt;⚠ 2 relapses&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="pt-meta-row"&gt;
+    &lt;div class="pt-meta-card"&gt;
+      &lt;div class="pt-meta-label"&gt;Start date&lt;/div&gt;
+      &lt;div class="pt-meta-value"&gt;3 Mar 2024&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="pt-meta-card"&gt;
+      &lt;div class="pt-meta-label"&gt;Current phase&lt;/div&gt;
+      &lt;div class="pt-meta-value" style="color:var(--sog-teal)"&gt;Phase 3&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="pt-meta-card"&gt;
+      &lt;div class="pt-meta-label"&gt;Month&lt;/div&gt;
+      &lt;div class="pt-meta-value"&gt;&lt;span class="pt-pip" style="background:var(--sog-teal)"&gt;&lt;/span&gt;20 of 36&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="pt-meta-card"&gt;
+      &lt;div class="pt-meta-label"&gt;Programme end&lt;/div&gt;
+      &lt;div class="pt-meta-value"&gt;3 Mar 2026&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Progress bar: positions use (month / 36) × 100% --&gt;
+  &lt;div class="pt-bar-wrap"&gt;
+    &lt;div class="pt-bar-outer"&gt;
+      &lt;div class="pt-phase-track"&gt;
+        &lt;div class="pt-phase-seg" style="width:22.22%;background:var(--sog-purple)"&gt;&lt;/div&gt;
+        &lt;div class="pt-phase-seg" style="width:22.22%;background:var(--sog-blue)"&gt;&lt;/div&gt;
+        &lt;div class="pt-phase-seg" style="width:22.22%;background:var(--sog-teal)"&gt;&lt;/div&gt;
+        &lt;div class="pt-phase-seg" style="width:33.33%;background:var(--sog-green);opacity:0.2"&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="pt-relapse-marker" style="left:13.89%"&gt;&lt;/div&gt;
+      &lt;div class="pt-relapse-marker" style="left:30.56%"&gt;&lt;/div&gt;
+      &lt;div class="pt-now-ring"     style="left:55.56%"&gt;&lt;/div&gt;
+      &lt;div class="pt-now-marker"   style="left:55.56%"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="pt-marker-row"&gt;
+      &lt;span class="pt-marker-label" style="left:0%;transform:none"&gt;Start&lt;/span&gt;
+      &lt;span class="pt-marker-label pt-marker-relapse" style="left:13.89%"&gt;◆ M5&lt;/span&gt;
+      &lt;span class="pt-marker-label pt-marker-relapse" style="left:30.56%"&gt;◆ M11&lt;/span&gt;
+      &lt;span class="pt-marker-label pt-marker-now"     style="left:55.56%"&gt;↑ Now&lt;/span&gt;
+      &lt;span class="pt-marker-label" style="left:100%;transform:translateX(-100%)"&gt;End&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="pt-phase-labels"&gt;
+      &lt;div class="pt-phase-label" style="width:22.22%"&gt;
+        &lt;span class="pt-phase-name" style="color:var(--sog-purple)"&gt;Phase 1: Engagement&lt;/span&gt;
+        &lt;span class="pt-phase-dur"&gt;Months 1–8&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="pt-phase-label" style="width:22.22%"&gt;
+        &lt;span class="pt-phase-name" style="color:var(--sog-blue)"&gt;Phase 2: Engaging&lt;/span&gt;
+        &lt;span class="pt-phase-dur"&gt;Months 9–16&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="pt-phase-label" style="width:22.22%"&gt;
+        &lt;span class="pt-phase-name" style="color:var(--sog-teal)"&gt;Phase 3: Advancing&lt;/span&gt;
+        &lt;span class="pt-phase-dur"&gt;Months 17–24&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="pt-phase-label" style="width:33.33%"&gt;
+        &lt;span class="pt-phase-name" style="color:var(--text-muted)"&gt;Post Programme Follow-up&lt;/span&gt;
+        &lt;span class="pt-phase-dur"&gt;Months 25–36&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre>
+    </div>
+    <div class="code-block collapsed" style="margin-top:8px">
+      <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+      <pre>/* Uses identical pt-* classes as the 24-month card. */
+/* The only difference is 4 segments and (month / 36) × 100% for positions. */
+
+.pt-phase-seg { height: 100%; border-radius: 5px; flex-shrink: 0; }
+
+/* Post-programme follow-up segment */
+/* width: 33.33%; background: var(--sog-green); opacity: 0.2 - upcoming */
+/* width: 33.33%; background: var(--sog-green)              - active     */</pre>
+    </div>
+  </div>
+
+  <!-- ── Cohort: 24-month ──────────────────────────────────────── -->
+  <div class="sg-sub" style="margin-top:24px">
+    <div class="sg-sub-title">Cohort View</div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;line-height:1.55">All participants on a shared 24-month scale. Bar positions use <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">(month / 24) × 100</code>.</p>
+
+    <div class="sg-example column" style="padding:32px 40px">
+    <div class="ptc-card">
+      <div style="margin-bottom:14px">
+        <div class="ptc-title">Key Worker: D. Okafor</div>
+        <div class="ptc-subtitle">5 participants · 24-month programme</div>
+      </div>
+      <div class="ptc-col-head">
+        <div class="ptc-col-label">Participant</div>
+        <div class="ptc-col-label">Progress</div>
+        <div class="ptc-col-label">Phase / Month</div>
+      </div>
+
+      <!-- Marcus T. - M14, Phase 2, 2 relapses -->
+      <div class="ptc-row">
+        <div>
+          <div class="ptc-name">Marcus T.</div>
+          <div class="ptc-id">SOG-2024-0041 <span style="color:var(--sog-red);font-weight:600">⚠ ×2</span></div>
+        </div>
+        <div class="ptc-bar-cell">
+          <div class="ptc-bar-track">
+            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-purple)"></div>
+            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-blue)"></div>
+            <div class="ptc-bar-seg" style="width:33.4%;background:var(--sog-teal);opacity:.35"></div>
+          </div>
+          <div class="ptc-relapse-dot" style="left:20.83%"></div>
+          <div class="ptc-relapse-dot" style="left:45.83%"></div>
+          <div class="ptc-now-dot" style="left:58.33%;background:var(--sog-blue)"></div>
+        </div>
+        <div>
+          <div class="ptc-phase" style="color:var(--sog-blue)">Phase 2: Engaging</div>
+          <div class="ptc-month">Month 14 of 24</div>
+        </div>
+      </div>
+
+      <!-- Aisha K. - M6, Phase 1, 0 relapses -->
+      <div class="ptc-row">
+        <div>
+          <div class="ptc-name">Aisha K.</div>
+          <div class="ptc-id">SOG-2024-0055</div>
+        </div>
+        <div class="ptc-bar-cell">
+          <div class="ptc-bar-track">
+            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-purple)"></div>
+            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-blue);opacity:.35"></div>
+            <div class="ptc-bar-seg" style="width:33.4%;background:var(--sog-teal);opacity:.35"></div>
+          </div>
+          <div class="ptc-now-dot" style="left:25%;background:var(--sog-purple)"></div>
+        </div>
+        <div>
+          <div class="ptc-phase" style="color:var(--sog-purple)">Phase 1: Engagement</div>
+          <div class="ptc-month">Month 6 of 24</div>
+        </div>
+      </div>
+
+      <!-- Darius M. - M19, Phase 3, 1 relapse -->
+      <div class="ptc-row">
+        <div>
+          <div class="ptc-name">Darius M.</div>
+          <div class="ptc-id">SOG-2023-0089 <span style="color:var(--sog-red);font-weight:600">⚠ ×1</span></div>
+        </div>
+        <div class="ptc-bar-cell">
+          <div class="ptc-bar-track">
+            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-purple)"></div>
+            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-blue)"></div>
+            <div class="ptc-bar-seg" style="width:33.4%;background:var(--sog-teal)"></div>
+          </div>
+          <div class="ptc-relapse-dot" style="left:33.33%"></div>
+          <div class="ptc-now-dot" style="left:79.17%;background:var(--sog-teal)"></div>
+        </div>
+        <div>
+          <div class="ptc-phase" style="color:var(--sog-teal)">Phase 3: Advancing</div>
+          <div class="ptc-month">Month 19 of 24</div>
+        </div>
+      </div>
+
+      <!-- Jordan S. - M9, Phase 2, 0 relapses -->
+      <div class="ptc-row">
+        <div>
+          <div class="ptc-name">Jordan S.</div>
+          <div class="ptc-id">SOG-2024-0063</div>
+        </div>
+        <div class="ptc-bar-cell">
+          <div class="ptc-bar-track">
+            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-purple)"></div>
+            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-blue)"></div>
+            <div class="ptc-bar-seg" style="width:33.4%;background:var(--sog-teal);opacity:.35"></div>
+          </div>
+          <div class="ptc-now-dot" style="left:37.5%;background:var(--sog-blue)"></div>
+        </div>
+        <div>
+          <div class="ptc-phase" style="color:var(--sog-blue)">Phase 2: Engaging</div>
+          <div class="ptc-month">Month 9 of 24</div>
+        </div>
+      </div>
+
+      <!-- Priya N. - M3, Phase 1, 0 relapses -->
+      <div class="ptc-row">
+        <div>
+          <div class="ptc-name">Priya N.</div>
+          <div class="ptc-id">SOG-2025-0012</div>
+        </div>
+        <div class="ptc-bar-cell">
+          <div class="ptc-bar-track">
+            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-purple)"></div>
+            <div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-blue);opacity:.35"></div>
+            <div class="ptc-bar-seg" style="width:33.4%;background:var(--sog-teal);opacity:.35"></div>
+          </div>
+          <div class="ptc-now-dot" style="left:12.5%;background:var(--sog-purple)"></div>
+        </div>
+        <div>
+          <div class="ptc-phase" style="color:var(--sog-purple)">Phase 1: Engagement</div>
+          <div class="ptc-month">Month 3 of 24</div>
+        </div>
+      </div>
+
+    </div>
+    </div>
+    <div class="code-block collapsed" style="margin-top:16px">
+      <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">HTML</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+      <pre>&lt;div class="ptc-card"&gt;
+  &lt;div style="margin-bottom:14px"&gt;
+    &lt;div class="ptc-title"&gt;Key Worker: D. Okafor&lt;/div&gt;
+    &lt;div class="ptc-subtitle"&gt;5 participants · 24-month programme&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="ptc-col-head"&gt;
+    &lt;div class="ptc-col-label"&gt;Participant&lt;/div&gt;
+    &lt;div class="ptc-col-label"&gt;Progress&lt;/div&gt;
+    &lt;div class="ptc-col-label"&gt;Phase / Month&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Row: positions use (month / 24) × 100% --&gt;
+  &lt;div class="ptc-row"&gt;
+    &lt;div&gt;
+      &lt;div class="ptc-name"&gt;Marcus T.&lt;/div&gt;
+      &lt;div class="ptc-id"&gt;SOG-2024-0041 &lt;span style="color:var(--sog-red);font-weight:600"&gt;⚠ ×2&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="ptc-bar-cell"&gt;
+      &lt;div class="ptc-bar-track"&gt;
+        &lt;div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-purple)"&gt;&lt;/div&gt;
+        &lt;div class="ptc-bar-seg" style="width:33.3%;background:var(--sog-blue)"&gt;&lt;/div&gt;
+        &lt;div class="ptc-bar-seg" style="width:33.4%;background:var(--sog-teal);opacity:.35"&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="ptc-relapse-dot" style="left:20.83%"&gt;&lt;/div&gt;
+      &lt;div class="ptc-relapse-dot" style="left:45.83%"&gt;&lt;/div&gt;
+      &lt;div class="ptc-now-dot" style="left:58.33%;background:var(--sog-blue)"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;div class="ptc-phase" style="color:var(--sog-blue)"&gt;Phase 2: Engaging&lt;/div&gt;
+      &lt;div class="ptc-month"&gt;Month 14 of 24&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Repeat ptc-row for each participant --&gt;
+&lt;/div&gt;</pre>
+    </div>
+    <div class="code-block collapsed" style="margin-top:8px">
+      <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+      <pre>.ptc-card { background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04); }
+.ptc-title { font-size: 16px; font-weight: 700; color: var(--text); }
+.ptc-subtitle { font-size: 12px; color: var(--text-muted); margin-top: 2px; margin-bottom: 16px; }
+.ptc-col-head { display: grid; grid-template-columns: 150px 1fr 110px; gap: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); margin-bottom: 2px; }
+.ptc-col-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); }
+.ptc-row { display: grid; grid-template-columns: 150px 1fr 110px; gap: 14px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); }
+.ptc-row:last-child { border-bottom: none; }
+.ptc-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.ptc-id { font-size: 11px; color: var(--text-muted); }
+.ptc-bar-cell { min-width: 0; position: relative; height: 20px; display: flex; align-items: center; }
+.ptc-bar-track { display: flex; height: 8px; border-radius: 4px; overflow: visible; gap: 1px; width: 100%; }
+.ptc-bar-seg { height: 100%; border-radius: 3px; flex-shrink: 0; }
+.ptc-now-dot { position: absolute; top: 10px; transform: translate(-50%,-50%); width: 12px; height: 12px; border-radius: 50%; border: 2px solid #fff; z-index: 4; }
+.ptc-relapse-dot { position: absolute; top: 10px; transform: translate(-50%,-50%) rotate(45deg); width: 7px; height: 7px; border-radius: 1px; background: var(--sog-red); border: 1px solid #fff; z-index: 3; }
+.ptc-phase { font-size: 12px; font-weight: 600; line-height: 1.3; }
+.ptc-month { font-size: 11px; color: var(--text-muted); }</pre>
+    </div>
+  </div>
+
+  <!-- ── Cohort: 36-month with post-programme ───────────────────── -->
+  <div class="sg-sub" style="margin-top:24px">
+    <div class="sg-sub-title">Cohort View with Post-Programme Follow-up</div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;line-height:1.55">All participants on a shared 36-month scale including the follow-up period. Bar positions use <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">(month / 36) × 100</code>.</p>
+
+    <div class="sg-example column" style="padding:32px 40px">
+    <div class="ptc-card">
+      <div style="margin-bottom:14px">
+        <div class="ptc-title">Key Worker: D. Okafor</div>
+        <div class="ptc-subtitle">5 participants · 24-month programme + 12-month follow-up</div>
+      </div>
+      <div class="ptc-col-head">
+        <div class="ptc-col-label">Participant</div>
+        <div class="ptc-col-label">Progress</div>
+        <div class="ptc-col-label">Phase / Month</div>
+      </div>
+
+      <!-- Marcus T. - M20, Phase 3, 2 relapses -->
+      <div class="ptc-row">
+        <div>
+          <div class="ptc-name">Marcus T.</div>
+          <div class="ptc-id">SOG-2024-0041 <span style="color:var(--sog-red);font-weight:600">⚠ ×2</span></div>
+        </div>
+        <div class="ptc-bar-cell">
+          <div class="ptc-bar-track">
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-purple)"></div>
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-blue)"></div>
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-teal)"></div>
+            <div class="ptc-bar-seg" style="width:33.33%;background:var(--sog-green);opacity:.2"></div>
+          </div>
+          <div class="ptc-relapse-dot" style="left:13.89%"></div>
+          <div class="ptc-relapse-dot" style="left:30.56%"></div>
+          <div class="ptc-now-dot" style="left:55.56%;background:var(--sog-teal)"></div>
+        </div>
+        <div>
+          <div class="ptc-phase" style="color:var(--sog-teal)">Phase 3: Advancing</div>
+          <div class="ptc-month">Month 20 of 36</div>
+        </div>
+      </div>
+
+      <!-- Liam O. - M28, Post-programme, 1 relapse -->
+      <div class="ptc-row">
+        <div>
+          <div class="ptc-name">Liam O.</div>
+          <div class="ptc-id">SOG-2023-0071 <span style="color:var(--sog-red);font-weight:600">⚠ ×1</span></div>
+        </div>
+        <div class="ptc-bar-cell">
+          <div class="ptc-bar-track">
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-purple)"></div>
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-blue)"></div>
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-teal)"></div>
+            <div class="ptc-bar-seg" style="width:33.33%;background:var(--sog-green)"></div>
+          </div>
+          <div class="ptc-relapse-dot" style="left:16.67%"></div>
+          <div class="ptc-now-dot" style="left:77.78%;background:var(--sog-green)"></div>
+        </div>
+        <div>
+          <div class="ptc-phase" style="color:var(--sog-green)">Post Programme</div>
+          <div class="ptc-month">Month 28 of 36</div>
+        </div>
+      </div>
+
+      <!-- Aisha K. - M14, Phase 2, 0 relapses -->
+      <div class="ptc-row">
+        <div>
+          <div class="ptc-name">Aisha K.</div>
+          <div class="ptc-id">SOG-2024-0055</div>
+        </div>
+        <div class="ptc-bar-cell">
+          <div class="ptc-bar-track">
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-purple)"></div>
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-blue)"></div>
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-teal);opacity:.35"></div>
+            <div class="ptc-bar-seg" style="width:33.33%;background:var(--sog-green);opacity:.2"></div>
+          </div>
+          <div class="ptc-now-dot" style="left:38.89%;background:var(--sog-blue)"></div>
+        </div>
+        <div>
+          <div class="ptc-phase" style="color:var(--sog-blue)">Phase 2: Engaging</div>
+          <div class="ptc-month">Month 14 of 36</div>
+        </div>
+      </div>
+
+      <!-- Darius M. - M31, Post-programme, 0 relapses -->
+      <div class="ptc-row">
+        <div>
+          <div class="ptc-name">Darius M.</div>
+          <div class="ptc-id">SOG-2023-0089</div>
+        </div>
+        <div class="ptc-bar-cell">
+          <div class="ptc-bar-track">
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-purple)"></div>
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-blue)"></div>
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-teal)"></div>
+            <div class="ptc-bar-seg" style="width:33.33%;background:var(--sog-green)"></div>
+          </div>
+          <div class="ptc-now-dot" style="left:86.11%;background:var(--sog-green)"></div>
+        </div>
+        <div>
+          <div class="ptc-phase" style="color:var(--sog-green)">Post Programme</div>
+          <div class="ptc-month">Month 31 of 36</div>
+        </div>
+      </div>
+
+      <!-- Jordan S. - M9, Phase 2, 1 relapse -->
+      <div class="ptc-row">
+        <div>
+          <div class="ptc-name">Jordan S.</div>
+          <div class="ptc-id">SOG-2024-0063 <span style="color:var(--sog-red);font-weight:600">⚠ ×1</span></div>
+        </div>
+        <div class="ptc-bar-cell">
+          <div class="ptc-bar-track">
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-purple)"></div>
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-blue)"></div>
+            <div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-teal);opacity:.35"></div>
+            <div class="ptc-bar-seg" style="width:33.33%;background:var(--sog-green);opacity:.2"></div>
+          </div>
+          <div class="ptc-relapse-dot" style="left:11.11%"></div>
+          <div class="ptc-now-dot" style="left:25%;background:var(--sog-blue)"></div>
+        </div>
+        <div>
+          <div class="ptc-phase" style="color:var(--sog-blue)">Phase 2: Engaging</div>
+          <div class="ptc-month">Month 9 of 36</div>
+        </div>
+      </div>
+
+    </div>
+    </div>
+    <div class="code-block collapsed" style="margin-top:16px">
+      <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">HTML</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+      <pre>&lt;div class="ptc-card"&gt;
+  &lt;div style="margin-bottom:14px"&gt;
+    &lt;div class="ptc-title"&gt;Key Worker: D. Okafor&lt;/div&gt;
+    &lt;div class="ptc-subtitle"&gt;5 participants · 24-month programme + 12-month follow-up&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="ptc-col-head"&gt;
+    &lt;div class="ptc-col-label"&gt;Participant&lt;/div&gt;
+    &lt;div class="ptc-col-label"&gt;Progress&lt;/div&gt;
+    &lt;div class="ptc-col-label"&gt;Phase / Month&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Row: positions use (month / 36) × 100% --&gt;
+  &lt;div class="ptc-row"&gt;
+    &lt;div&gt;
+      &lt;div class="ptc-name"&gt;Marcus T.&lt;/div&gt;
+      &lt;div class="ptc-id"&gt;SOG-2024-0041 &lt;span style="color:var(--sog-red);font-weight:600"&gt;⚠ ×2&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="ptc-bar-cell"&gt;
+      &lt;div class="ptc-bar-track"&gt;
+        &lt;div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-purple)"&gt;&lt;/div&gt;
+        &lt;div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-blue)"&gt;&lt;/div&gt;
+        &lt;div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-teal)"&gt;&lt;/div&gt;
+        &lt;div class="ptc-bar-seg" style="width:33.33%;background:var(--sog-green);opacity:.2"&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="ptc-relapse-dot" style="left:13.89%"&gt;&lt;/div&gt;
+      &lt;div class="ptc-relapse-dot" style="left:30.56%"&gt;&lt;/div&gt;
+      &lt;div class="ptc-now-dot" style="left:55.56%;background:var(--sog-teal)"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;div class="ptc-phase" style="color:var(--sog-teal)"&gt;Phase 3: Advancing&lt;/div&gt;
+      &lt;div class="ptc-month"&gt;Month 20 of 36&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Post-programme row example --&gt;
+  &lt;div class="ptc-row"&gt;
+    &lt;div&gt;
+      &lt;div class="ptc-name"&gt;Liam O.&lt;/div&gt;
+      &lt;div class="ptc-id"&gt;SOG-2023-0071 &lt;span style="color:var(--sog-red);font-weight:600"&gt;⚠ ×1&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="ptc-bar-cell"&gt;
+      &lt;div class="ptc-bar-track"&gt;
+        &lt;div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-purple)"&gt;&lt;/div&gt;
+        &lt;div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-blue)"&gt;&lt;/div&gt;
+        &lt;div class="ptc-bar-seg" style="width:22.22%;background:var(--sog-teal)"&gt;&lt;/div&gt;
+        &lt;div class="ptc-bar-seg" style="width:33.33%;background:var(--sog-green)"&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="ptc-relapse-dot" style="left:16.67%"&gt;&lt;/div&gt;
+      &lt;div class="ptc-now-dot" style="left:77.78%;background:var(--sog-green)"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;div class="ptc-phase" style="color:var(--sog-green)"&gt;Post Programme&lt;/div&gt;
+      &lt;div class="ptc-month"&gt;Month 28 of 36&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Repeat ptc-row for each participant --&gt;
+&lt;/div&gt;</pre>
+    </div>
+    <div class="code-block collapsed" style="margin-top:8px">
+      <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+      <pre>/* Uses identical ptc-* CSS as the Cohort View above. */
+/* The only difference is 4 bar segments and (month / 36) × 100% for positions. */
+
+/* Post-programme segment states */
+/* Upcoming: background: var(--sog-green); opacity: 0.2 */
+/* Active:   background: var(--sog-green)               */
+
+/* Now-dot colour for post-programme participant */
+/* background: var(--sog-green) */</pre>
+    </div>
+  </div>
+
+  <div class="sg-sub">
+    <div class="sg-sub-title">Usage Rules</div>
+    <div class="info-callout" style="margin-bottom:12px">
+      <strong>Bar positions:</strong> Always calculate as <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">(month / 24) × 100</code> applied as a CSS <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">left</code> percentage. Never hardcode positions.
+    </div>
+    <div class="info-callout" style="margin-bottom:12px">
+      <strong>Phase colours:</strong> Phase 1 = <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">var(--sog-purple)</code>. Phase 2 = <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">var(--sog-blue)</code>. Phase 3 = <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">var(--sog-teal)</code> at <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">opacity: 0.35</code> until active. Do not use red as a phase segment - relapse is an event marker, not a phase.
+    </div>
+    <div class="info-callout" style="margin-bottom:12px">
+      <strong>Relapse markers:</strong> Red diamonds (<code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">var(--sog-red)</code>, <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">rotate(45deg)</code>) placed at their exact month position on the bar. No phase reset - the bar does not rewind. The header badge shows the total relapse count.
+    </div>
+    <div class="info-callout">
+      <strong>Survey urgency:</strong> Flag any survey within 12 weeks of today as <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">pt-s-soon</code> and colour the meta card date <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">var(--color-warning-text)</code>. Post-programme surveys use <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">pt-s-upcoming</code> with the label "Post-programme".
+    </div>
+  </div>
+
 
 </section>
 
