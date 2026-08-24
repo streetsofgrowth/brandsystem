@@ -39,6 +39,16 @@ body{font-family:'Open Sans',sans-serif;font-size:14px;color:#323E48;background:
   --red-10:#FEE8EA;--red-20:#FDD4D7;--red-40:#FAA9AE;--red-70:#F76872;
   --orange-10:#FFF0E7;--orange-20:#FFE2CF;--orange-40:#FFC49F;--orange-70:#FF9856;
   --yellow-10:#FEFAE6;--yellow-20:#FCF5CC;--yellow-40:#FAEB99;--yellow-70:#F6DC4D;
+  /* ── Shades (Shade 1 = darkest AA-safe step, Shade 4 = near-black) ── */
+  --purple-s1:#534F85;--purple-s2:#403C65;--purple-s3:#2C2A46;--purple-s4:#191727;
+  --blue-s1:#3780AD;--blue-s2:#2A6284;--blue-s3:#1D445B;--blue-s4:#102633;
+  --sky-s1:#5098C2;--sky-s2:#3D7494;--sky-s3:#2A5167;--sky-s4:#182D39;
+  --teal-s1:#007F90;--teal-s2:#00616E;--teal-s3:#00434C;--teal-s4:#00252A;
+  --green-s1:#009583;--green-s2:#007264;--green-s3:#004F45;--green-s4:#002C27;
+  --charcoal-s1:#2B353D;--charcoal-s2:#21282F;--charcoal-s3:#171C20;--charcoal-s4:#0D1012;
+  --red-s1:#CF212D;--red-s2:#9E1922;--red-s3:#6D1218;--red-s4:#3D0A0D;
+  --orange-s1:#D95C0C;--orange-s2:#A64609;--orange-s3:#733106;--orange-s4:#401B04;
+  --yellow-s1:#CEAE00;--yellow-s2:#9D8500;--yellow-s3:#6D5C00;--yellow-s4:#3D3300;
   --bg:#fff;--surface:#fff;--muted-bg:#F5F5F7;--border:#E2E4E6;
   --text:#323E48;--text-muted:#70787F;--primary:#625D9C;
   --radius-sm:4px;--radius-md:8px;--radius-lg:12px;--radius-xl:16px;--radius-full:9999px;
@@ -267,6 +277,10 @@ html.theme-dark .sidebar-link.active{background:rgba(145,141,185,.30);color:#E4E
 .sg-example.column{flex-direction:column;align-items:stretch}
 .sg-example.center{justify-content:center;align-items:center}
 .sg-example.dark{background:#1E2128;border-color:#2A2F3A}
+/* Flush: the child is a self-framed panel (own 1px border + radius), so the
+   example surrenders its frame - otherwise the two 1px borders coincide and
+   read as a 2px rule. Use only when the child fills the example edge to edge. */
+.sg-example--flush{padding:0;display:block;overflow:hidden;background:transparent;border-color:transparent}
 .code-block{background:#1E2128;border-radius:10px;overflow:hidden;margin-bottom:24px;font-family:'SF Mono','Fira Code','Cascadia Code',Consolas,monospace;font-size:13px;line-height:1.6}
 .code-block-header{display:flex;justify-content:space-between;align-items:center;padding:8px 16px;background:#2A2F3A;border-bottom:1px solid rgba(255,255,255,.05)}
 .code-block.collapsed .code-block-header{border-bottom:none}
@@ -365,19 +379,42 @@ html.theme-dark .sidebar-link.active{background:rgba(145,141,185,.30);color:#E4E
 .logo-variant-desc{font-size:11px;color:var(--text-muted);line-height:1.4}
 .logo-clear-diagram{background:#fff;border:1px solid var(--border);border-radius:12px;padding:32px;display:flex;align-items:center;justify-content:center}
 .tint-strip{display:flex;border-radius:8px;overflow:hidden;height:48px;margin-bottom:8px}
+/* ── Type scale utility classes (spec: Typography > Type Scale) ── */
+.text-display-xl{font-size:56px;font-weight:700;letter-spacing:-.5px;line-height:1.1}
+.text-display-lg{font-size:48px;font-weight:700;letter-spacing:-.3px;line-height:1.1}
+.text-display-md{font-size:40px;font-weight:700;letter-spacing:-.2px;line-height:1.15}
+.text-display-sm{font-size:32px;font-weight:700;letter-spacing:-.1px;line-height:1.2}
+.text-headline-lg{font-size:24px;font-weight:700;line-height:1.3}
+.text-headline-md{font-size:20px;font-weight:600;line-height:1.3}
+.text-headline-sm{font-size:18px;font-weight:600;line-height:1.4}
+.text-body-lg{font-size:16px;font-weight:400;line-height:1.6}
+.text-body-md{font-size:14px;font-weight:400;line-height:1.6}
+.text-body-sm{font-size:12px;font-weight:400;line-height:1.5}
+.text-caption{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+@media(max-width:480px){
+  /* Typography rule: scale body and headings down one step at <=480px */
+  .text-display-xl{font-size:48px}.text-display-lg{font-size:40px}
+  .text-display-md{font-size:32px}.text-display-sm{font-size:24px}
+  .text-headline-lg{font-size:20px}.text-headline-md{font-size:18px}
+  .text-headline-sm{font-size:16px}
+}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-family:inherit;font-size:14px;font-weight:600;border-radius:8px;cursor:pointer;transition:background 150ms ease-out,transform 160ms ease-out;border:none;padding:0 16px;height:36px;text-decoration:none;white-space:nowrap}
 .btn:focus-visible{outline:2px solid var(--sog-purple);outline-offset:2px}
 .btn:active{transform:scale(0.97)}
-.btn-primary{background:var(--sog-purple);color:#fff}
-.btn-primary:hover{background:#534F87}
-.btn-secondary{background:var(--sog-teal);color:#fff}
-.btn-secondary:hover{background:#007A8A}
+/* Filled buttons: resting fill is the lightest step that clears 4.5:1 for a
+   white 14px/600 label; hover darkens by one shade step. Base Dynamic Teal
+   (3.58:1) and base Alert Red (4.08:1) fail small-text AA, so those two
+   variants rest on Shade 1 - see the Accessibility contrast table. */
+.btn-primary{background:var(--sog-purple);color:#fff}          /* 5.89:1 */
+.btn-primary:hover{background:var(--purple-s1)}                /* 7.40:1 */
+.btn-secondary{background:var(--teal-s1);color:#fff}           /* 4.73:1 */
+.btn-secondary:hover{background:var(--teal-s2)}                /* 7.15:1 */
 .btn-outline{background:transparent;color:var(--sog-purple);border:1.5px solid var(--sog-purple)}
 .btn-outline:hover{background:var(--purple-10)}
 .btn-ghost{background:transparent;color:var(--text)}
 .btn-ghost:hover{background:var(--charcoal-10)}
-.btn-danger{background:var(--sog-red);color:#fff}
-.btn-danger:hover{background:#CE1F2B}
+.btn-danger{background:var(--red-s1);color:#fff}               /* 5.37:1 */
+.btn-danger:hover{background:var(--red-s2)}                    /* 8.03:1 */
 .btn-link{background:transparent;color:var(--sog-purple);padding:0;height:auto;text-decoration:underline;font-weight:400;border:none}
 .btn-sm{height:28px;font-size:12px;padding:0 10px;border-radius:6px}
 .btn-lg{height:44px;font-size:16px;padding:0 24px;border-radius:10px}
@@ -445,16 +482,18 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
 .kpi-desc{font-size:11px;color:var(--text-muted);line-height:1.5}
 .badge{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;padding:3px 10px;border-radius:var(--radius-full);border:1px solid transparent;white-space:nowrap}
 .badge-purple{background:var(--purple-10);border-color:var(--purple-40);color:var(--sog-purple)}
-.badge-blue{background:var(--blue-10);border-color:var(--blue-40);color:#1B6FA0}
-.badge-sky{background:var(--sky-10);border-color:var(--sky-40);color:#2A7FAA}
-.badge-teal{background:var(--teal-10);border-color:var(--teal-40);color:#007080}
-.badge-green{background:var(--green-10);border-color:var(--green-40);color:#007A6C}
+/* Badge labels sit on a tint-10 fill at 12px/600 (small text, 4.5:1 required).
+   Base hues fail there, so the label drops to Shade 2 of its own colour. */
+.badge-blue{background:var(--blue-10);border-color:var(--blue-40);color:var(--blue-s2)}     /* 5.98:1 */
+.badge-sky{background:var(--sky-10);border-color:var(--sky-40);color:var(--sky-s2)}         /* 4.73:1 */
+.badge-teal{background:var(--teal-10);border-color:var(--teal-40);color:var(--teal-s2)}     /* 6.39:1 */
+.badge-green{background:var(--green-10);border-color:var(--green-40);color:var(--green-s2)} /* 5.29:1 */
 .badge-charcoal{background:var(--charcoal-10);border-color:var(--charcoal-40);color:var(--sog-charcoal)}
-.badge-red{background:var(--red-10);border-color:var(--red-40);color:var(--sog-red)}
-.badge-orange{background:var(--orange-10);border-color:var(--orange-40);color:var(--sog-orange)}
+.badge-red{background:var(--red-10);border-color:var(--red-40);color:var(--red-s2)}          /* 6.86:1 */
+.badge-orange{background:var(--orange-10);border-color:var(--orange-40);color:var(--orange-s2)} /* 5.39:1 */
 .badge-yellow{background:var(--yellow-10);border-color:var(--yellow-40);color:#854D0E}
 .badge-filled{background:var(--sog-purple);color:#fff}
-.badge-filled-teal{background:var(--sog-teal);color:#fff}
+.badge-filled-teal{background:var(--teal-s1);color:#fff}  /* base teal is 3.58:1 - see btn-secondary */
 .sg-alert{display:flex;gap:12px;padding:14px 16px;border-radius:10px;border:1px solid;margin-bottom:12px}
 .sg-alert-default{background:var(--purple-10);border-color:var(--purple-40);color:var(--sog-charcoal)}
 .sg-alert-info{background:var(--blue-10);border-color:var(--blue-40);color:var(--sog-charcoal)}
@@ -492,7 +531,7 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
 .crit-sub{font-size:11px;color:var(--text-muted);line-height:1.4;margin-top:4px}
 .prog-row{margin-top:8px;margin-bottom:6px}
 .prog-track{height:5px;background:var(--charcoal-10);border-radius:3px;overflow:hidden}
-.prog-fill{height:100%;border-radius:3px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.prog-fill{height:100%;border-radius:3px;transition:width .5s cubic-bezier(.4,0,.2,1)}
 .prog-fill--green{background:var(--sog-green)}
 .prog-fill--purple{background:var(--sog-purple)}
 .scorecard-phase--p1 .prog-fill--phase{background:var(--sog-purple)}
@@ -566,15 +605,21 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
 .sg-th-sort:hover{color:var(--sog-purple)}
 .sg-th-sort--asc,.sg-th-sort--desc{color:var(--sog-purple)}
 /* Resizable columns */
+.sort-icon{display:inline-flex;flex-direction:column;gap:1px}
+.sort-icon--none svg{opacity:.4}
+.sort-icon--asc svg:first-child{opacity:1;fill:var(--sog-purple)}
+.sort-icon--asc svg:last-child{opacity:.25}
+.sort-icon--desc svg:first-child{opacity:.25}
+.sort-icon--desc svg:last-child{opacity:1;fill:var(--sog-purple)}
 .col-resize-handle{position:absolute;right:0;top:0;width:8px;height:100%;cursor:col-resize;user-select:none;display:flex;align-items:center;justify-content:center}
 .col-resize-handle::after{content:'';display:block;width:2px;height:60%;background:var(--border);border-radius:1px;transition:background .15s ease-out,opacity .15s ease-out}
 .col-resize-handle:hover::after,.col-resize-handle.resizing::after{background:var(--sog-purple);opacity:1}
 body.col-resizing{cursor:col-resize !important;user-select:none}
 /* Custom dropdown */
-.sg-dropdown{position:relative;width:100%;display:block}
+.sg-dropdown{position:relative;width:100%;display:inline-block}
 .sg-dropdown-trigger{
-  display:flex;align-items:center;justify-content:space-between;gap:8px;
-  width:100%;height:38px;padding:0 12px;
+  display:inline-flex;align-items:center;justify-content:space-between;gap:8px;
+  width:100%;height:36px;padding:0 12px;
   background:#fff;border:1.5px solid var(--border);
   border-radius:var(--radius-md);font-size:13px;font-family:inherit;
   color:var(--text);cursor:pointer;text-align:left;
@@ -615,7 +660,7 @@ body.col-resizing{cursor:col-resize !important;user-select:none}
 .risk-chip-sm{font-size:10px;height:18px;min-width:22px;padding:0 4px}
 .cell-muted{color:var(--text-muted);font-size:13px}
 /* Empty cell states */
-.cell-pending{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;color:var(--charcoal-40)}
+.cell-pending{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--charcoal-40)}
 .cell-pending-dot{width:6px;height:6px;border-radius:50%;background:var(--charcoal-40);flex-shrink:0}
 .cell-na{font-size:13px;color:var(--charcoal-20)}
 /* Table footer + inline legend */
@@ -690,7 +735,7 @@ body.col-resizing{cursor:col-resize !important;user-select:none}
 .sheet-row{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px}
 .sheet-row:last-child{border-bottom:none}
 .sheet-row-label{color:var(--text-muted);flex-shrink:0;padding-right:16px}
-.sheet-row-value{color:var(--text);font-weight:500;text-align:right}
+.sheet-row-value{color:var(--text);font-weight:600;text-align:right}
 /* ── Modal ────────────────────────────────────────── */
 .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .2s;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
 .modal-backdrop.open{opacity:1;pointer-events:all}
@@ -756,20 +801,20 @@ body.col-resizing{cursor:col-resize !important;user-select:none}
 .ptc-month{font-size:11px;color:var(--text-muted)}
 
 #toast-container{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
-.toast{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--sog-charcoal);color:#fff;border-radius:10px;font-size:14px;font-weight:500;box-shadow:0 8px 24px rgba(0,0,0,.15);pointer-events:all;transform:translateX(120%);transition:transform .3s cubic-bezier(.34,1.56,.64,1);min-width:280px;max-width:360px}
+.toast{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--sog-charcoal);color:#fff;border-radius:10px;font-size:14px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.15);pointer-events:all;transform:translateX(120%);transition:transform .3s cubic-bezier(.34,1.56,.64,1);min-width:280px;max-width:360px}
 .toast.visible{transform:translateX(0)}
 .toast-success{border-left:4px solid var(--sog-green)}
 .toast-error{border-left:4px solid var(--sog-red)}
 .toast-info{border-left:4px solid var(--sog-blue)}
 .toast-icon{font-size:16px;flex-shrink:0}
 .nav-demo{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden}
-.nav-demo-sidebar{width:200px;background:#fff;border-right:1px solid var(--border);padding:12px 0}
+.nav-demo-sidebar{width:200px;background:#fff;border-right:1px solid var(--border);padding:12px 0;display:flex;flex-direction:column;flex-shrink:0}
 .nav-item{display:flex;align-items:center;gap:8px;padding:8px 16px;font-size:13px;color:var(--text-muted);cursor:pointer;transition:background 150ms ease-out,color 150ms ease-out}
 .nav-item:hover{background:var(--purple-10);color:var(--sog-charcoal)}
 .nav-item.active{background:var(--purple-10);color:var(--sog-purple);font-weight:600}
 .nav-item-icon{font-size:16px}
 .tab-bar{display:flex;background:var(--muted-bg);border:1px solid var(--border);border-radius:10px;padding:4px;gap:2px;width:fit-content}
-.tab-pill{padding:6px 16px;border-radius:8px;font-size:13px;font-weight:500;color:var(--text-muted);cursor:pointer;transition:background 150ms ease-out,color 150ms ease-out}
+.tab-pill{padding:6px 16px;border-radius:8px;font-size:13px;font-weight:600;color:var(--text-muted);cursor:pointer;transition:background 150ms ease-out,color 150ms ease-out}
 .tab-pill.active{background:#fff;color:var(--sog-purple);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.08)}
 .chart-wrapper{position:relative;height:320px;width:100%}
 .chart-card{background:#fff;border-radius:12px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,.06),0 1px 3px rgba(0,0,0,.04);overflow:hidden;transition:box-shadow .2s ease-out}
@@ -828,7 +873,7 @@ body.col-resizing{cursor:col-resize !important;user-select:none}
   100%{background-position:0% 50%}
 }
 .sog-gradient-animated{
-  background:linear-gradient(45deg,var(--sog-purple) 0%,#4197CB 35%,var(--sog-teal) 65%,#00AF9A 100%);
+  background:linear-gradient(45deg,var(--sog-purple) 0%,var(--sog-teal) 100%);
   background-size:250% 250%;
   animation:gradientShift 5s ease-out infinite;
 }
@@ -839,7 +884,7 @@ body.col-resizing{cursor:col-resize !important;user-select:none}
 @media(max-width:400px){.alert-card-grid{grid-template-columns:1fr}}
 @media(max-width:400px){.kpi-grid{grid-template-columns:1fr}}
 /* btn-glass disabled */
-.btn-glass:disabled{opacity:.45;cursor:not-allowed;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)}
+.btn-glass:disabled{opacity:.45;cursor:not-allowed;background:rgba(50,62,72,.28);border-color:rgba(255,255,255,.3)}
 /* Base card reusable content classes */
 .sg-card-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:6px}
 .sg-card-title{font-size:18px;font-weight:700;color:var(--text);margin-bottom:4px}
@@ -852,13 +897,23 @@ body.col-resizing{cursor:col-resize !important;user-select:none}
 @media(max-width:640px){.gradient-card-grid{grid-template-columns:1fr}}
 
 /* Gradient card glass button */
+/* Secondary action on a gradient: charcoal scrim, not a white wash.
+   White at low alpha lightens the teal/green half of every brand gradient
+   and drops the label to 2.3-2.9:1. A charcoal scrim holds 4.67-7.53:1
+   across all five primary gradients. */
 .btn-glass{
-  background:rgba(255,255,255,.18);color:#fff;
-  border:1.5px solid rgba(255,255,255,.55);
+  background:rgba(50,62,72,.40);color:#fff;
+  border:1.5px solid rgba(255,255,255,.65);
   backdrop-filter:blur(4px);
 }
-.btn-glass:hover{background:rgba(255,255,255,.28);border-color:rgba(255,255,255,.65)}
+.btn-glass:hover{background:rgba(50,62,72,.52);border-color:#fff}
 .btn-glass:focus-visible{outline:2px solid #fff;outline-offset:2px}
+
+/* Primary action on a gradient: solid white, purple label (5.89:1) */
+.btn-solid-light{background:#fff;color:var(--sog-purple);border:none}
+.btn-solid-light:hover{background:var(--purple-10)}
+.btn-solid-light:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.btn-solid-light:disabled{opacity:.45;cursor:not-allowed;background:#fff}
 .info-callout{background:var(--blue-10);border:1px solid var(--blue-40);border-radius:10px;padding:16px 20px;margin-bottom:24px;font-size:13px;color:var(--sog-charcoal);line-height:1.6}
 .info-callout strong{color:var(--sog-charcoal)}
 .warning-callout{background:var(--color-warning-bg);border:1px solid var(--color-warning-border);border-radius:10px;padding:16px 20px;margin-bottom:24px;font-size:13px;color:var(--sog-charcoal);line-height:1.6}
@@ -898,7 +953,7 @@ body.col-resizing{cursor:col-resize !important;user-select:none}
 .usage-card-list{font-size:13px;color:var(--text-muted);line-height:1.6;margin-top:8px;padding-left:16px}
 .crumb-nav{display:flex;align-items:center;gap:6px;font-size:13px}
 .crumb-sep{color:var(--text-muted)}
-.crumb-link{color:var(--sog-purple);text-decoration:none;font-weight:500}
+.crumb-link{color:var(--sog-purple);text-decoration:none;font-weight:600}
 .crumb-link:hover{text-decoration:underline}
 .crumb-current{color:var(--text-muted)}
 .pagination{display:flex;gap:4px;align-items:center}
@@ -1388,7 +1443,7 @@ body.col-resizing{cursor:col-resize !important;user-select:none}
 .icon-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:16px;margin-top:16px}
 .icon-tile{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
 .icon-tile img{width:80px;height:80px;border-radius:10px;object-fit:cover;background:var(--muted-bg)}
-.icon-tile-label{font-size:11px;color:var(--text-muted);line-height:1.3;font-weight:500}
+.icon-tile-label{font-size:11px;color:var(--text-muted);line-height:1.3;font-weight:600}
 .icon-category-title{font-size:13px;font-weight:700;color:var(--sog-charcoal);text-transform:uppercase;letter-spacing:.06em;margin:32px 0 4px;padding-bottom:8px;border-bottom:2px solid var(--border)}
 /* Broken image placeholder */
 .icon-tile img[src=""],.icon-tile img:not([src]){background:var(--muted-bg)}
@@ -1810,7 +1865,7 @@ input[type="date"].sg-input::-webkit-datetime-edit-year-field:focus{
   <div class="hero-band">
     <div class="hero-eyebrow-row">
       <div class="hero-eyebrow" id="hero-eyebrow" aria-hidden="true"><span class="hero-eyebrow-dot"></span>Design System v2.0</div>
-      <div class="hero-updated" aria-label="Last updated 11 August 2026">Last updated: 11 Aug 2026</div>
+      <div class="hero-updated" aria-label="Last updated 24 August 2026">Last updated: 24 Aug 2026</div>
     </div>
     <h1 class="hero-title" aria-describedby="hero-eyebrow">Streets of Growth:<br><em>Brand &amp; UX/UI Style Guide</em></h1>
     <p class="hero-subtitle">The single source of truth for all digital SOG products: covering visual identity, components, data visualisation, and accessibility standards.</p>
@@ -3375,6 +3430,7 @@ input[type="date"].sg-input::-webkit-datetime-edit-year-field:focus{
           <li>Apply to full-bleed hero sections, card headers, or accent bars</li>
           <li>Use white or off-white text on any gradient background</li>
           <li>Limit to one gradient element per page or spread</li>
+          <li>On a gradient surface, use a solid white button (Professional Purple label) for the primary action and a charcoal-scrim glass button for the secondary</li>
         </ul>
       </div>
       <div style="background:#FFF5F5;border:1px solid #F5C0C0;border-radius:10px;padding:20px">
@@ -3384,6 +3440,8 @@ input[type="date"].sg-input::-webkit-datetime-edit-year-field:focus{
           <li>Do not place dark body text directly on a gradient</li>
           <li>Do not combine two gradient elements on the same spread</li>
           <li>Do not use more than two colour stops in a gradient</li>
+          <li>Do not apply a gradient to a button or any other interactive element</li>
+          <li>Do not use a low-alpha white fill for a button on a gradient it lightens the teal and green stops and drops the label below 3:1</li>
         </ul>
       </div>
     </div>
@@ -3418,7 +3476,10 @@ background: linear-gradient(180deg, ...); /* vertical           */
 background: linear-gradient(45deg, ...);  /* shallow diagonal   */
 
 /* Rule: gradients are for backgrounds only.
-   Never apply a gradient to text or interactive elements. */</pre>
+   Never apply a gradient to text or to an interactive element -
+   buttons included. On a gradient surface, use a solid white
+   button (purple label) for the primary action and a
+   charcoal-scrim glass button for the secondary. */</pre>
     </div>
   </div>
 </section>
@@ -5913,20 +5974,19 @@ body { font-family: 'Open Sans', sans-serif; font-size: 14px; }
   <!-- ── SOG Gradient Usage ─────────────────────────────────────── -->
   <div class="sg-sub">
     <div class="sg-sub-title">SOG Gradient Usage</div>
-    <div class="sg-sub-desc">Use the SOG gradient for hero banners, milestone celebration cards, and section headers where visual emphasis is required. Always use white or reversed text on gradient backgrounds. Never use the gradient as a background for body text blocks, never tile it, and never apply it to interactive elements other than buttons. The gradient button variant is reserved for high-emphasis primary CTAs only.</div>
+    <div class="sg-sub-desc">Use the SOG gradient for hero banners, milestone celebration cards, and section headers where visual emphasis is required. Always use white or reversed text on gradient backgrounds. Never use the gradient as a background for body text blocks, never tile it, and never apply it to an interactive element buttons included. A gradient is a surface, not a control: on a gradient surface the primary CTA is a solid white button with a Professional Purple label, and the secondary is a charcoal-scrim glass button.</div>
     <div class="sg-example column">
       <div class="gradient-demo sog-gradient" style="margin-bottom:12px">
         <h3>Programme Dashboard</h3>
         <p>Use the SOG gradient for hero banners, milestone celebration cards, and section headers. Never use as a background for body text.</p>
         <div style="margin-top:16px;display:flex;gap:10px">
-          <button class="btn" style="background:#fff;color:var(--sog-purple)">View Report</button>
+          <button class="btn btn-solid-light">View Report</button>
           <button class="btn btn-glass">Learn More</button>
         </div>
       </div>
       <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
-        <button class="btn btn-lg sog-gradient" style="color:#fff;border:none">Gradient Button</button>
         <div style="height:8px;flex:1;min-width:200px;background:linear-gradient(90deg,var(--sog-purple),var(--sog-teal));border-radius:9999px;max-width:300px" aria-hidden="true"></div>
-        <span style="font-size:12px;color:var(--text-muted)">Gradient progress bar</span>
+        <span style="font-size:12px;color:var(--text-muted)">Gradient progress bar permitted: a progress track is a surface, not a control</span>
       </div>
     </div>
   </div>
@@ -5942,7 +6002,9 @@ body { font-family: 'Open Sans', sans-serif; font-size: 14px; }
           <ul style="list-style:none;display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--text)">
             <li>Default easing: <code style="background:var(--muted-bg);padding:1px 4px;border-radius:3px;font-size:11px">ease-out</code></li>
             <li>Standard duration: <code style="background:var(--muted-bg);padding:1px 4px;border-radius:3px;font-size:11px">150ms</code></li>
-            <li>Maximum duration: <code style="background:var(--muted-bg);padding:1px 4px;border-radius:3px;font-size:11px">300ms</code></li>
+            <li>Interaction feedback (hover, press, focus): max <code style="background:var(--muted-bg);padding:1px 4px;border-radius:3px;font-size:11px">300ms</code></li>
+            <li>Entrance, reveal and value transitions: max <code style="background:var(--muted-bg);padding:1px 4px;border-radius:3px;font-size:11px">500ms</code></li>
+            <li>Ambient loops (gradient sweep, shimmer) are uncapped but must stop under <code style="background:var(--muted-bg);padding:1px 4px;border-radius:3px;font-size:11px">prefers-reduced-motion</code></li>
             <li>Button press: <code style="background:var(--muted-bg);padding:1px 4px;border-radius:3px;font-size:11px">scale(0.97)</code> at <code style="background:var(--muted-bg);padding:1px 4px;border-radius:3px;font-size:11px">160ms ease-out</code></li>
             <li>Stagger increment: <code style="background:var(--muted-bg);padding:1px 4px;border-radius:3px;font-size:11px">40–60ms</code> per item, max 4 items</li>
           </ul>
@@ -6086,7 +6148,7 @@ body { font-family: 'Open Sans', sans-serif; font-size: 14px; }
     <div class="sg-sub-desc">These rules consolidate the colour constraints scattered across Colour Palette, Gradients, and Data Visualisation into one authoritative reference. When in doubt about whether a colour use is correct, check here first.</div>
     <div class="sg-example" style="display:block;padding:16px 20px">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-        <div style="background:var(--g10,#E6F7F5);border:1px solid var(--green-40);border-radius:var(--radius-lg);padding:13px 15px">
+        <div style="background:var(--green-10);border:1px solid var(--green-40);border-radius:var(--radius-lg);padding:13px 15px">
           <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#007A6C;margin-bottom:8px">Do</div>
           <ul style="list-style:none;display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--text);line-height:1.5">
             <li>Use SOG Purple as the primary interactive colour for links, focus rings, and active states</li>
@@ -6336,10 +6398,11 @@ body { font-family: 'Open Sans', sans-serif; font-size: 14px; }
 <section id="buttons" class="sg-section">
   <div class="sg-section-label">Components</div>
   <h2 class="sg-section-title">Buttons</h2>
-  <p class="sg-section-desc">Buttons trigger actions. Use the primary button for the single most important action on a page. Limit destructive buttons to genuinely irreversible actions.</p>
+  <p class="sg-section-desc">Buttons trigger actions. Use the primary button for the single most important action on a page. Limit destructive buttons to genuinely irreversible actions. The six standard variants below are for white and light surfaces only on a gradient or dark brand surface, switch to the two on-gradient variants documented further down never a gradient itself.</p>
 
   <div class="sg-sub">
     <div class="sg-sub-title">Variants</div>
+    <div class="sg-sub-desc">Every filled variant clears 4.5:1 against its white label. Secondary and Destructive rest on <strong>Shade 1</strong> of their colour rather than the base value base Dynamic Teal (3.58:1) and base Alert Red (4.08:1) both fail small-text AA, as recorded in the Accessibility contrast table. Never hand-code a button fill from the base palette; use the variant class.</div>
     <div class="sg-example">
       <button class="btn btn-primary">Primary</button>
       <button class="btn btn-secondary">Secondary</button>
@@ -6364,6 +6427,24 @@ body { font-family: 'Open Sans', sans-serif; font-size: 14px; }
   </div>
 
   <div class="sg-sub">
+    <div class="sg-sub-title">On Gradient Surfaces</div>
+    <div class="sg-sub-desc">The six variants above assume a white or light background. On a gradient or dark brand surface hero banners, gradient cards, celebration call-outs use these two instead. <strong>Solid Light</strong> is the primary: solid white with a Professional Purple label (5.89:1). <strong>Glass</strong> is the secondary: a charcoal scrim with a white border, holding 4.67&ndash;7.53:1 across all five primary brand gradients. Never place <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">btn-primary</code> on a gradient the purple label disappears into the purple stop and never apply a gradient to a button.</div>
+    <div class="sg-example" style="display:block;padding:0;overflow:hidden">
+      <div class="sog-gradient" style="padding:28px 32px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <button class="btn btn-solid-light">Solid Light</button>
+        <button class="btn btn-glass">Glass</button>
+        <button class="btn btn-glass" disabled>Disabled</button>
+      </div>
+    </div>
+    <div class="sg-example" style="padding:16px 20px;display:block;margin-top:12px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="background:var(--purple-10);border:1px solid var(--purple-40);border-radius:var(--radius-lg);padding:12px 14px"><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--sog-purple);margin-bottom:4px">Solid Light</div><div style="font-size:12px;color:var(--text-muted);line-height:1.5">Primary action on a gradient or dark brand surface. One per card. Replaces Primary in that context.</div></div>
+        <div style="background:var(--muted-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:12px 14px"><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:4px">Glass</div><div style="font-size:12px;color:var(--text-muted);line-height:1.5">Secondary action beside Solid Light. At most one per card. Never use it as the only CTA.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-sub">
     <div class="sg-sub-title">Sizes</div>
     <div class="sg-example" style="align-items:center">
       <button class="btn btn-primary btn-sm">Small</button>
@@ -6375,11 +6456,11 @@ body { font-family: 'Open Sans', sans-serif; font-size: 14px; }
 
   <div class="sg-sub">
     <div class="sg-sub-title">States</div>
-    <div class="sg-sub-desc">Every button has four states: default, hover (background lightens), active/pressed (scales to 0.97 - physical press feedback confirming the action registered at <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">160ms ease-out</code>), and disabled (40% opacity, not-allowed cursor). The scale feels like a physical response, not an animation - it should be instant enough that users never consciously notice it, only feel it.</div>
+    <div class="sg-sub-desc">Every button has four states: default, hover (filled variants darken by one shade step; Outline and Ghost pick up a tint-10 wash), active/pressed (scales to 0.97 - physical press feedback confirming the action registered at <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">160ms ease-out</code>), and disabled (45% opacity, not-allowed cursor). The scale feels like a physical response, not an animation - it should be instant enough that users never consciously notice it, only feel it.</div>
     <div class="sg-example">
       <button class="btn btn-primary">Default</button>
       <button class="btn btn-primary" disabled>Disabled</button>
-      <button class="btn btn-primary" style="background:#534F87">Hover (CSS)</button>
+      <button class="btn btn-primary" style="background:var(--purple-s1)">Hover (CSS)</button>
       <button class="btn btn-primary" style="outline:2px solid var(--sog-purple);outline-offset:2px">Focus</button>
     </div>
   </div>
@@ -6433,7 +6514,11 @@ body { font-family: 'Open Sans', sans-serif; font-size: 14px; }
 &lt;/button&gt;
 
 &lt;!-- Disabled --&gt;
-&lt;button class="btn btn-primary" disabled&gt;Disabled&lt;/button&gt;</pre>
+&lt;button class="btn btn-primary" disabled&gt;Disabled&lt;/button&gt;
+
+&lt;!-- On a gradient surface: white primary + glass secondary --&gt;
+&lt;button class="btn btn-solid-light"&gt;View Profile&lt;/button&gt;
+&lt;button class="btn btn-glass"&gt;Add Note&lt;/button&gt;</pre>
   </div>
 </section>
 
@@ -6584,12 +6669,12 @@ body { font-family: 'Open Sans', sans-serif; font-size: 14px; }
 /* Trigger button */
 .sg-dropdown-trigger {
   display: inline-flex; align-items: center; gap: 8px;
-  height: 32px; padding: 0 10px;
+  height: 36px; padding: 0 12px;
   background: #fff; border: 1.5px solid var(--border);
   border-radius: var(--radius-md);
   font-size: 13px; font-family: inherit;
   color: var(--text); cursor: pointer; white-space: nowrap;
-  transition: border-color .15s ease-out;
+  transition: border-color .15s ease-out, box-shadow .15s ease-out;
 }
 .sg-dropdown-trigger:hover  { border-color: var(--charcoal-40); }
 .sg-dropdown-trigger:focus  { outline: none;
@@ -6608,8 +6693,8 @@ body { font-family: 'Open Sans', sans-serif; font-size: 14px; }
   top: calc(100% + 4px); right: 0;
   min-width: 100%; background: #fff;
   border: 1px solid var(--border); border-radius: var(--radius-md);
-  box-shadow: 0 4px 16px rgba(0,0,0,.1);
-  z-index: 100; padding: 4px 0; list-style: none;
+  box-shadow: 0 8px 24px rgba(0,0,0,.1);
+  z-index: 200; padding: 4px 0; list-style: none;
 }
 .sg-dropdown.open .sg-dropdown-menu { display: block; }
 
@@ -7029,7 +7114,7 @@ document.addEventListener('click', e => {
 
   <div class="sg-sub">
     <div class="sg-sub-title">Gradient Card</div>
-    <div class="sg-sub-desc">Use for milestone moments, celebration banners, and hero call-outs. The static gradient follows the SOG signature direction; the animated variant cycles continuously and is best reserved for standout UI moments avoid using both on the same page.</div>
+    <div class="sg-sub-desc">Use for milestone moments, celebration banners, and hero call-outs. The static gradient follows the SOG signature direction; the animated variant cycles continuously and is best reserved for standout UI moments avoid using both on the same page. Buttons on a gradient card follow one pattern only: a solid white primary with a Professional Purple label, and at most one charcoal-scrim glass secondary beside it. Never apply a gradient to the button itself gradients are for the card surface, not the control.</div>
     <div class="sg-example gradient-card-grid" style="gap:20px;align-items:start">
 
       <!-- Static -->
@@ -7039,8 +7124,9 @@ document.addEventListener('click', e => {
           <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.55);margin-bottom:14px">Streets of Growth</div>
           <h3 style="font-size:20px;font-weight:700;margin-bottom:8px">Programme Milestone Reached</h3>
           <p style="font-size:14px;line-height:1.6;color:rgba(255,255,255,.88);text-shadow:0 1px 2px rgba(0,0,0,.15)">Jordan Smith has successfully completed Phase 2 of the Streets of Growth programme. Outstanding work from both participant and key worker.</p>
-          <div style="margin-top:20px">
-            <button class="btn btn-glass">View Profile</button>
+          <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn btn-solid-light">View Profile</button>
+            <button class="btn btn-glass">Add Note</button>
           </div>
         </div>
       </div>
@@ -7053,8 +7139,9 @@ document.addEventListener('click', e => {
           <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.55);margin-bottom:14px">Streets of Growth</div>
           <h3 style="font-size:20px;font-weight:700;margin-bottom:8px">Annual Impact Report 2024</h3>
           <p style="font-size:14px;line-height:1.6;color:rgba(255,255,255,.88);text-shadow:0 1px 2px rgba(0,0,0,.15)">Download the full SOG Impact Report to explore outcomes, stories, and data from our work with young people across east London this year.</p>
-          <div style="margin-top:20px">
-            <button class="btn btn-glass">Download Report</button>
+          <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn btn-solid-light">Download Report</button>
+            <button class="btn btn-glass">Share</button>
           </div>
         </div>
       </div>
@@ -7073,14 +7160,16 @@ document.addEventListener('click', e => {
 &lt;div class="gradient-demo sog-gradient" role="region" aria-label="Card title"&gt;
   &lt;h3&gt;Programme Milestone Reached&lt;/h3&gt;
   &lt;p&gt;Supporting message here.&lt;/p&gt;
-  &lt;button class="btn btn-glass"&gt;View Profile&lt;/button&gt;
+  &lt;button class="btn btn-solid-light"&gt;View Profile&lt;/button&gt;
+  &lt;button class="btn btn-glass"&gt;Add Note&lt;/button&gt;
 &lt;/div&gt;
 
 &lt;!-- Animated gradient card --&gt;
 &lt;div class="gradient-demo sog-gradient-animated" role="region" aria-label="Card title"&gt;
   &lt;h3&gt;Annual Impact Report 2024&lt;/h3&gt;
   &lt;p&gt;Supporting message here.&lt;/p&gt;
-  &lt;button class="btn btn-glass"&gt;Download Report&lt;/button&gt;
+  &lt;button class="btn btn-solid-light"&gt;Download Report&lt;/button&gt;
+  &lt;button class="btn btn-glass"&gt;Share&lt;/button&gt;
 &lt;/div&gt;</pre>
     </div>
 
@@ -7094,31 +7183,43 @@ document.addEventListener('click', e => {
       </div>
       <pre>/* Static */
 .sog-gradient {
-  background: linear-gradient(45deg, var(--sog-purple) 0%, var(--sog-teal) 100%);
+  background: linear-gradient(45deg, #625D9C 0%, #0095A9 100%);
 }
 
-/* Animated - cycles every 5s */
+/* Animated - two stops, cycles every 5s */
 @keyframes gradientShift {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 .sog-gradient-animated {
-  background: linear-gradient(45deg, #625D9C 0%, #4197CB 35%, #0095A9 65%, #00AF9A 100%);
+  background: linear-gradient(45deg, #625D9C 0%, #0095A9 100%);
   background-size: 250% 250%;
   animation: gradientShift 5s ease-out infinite;
 }
 
-/* Glass button - use on gradient backgrounds only */
+/* PRIMARY action on a gradient - solid white, purple label (5.89:1) */
+.btn-solid-light {
+  background: #fff;
+  color: var(--sog-purple);
+  border: none;
+}
+.btn-solid-light:hover         { background: var(--purple-10); }
+.btn-solid-light:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+/* SECONDARY action on a gradient - charcoal scrim, never a white wash.
+   White at low alpha lightens the teal/green half of the gradient and
+   drops the label to 2.3-2.9:1. The charcoal scrim holds 4.67-7.53:1
+   across all five primary brand gradients. */
 .btn-glass {
-  background: rgba(255, 255, 255, .15);
+  background: rgba(50, 62, 72, .40);
   color: #fff;
-  border: 1.5px solid rgba(255, 255, 255, .4);
+  border: 1.5px solid rgba(255, 255, 255, .65);
   backdrop-filter: blur(4px);
 }
-.btn-glass:hover         { background: rgba(255, 255, 255, .28); border-color: rgba(255, 255, 255, .65); }
+.btn-glass:hover         { background: rgba(50, 62, 72, .52); border-color: #fff; }
 .btn-glass:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-.btn-glass:disabled      { opacity: .45; cursor: not-allowed; }</pre>
+.btn-glass:disabled      { opacity: .45; cursor: not-allowed; background: rgba(50, 62, 72, .28); }</pre>
     </div>
   </div>
 
@@ -7788,25 +7889,29 @@ document.addEventListener('click', e => {
     <pre>/* Badge base - tint token system */
 .badge {
   display: inline-flex; align-items: center;
-  font-size: 11px; font-weight: 600; line-height: 1;
-  padding: 3px 9px; border-radius: var(--radius-full);
+  font-size: 12px; font-weight: 600; line-height: 1;
+  padding: 3px 10px; border-radius: var(--radius-full);
   border: 1px solid transparent; white-space: nowrap;
 }
 
-/* Tinted variants: -10 bg, -40 border, brand text */
-.badge-purple  { background: var(--purple-10);   border-color: var(--purple-40);   color: var(--sog-purple);   }
-.badge-blue    { background: var(--blue-10);     border-color: var(--blue-40);     color: var(--sog-blue);     }
-.badge-teal    { background: var(--teal-10);     border-color: var(--teal-40);     color: var(--sog-teal);     }
-.badge-green   { background: var(--green-10);    border-color: var(--green-40);    color: var(--sog-green);    }
-.badge-sky     { background: var(--sky-10);      border-color: var(--sky-40);      color: var(--sog-sky);      }
-.badge-charcoal{ background: var(--charcoal-10); border-color: var(--charcoal-40); color: var(--sog-charcoal); }
-.badge-red     { background: var(--red-10);      border-color: var(--red-40);      color: var(--sog-red);      }
-.badge-orange  { background: var(--orange-10);   border-color: var(--orange-40);   color: var(--sog-orange);   }
-.badge-yellow  { background: var(--yellow-10);   border-color: var(--yellow-40);   color: #854D0E;             }
+/* Tinted variants: -10 bg, -40 border, Shade 2 label.
+   The label is 12px/600 - small text - so it needs 4.5:1 against the
+   tint-10 fill. Base Belonging Blue, Collaborative Sky, Dynamic Teal,
+   Independence Green, Alert Red and Energy Orange all fail there, so
+   every chromatic badge takes Shade 2 of its own hue. */
+.badge-purple  { background: var(--purple-10);   border-color: var(--purple-40);   color: var(--sog-purple);   } /* 5.16:1 */
+.badge-blue    { background: var(--blue-10);     border-color: var(--blue-40);     color: var(--blue-s2);      } /* 5.98:1 */
+.badge-teal    { background: var(--teal-10);     border-color: var(--teal-40);     color: var(--teal-s2);      } /* 6.39:1 */
+.badge-green   { background: var(--green-10);    border-color: var(--green-40);    color: var(--green-s2);     } /* 5.29:1 */
+.badge-sky     { background: var(--sky-10);      border-color: var(--sky-40);      color: var(--sky-s2);       } /* 4.73:1 */
+.badge-charcoal{ background: var(--charcoal-10); border-color: var(--charcoal-40); color: var(--sog-charcoal); } /* 9.26:1 */
+.badge-red     { background: var(--red-10);      border-color: var(--red-40);      color: var(--red-s2);       } /* 6.86:1 */
+.badge-orange  { background: var(--orange-10);   border-color: var(--orange-40);   color: var(--orange-s2);    } /* 5.39:1 */
+.badge-yellow  { background: var(--yellow-10);   border-color: var(--yellow-40);   color: #854D0E;             } /* 6.53:1 */
 
 /* Filled variants */
-.badge-filled      { background: var(--sog-purple); color: #fff; border-color: transparent; }
-.badge-filled-teal { background: var(--sog-teal);   color: #fff; border-color: transparent; }</pre>
+.badge-filled      { background: var(--sog-purple); color: #fff; border-color: transparent; } /* 5.89:1 */
+.badge-filled-teal { background: var(--teal-s1);    color: #fff; border-color: transparent; } /* 4.73:1 */</pre>
   </div>
 </section>
 
@@ -7907,7 +8012,7 @@ document.addEventListener('click', e => {
         <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em">Warning</div>
         <div style="display:flex;gap:10px;align-items:center">
           <div class="alert-card-icon alert-icon--warning" aria-label="Warning">
-            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1.5L9.2 8.5H.8L5 1.5z" stroke="#FF6C0E" stroke-width="1.4" stroke-linejoin="round"/><line x1="5" y1="4" x2="5" y2="6.2" stroke="#FF6C0E" stroke-width="1.4" stroke-linecap="round"/><circle cx="5" cy="7.4" r=".65" fill="#FF6C0E"/></svg>
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1.5L9.2 8.5H.8L5 1.5z" stroke="var(--sog-orange)" stroke-width="1.4" stroke-linejoin="round"/><line x1="5" y1="4" x2="5" y2="6.2" stroke="var(--sog-orange)" stroke-width="1.4" stroke-linecap="round"/><circle cx="5" cy="7.4" r=".65" fill="var(--sog-orange)"/></svg>
           </div>
           <div style="font-size:12px;color:var(--text-muted)">Outlined · Orange · SVG ▲</div>
         </div>
@@ -7929,11 +8034,11 @@ document.addEventListener('click', e => {
 &lt;!-- Warning --&gt;
 &lt;div class="alert-card-icon alert-icon--warning" aria-label="Warning"&gt;
   &lt;svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"&gt;
-    &lt;path d="M5 1.5L9.2 8.5H.8L5 1.5z" stroke="#FF6C0E"
+    &lt;path d="M5 1.5L9.2 8.5H.8L5 1.5z" stroke="var(--sog-orange)"
           stroke-width="1.4" stroke-linejoin="round"/&gt;
     &lt;line x1="5" y1="4" x2="5" y2="6.2"
-          stroke="#FF6C0E" stroke-width="1.4" stroke-linecap="round"/&gt;
-    &lt;circle cx="5" cy="7.4" r=".65" fill="#FF6C0E"/&gt;
+          stroke="var(--sog-orange)" stroke-width="1.4" stroke-linecap="round"/&gt;
+    &lt;circle cx="5" cy="7.4" r=".65" fill="var(--sog-orange)"/&gt;
   &lt;/svg&gt;
 &lt;/div&gt;</pre>
     </div>
@@ -7941,7 +8046,7 @@ document.addEventListener('click', e => {
       <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
       <pre>.alert-card-icon  { width: 24px; height: 24px; border-radius: 50%;
                     display: flex; align-items: center; justify-content: center; }
-.alert-icon--critical { background: var(--sog-red); }
+.alert-icon--critical { background: var(--color-error); }
 .alert-icon--warning  { background: transparent; border: 1.5px solid var(--color-warning); }</pre>
     </div>
   </div>
@@ -7965,7 +8070,7 @@ document.addEventListener('click', e => {
       <div style="display:flex;flex-direction:column;gap:6px">
         <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em">Warning</div>
         <div class="alert-card alert-card--warning" role="alertdialog" aria-labelledby="ac-demo-2">
-          <div class="alert-card-icon alert-icon--warning" aria-label="Warning"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1.5L9.2 8.5H.8L5 1.5z" stroke="#FF6C0E" stroke-width="1.4" stroke-linejoin="round"/><line x1="5" y1="4" x2="5" y2="6.2" stroke="#FF6C0E" stroke-width="1.4" stroke-linecap="round"/><circle cx="5" cy="7.4" r=".65" fill="#FF6C0E"/></svg></div>
+          <div class="alert-card-icon alert-icon--warning" aria-label="Warning"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1.5L9.2 8.5H.8L5 1.5z" stroke="var(--sog-orange)" stroke-width="1.4" stroke-linejoin="round"/><line x1="5" y1="4" x2="5" y2="6.2" stroke="var(--sog-orange)" stroke-width="1.4" stroke-linecap="round"/><circle cx="5" cy="7.4" r=".65" fill="var(--sog-orange)"/></svg></div>
           <div id="ac-demo-2" class="alert-card-title">Next Self Efficacy Due</div>
           <div class="alert-card-detail">Due soon<br>Next due: <strong>27 Mar 2026</strong></div>
         </div>
@@ -8024,12 +8129,12 @@ document.addEventListener('click', e => {
     <div class="sg-sub-title">Alert Grid Layout</div>
     <div class="sg-sub-desc">A 4-column responsive grid for alert cards. Handles variable alert counts cleanly critical cards always precede warning cards within the grid, established at render time by sorting the alerts array by severity before injecting cards. The grid collapses to 2 columns below 640px and 1 column below 400px. Never leave orphan single cards in the last row if the count is odd, consider whether the last alert genuinely needs a card or could be promoted to an inline banner.</div>
 
-    <div class="sg-example" style="padding:0;overflow:hidden;display:block">
+    <div class="sg-example sg-example--flush">
       <div style="background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden">
         <div class="table-panel-header">
           <div class="tph-left">
             <div class="tph-icon tph-icon-warning">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--sog-orange)" stroke-width="2" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <svg width="14" height="14" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1.5L9.2 8.5H.8L5 1.5z" stroke="var(--sog-orange)" stroke-width="1" stroke-linejoin="round"/><line x1="5" y1="4" x2="5" y2="6.2" stroke="var(--sog-orange)" stroke-width="1" stroke-linecap="round"/><circle cx="5" cy="7.4" r=".65" fill="var(--sog-orange)"/></svg>
             </div>
             <span class="tph-title tph-title--warning">Alerts &amp; Flags</span>
           </div>
@@ -8041,8 +8146,8 @@ document.addEventListener('click', e => {
             <div class="alert-card alert-card--critical" role="alertdialog" aria-labelledby="ag2"><div class="alert-card-icon alert-icon--critical" aria-label="Critical"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><line x1="2.5" y1="2.5" x2="7.5" y2="7.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><line x1="7.5" y1="2.5" x2="2.5" y2="7.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></div><div id="ag2" class="alert-card-title">Safety Survey Overdue</div><div class="alert-card-detail">Last: 29 Jan 2026<br>Due by: <strong>08 Feb 2026</strong></div></div>
             <div class="alert-card alert-card--critical" role="alertdialog" aria-labelledby="ag3"><div class="alert-card-icon alert-icon--critical" aria-label="Critical"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><line x1="2.5" y1="2.5" x2="7.5" y2="7.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><line x1="7.5" y1="2.5" x2="2.5" y2="7.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></div><div id="ag3" class="alert-card-title">Self Efficacy Overdue</div><div class="alert-card-detail">Last: 25 Feb 2026<br>Due by: <strong>07 Mar 2026</strong></div></div>
             <div class="alert-card alert-card--critical" role="alertdialog" aria-labelledby="ag4"><div class="alert-card-icon alert-icon--critical" aria-label="Critical"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><line x1="2.5" y1="2.5" x2="7.5" y2="7.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><line x1="7.5" y1="2.5" x2="2.5" y2="7.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></div><div id="ag4" class="alert-card-title">Intervention Gaps</div><div class="alert-card-detail">2 gaps &gt; 30 days<br>Longest: <strong>128 days</strong></div></div>
-            <div class="alert-card alert-card--warning" role="alertdialog" aria-labelledby="ag5"><div class="alert-card-icon alert-icon--warning" aria-label="Warning"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1.5L9.2 8.5H.8L5 1.5z" stroke="#FF6C0E" stroke-width="1.4" stroke-linejoin="round"/><line x1="5" y1="4" x2="5" y2="6.2" stroke="#FF6C0E" stroke-width="1.4" stroke-linecap="round"/><circle cx="5" cy="7.4" r=".65" fill="#FF6C0E"/></svg></div><div id="ag5" class="alert-card-title">Safety Score Gap</div><div class="alert-card-detail">YP: 96 vs Coach: 75<br><strong>28% gap</strong> (threshold 10%)</div></div>
-            <div class="alert-card alert-card--warning" role="alertdialog" aria-labelledby="ag6"><div class="alert-card-icon alert-icon--warning" aria-label="Warning"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1.5L9.2 8.5H.8L5 1.5z" stroke="#FF6C0E" stroke-width="1.4" stroke-linejoin="round"/><line x1="5" y1="4" x2="5" y2="6.2" stroke="#FF6C0E" stroke-width="1.4" stroke-linecap="round"/><circle cx="5" cy="7.4" r=".65" fill="#FF6C0E"/></svg></div><div id="ag6" class="alert-card-title">Next Self Efficacy Due</div><div class="alert-card-detail">Due soon<br>Next: <strong>27 Mar 2026</strong></div></div>
+            <div class="alert-card alert-card--warning" role="alertdialog" aria-labelledby="ag5"><div class="alert-card-icon alert-icon--warning" aria-label="Warning"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1.5L9.2 8.5H.8L5 1.5z" stroke="var(--sog-orange)" stroke-width="1.4" stroke-linejoin="round"/><line x1="5" y1="4" x2="5" y2="6.2" stroke="var(--sog-orange)" stroke-width="1.4" stroke-linecap="round"/><circle cx="5" cy="7.4" r=".65" fill="var(--sog-orange)"/></svg></div><div id="ag5" class="alert-card-title">Safety Score Gap</div><div class="alert-card-detail">YP: 96 vs Coach: 75<br><strong>28% gap</strong> (threshold 10%)</div></div>
+            <div class="alert-card alert-card--warning" role="alertdialog" aria-labelledby="ag6"><div class="alert-card-icon alert-icon--warning" aria-label="Warning"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1.5L9.2 8.5H.8L5 1.5z" stroke="var(--sog-orange)" stroke-width="1.4" stroke-linejoin="round"/><line x1="5" y1="4" x2="5" y2="6.2" stroke="var(--sog-orange)" stroke-width="1.4" stroke-linecap="round"/><circle cx="5" cy="7.4" r=".65" fill="var(--sog-orange)"/></svg></div><div id="ag6" class="alert-card-title">Next Self Efficacy Due</div><div class="alert-card-detail">Due soon<br>Next: <strong>27 Mar 2026</strong></div></div>
           </div>
         </div>
       </div>
@@ -8104,7 +8209,7 @@ function renderAlerts(alerts, gridEl) {
   <div class="sg-sub">
     <div class="sg-sub-title">App Sidebar</div>
     <div class="sg-sub-desc">The primary navigation container. Each nav item has a Material Symbols Rounded icon at 20px and a text label. The active item uses the <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">active</code> class which applies the purple-10 background and SOG purple text. Always add <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">aria-current="page"</code> to the active item so screen readers announce the current location.</div>
-    <div class="sg-example" style="padding:0;overflow:hidden;height:280px">
+    <div class="sg-example" style="padding:0;overflow:hidden;height:280px;align-items:stretch;flex-wrap:nowrap">
       <div class="nav-demo-sidebar">
         <div style="padding:16px;border-bottom:1px solid var(--border);font-weight:700;font-size:13px;color:var(--text)">Programme</div>
         <div class="nav-item active" aria-current="page"><span class="material-symbols-rounded nav-item-icon">dashboard</span>Dashboard</div>
@@ -8244,7 +8349,7 @@ function renderAlerts(alerts, gridEl) {
           <div class="table-panel-header">
             <div class="tph-left">
               <div class="tph-icon tph-icon-warning">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--sog-orange)" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <svg width="14" height="14" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1.5L9.2 8.5H.8L5 1.5z" stroke="var(--sog-orange)" stroke-width="1" stroke-linejoin="round"/><line x1="5" y1="4" x2="5" y2="6.2" stroke="var(--sog-orange)" stroke-width="1" stroke-linecap="round"/><circle cx="5" cy="7.4" r=".65" fill="var(--sog-orange)"/></svg>
               </div>
               <span class="tph-title tph-title--warning">Alerts &amp; Flags</span>
             </div>
@@ -8292,8 +8397,8 @@ function renderAlerts(alerts, gridEl) {
 .tph-icon-default { background: var(--purple-10); border: 1px solid var(--purple-20); }
 .tph-icon-warning { background: var(--color-warning-bg); border: 1px solid var(--color-warning-border); }
 .tph-title          { font-size: 12px; font-weight: 700; text-transform: uppercase;
-                      letter-spacing: .09em; color: var(--sog-purple); }
-.tph-title--warning { color: var(--text); }  /* modifier - overrides purple */
+                      letter-spacing: .09em; color: var(--sog-charcoal); }
+.tph-title--warning { color: var(--text); }  /* modifier - overrides the charcoal default */
 .tph-meta   { font-size: 12px; color: var(--text-muted); }
 
 /* Toolbar row - sits between panel header and table, contains search/filters */
@@ -8310,7 +8415,7 @@ function renderAlerts(alerts, gridEl) {
     <div class="sg-sub-title">Standard Table with Search</div>
     <div class="sg-sub-desc">The base table pattern for participant lists, session logs, and any structured dataset. Always pair with the panel header. Always add <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">scope="col"</code> to every <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">&lt;th&gt;</code> screen readers use this to associate header cells with data cells. Wrap the table in an overflow container so it scrolls horizontally on narrow viewports without breaking the layout.</div>
 
-    <div class="sg-example" style="padding:0;overflow:hidden;display:block">
+    <div class="sg-example sg-example--flush">
       <div style="background:#fff;border-radius:12px;border:1px solid var(--border);overflow:hidden">
         <div class="table-panel-header">
           <div class="tph-left">
@@ -8557,9 +8662,9 @@ function riskClass(score) {
     <div class="code-block collapsed" style="margin-top:8px">
       <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
       <pre>.cell-pending     { display: inline-flex; align-items: center; gap: 5px;
-                    font-size: 12px; font-weight: 500; color: var(--charcoal-40); }
+                    font-size: 12px; font-weight: 600; color: var(--charcoal-40); }
 .cell-pending-dot { width: 6px; height: 6px; border-radius: 50%;
-                    background: var(--charcoal-20); flex-shrink: 0; }
+                    background: var(--charcoal-40); flex-shrink: 0; }
 .cell-na          { font-size: 13px; color: var(--charcoal-20); }</pre>
     </div>
   </div>
@@ -8597,7 +8702,7 @@ function riskClass(score) {
     <div class="sg-sub-title">Filter &amp; Toolbar</div>
     <div class="sg-sub-desc">The toolbar row sits between the panel header and the table. It holds search inputs, filter dropdowns, and active filter chips. It is always a separate row from the panel header never place filters inside the panel header flex row, as they compete for space at narrow widths. When filters are active, show a chip for each applied filter with a remove button. Always provide a "Clear all" action when more than one filter is active.</div>
 
-    <div class="sg-example" style="padding:0;overflow:hidden;display:block">
+    <div class="sg-example sg-example--flush">
       <div style="background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden">
 
         <!-- Panel header -->
@@ -8660,7 +8765,7 @@ function riskClass(score) {
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><line x1="3" y1="3" x2="9" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="9" y1="3" x2="3" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </button>
           </span>
-          <button class="btn btn-ghost" style="font-size:11px;height:24px;padding:0 10px;color:var(--text-muted)">Clear all</button>
+          <button class="btn btn-ghost btn-sm" style="color:var(--text-muted)">Clear all</button>
           <span style="margin-left:auto;font-size:11px;color:var(--text-muted)">Showing 18 of 142</span>
         </div>
 
@@ -8820,7 +8925,7 @@ function renderFilterChips() {
     <div class="sg-sub-title">Sortable Column Headers</div>
     <div class="sg-sub-desc">Sortable columns use a sort icon in the column header to communicate the current sort state. Three states: unsorted (neutral icon, both arrows visible), ascending (up arrow active), descending (down arrow active). Only one column can be sorted at a time this pattern supports single-column sort only. Multi-column sort (shift+click) is out of scope; if required, use a sort configuration panel rather than column headers activating a new column resets the previous. Clicking an already-sorted column toggles between ascending and descending. Always sort the data immediately on click never require a separate "Apply" action. Include <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">aria-sort</code> on the active column header for screen readers.</div>
 
-    <div class="sg-example" style="padding:0;overflow:hidden;display:block">
+    <div class="sg-example sg-example--flush">
       <div style="background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden">
         <table class="sg-table" id="sort-demo-table">
           <thead>
@@ -8828,7 +8933,7 @@ function renderFilterChips() {
               <th scope="col" class="sg-th-sort" onclick="demoSort('name')" aria-sort="none" style="cursor:pointer;user-select:none;white-space:nowrap">
                 <span style="display:inline-flex;align-items:center;gap:4px">
                   Participant
-                  <span class="sort-icon" style="display:inline-flex;flex-direction:column;gap:1px;opacity:.4">
+                  <span class="sort-icon sort-icon--none">
                     <svg width="8" height="5" viewBox="0 0 8 5"><path d="M4 0L8 5H0L4 0Z" fill="currentColor"/></svg>
                     <svg width="8" height="5" viewBox="0 0 8 5"><path d="M4 5L0 0H8L4 5Z" fill="currentColor"/></svg>
                   </span>
@@ -8838,7 +8943,7 @@ function renderFilterChips() {
               <th scope="col" class="sg-th-sort" onclick="demoSort('phase')" aria-sort="none" style="cursor:pointer;user-select:none;white-space:nowrap">
                 <span style="display:inline-flex;align-items:center;gap:4px">
                   Phase
-                  <span class="sort-icon" style="display:inline-flex;flex-direction:column;gap:1px;opacity:.4">
+                  <span class="sort-icon sort-icon--none">
                     <svg width="8" height="5" viewBox="0 0 8 5"><path d="M4 0L8 5H0L4 0Z" fill="currentColor"/></svg>
                     <svg width="8" height="5" viewBox="0 0 8 5"><path d="M4 5L0 0H8L4 5Z" fill="currentColor"/></svg>
                   </span>
@@ -8848,9 +8953,9 @@ function renderFilterChips() {
               <th scope="col" class="sg-th-sort sg-th-sort--asc" onclick="demoSort('risk')" aria-sort="ascending" style="cursor:pointer;user-select:none;white-space:nowrap;color:var(--sog-purple)">
                 <span style="display:inline-flex;align-items:center;gap:4px">
                   Risk Score
-                  <span class="sort-icon" style="display:inline-flex;flex-direction:column;gap:1px">
-                    <svg width="8" height="5" viewBox="0 0 8 5" style="opacity:1"><path d="M4 0L8 5H0L4 0Z" fill="var(--sog-purple)"/></svg>
-                    <svg width="8" height="5" viewBox="0 0 8 5" style="opacity:.25"><path d="M4 5L0 0H8L4 5Z" fill="currentColor"/></svg>
+                  <span class="sort-icon sort-icon--asc">
+                    <svg width="8" height="5" viewBox="0 0 8 5"><path d="M4 0L8 5H0L4 0Z" fill="currentColor"/></svg>
+                    <svg width="8" height="5" viewBox="0 0 8 5"><path d="M4 5L0 0H8L4 5Z" fill="currentColor"/></svg>
                   </span>
                 </span>
               </th>
@@ -8858,7 +8963,7 @@ function renderFilterChips() {
               <th scope="col" class="sg-th-sort" onclick="demoSort('date')" aria-sort="none" style="cursor:pointer;user-select:none;white-space:nowrap">
                 <span style="display:inline-flex;align-items:center;gap:4px">
                   Last Session
-                  <span class="sort-icon" style="display:inline-flex;flex-direction:column;gap:1px;opacity:.4">
+                  <span class="sort-icon sort-icon--none">
                     <svg width="8" height="5" viewBox="0 0 8 5"><path d="M4 0L8 5H0L4 0Z" fill="currentColor"/></svg>
                     <svg width="8" height="5" viewBox="0 0 8 5"><path d="M4 5L0 0H8L4 5Z" fill="currentColor"/></svg>
                   </span>
@@ -8964,7 +9069,7 @@ function sortTable(col, tbody, getValue) {
     <div class="sg-sub-title">Resizable Columns</div>
     <div class="sg-sub-desc">Column resize handles sit on the right edge of each <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">&lt;th&gt;</code>. Dragging the handle updates the column width live with the left boundary fixed only the right edge moves. Each column has a minimum width of 60px. Column widths are persisted to <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">localStorage</code> and restored on next page load. The table must use <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">table-layout: fixed</code> with explicit column widths set via <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">&lt;colgroup&gt;</code>. Touch devices: resize handles use mouse events only and are not available on touch screens on mobile, consider omitting handles or replacing them with a column visibility panel.</div>
 
-    <div class="sg-example" style="padding:0;overflow:hidden;display:block">
+    <div class="sg-example sg-example--flush">
       <div style="background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden">
 
         <div class="table-panel-header">
@@ -9070,7 +9175,7 @@ function sortTable(col, tbody, getValue) {
       <pre>/* Resize handle - sits on the right edge of each th */
 .col-resize-handle {
   position: absolute; right: 0; top: 0;
-  width: 6px; height: 100%;
+  width: 8px; height: 100%;
   cursor: col-resize;
   user-select: none;
   background: transparent;
@@ -9153,7 +9258,7 @@ initResizableColumns('participants-table', 'sog-table-widths');</pre>
     <div class="sg-sub-title">Table Footer &amp; Inline Legend</div>
     <div class="sg-sub-desc">The table footer strip serves two purposes: left side holds pagination or row counts; right side holds an inline legend when the table uses any data-encoding component (risk chips, coloured values, or status icons) that requires a key. The legend explains the colour system without interrupting the table header.able data. The two zones use display:flex with justify-content:space-between to push them to opposite ends. Never place action buttons in the footer those belong in the panel header or toolbar.</div>
 
-    <div class="sg-example" style="padding:0;overflow:hidden;display:block">
+    <div class="sg-example sg-example--flush">
       <div style="background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden">
         <!-- sample minimal table -->
         <table class="sg-table">
@@ -9204,7 +9309,7 @@ initResizableColumns('participants-table', 'sog-table-widths');</pre>
                       padding: 10px 16px; background: var(--muted-bg);
                       border-top: 1px solid var(--border);
                       font-size: 12px; color: var(--text-muted); flex-wrap: wrap; gap: 8px; }
-.table-legend       { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.table-legend       { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .table-legend-title { font-size: 11px; font-weight: 700; color: var(--charcoal-40); margin-right: 2px; }
 .table-legend-item  { display: flex; align-items: center; gap: 4px;
                       font-size: 11px; color: var(--text-muted); }
@@ -9217,7 +9322,7 @@ initResizableColumns('participants-table', 'sog-table-widths');</pre>
     <div class="sg-sub-title">Fixed-Column Table</div>
     <div class="sg-sub-desc">Use <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">table-layout:fixed</code> with a <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">&lt;colgroup&gt;</code> whenever the table has both narrow data columns (date, duration, risk) and a wide content column (tools, notes, description). Without it, a row with long tool names will push the date column wider, destroying the layout. Column widths are derived from content minimum + 2× cell padding. The tools column takes remaining width with no <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">width</code> set. Important: if the table contains dropdowns or tooltips, set their <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">z-index</code> higher than the fixed column (z-index: 10 or above) so they render over the sticky cells rather than behind them.</div>
 
-    <div class="sg-example" style="padding:0;overflow:hidden;display:block">
+    <div class="sg-example sg-example--flush">
       <div style="background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden">
         <div class="table-panel-header">
           <div class="tph-left">
@@ -10126,7 +10231,7 @@ initResizableColumns('participants-table', 'sog-table-widths');</pre>
     <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
     <pre>/* Shimmer skeleton */
 .skeleton {
-  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
   border-radius: 6px;
@@ -10243,6 +10348,9 @@ initResizableColumns('participants-table', 'sog-table-widths');</pre>
 }
 .sheet-backdrop.open { opacity: 1; pointer-events: all; }
 
+/* Production values. The live demo on this page uses position:absolute and
+   max-width:calc(100% - 48px) so the sheet stays inside its preview frame -
+   use fixed/100vw in a real app. */
 .sheet {
   position: fixed; top: 0; right: 0; height: 100%;
   width: 480px; max-width: calc(100vw - 48px);
@@ -10959,7 +11067,7 @@ document.querySelectorAll('.ring-node').forEach(node => {
 .pt-meta-card { background: var(--muted-bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; transition: border-color 150ms ease; }
 .pt-meta-card:hover { border-color: rgba(0,0,0,.2); }
 .pt-meta-label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
-.pt-meta-value { font-size: 15px; font-weight: 500; color: var(--text); }
+.pt-meta-value { font-size: 15px; font-weight: 600; color: var(--text); }
 .pt-pip { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--sog-blue); vertical-align: middle; margin-right: 4px; }
 .pt-bar-outer { position: relative; }
 .pt-phase-track { display: flex; height: 20px; border-radius: 10px; overflow: visible; gap: 2px; }
@@ -12680,7 +12788,7 @@ renderEngagementHeatmap('heatmap-container', {
       <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
       <pre>.phase-status {
   display: inline-flex; align-items: center; gap: 5px;
-  font-size: 11px; font-weight: 700; white-space: nowrap;
+  font-size: 12px; font-weight: 600; white-space: nowrap;
 }
 .phase-status--complete { background: var(--green-10);  border-color: var(--green-40);  color: #007A6C; }
 .phase-status--exit     { background: var(--orange-10); border-color: var(--orange-40); color: var(--sog-orange); }
@@ -12776,10 +12884,10 @@ renderEngagementHeatmap('heatmap-container', {
 .crit-icon  { width: 16px; height: 16px; border-radius: 50%;
               display: flex; align-items: center; justify-content: center;
               flex-shrink: 0; margin-top: 1px; }
-.icon-pass  { background: var(--green-10); color: #007A6C; border: 1px solid var(--green-20); }
+.icon-pass  { background: var(--green-10); color: #007A6C; border: 1px solid var(--green-40); }
 .icon-fail  { background: var(--color-error-bg); color: var(--color-error-text); border: 1px solid var(--color-error-border); }
 .crit-label { font-size: 12px; font-weight: 600; color: var(--text); line-height: 1.3; }
-.crit-sub   { font-size: 11px; color: var(--charcoal-40); line-height: 1.4; margin-top: 4px; }</pre>
+.crit-sub   { font-size: 11px; color: var(--text-muted); line-height: 1.4; margin-top: 4px; }</pre>
     </div>
   </div>
 
@@ -12834,7 +12942,7 @@ renderEngagementHeatmap('heatmap-container', {
 .prog-track        { height: 5px; background: var(--charcoal-10);
                      border-radius: 3px; overflow: hidden; }
 .prog-fill         { height: 100%; border-radius: 3px;
-                     transition: width .6s cubic-bezier(.4,0,.2,1); }
+                     transition: width .5s cubic-bezier(.4,0,.2,1); }
 .prog-fill--green  { background: var(--sog-green); }   /* post-programme context only */
 .prog-fill--phase  { /* inherits from scorecard-phase--p* parent */ }
 .scorecard-phase--p1 .prog-fill--phase { background: var(--sog-purple); }
@@ -15174,7 +15282,7 @@ function initCalendarHeatmap() {
 
     let mLabels = `<div style="position:relative;height:20px;margin-left:${labelW + 6}px;margin-bottom:4px">`;
     mWeeks.forEach((w, i) => {
-      mLabels += `<span style="position:absolute;left:${w*unit}px;font-size:11px;color:var(--text-muted);font-weight:500;white-space:nowrap">${months[i]}</span>`;
+      mLabels += `<span style="position:absolute;left:${w*unit}px;font-size:11px;color:var(--text-muted);font-weight:600;white-space:nowrap">${months[i]}</span>`;
     });
     mLabels += `</div>`;
 
@@ -16059,14 +16167,13 @@ function demoSort(col) {
       currentDir = current === 'ascending' ? 'desc' : 'asc';
     }
   });
-  // Reset all headers
+  // Reset all headers - state lives in the .sort-icon modifier classes,
+  // not inline styles, so the documented API is the single source of truth.
   headers.forEach(th => {
     th.setAttribute('aria-sort', 'none');
     th.style.color = '';
     const iconWrap = th.querySelector('.sort-icon');
-    if (iconWrap) iconWrap.style.opacity = '.4';
-    const svgs = th.querySelectorAll('svg');
-    svgs.forEach(s => { s.style.opacity = ''; s.querySelector('path')?.removeAttribute('fill'); });
+    if (iconWrap) iconWrap.className = 'sort-icon sort-icon--none';
   });
   // Set active header
   headers.forEach(th => {
@@ -16074,17 +16181,7 @@ function demoSort(col) {
       th.setAttribute('aria-sort', currentDir === 'asc' ? 'ascending' : 'descending');
       th.style.color = 'var(--sog-purple)';
       const iconWrap = th.querySelector('.sort-icon');
-      if (iconWrap) iconWrap.style.opacity = '1';
-      const svgs = th.querySelectorAll('svg');
-      if (svgs[0] && svgs[1]) {
-        if (currentDir === 'asc') {
-          svgs[0].style.opacity = '1'; svgs[0].querySelector('path').setAttribute('fill','var(--sog-purple)');
-          svgs[1].style.opacity = '.25'; svgs[1].querySelector('path').removeAttribute('fill');
-        } else {
-          svgs[0].style.opacity = '.25'; svgs[0].querySelector('path').removeAttribute('fill');
-          svgs[1].style.opacity = '1'; svgs[1].querySelector('path').setAttribute('fill','var(--sog-purple)');
-        }
-      }
+      if (iconWrap) iconWrap.className = 'sort-icon sort-icon--' + currentDir;
     }
   });
   // Sort rows
