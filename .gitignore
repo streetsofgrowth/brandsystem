@@ -1,0 +1,8 @@
+# macOS folder metadata — invisible files Finder creates, never part of the site
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows equivalent, in case a file is ever handled on a PC
+Thumbs.db
