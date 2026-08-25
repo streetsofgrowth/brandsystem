@@ -1683,32 +1683,27 @@ input[type="date"].sg-input::-webkit-datetime-edit-year-field:focus{
 .aim-node{cursor:pointer}
 .aim-node:focus{outline:none}
 .aim-node:focus-visible .aim-core{outline:3px solid var(--sog-purple);outline-offset:4px}
-/* Core lifts on hover, holds slightly larger while active */
+/* Core lifts on hover, holds larger while active */
 .aim-core{transform-box:fill-box;transform-origin:center;transition:transform .4s cubic-bezier(.34,1.56,.64,1),filter .3s ease}
-.aim-node:hover .aim-core{transform:scale(1.035);filter:drop-shadow(0 10px 24px rgba(64,60,101,.45))}
-.aim-node.active .aim-core{transform:scale(1.05);filter:drop-shadow(0 12px 28px rgba(64,60,101,.6))}
-/* Halos ease outward on hover, but only while the node is not already rippling */
-.aim-halo{transform-box:fill-box;transform-origin:center;transition:transform .4s cubic-bezier(.2,.8,.2,1),opacity .3s ease}
-.aim-node:hover:not(.active) .aim-halo-inner{transform:scale(1.06);opacity:.8}
-.aim-node:hover:not(.active) .aim-halo-outer{transform:scale(1.12);opacity:.6;transition-delay:.03s}
-/* Active: continuous ripples starting flush at the core perimeter and fading out.
-   Scales differ per circle so each ripple begins exactly on the core edge. */
-.aim-node.active .aim-halo-inner{animation:aimRippleStrand1 2s linear infinite}
-.aim-node.active .aim-halo-outer{animation:aimRippleStrand2 2s linear 1s infinite}
-@keyframes aimRippleStrand1{0%{transform:scale(.755);opacity:.7}50%{transform:scale(1.18);opacity:.45}100%{transform:scale(1.6);opacity:0}}
-@keyframes aimRippleStrand2{0%{transform:scale(.61);opacity:.7}50%{transform:scale(.95);opacity:.45}100%{transform:scale(1.3);opacity:0}}
-#aim-node-centre.active .aim-halo-inner{animation:aimRippleCentre1 2s linear infinite}
-#aim-node-centre.active .aim-halo-outer{animation:aimRippleCentre2 2s linear 1s infinite}
-@keyframes aimRippleCentre1{0%{transform:scale(.848);opacity:.7}50%{transform:scale(1.22);opacity:.45}100%{transform:scale(1.6);opacity:0}}
-@keyframes aimRippleCentre2{0%{transform:scale(.737);opacity:.7}50%{transform:scale(1.06);opacity:.45}100%{transform:scale(1.39);opacity:0}}
-.aim-label{fill:#fff;text-anchor:middle;dominant-baseline:central;pointer-events:none;user-select:none;transform-box:fill-box;transform-origin:center;transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
+.aim-node:hover .aim-core{transform:scale(1.04);filter:drop-shadow(0 10px 24px rgba(64,60,101,.45))}
+.aim-node.active .aim-core{transform:scale(1.06);filter:drop-shadow(0 12px 28px rgba(64,60,101,.6))}
+/* Halos ripple outward on a stagger, then pulse gently while active */
+.aim-halo{transform-box:fill-box;transform-origin:center;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .4s ease}
+.aim-node:hover .aim-halo-inner{transform:scale(1.07);opacity:.85;transition-delay:.02s}
+.aim-node:hover .aim-halo-outer{transform:scale(1.13);opacity:.65;transition-delay:.06s}
+.aim-node.active .aim-halo-inner{animation:aimPulseInner 2.4s ease-in-out infinite alternate}
+.aim-node.active .aim-halo-outer{animation:aimPulseOuter 2.4s ease-in-out infinite alternate .3s}
+@keyframes aimPulseInner{0%{transform:scale(1.05);opacity:.9}100%{transform:scale(1.10);opacity:.7}}
+@keyframes aimPulseOuter{0%{transform:scale(1.10);opacity:.75}100%{transform:scale(1.18);opacity:.4}}
+.aim-label{fill:#fff;text-anchor:middle;pointer-events:none;user-select:none;transform-box:fill-box;transform-origin:center;transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
+/* dominant-baseline does not inherit, so it must sit on the text elements */
+.aim-label text{dominant-baseline:central}
 .aim-node:hover .aim-label{transform:scale(1.02)}
 .aim-badge{pointer-events:none;user-select:none}
 .aim-badge-text{fill:var(--green-s3);font-weight:700;font-size:15.5px;letter-spacing:.3px;text-anchor:middle;dominant-baseline:central}
 @media (prefers-reduced-motion:reduce){
   .aim-core,.aim-halo,.aim-label{transition:none}
-  .aim-node.active .aim-halo-inner,.aim-node.active .aim-halo-outer,
-  #aim-node-centre.active .aim-halo-inner,#aim-node-centre.active .aim-halo-outer{animation:none}
+  .aim-node.active .aim-halo-inner,.aim-node.active .aim-halo-outer{animation:none}
 }
 
 </style>
@@ -10609,40 +10604,40 @@ document.addEventListener('keydown', e => {
 
     <div class="sg-example" style="justify-content:center">
       <div class="aim-figure">
-        <svg viewBox="0 0 900 830" role="group" aria-label="Appropriate Intervention Plus Model: three practice strands orbiting Significant Harm Reduction, on a Safeguarding System">
+        <svg viewBox="0 0 900 820" role="group" aria-label="Appropriate Intervention Plus Model: three practice strands orbiting Significant Harm Reduction, on a Safeguarding System">
           <!-- Connecting ring -->
           <circle cx="450" cy="450" r="250" fill="none" stroke="var(--green-70)" stroke-width="2.5" />
 
           <!-- Outreach and Intervention -->
           <g class="aim-node" id="aim-node-outreach" role="button" tabindex="0" aria-pressed="false" aria-label="Plus Outreach and Intervention">
-            <circle cx="450" cy="200" r="136" fill="rgba(64,60,101,.25)" class="aim-halo aim-halo-outer" />
+            <circle cx="450" cy="200" r="135" fill="rgba(64,60,101,.25)" class="aim-halo aim-halo-outer" />
             <circle cx="450" cy="200" r="110" fill="rgba(64,60,101,.45)" class="aim-halo aim-halo-inner" />
-            <circle cx="450" cy="200" r="83" fill="var(--purple-s2)" class="aim-core" />
+            <circle cx="450" cy="200" r="85" fill="var(--purple-s2)" class="aim-core" />
             <g class="aim-label">
-              <text x="450" y="188" font-size="17" font-weight="500">&#8314;Outreach &amp;</text>
-              <text x="450" y="212" font-size="17" font-weight="500">Intervention</text>
+              <text x="450" y="189" font-size="16" font-weight="500">&#8314;Outreach &amp;</text>
+              <text x="450" y="213" font-size="16" font-weight="500">Intervention</text>
             </g>
           </g>
 
           <!-- Lifestyle Change -->
           <g class="aim-node" id="aim-node-lifestyle" role="button" tabindex="0" aria-pressed="false" aria-label="Plus Lifestyle Change">
-            <circle cx="233.5" cy="575" r="136" fill="rgba(64,60,101,.25)" class="aim-halo aim-halo-outer" />
+            <circle cx="233.5" cy="575" r="135" fill="rgba(64,60,101,.25)" class="aim-halo aim-halo-outer" />
             <circle cx="233.5" cy="575" r="110" fill="rgba(64,60,101,.45)" class="aim-halo aim-halo-inner" />
-            <circle cx="233.5" cy="575" r="83" fill="var(--purple-s2)" class="aim-core" />
+            <circle cx="233.5" cy="575" r="85" fill="var(--purple-s2)" class="aim-core" />
             <g class="aim-label">
-              <text x="233.5" y="563" font-size="17" font-weight="500">&#8314;Lifestyle</text>
-              <text x="233.5" y="587" font-size="17" font-weight="500">Change</text>
+              <text x="233.5" y="564" font-size="16" font-weight="500">&#8314;Lifestyle</text>
+              <text x="233.5" y="588" font-size="16" font-weight="500">Change</text>
             </g>
           </g>
 
           <!-- Employability Progression -->
           <g class="aim-node" id="aim-node-employability" role="button" tabindex="0" aria-pressed="false" aria-label="Plus Employability Progression">
-            <circle cx="666.5" cy="575" r="136" fill="rgba(64,60,101,.25)" class="aim-halo aim-halo-outer" />
+            <circle cx="666.5" cy="575" r="135" fill="rgba(64,60,101,.25)" class="aim-halo aim-halo-outer" />
             <circle cx="666.5" cy="575" r="110" fill="rgba(64,60,101,.45)" class="aim-halo aim-halo-inner" />
-            <circle cx="666.5" cy="575" r="83" fill="var(--purple-s2)" class="aim-core" />
+            <circle cx="666.5" cy="575" r="85" fill="var(--purple-s2)" class="aim-core" />
             <g class="aim-label">
-              <text x="666.5" y="563" font-size="17" font-weight="500">&#8314;Employability</text>
-              <text x="666.5" y="587" font-size="17" font-weight="500">Progression</text>
+              <text x="666.5" y="564" font-size="16" font-weight="500">&#8314;Employability</text>
+              <text x="666.5" y="588" font-size="16" font-weight="500">Progression</text>
             </g>
           </g>
 
@@ -10652,15 +10647,15 @@ document.addEventListener('keydown', e => {
             <circle cx="450" cy="450" r="165" fill="rgba(98,93,156,.45)" class="aim-halo aim-halo-inner" />
             <circle cx="450" cy="450" r="140" fill="var(--sog-purple)" class="aim-core" />
             <g class="aim-label">
-              <text x="450" y="433" font-size="28" font-weight="700">Significant</text>
-              <text x="450" y="467" font-size="28" font-weight="700">Harm Reduction</text>
+              <text x="450" y="434" font-size="28" font-weight="700">Significant</text>
+              <text x="450" y="468" font-size="28" font-weight="700">Harm Reduction</text>
             </g>
           </g>
 
           <!-- Safeguarding badge -->
           <g class="aim-badge">
-            <rect x="335" y="677" width="230" height="46" rx="23" fill="var(--green-20)" />
-            <text class="aim-badge-text" x="450" y="700">SAFEGUARDING SYSTEM</text>
+            <rect x="335" y="667" width="230" height="46" rx="23" fill="var(--green-20)" />
+            <text class="aim-badge-text" x="450" y="691">SAFEGUARDING SYSTEM</text>
           </g>
         </svg>
       </div>
@@ -10741,7 +10736,7 @@ document.addEventListener('keydown', e => {
   <div class="code-block collapsed" style="margin-top:12px">
     <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">HTML</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
     <pre>&lt;div class="aim-figure"&gt;
-  &lt;svg viewBox="0 0 900 830" role="group"
+  &lt;svg viewBox="0 0 900 820" role="group"
        aria-label="Appropriate Intervention Plus Model: three practice strands
                    orbiting Significant Harm Reduction, on a Safeguarding System"&gt;
 
@@ -10753,14 +10748,14 @@ document.addEventListener('keydown', e => {
     &lt;g class="aim-node" id="aim-node-outreach"
        role="button" tabindex="0" aria-pressed="false"
        aria-label="Plus Outreach and Intervention"&gt;
-      &lt;circle cx="450" cy="200" r="136" fill="rgba(64,60,101,.25)"
+      &lt;circle cx="450" cy="200" r="135" fill="rgba(64,60,101,.25)"
               class="aim-halo aim-halo-outer" /&gt;
       &lt;circle cx="450" cy="200" r="110" fill="rgba(64,60,101,.45)"
               class="aim-halo aim-halo-inner" /&gt;
-      &lt;circle cx="450" cy="200" r="83" fill="var(--purple-s2)" class="aim-core" /&gt;
+      &lt;circle cx="450" cy="200" r="85" fill="var(--purple-s2)" class="aim-core" /&gt;
       &lt;g class="aim-label"&gt;
-        &lt;text x="450" y="188" font-size="17" font-weight="500"&gt;&amp;#8314;Outreach &amp;amp;&lt;/text&gt;
-        &lt;text x="450" y="212" font-size="17" font-weight="500"&gt;Intervention&lt;/text&gt;
+        &lt;text x="450" y="189" font-size="16" font-weight="500"&gt;&amp;#8314;Outreach &amp;amp;&lt;/text&gt;
+        &lt;text x="450" y="213" font-size="16" font-weight="500"&gt;Intervention&lt;/text&gt;
       &lt;/g&gt;
     &lt;/g&gt;
 
@@ -10773,15 +10768,15 @@ document.addEventListener('keydown', e => {
               class="aim-halo aim-halo-inner" /&gt;
       &lt;circle cx="450" cy="450" r="140" fill="var(--sog-purple)" class="aim-core" /&gt;
       &lt;g class="aim-label"&gt;
-        &lt;text x="450" y="433" font-size="28" font-weight="700"&gt;Significant&lt;/text&gt;
-        &lt;text x="450" y="467" font-size="28" font-weight="700"&gt;Harm Reduction&lt;/text&gt;
+        &lt;text x="450" y="434" font-size="28" font-weight="700"&gt;Significant&lt;/text&gt;
+        &lt;text x="450" y="468" font-size="28" font-weight="700"&gt;Harm Reduction&lt;/text&gt;
       &lt;/g&gt;
     &lt;/g&gt;
 
     &lt;!-- Safeguarding pill - static, sits outside the ring --&gt;
     &lt;g class="aim-badge"&gt;
-      &lt;rect x="335" y="677" width="230" height="46" rx="23" fill="var(--green-20)" /&gt;
-      &lt;text class="aim-badge-text" x="450" y="700"&gt;SAFEGUARDING SYSTEM&lt;/text&gt;
+      &lt;rect x="335" y="667" width="230" height="46" rx="23" fill="var(--green-20)" /&gt;
+      &lt;text class="aim-badge-text" x="450" y="691"&gt;SAFEGUARDING SYSTEM&lt;/text&gt;
     &lt;/g&gt;
   &lt;/svg&gt;
 &lt;/div&gt;</pre>
@@ -10792,49 +10787,31 @@ document.addEventListener('keydown', e => {
     <pre>.aim-figure{width:100%;max-width:440px;margin:0 auto;display:block}
 .aim-figure svg{width:100%;height:auto;display:block;overflow:visible}
 
-/* Core lifts on hover, holds slightly larger while active */
+/* Core lifts on hover, holds larger while active */
 .aim-core{
   transform-box:fill-box;transform-origin:center;
   transition:transform .4s cubic-bezier(.34,1.56,.64,1),filter .3s ease;
 }
-.aim-node:hover .aim-core{transform:scale(1.035);filter:drop-shadow(0 10px 24px rgba(64,60,101,.45))}
-.aim-node.active .aim-core{transform:scale(1.05);filter:drop-shadow(0 12px 28px rgba(64,60,101,.6))}
+.aim-node:hover .aim-core{transform:scale(1.04);filter:drop-shadow(0 10px 24px rgba(64,60,101,.45))}
+.aim-node.active .aim-core{transform:scale(1.06);filter:drop-shadow(0 12px 28px rgba(64,60,101,.6))}
 
-/* Halos ease outward on hover, but only while the node is not already rippling */
+/* Halos ripple outward on a stagger, then pulse gently while active */
 .aim-halo{transform-box:fill-box;transform-origin:center;
-  transition:transform .4s cubic-bezier(.2,.8,.2,1),opacity .3s ease}
-.aim-node:hover:not(.active) .aim-halo-inner{transform:scale(1.06);opacity:.8}
-.aim-node:hover:not(.active) .aim-halo-outer{transform:scale(1.12);opacity:.6;transition-delay:.03s}
+  transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .4s ease}
+.aim-node:hover .aim-halo-inner{transform:scale(1.07);opacity:.85;transition-delay:.02s}
+.aim-node:hover .aim-halo-outer{transform:scale(1.13);opacity:.65;transition-delay:.06s}
+.aim-node.active .aim-halo-inner{animation:aimPulseInner 2.4s ease-in-out infinite alternate}
+.aim-node.active .aim-halo-outer{animation:aimPulseOuter 2.4s ease-in-out infinite alternate .3s}
 
-/* Active: continuous ripples that start flush at the core perimeter and fade out.
-   The two halos are offset by 1s so the ripple reads as a steady pulse.
-   Scales are per-circle so each ripple begins exactly on the core edge:
-   strand cores are r=83, the centre core is r=140. */
-.aim-node.active .aim-halo-inner{animation:aimRippleStrand1 2s linear infinite}
-.aim-node.active .aim-halo-outer{animation:aimRippleStrand2 2s linear 1s infinite}
-@keyframes aimRippleStrand1{
-  0%  {transform:scale(.755);opacity:.7}   /* r = 83  */
-  50% {transform:scale(1.18);opacity:.45}  /* r = 130 */
-  100%{transform:scale(1.6); opacity:0}    /* r = 176 */
-}
-@keyframes aimRippleStrand2{
-  0%  {transform:scale(.61); opacity:.7}
-  50% {transform:scale(.95); opacity:.45}
-  100%{transform:scale(1.3); opacity:0}
-}
+@keyframes aimPulseInner{0%{transform:scale(1.05);opacity:.9}  100%{transform:scale(1.10);opacity:.7}}
+@keyframes aimPulseOuter{0%{transform:scale(1.10);opacity:.75} 100%{transform:scale(1.18);opacity:.4}}
 
-#aim-node-centre.active .aim-halo-inner{animation:aimRippleCentre1 2s linear infinite}
-#aim-node-centre.active .aim-halo-outer{animation:aimRippleCentre2 2s linear 1s infinite}
-@keyframes aimRippleCentre1{
-  0%  {transform:scale(.848);opacity:.7}   /* r = 140 */
-  50% {transform:scale(1.22);opacity:.45}  /* r = 201 */
-  100%{transform:scale(1.6); opacity:0}    /* r = 264 */
-}
-@keyframes aimRippleCentre2{
-  0%  {transform:scale(.737);opacity:.7}
-  50% {transform:scale(1.06);opacity:.45}
-  100%{transform:scale(1.39);opacity:0}
-}
+/* dominant-baseline does not inherit, so it must sit on the text elements */
+.aim-label{fill:#fff;text-anchor:middle;pointer-events:none;user-select:none;
+  transform-box:fill-box;transform-origin:center;
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
+.aim-label text{dominant-baseline:central}
+.aim-node:hover .aim-label{transform:scale(1.02)}
 
 /* Focus ring sits outside the halo so it stays visible */
 .aim-node:focus{outline:none}
@@ -10843,9 +10820,8 @@ document.addEventListener('keydown', e => {
 /* Honour a reduced-motion preference */
 @media (prefers-reduced-motion:reduce){
   .aim-core,.aim-halo,.aim-label{transition:none}
-  .aim-node.active .aim-halo-inner,.aim-node.active .aim-halo-outer,
-  #aim-node-centre.active .aim-halo-inner,
-  #aim-node-centre.active .aim-halo-outer{animation:none}
+  .aim-node.active .aim-halo-inner,
+  .aim-node.active .aim-halo-outer{animation:none}
 }</pre>
   </div>
 
