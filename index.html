@@ -1699,6 +1699,8 @@ input[type="date"].sg-input::-webkit-datetime-edit-year-field:focus{
 /* dominant-baseline does not inherit, so it must sit on the text elements */
 .aim-label text{dominant-baseline:central}
 .aim-node:hover .aim-label{transform:scale(1.02)}
+/* Superscript plus, scaled up relative to its line */
+.aim-plus{font-size:1.1em;font-weight:700;letter-spacing:-.6px}
 .aim-badge{pointer-events:none;user-select:none}
 .aim-badge-text{fill:var(--green-s3);font-weight:700;font-size:15.5px;letter-spacing:.3px;text-anchor:middle;dominant-baseline:central}
 @media (prefers-reduced-motion:reduce){
@@ -10614,8 +10616,8 @@ document.addEventListener('keydown', e => {
             <circle cx="450" cy="200" r="110" fill="rgba(64,60,101,.45)" class="aim-halo aim-halo-inner" />
             <circle cx="450" cy="200" r="85" fill="var(--purple-s2)" class="aim-core" />
             <g class="aim-label">
-              <text x="450" y="189" font-size="16" font-weight="500">&#8314;Outreach &amp;</text>
-              <text x="450" y="213" font-size="16" font-weight="500">Intervention</text>
+              <text x="450" y="192" font-size="16" font-weight="500"><tspan class="aim-plus" dy="0">+</tspan><tspan dy="0">&#160;Outreach &amp;</tspan></text>
+              <text x="450" y="210" font-size="16" font-weight="500">Intervention</text>
             </g>
           </g>
 
@@ -10625,8 +10627,8 @@ document.addEventListener('keydown', e => {
             <circle cx="233.5" cy="575" r="110" fill="rgba(64,60,101,.45)" class="aim-halo aim-halo-inner" />
             <circle cx="233.5" cy="575" r="85" fill="var(--purple-s2)" class="aim-core" />
             <g class="aim-label">
-              <text x="233.5" y="564" font-size="16" font-weight="500">&#8314;Lifestyle</text>
-              <text x="233.5" y="588" font-size="16" font-weight="500">Change</text>
+              <text x="233.5" y="567" font-size="16" font-weight="500"><tspan class="aim-plus" dy="0">+</tspan><tspan dy="0">&#160;Lifestyle</tspan></text>
+              <text x="233.5" y="585" font-size="16" font-weight="500">Change</text>
             </g>
           </g>
 
@@ -10636,8 +10638,8 @@ document.addEventListener('keydown', e => {
             <circle cx="666.5" cy="575" r="110" fill="rgba(64,60,101,.45)" class="aim-halo aim-halo-inner" />
             <circle cx="666.5" cy="575" r="85" fill="var(--purple-s2)" class="aim-core" />
             <g class="aim-label">
-              <text x="666.5" y="564" font-size="16" font-weight="500">&#8314;Employability</text>
-              <text x="666.5" y="588" font-size="16" font-weight="500">Progression</text>
+              <text x="666.5" y="567" font-size="16" font-weight="500"><tspan class="aim-plus" dy="0">+</tspan><tspan dy="0">&#160;Employability</tspan></text>
+              <text x="666.5" y="585" font-size="16" font-weight="500">Progression</text>
             </g>
           </g>
 
@@ -10754,8 +10756,10 @@ document.addEventListener('keydown', e => {
               class="aim-halo aim-halo-inner" /&gt;
       &lt;circle cx="450" cy="200" r="85" fill="var(--purple-s2)" class="aim-core" /&gt;
       &lt;g class="aim-label"&gt;
-        &lt;text x="450" y="189" font-size="16" font-weight="500"&gt;&amp;#8314;Outreach &amp;amp;&lt;/text&gt;
-        &lt;text x="450" y="213" font-size="16" font-weight="500"&gt;Intervention&lt;/text&gt;
+        &lt;text x="450" y="192" font-size="16" font-weight="500"&gt;
+          &lt;tspan class="aim-plus" dy="0"&gt;+&lt;/tspan&gt;&lt;tspan dy="0"&gt;&amp;#160;Outreach &amp;amp;&lt;/tspan&gt;
+        &lt;/text&gt;
+        &lt;text x="450" y="210" font-size="16" font-weight="500"&gt;Intervention&lt;/text&gt;
       &lt;/g&gt;
     &lt;/g&gt;
 
@@ -10812,6 +10816,9 @@ document.addEventListener('keydown', e => {
   transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
 .aim-label text{dominant-baseline:central}
 .aim-node:hover .aim-label{transform:scale(1.02)}
+
+/* Superscript plus, scaled up relative to its line */
+.aim-plus{font-size:1.1em;font-weight:700;letter-spacing:-.6px}
 
 /* Focus ring sits outside the halo so it stays visible */
 .aim-node:focus{outline:none}
