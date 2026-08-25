@@ -75,7 +75,6 @@ body{font-family:'Open Sans',sans-serif;font-size:14px;color:#323E48;background:
   width:var(--sidebar-w);height:100%;display:flex;flex-direction:column;
   background:#fff;border-radius:16px;
   border:1px solid rgba(0,0,0,.07);
-  box-shadow:0 2px 12px rgba(0,0,0,.06),0 1px 3px rgba(0,0,0,.04);
   overflow:hidden;
 }
 
@@ -1451,11 +1450,6 @@ body.col-resizing{cursor:col-resize !important;user-select:none}
 /* ── Logo section download buttons ─────────────────── */
 .logo-dl-btn{height:38px;padding:0 16px;gap:8px}
 .logo-dl-btn[disabled]{opacity:.5;cursor:not-allowed}
-/* Download Logo Pack CTA - matches brand button animation (darken on hover, press on active) */
-.logo-dl-cta{transition:background 150ms ease-out,transform 160ms ease-out}
-.logo-dl-cta:hover{background:#534F87!important}
-.logo-dl-cta:active{transform:scale(0.97)}
-.logo-dl-cta:focus-visible{outline:2px solid var(--sog-purple);outline-offset:2px}
 
 /* ── Shared code pill ──────────────────────────────── */
 .code-pill{
@@ -1666,10 +1660,61 @@ input[type="date"].sg-input::-webkit-datetime-edit-year-field:focus{
 .mt-green .mt-icon-circle{background:var(--sog-green)}
 .milestone-title{font-size:14px;font-weight:700;color:var(--text)}
 .milestone-desc{font-size:13px;color:var(--text-muted);line-height:1.55}
+/* ── Tabbed code panels ───────────────────────────────────────
+   Adjacent code blocks belonging to one example are merged into a
+   single panel at load time by initCodeTabs(). */
+.code-tabs{background:#1E2128;border-radius:10px;overflow:hidden;margin-bottom:24px;font-family:'SF Mono','Fira Code','Cascadia Code',Consolas,monospace;font-size:13px;line-height:1.6}
+.code-tabs-header{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#2A2F3A;border-bottom:1px solid rgba(255,255,255,.05)}
+.code-tabs.collapsed .code-tabs-header{border-bottom:none}
+.code-tabs-list{display:flex;align-items:stretch;overflow-x:auto;scrollbar-width:none}
+.code-tabs-list::-webkit-scrollbar{display:none}
+.code-tab{background:none;border:none;border-bottom:2px solid transparent;color:#8B95A5;font-family:inherit;font-size:11px;text-transform:uppercase;letter-spacing:.05em;padding:9px 14px;cursor:pointer;white-space:nowrap;transition:color .15s ease-out,background .15s ease-out,border-color .15s ease-out}
+.code-tab:hover{color:#D0D7E0;background:rgba(255,255,255,.06)}
+.code-tab[aria-selected="true"]{color:#fff;border-bottom-color:#918DB9}
+.code-tab:focus-visible{outline:2px solid rgba(255,255,255,.6);outline-offset:-2px}
+.code-tabs-single{font-size:11px;color:#8B95A5;text-transform:uppercase;letter-spacing:.05em;padding:9px 16px}
+.code-tabs-actions{display:flex;align-items:center;gap:8px;flex-shrink:0;padding:0 12px}
+.code-tabs.collapsed .code-tabs-body{display:none}
+.code-tabs pre{margin:0;padding:20px;color:#D0D7E0;overflow-x:auto;white-space:pre-wrap}
+
+/* ── AIM+ Model (Appropriate Intervention Plus) ───────────── */
+.aim-figure{width:100%;max-width:440px;margin:0 auto;display:block}
+.aim-figure svg{width:100%;height:auto;display:block;overflow:visible}
+.aim-node{cursor:pointer}
+.aim-node:focus{outline:none}
+.aim-node:focus-visible .aim-core{outline:3px solid var(--sog-purple);outline-offset:4px}
+/* Core lifts on hover, holds slightly larger while active */
+.aim-core{transform-box:fill-box;transform-origin:center;transition:transform .4s cubic-bezier(.34,1.56,.64,1),filter .3s ease}
+.aim-node:hover .aim-core{transform:scale(1.035);filter:drop-shadow(0 10px 24px rgba(64,60,101,.45))}
+.aim-node.active .aim-core{transform:scale(1.05);filter:drop-shadow(0 12px 28px rgba(64,60,101,.6))}
+/* Halos ease outward on hover, but only while the node is not already rippling */
+.aim-halo{transform-box:fill-box;transform-origin:center;transition:transform .4s cubic-bezier(.2,.8,.2,1),opacity .3s ease}
+.aim-node:hover:not(.active) .aim-halo-inner{transform:scale(1.06);opacity:.8}
+.aim-node:hover:not(.active) .aim-halo-outer{transform:scale(1.12);opacity:.6;transition-delay:.03s}
+/* Active: continuous ripples starting flush at the core perimeter and fading out.
+   Scales differ per circle so each ripple begins exactly on the core edge. */
+.aim-node.active .aim-halo-inner{animation:aimRippleStrand1 2s linear infinite}
+.aim-node.active .aim-halo-outer{animation:aimRippleStrand2 2s linear 1s infinite}
+@keyframes aimRippleStrand1{0%{transform:scale(.755);opacity:.7}50%{transform:scale(1.18);opacity:.45}100%{transform:scale(1.6);opacity:0}}
+@keyframes aimRippleStrand2{0%{transform:scale(.61);opacity:.7}50%{transform:scale(.95);opacity:.45}100%{transform:scale(1.3);opacity:0}}
+#aim-node-centre.active .aim-halo-inner{animation:aimRippleCentre1 2s linear infinite}
+#aim-node-centre.active .aim-halo-outer{animation:aimRippleCentre2 2s linear 1s infinite}
+@keyframes aimRippleCentre1{0%{transform:scale(.848);opacity:.7}50%{transform:scale(1.22);opacity:.45}100%{transform:scale(1.6);opacity:0}}
+@keyframes aimRippleCentre2{0%{transform:scale(.737);opacity:.7}50%{transform:scale(1.06);opacity:.45}100%{transform:scale(1.39);opacity:0}}
+.aim-label{fill:#fff;text-anchor:middle;dominant-baseline:central;pointer-events:none;user-select:none;transform-box:fill-box;transform-origin:center;transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
+.aim-node:hover .aim-label{transform:scale(1.02)}
+.aim-badge{pointer-events:none;user-select:none}
+.aim-badge-text{fill:var(--green-s3);font-weight:700;font-size:15.5px;letter-spacing:.3px;text-anchor:middle;dominant-baseline:central}
+@media (prefers-reduced-motion:reduce){
+  .aim-core,.aim-halo,.aim-label{transition:none}
+  .aim-node.active .aim-halo-inner,.aim-node.active .aim-halo-outer,
+  #aim-node-centre.active .aim-halo-inner,#aim-node-centre.active .aim-halo-outer{animation:none}
+}
+
 </style>
 </head>
 <body>
-<script>try{if(localStorage.getItem('sogSidebarTheme')==='dark')document.documentElement.classList.add('theme-dark');}catch(e){}</script>
+<script>try{if(localStorage.getItem('sogSidebarTheme')!=='light')document.documentElement.classList.add('theme-dark');}catch(e){}</script>
 <a href="#main-content" id="skip-link">Skip to main content</a>
 
 <!-- Mobile topbar -->
@@ -1812,6 +1857,7 @@ input[type="date"].sg-input::-webkit-datetime-edit-year-field:focus{
     <div class="sidebar-group">
       <div class="sidebar-group-label" role="button" tabindex="0"><div class="sidebar-group-label-inner"><span class="material-symbols-rounded sidebar-group-icon">auto_awesome_mosaic</span>Patterns</div><span class="material-symbols-rounded sidebar-chevron">expand_more</span></div>
       <div class="sidebar-group-links">
+        <a href="#aim-model" class="sidebar-link">AIM+ Model</a>
         <a href="#flywheel" class="sidebar-link">Flywheel</a>
         <a href="#prog-timeline" class="sidebar-link">Programme Position</a>
       </div>
@@ -2109,19 +2155,17 @@ input[type="date"].sg-input::-webkit-datetime-edit-year-field:focus{
   <h2 class="sg-section-title">Logo Usage</h2>
   <p class="sg-section-desc">The SOG logo is the most visible expression of our brand. Consistent application builds recognition and trust. Follow these rules across all digital, print, and environmental applications.</p>
 
-  <!-- Download note -->
-  <div class="info-callout" style="margin-bottom:16px">
+  <!-- Logo approval -->
+  <div class="info-callout" style="margin-bottom:28px">
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-      <span class="material-symbols-rounded" style="font-size:16px;color:var(--sog-purple)">folder_open</span>
-      <strong style="font-size:13px;color:var(--sog-purple)">Logo assets</strong>
+      <span class="material-symbols-rounded" style="font-size:16px;color:var(--sog-purple)">verified_user</span>
+      <strong style="font-size:13px;color:var(--sog-purple)">Logo approval</strong>
     </div>
-    <span style="font-size:13px;color:var(--text)">All approved logo files in every format (SVG, PNG, EPS). &nbsp;<strong>External partners:</strong> contact <a href="mailto:salik@streetsofgrowth.org" style="color:var(--sog-purple)">salik@streetsofgrowth.org</a> to request the asset pack.</span>
-  </div>
-  <div style="margin-bottom:28px">
-    <a href="SOG Logos.zip" download="SOG Logos.zip" class="logo-dl-cta" style="display:inline-flex;align-items:center;gap:8px;background:var(--sog-purple);color:#fff;font-family:inherit;font-size:14px;font-weight:600;padding:0 20px;height:40px;border-radius:8px;text-decoration:none;cursor:pointer">
-      <span class="material-symbols-rounded" style="font-size:18px">download</span>
-      Download Logo Pack
-    </a>
+    <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--text)">
+      <span>You can download the Streets of Growth logo pack from the Downloads section found in the navigation bar above.</span>
+      <span><strong>External partners:</strong> any design work applying the SOG logo must be approved before it is published.</span>
+      <span>Email <a href="mailto:salik@streetsofgrowth.org" style="color:var(--sog-purple)">salik@streetsofgrowth.org</a> to get sign-off.</span>
+    </div>
   </div>
 
   <!-- Logo Variants -->
@@ -2708,7 +2752,7 @@ input[type="date"].sg-input::-webkit-datetime-edit-year-field:focus{
   </div>
   <!-- File Formats callout -->
   <div class="info-callout" style="margin-top:8px">
-    <strong>File Formats:</strong> The master logo files are available in SVG (vector, for digital), EPS (vector, for print), and PNG (raster, for web/social). Always request the correct format for your use case from the brand team. Never export or convert logo files yourself without approval.
+    <strong>File Formats:</strong> The master logo files are available in SVG (vector, for digital), EPS (vector, for print), and PNG (raster, for web/social). Download the correct format for your use case from the <strong>Downloads</strong> button in the top bar. Never export or convert logo files yourself without approval.
   </div>
 
 </section>
@@ -10552,6 +10596,289 @@ document.addEventListener('keydown', e => {
 
 
 
+<!-- =================== AIM+ MODEL =================== -->
+<section id="aim-model" class="sg-section">
+  <div class="sg-section-label">Patterns</div>
+  <h2 class="sg-section-title">Appropriate Intervention Plus Model (AIM+)</h2>
+  <p class="sg-section-desc">The Appropriate Intervention Plus Model is our approach to youth work: a robust approach that incorporates &ldquo;systems thinking&rdquo; disciplines, connecting three core components into a more comprehensive system of interrelated interventions. Together they create safety and stability in a young person&rsquo;s life so they can progress and maintain their personal, social and economic development, independent of us. This section covers how the diagram is drawn and used. Use it in funder reports, presentations and onboarding material wherever the whole model needs to be understood at a glance.</p>
+
+  <!-- ── 1. The Model ────────────────────────────────────────────── -->
+  <div class="sg-sub">
+    <div class="sg-sub-title">The Model</div>
+    <div class="sg-sub-desc">Click any circle to hold it in focus. Clicking it again releases it. Only one circle can be held at a time, so the diagram can be used live in a presentation to walk an audience through each strand in turn.</div>
+
+    <div class="sg-example" style="justify-content:center">
+      <div class="aim-figure">
+        <svg viewBox="0 0 900 830" role="group" aria-label="Appropriate Intervention Plus Model: three practice strands orbiting Significant Harm Reduction, on a Safeguarding System">
+          <!-- Connecting ring -->
+          <circle cx="450" cy="450" r="250" fill="none" stroke="var(--green-70)" stroke-width="2.5" />
+
+          <!-- Outreach and Intervention -->
+          <g class="aim-node" id="aim-node-outreach" role="button" tabindex="0" aria-pressed="false" aria-label="Plus Outreach and Intervention">
+            <circle cx="450" cy="200" r="136" fill="rgba(64,60,101,.25)" class="aim-halo aim-halo-outer" />
+            <circle cx="450" cy="200" r="110" fill="rgba(64,60,101,.45)" class="aim-halo aim-halo-inner" />
+            <circle cx="450" cy="200" r="83" fill="var(--purple-s2)" class="aim-core" />
+            <g class="aim-label">
+              <text x="450" y="188" font-size="17" font-weight="500">&#8314;Outreach &amp;</text>
+              <text x="450" y="212" font-size="17" font-weight="500">Intervention</text>
+            </g>
+          </g>
+
+          <!-- Lifestyle Change -->
+          <g class="aim-node" id="aim-node-lifestyle" role="button" tabindex="0" aria-pressed="false" aria-label="Plus Lifestyle Change">
+            <circle cx="233.5" cy="575" r="136" fill="rgba(64,60,101,.25)" class="aim-halo aim-halo-outer" />
+            <circle cx="233.5" cy="575" r="110" fill="rgba(64,60,101,.45)" class="aim-halo aim-halo-inner" />
+            <circle cx="233.5" cy="575" r="83" fill="var(--purple-s2)" class="aim-core" />
+            <g class="aim-label">
+              <text x="233.5" y="563" font-size="17" font-weight="500">&#8314;Lifestyle</text>
+              <text x="233.5" y="587" font-size="17" font-weight="500">Change</text>
+            </g>
+          </g>
+
+          <!-- Employability Progression -->
+          <g class="aim-node" id="aim-node-employability" role="button" tabindex="0" aria-pressed="false" aria-label="Plus Employability Progression">
+            <circle cx="666.5" cy="575" r="136" fill="rgba(64,60,101,.25)" class="aim-halo aim-halo-outer" />
+            <circle cx="666.5" cy="575" r="110" fill="rgba(64,60,101,.45)" class="aim-halo aim-halo-inner" />
+            <circle cx="666.5" cy="575" r="83" fill="var(--purple-s2)" class="aim-core" />
+            <g class="aim-label">
+              <text x="666.5" y="563" font-size="17" font-weight="500">&#8314;Employability</text>
+              <text x="666.5" y="587" font-size="17" font-weight="500">Progression</text>
+            </g>
+          </g>
+
+          <!-- Centre: the outcome -->
+          <g class="aim-node" id="aim-node-centre" role="button" tabindex="0" aria-pressed="false" aria-label="Significant Harm Reduction">
+            <circle cx="450" cy="450" r="190" fill="rgba(98,93,156,.25)" class="aim-halo aim-halo-outer" />
+            <circle cx="450" cy="450" r="165" fill="rgba(98,93,156,.45)" class="aim-halo aim-halo-inner" />
+            <circle cx="450" cy="450" r="140" fill="var(--sog-purple)" class="aim-core" />
+            <g class="aim-label">
+              <text x="450" y="433" font-size="28" font-weight="700">Significant</text>
+              <text x="450" y="467" font-size="28" font-weight="700">Harm Reduction</text>
+            </g>
+          </g>
+
+          <!-- Safeguarding badge -->
+          <g class="aim-badge">
+            <rect x="335" y="677" width="230" height="46" rx="23" fill="var(--green-20)" />
+            <text class="aim-badge-text" x="450" y="700">SAFEGUARDING SYSTEM</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 2. The three strands ────────────────────────────────────── -->
+  <div class="sg-sub">
+    <div class="sg-sub-title">The three strands</div>
+    <div class="sg-sub-desc">Each strand is a distinct area of practice. They are not stages: a young person can be held by more than one at a time, which is why the diagram draws them as an orbit rather than a line. Use the wording below when the diagram needs a written explanation alongside it.</div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+      <div class="sg-card">
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:6px">Strand 01</div>
+        <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px"><sup>+</sup>Outreach &amp; Intervention</div>
+        <div style="font-size:12px;color:var(--text-muted);line-height:1.6">Street-level engagement on council estates, described as <em>Building a Relationship for Change</em>. It exists because young people don&rsquo;t simply walk through our doors, and may reject professional support to begin with.</div>
+      </div>
+      <div class="sg-card">
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:6px">Strand 02</div>
+        <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px"><sup>+</sup>Lifestyle Change</div>
+        <div style="font-size:12px;color:var(--text-muted);line-height:1.6">Significantly reducing harm in a young person&rsquo;s life and equipping them with vital cognitive behavioural skills. Because criminality persists in the environments they live in, this runs both inside our building and out in the community.</div>
+      </div>
+      <div class="sg-card">
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:6px">Strand 03</div>
+        <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px"><sup>+</sup>Employability Progression</div>
+        <div style="font-size:12px;color:var(--text-muted);line-height:1.6">Coaching a professional growth and success mindset for one&rsquo;s career of choice, and moving young people into employment and training. We are not a recruiter that simply tries to find any jobs for young people.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 2. Anatomy ──────────────────────────────────────────────── -->
+  <div class="sg-sub">
+    <div class="sg-sub-title">Anatomy</div>
+    <div class="sg-sub-desc">Four parts, each carrying a fixed meaning. Never add a fifth strand or move the outcome out of the centre: the geometry is the argument.</div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+      <div class="sg-card">
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:6px">Centre</div>
+        <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px">Significant Harm Reduction</div>
+        <div style="font-size:12px;color:var(--text-muted);line-height:1.6">The central outcome of the model. Drawn largest, in SOG Purple, and always at the centre. The three strands exist to produce it.</div>
+      </div>
+      <div class="sg-card">
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:6px">Three strands</div>
+        <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px">The <sup>+</sup> practice areas</div>
+        <div style="font-size:12px;color:var(--text-muted);line-height:1.6">Outreach &amp; Intervention, Lifestyle Change, Employability Progression. Drawn identical in size and colour: they are components of one system, not a ranked list.</div>
+      </div>
+      <div class="sg-card">
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:6px">Ring</div>
+        <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px">The connecting orbit</div>
+        <div style="font-size:12px;color:var(--text-muted);line-height:1.6">A single Green 70 line passing through all three strands, carrying the &ldquo;interrelated interventions&rdquo; idea: the strands connect to each other, not just to the centre.</div>
+      </div>
+      <div class="sg-card">
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:6px">Base</div>
+        <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px">Safeguarding System</div>
+        <div style="font-size:12px;color:var(--text-muted);line-height:1.6">Sits beneath the model rather than inside the ring, spanning its full width. It underpins every strand rather than sitting alongside them as a fourth.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 3. Design rules ─────────────────────────────────────────── -->
+  <div class="sg-sub">
+    <div class="sg-sub-title">Design rules</div>
+    <div class="sg-sub-desc">Always write it as <strong>AIM+</strong> on first use, spelled out in full as <strong>Appropriate Intervention Plus Model</strong> at least once per document. The three strand labels carry a raised plus (<sup>+</sup>Outreach &amp; Intervention) and that plus is never dropped. Keep all three strands identical in size and colour. Never number them or redraw them as a sequence, because they are interrelated rather than consecutive, and never add a fourth. The safeguarding pill stays in full capitals and stays outside the ring. Give the diagram room to breathe: at least 40px clear space on every side, and never place it on a photographic background. Minimum reproduction width is 320px, below which the strand labels stop being legible and a stacked text version should be used instead.</div>
+  </div>
+
+  <!-- ── 4. When to use ──────────────────────────────────────────── -->
+  <div class="sg-sub">
+    <div class="sg-sub-title">When to use</div>
+    <div class="info-callout">Use AIM+ when the audience needs the whole model at once: funder applications, board papers, staff induction, partner briefings. Do not use it to describe one young person's journey, that is what the <strong>Programme Position</strong> pattern is for. If you only need to reference a single strand, use the strand name in text rather than cropping the diagram.</div>
+  </div>
+
+  <!-- ── 5. Accessibility ────────────────────────────────────────── -->
+  <div class="sg-sub">
+    <div class="sg-sub-title">Accessibility</div>
+    <div class="sg-sub-desc">Each circle is a keyboard-reachable button: tab to it and press Enter or Space to hold it in focus. Focus is shown with a 3px SOG Purple ring offset from the circle, so it stays visible against the halo. White label text on Purple Shade 2 and on SOG Purple both clear WCAG AA at these sizes. The whole SVG carries a description naming all four parts, so the model is announced meaningfully to a screen reader even though the individual circles are decorative shapes. Where a reader has asked their system to reduce motion, the hover growth and the pulsing halo are switched off and the diagram becomes static.</div>
+  </div>
+
+  <div class="code-block collapsed" style="margin-top:12px">
+    <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">HTML</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+    <pre>&lt;div class="aim-figure"&gt;
+  &lt;svg viewBox="0 0 900 830" role="group"
+       aria-label="Appropriate Intervention Plus Model: three practice strands
+                   orbiting Significant Harm Reduction, on a Safeguarding System"&gt;
+
+    &lt;!-- Connecting ring --&gt;
+    &lt;circle cx="450" cy="450" r="250" fill="none"
+            stroke="var(--green-70)" stroke-width="2.5" /&gt;
+
+    &lt;!-- One strand - repeat for each, changing cx/cy and the label --&gt;
+    &lt;g class="aim-node" id="aim-node-outreach"
+       role="button" tabindex="0" aria-pressed="false"
+       aria-label="Plus Outreach and Intervention"&gt;
+      &lt;circle cx="450" cy="200" r="136" fill="rgba(64,60,101,.25)"
+              class="aim-halo aim-halo-outer" /&gt;
+      &lt;circle cx="450" cy="200" r="110" fill="rgba(64,60,101,.45)"
+              class="aim-halo aim-halo-inner" /&gt;
+      &lt;circle cx="450" cy="200" r="83" fill="var(--purple-s2)" class="aim-core" /&gt;
+      &lt;g class="aim-label"&gt;
+        &lt;text x="450" y="188" font-size="17" font-weight="500"&gt;&amp;#8314;Outreach &amp;amp;&lt;/text&gt;
+        &lt;text x="450" y="212" font-size="17" font-weight="500"&gt;Intervention&lt;/text&gt;
+      &lt;/g&gt;
+    &lt;/g&gt;
+
+    &lt;!-- Centre: larger radii, SOG Purple --&gt;
+    &lt;g class="aim-node" id="aim-node-centre" role="button" tabindex="0"
+       aria-pressed="false" aria-label="Significant Harm Reduction"&gt;
+      &lt;circle cx="450" cy="450" r="190" fill="rgba(98,93,156,.25)"
+              class="aim-halo aim-halo-outer" /&gt;
+      &lt;circle cx="450" cy="450" r="165" fill="rgba(98,93,156,.45)"
+              class="aim-halo aim-halo-inner" /&gt;
+      &lt;circle cx="450" cy="450" r="140" fill="var(--sog-purple)" class="aim-core" /&gt;
+      &lt;g class="aim-label"&gt;
+        &lt;text x="450" y="433" font-size="28" font-weight="700"&gt;Significant&lt;/text&gt;
+        &lt;text x="450" y="467" font-size="28" font-weight="700"&gt;Harm Reduction&lt;/text&gt;
+      &lt;/g&gt;
+    &lt;/g&gt;
+
+    &lt;!-- Safeguarding pill - static, sits outside the ring --&gt;
+    &lt;g class="aim-badge"&gt;
+      &lt;rect x="335" y="677" width="230" height="46" rx="23" fill="var(--green-20)" /&gt;
+      &lt;text class="aim-badge-text" x="450" y="700"&gt;SAFEGUARDING SYSTEM&lt;/text&gt;
+    &lt;/g&gt;
+  &lt;/svg&gt;
+&lt;/div&gt;</pre>
+  </div>
+
+  <div class="code-block collapsed" style="margin-top:8px">
+    <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">CSS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+    <pre>.aim-figure{width:100%;max-width:440px;margin:0 auto;display:block}
+.aim-figure svg{width:100%;height:auto;display:block;overflow:visible}
+
+/* Core lifts on hover, holds slightly larger while active */
+.aim-core{
+  transform-box:fill-box;transform-origin:center;
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1),filter .3s ease;
+}
+.aim-node:hover .aim-core{transform:scale(1.035);filter:drop-shadow(0 10px 24px rgba(64,60,101,.45))}
+.aim-node.active .aim-core{transform:scale(1.05);filter:drop-shadow(0 12px 28px rgba(64,60,101,.6))}
+
+/* Halos ease outward on hover, but only while the node is not already rippling */
+.aim-halo{transform-box:fill-box;transform-origin:center;
+  transition:transform .4s cubic-bezier(.2,.8,.2,1),opacity .3s ease}
+.aim-node:hover:not(.active) .aim-halo-inner{transform:scale(1.06);opacity:.8}
+.aim-node:hover:not(.active) .aim-halo-outer{transform:scale(1.12);opacity:.6;transition-delay:.03s}
+
+/* Active: continuous ripples that start flush at the core perimeter and fade out.
+   The two halos are offset by 1s so the ripple reads as a steady pulse.
+   Scales are per-circle so each ripple begins exactly on the core edge:
+   strand cores are r=83, the centre core is r=140. */
+.aim-node.active .aim-halo-inner{animation:aimRippleStrand1 2s linear infinite}
+.aim-node.active .aim-halo-outer{animation:aimRippleStrand2 2s linear 1s infinite}
+@keyframes aimRippleStrand1{
+  0%  {transform:scale(.755);opacity:.7}   /* r = 83  */
+  50% {transform:scale(1.18);opacity:.45}  /* r = 130 */
+  100%{transform:scale(1.6); opacity:0}    /* r = 176 */
+}
+@keyframes aimRippleStrand2{
+  0%  {transform:scale(.61); opacity:.7}
+  50% {transform:scale(.95); opacity:.45}
+  100%{transform:scale(1.3); opacity:0}
+}
+
+#aim-node-centre.active .aim-halo-inner{animation:aimRippleCentre1 2s linear infinite}
+#aim-node-centre.active .aim-halo-outer{animation:aimRippleCentre2 2s linear 1s infinite}
+@keyframes aimRippleCentre1{
+  0%  {transform:scale(.848);opacity:.7}   /* r = 140 */
+  50% {transform:scale(1.22);opacity:.45}  /* r = 201 */
+  100%{transform:scale(1.6); opacity:0}    /* r = 264 */
+}
+@keyframes aimRippleCentre2{
+  0%  {transform:scale(.737);opacity:.7}
+  50% {transform:scale(1.06);opacity:.45}
+  100%{transform:scale(1.39);opacity:0}
+}
+
+/* Focus ring sits outside the halo so it stays visible */
+.aim-node:focus{outline:none}
+.aim-node:focus-visible .aim-core{outline:3px solid var(--sog-purple);outline-offset:4px}
+
+/* Honour a reduced-motion preference */
+@media (prefers-reduced-motion:reduce){
+  .aim-core,.aim-halo,.aim-label{transition:none}
+  .aim-node.active .aim-halo-inner,.aim-node.active .aim-halo-outer,
+  #aim-node-centre.active .aim-halo-inner,
+  #aim-node-centre.active .aim-halo-outer{animation:none}
+}</pre>
+  </div>
+
+  <div class="code-block collapsed" style="margin-top:8px">
+    <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">JS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+    <pre>function initAimModel() {
+  const nodes = document.querySelectorAll('#aim-model .aim-node');
+  if (!nodes.length) return;
+
+  // Only one circle is held at a time; clicking the held one releases it.
+  const select = (target) =&gt; {
+    const wasActive = target.classList.contains('active');
+    nodes.forEach(n =&gt; {
+      n.classList.remove('active');
+      n.setAttribute('aria-pressed', 'false');
+    });
+    if (!wasActive) {
+      target.classList.add('active');
+      target.setAttribute('aria-pressed', 'true');
+    }
+  };
+
+  nodes.forEach(node =&gt; {
+    node.addEventListener('click', () =&gt; select(node));
+    node.addEventListener('keydown', e =&gt; {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(node); }
+    });
+  });
+}</pre>
+  </div>
+</section>
+
+
 <!-- =================== FLYWHEEL =================== -->
 <section id="flywheel" class="sg-section">
   <div class="sg-section-label">Patterns</div>
@@ -11705,45 +12032,140 @@ document.querySelectorAll('.ring-node').forEach(node => {
 
   <div class="sg-sub">
     <div class="sg-sub-title">Sequential &amp; Monochromatic Scales</div>
-    <div class="sg-sub-desc">The <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">SOG_COLORS</code> array is for categorical data (one colour per series). For ordered, intensity, or single-series data (heatmaps, calendar heatmaps, treemaps, and single-series bar or area charts) use the tint or shade steps of one colour family from lightest to darkest instead: tints for light-background ramps, shades for deeper saturated fills. Never mix different hues to encode ordered data; pick the family whose brand role matches the metric. Full step values live in the Tint &amp; Shade scales under Colour Palette.</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+    <div class="sg-sub-desc">The <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">SOG_COLORS</code> array is for categorical data (one colour per series). For ordered, intensity, or single-series data (heatmaps, calendar heatmaps, treemaps, and single-series bar or area charts) use the tint or shade steps of one colour family from lightest to darkest instead: tints for light-background ramps, shades for deeper saturated fills. Never mix different hues to encode ordered data; pick the family whose brand role matches the metric. Every family in <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">SOG_COLORS</code> has a ramp below, in the same index order as the Colour to Role Mapping above. Full step values live in the Tint &amp; Shade scales under Colour Palette.</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px 20px">
       <div>
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:8px">Purple</div>
-        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Tints (light → base)</div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted)">Purple</div>
+        </div>
+        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Tints (light &rarr; base)</div>
         <div style="display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:12px" aria-hidden="true">
           <div style="flex:1;background:#F0EFF6"></div><div style="flex:1;background:#E0DFEB"></div><div style="flex:1;background:#C0BED7"></div><div style="flex:1;background:#918DB9"></div><div style="flex:1;background:#625D9C"></div>
         </div>
-        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Shades (base → dark)</div>
-        <div style="display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--border)" aria-hidden="true">
+        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Shades (base &rarr; dark)</div>
+        <div style="display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:6px" aria-hidden="true">
           <div style="flex:1;background:#625D9C"></div><div style="flex:1;background:#534F85"></div><div style="flex:1;background:#403C65"></div><div style="flex:1;background:#2C2A46"></div><div style="flex:1;background:#191727"></div>
         </div>
+        <div style="font-size:11px;color:var(--text-muted);line-height:1.4">Primary series</div>
       </div>
       <div>
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:8px">Teal</div>
-        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Tints (light → base)</div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted)">Blue</div>
+        </div>
+        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Tints (light &rarr; base)</div>
+        <div style="display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:12px" aria-hidden="true">
+          <div style="flex:1;background:#ECF5FA"></div><div style="flex:1;background:#D9EAF5"></div><div style="flex:1;background:#B3D5EA"></div><div style="flex:1;background:#7AB7DB"></div><div style="flex:1;background:#4197CB"></div>
+        </div>
+        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Shades (base &rarr; dark)</div>
+        <div style="display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:6px" aria-hidden="true">
+          <div style="flex:1;background:#4197CB"></div><div style="flex:1;background:#3780AD"></div><div style="flex:1;background:#2A6284"></div><div style="flex:1;background:#1D445B"></div><div style="flex:1;background:#102633"></div>
+        </div>
+        <div style="font-size:11px;color:var(--text-muted);line-height:1.4">Secondary series</div>
+      </div>
+      <div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted)">Sky</div>
+        </div>
+        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Tints (light &rarr; base)</div>
+        <div style="display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:12px" aria-hidden="true">
+          <div style="flex:1;background:#EFF8FD"></div><div style="flex:1;background:#DFF0FA"></div><div style="flex:1;background:#BFE1F4"></div><div style="flex:1;background:#8FCAED"></div><div style="flex:1;background:#5EB3E4"></div>
+        </div>
+        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Shades (base &rarr; dark)</div>
+        <div style="display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:6px" aria-hidden="true">
+          <div style="flex:1;background:#5EB3E4"></div><div style="flex:1;background:#5098C2"></div><div style="flex:1;background:#3D7494"></div><div style="flex:1;background:#2A5167"></div><div style="flex:1;background:#182D39"></div>
+        </div>
+        <div style="font-size:11px;color:var(--text-muted);line-height:1.4">Tertiary series</div>
+      </div>
+      <div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted)">Teal</div>
+        </div>
+        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Tints (light &rarr; base)</div>
         <div style="display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:12px" aria-hidden="true">
           <div style="flex:1;background:#E6F5F7"></div><div style="flex:1;background:#CCEAEE"></div><div style="flex:1;background:#99D5DD"></div><div style="flex:1;background:#4DB5C3"></div><div style="flex:1;background:#0095A9"></div>
         </div>
-        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Shades (base → dark)</div>
-        <div style="display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--border)" aria-hidden="true">
+        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Shades (base &rarr; dark)</div>
+        <div style="display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:6px" aria-hidden="true">
           <div style="flex:1;background:#0095A9"></div><div style="flex:1;background:#007F90"></div><div style="flex:1;background:#00616E"></div><div style="flex:1;background:#00434C"></div><div style="flex:1;background:#00252A"></div>
         </div>
+        <div style="font-size:11px;color:var(--text-muted);line-height:1.4">Highlight / accent</div>
       </div>
       <div>
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:8px">Green</div>
-        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Tints (light → base)</div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted)">Green</div>
+        </div>
+        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Tints (light &rarr; base)</div>
         <div style="display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:12px" aria-hidden="true">
           <div style="flex:1;background:#E6F7F5"></div><div style="flex:1;background:#CCEFEB"></div><div style="flex:1;background:#99DFD7"></div><div style="flex:1;background:#4DC7B9"></div><div style="flex:1;background:#00AF9A"></div>
         </div>
-        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Shades (base → dark)</div>
-        <div style="display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--border)" aria-hidden="true">
+        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Shades (base &rarr; dark)</div>
+        <div style="display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:6px" aria-hidden="true">
           <div style="flex:1;background:#00AF9A"></div><div style="flex:1;background:#009583"></div><div style="flex:1;background:#007264"></div><div style="flex:1;background:#004F45"></div><div style="flex:1;background:#002C27"></div>
         </div>
+        <div style="font-size:11px;color:var(--text-muted);line-height:1.4">Positive / on target</div>
+      </div>
+      <div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted)">Charcoal</div>
+        </div>
+        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Tints (light &rarr; base)</div>
+        <div style="display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:12px" aria-hidden="true">
+          <div style="flex:1;background:#EBECED"></div><div style="flex:1;background:#D6D8DA"></div><div style="flex:1;background:#ADB2B6"></div><div style="flex:1;background:#70787F"></div><div style="flex:1;background:#323E48"></div>
+        </div>
+        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Shades (base &rarr; dark)</div>
+        <div style="display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:6px" aria-hidden="true">
+          <div style="flex:1;background:#323E48"></div><div style="flex:1;background:#2B353D"></div><div style="flex:1;background:#21282F"></div><div style="flex:1;background:#171C20"></div><div style="flex:1;background:#0D1012"></div>
+        </div>
+        <div style="font-size:11px;color:var(--text-muted);line-height:1.4">Neutral / baseline</div>
+      </div>
+      <div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted)">Red</div>
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--sog-orange)">Semantic</div>
+        </div>
+        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Tints (light &rarr; base)</div>
+        <div style="display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:12px" aria-hidden="true">
+          <div style="flex:1;background:#FEE8EA"></div><div style="flex:1;background:#FDD4D7"></div><div style="flex:1;background:#FAA9AE"></div><div style="flex:1;background:#F76872"></div><div style="flex:1;background:#F32735"></div>
+        </div>
+        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Shades (base &rarr; dark)</div>
+        <div style="display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:6px" aria-hidden="true">
+          <div style="flex:1;background:#F32735"></div><div style="flex:1;background:#CF212D"></div><div style="flex:1;background:#9E1922"></div><div style="flex:1;background:#6D1218"></div><div style="flex:1;background:#3D0A0D"></div>
+        </div>
+        <div style="font-size:11px;color:var(--text-muted);line-height:1.4">Alert / high risk</div>
+      </div>
+      <div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted)">Orange</div>
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--sog-orange)">Semantic</div>
+        </div>
+        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Tints (light &rarr; base)</div>
+        <div style="display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:12px" aria-hidden="true">
+          <div style="flex:1;background:#FFF0E7"></div><div style="flex:1;background:#FFE2CF"></div><div style="flex:1;background:#FFC49F"></div><div style="flex:1;background:#FF9856"></div><div style="flex:1;background:#FF6C0E"></div>
+        </div>
+        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Shades (base &rarr; dark)</div>
+        <div style="display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:6px" aria-hidden="true">
+          <div style="flex:1;background:#FF6C0E"></div><div style="flex:1;background:#D95C0C"></div><div style="flex:1;background:#A64609"></div><div style="flex:1;background:#733106"></div><div style="flex:1;background:#401B04"></div>
+        </div>
+        <div style="font-size:11px;color:var(--text-muted);line-height:1.4">Warning / medium risk</div>
+      </div>
+      <div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted)">Yellow</div>
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--sog-orange)">Semantic</div>
+        </div>
+        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Tints (light &rarr; base)</div>
+        <div style="display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:12px" aria-hidden="true">
+          <div style="flex:1;background:#FEFAE6"></div><div style="flex:1;background:#FCF5CC"></div><div style="flex:1;background:#FAEB99"></div><div style="flex:1;background:#F6DC4D"></div><div style="flex:1;background:#F2CD00"></div>
+        </div>
+        <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Shades (base &rarr; dark)</div>
+        <div style="display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:6px" aria-hidden="true">
+          <div style="flex:1;background:#F2CD00"></div><div style="flex:1;background:#CEAE00"></div><div style="flex:1;background:#9D8500"></div><div style="flex:1;background:#6D5C00"></div><div style="flex:1;background:#3D3300"></div>
+        </div>
+        <div style="font-size:11px;color:var(--text-muted);line-height:1.4">On hold / low risk</div>
       </div>
     </div>
-    <div class="info-callout" style="margin-top:16px">Use a single family's tint ramp for intensity or ordered scales, and keep flat fills for all data marks so magnitude reads accurately.</div>
+    <div class="info-callout" style="margin-top:16px">Use a single family's tint ramp for intensity or ordered scales, and keep flat fills for all data marks so magnitude reads accurately. The Red, Orange, and Yellow ramps are for risk and status intensity only &mdash; never as a general sequential scale.</div>
   </div>
-
   <div class="sg-sub">
     <div class="sg-sub-title">Chart.js Version &amp; Setup</div>
     <div class="sg-sub-desc">All charts use Chart.js 4.4.0 with the date-fns adapter for time-axis charts. Load both scripts before any chart initialisation. The global defaults block must run once after Chart.js loads and before any <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">new Chart()</code> call: it sets Open Sans, the SOG text colour, and consistent tooltip and legend sizing across every chart automatically.</div>
@@ -11802,25 +12224,156 @@ Chart.defaults.scale.border.dash                = [4, 4];</pre>
   </div>
 
   <div class="sg-sub">
+    <div class="sg-sub-title">Hover &amp; Active States</div>
+    <div class="sg-sub-desc">Chart.js does <strong>not</strong> leave hover colours alone. If a dataset has no explicit hover colour, it generates one by saturating and darkening the fill, which produces a hue outside the SOG palette. Every dataset must therefore pin its own hover colours. Two rules cover every chart in this guide.</div>
+    <div class="sg-example" style="padding:24px;display:block">
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px 20px">
+          <div class="step-circle active" style="width:26px;height:26px;font-size:12px;margin-bottom:12px">1</div>
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:5px">Solid fill &rarr; darken one step</div>
+          <div style="font-size:12px;color:var(--text-muted);line-height:1.55">Set <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:11px;font-family:'SF Mono',Consolas,monospace">hoverBackgroundColor</code> to the colour's <strong>+10% Black</strong> shade step. Hover reads as the same colour pressed down. Used by the doughnut and the risk bars.</div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px 20px">
+          <div class="step-circle active" style="width:26px;height:26px;font-size:12px;margin-bottom:12px">2</div>
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:5px">Translucent fill &rarr; solidify</div>
+          <div style="font-size:12px;color:var(--text-muted);line-height:1.55">Where the fill carries opacity (<code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:11px;font-family:'SF Mono',Consolas,monospace">+'CC'</code>, <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:11px;font-family:'SF Mono',Consolas,monospace">rgba(&hellip;,.75)</code>), hover to the same colour at full opacity. Used by the bar, bubble, polar area, diverging, and waterfall charts.</div>
+        </div>
+      </div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin:24px 0 12px">Base &rarr; hover pairs (rule 1)</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px 20px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="display:flex;border-radius:6px;overflow:hidden;border:1px solid var(--border);flex-shrink:0"><div style="width:34px;height:26px;background:#625D9C"></div><div style="width:34px;height:26px;background:#534F85"></div></div>
+          <div style="min-width:0">
+            <div style="font-size:12px;font-weight:600;color:var(--text);line-height:1.3">Purple</div>
+            <div style="font-size:11px;color:var(--text-muted);font-family:'SF Mono',Consolas,monospace">#625D9C &rarr; #534F85</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="display:flex;border-radius:6px;overflow:hidden;border:1px solid var(--border);flex-shrink:0"><div style="width:34px;height:26px;background:#4197CB"></div><div style="width:34px;height:26px;background:#3780AD"></div></div>
+          <div style="min-width:0">
+            <div style="font-size:12px;font-weight:600;color:var(--text);line-height:1.3">Blue</div>
+            <div style="font-size:11px;color:var(--text-muted);font-family:'SF Mono',Consolas,monospace">#4197CB &rarr; #3780AD</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="display:flex;border-radius:6px;overflow:hidden;border:1px solid var(--border);flex-shrink:0"><div style="width:34px;height:26px;background:#5EB3E4"></div><div style="width:34px;height:26px;background:#5098C2"></div></div>
+          <div style="min-width:0">
+            <div style="font-size:12px;font-weight:600;color:var(--text);line-height:1.3">Sky</div>
+            <div style="font-size:11px;color:var(--text-muted);font-family:'SF Mono',Consolas,monospace">#5EB3E4 &rarr; #5098C2</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="display:flex;border-radius:6px;overflow:hidden;border:1px solid var(--border);flex-shrink:0"><div style="width:34px;height:26px;background:#0095A9"></div><div style="width:34px;height:26px;background:#007F90"></div></div>
+          <div style="min-width:0">
+            <div style="font-size:12px;font-weight:600;color:var(--text);line-height:1.3">Teal</div>
+            <div style="font-size:11px;color:var(--text-muted);font-family:'SF Mono',Consolas,monospace">#0095A9 &rarr; #007F90</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="display:flex;border-radius:6px;overflow:hidden;border:1px solid var(--border);flex-shrink:0"><div style="width:34px;height:26px;background:#00AF9A"></div><div style="width:34px;height:26px;background:#009583"></div></div>
+          <div style="min-width:0">
+            <div style="font-size:12px;font-weight:600;color:var(--text);line-height:1.3">Green</div>
+            <div style="font-size:11px;color:var(--text-muted);font-family:'SF Mono',Consolas,monospace">#00AF9A &rarr; #009583</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="display:flex;border-radius:6px;overflow:hidden;border:1px solid var(--border);flex-shrink:0"><div style="width:34px;height:26px;background:#323E48"></div><div style="width:34px;height:26px;background:#2B353D"></div></div>
+          <div style="min-width:0">
+            <div style="font-size:12px;font-weight:600;color:var(--text);line-height:1.3">Charcoal</div>
+            <div style="font-size:11px;color:var(--text-muted);font-family:'SF Mono',Consolas,monospace">#323E48 &rarr; #2B353D</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="display:flex;border-radius:6px;overflow:hidden;border:1px solid var(--border);flex-shrink:0"><div style="width:34px;height:26px;background:#F32735"></div><div style="width:34px;height:26px;background:#CF212D"></div></div>
+          <div style="min-width:0">
+            <div style="font-size:12px;font-weight:600;color:var(--text);line-height:1.3">Red</div>
+            <div style="font-size:11px;color:var(--text-muted);font-family:'SF Mono',Consolas,monospace">#F32735 &rarr; #CF212D</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="display:flex;border-radius:6px;overflow:hidden;border:1px solid var(--border);flex-shrink:0"><div style="width:34px;height:26px;background:#FF6C0E"></div><div style="width:34px;height:26px;background:#D95C0C"></div></div>
+          <div style="min-width:0">
+            <div style="font-size:12px;font-weight:600;color:var(--text);line-height:1.3">Orange</div>
+            <div style="font-size:11px;color:var(--text-muted);font-family:'SF Mono',Consolas,monospace">#FF6C0E &rarr; #D95C0C</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="display:flex;border-radius:6px;overflow:hidden;border:1px solid var(--border);flex-shrink:0"><div style="width:34px;height:26px;background:#F2CD00"></div><div style="width:34px;height:26px;background:#CEAE00"></div></div>
+          <div style="min-width:0">
+            <div style="font-size:12px;font-weight:600;color:var(--text);line-height:1.3">Yellow</div>
+            <div style="font-size:11px;color:var(--text-muted);font-family:'SF Mono',Consolas,monospace">#F2CD00 &rarr; #CEAE00</div>
+          </div>
+        </div>
+      </div>
+      <div class="info-callout" style="margin-top:20px"><strong>Line and radar points:</strong> a data point's hover marker keeps its own colour and gains a 2px white ring (<code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">pointHoverBorderColor: '#fff'</code>) at radius 6. Where the line already uses white-filled points, the hover point stays white-filled and keeps the line colour as its ring. Never let a point hover change hue.</div>
+    </div>
+    <div class="code-block collapsed">
+      <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">JS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+      <pre>// -- Rule 1: solid fill - hover is the +10% Black shade step ----
+const SOG_HOVER = {
+  '#625D9C': '#534F85', // Purple
+  '#4197CB': '#3780AD', // Blue
+  '#5EB3E4': '#5098C2', // Sky
+  '#0095A9': '#007F90', // Teal
+  '#00AF9A': '#009583', // Green
+  '#323E48': '#2B353D', // Charcoal
+  '#F32735': '#CF212D', // Red
+  '#FF6C0E': '#D95C0C', // Orange
+  '#F2CD00': '#CEAE00', // Yellow
+};
+const hoverFor = hex =&gt; SOG_HOVER[hex] || hex;
+
+// Doughnut / pie / solid bars
+datasets: [{
+  backgroundColor:      SOG_COLORS.slice(0, 5),
+  hoverBackgroundColor: SOG_COLORS.slice(0, 5).map(hoverFor),
+}]
+
+// -- Rule 2: translucent fill - hover solidifies to the base ----
+datasets: [{
+  backgroundColor:      C.blue + 'CC',   // 80% opacity at rest
+  hoverBackgroundColor: C.blue,          // full opacity on hover
+  borderColor:          C.blue,
+  hoverBorderColor:     hoverFor(C.blue),
+}]
+
+// -- Line and radar points - keep the hue, add a white ring -----
+datasets: [{
+  borderColor:               C.teal,
+  pointBackgroundColor:      C.teal,
+  pointRadius:               4,
+  pointHoverRadius:          6,
+  pointHoverBackgroundColor: C.teal,
+  pointHoverBorderColor:     '#fff',
+  pointHoverBorderWidth:     2,
+}]</pre>
+    </div>
+  </div>
+
+  <div class="sg-sub">
     <div class="sg-sub-title">How each chart section is structured</div>
     <div class="sg-sub-desc">Every chart section in this guide follows the same four-part structure so developers know exactly where to look regardless of which chart they are reading.</div>
-    <div class="sg-example" style="padding:16px 20px;display:block">
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
-        <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:13px 15px">
-          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--sog-purple);margin-bottom:6px">① Section desc</div>
-          <div style="font-size:12px;color:var(--text-muted);line-height:1.5">What the chart shows and which section of the product it lives in</div>
+    <div class="sg-example" style="padding:24px;display:block">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 18px 20px">
+          <div class="step-circle active" style="width:26px;height:26px;font-size:12px;margin-bottom:12px">1</div>
+          <div style="font-size:13px;font-weight:600;color:var(--text);line-height:1.35;margin-bottom:5px">Section description</div>
+          <div style="font-size:12px;color:var(--text-muted);line-height:1.55">What the chart shows and which section of the product it lives in</div>
         </div>
-        <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:13px 15px">
-          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--sog-purple);margin-bottom:6px">② Live chart demo</div>
-          <div style="font-size:12px;color:var(--text-muted);line-height:1.5">Interactive Chart.js or HTML render using real SOG data</div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 18px 20px">
+          <div class="step-circle active" style="width:26px;height:26px;font-size:12px;margin-bottom:12px">2</div>
+          <div style="font-size:13px;font-weight:600;color:var(--text);line-height:1.35;margin-bottom:5px">Live chart demo</div>
+          <div style="font-size:12px;color:var(--text-muted);line-height:1.55">Interactive Chart.js or HTML render using real SOG data</div>
         </div>
-        <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:13px 15px">
-          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--sog-purple);margin-bottom:6px">③ Encoding guide + Design rules</div>
-          <div style="font-size:12px;color:var(--text-muted);line-height:1.5">How to read the visual encoding. Constraints, max values, and what not to do</div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 18px 20px">
+          <div class="step-circle active" style="width:26px;height:26px;font-size:12px;margin-bottom:12px">3</div>
+          <div style="font-size:13px;font-weight:600;color:var(--text);line-height:1.35;margin-bottom:5px">Encoding guide + Design rules</div>
+          <div style="font-size:12px;color:var(--text-muted);line-height:1.55">How to read the visual encoding. Constraints, max values, and what not to do</div>
         </div>
-        <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:13px 15px">
-          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--sog-purple);margin-bottom:6px">④ When to use + Code</div>
-          <div style="font-size:12px;color:var(--text-muted);line-height:1.5">Decision guidance and copy-pasteable JS, HTML, and CSS</div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 18px 20px">
+          <div class="step-circle active" style="width:26px;height:26px;font-size:12px;margin-bottom:12px">4</div>
+          <div style="font-size:13px;font-weight:600;color:var(--text);line-height:1.35;margin-bottom:5px">When to use + Code</div>
+          <div style="font-size:12px;color:var(--text-muted);line-height:1.55">Decision guidance and copy-pasteable JS, HTML, and CSS</div>
         </div>
       </div>
     </div>
@@ -13513,7 +14066,7 @@ metrics.forEach(m => {
 
   <div class="sg-sub">
     <div class="sg-sub-title">Design rules</div>
-    <div class="sg-sub-desc">Use SOG_COLORS in order from the palette. Keep stages to 5–7 maximum. Never skip stages. Always start with the widest bar at the top. Conversion labels use charcoal-40 text at 11px.</div>
+    <div class="sg-sub-desc">Assign one brand palette colour per stage, running Purple → Blue → Teal → Green → Sky so the funnel ends on a light, positive tone. Keep stages to 5–7 maximum. Never skip stages. Always start with the widest bar at the top. Conversion labels use charcoal-40 text at 11px.</div>
   </div>
 
   <div class="sg-sub">
@@ -13788,12 +14341,12 @@ new Chart(document.getElementById('chart-waterfall-canvas'), {
 
   <div class="sg-sub" style="margin-top:40px">
     <div class="sg-sub-title">Encoding guide</div>
-    <div class="sg-sub-desc">Each point is one participant. X axis = sessions attended. Y axis = outcome score improvement. Point radius = 4px. Colour encodes phase (Phase 1 purple, Phase 2 blue, Phase 3 teal). A linear regression line (SOG Purple, 60% opacity) shows the overall trend.</div>
+    <div class="sg-sub-desc">Each point is one participant. X axis = sessions attended. Y axis = outcome score improvement. Point radius = 6px. Colour encodes phase (Phase 1 purple, Phase 2 blue, Phase 3 teal). A dashed linear regression line (SOG Charcoal, 70% opacity) shows the overall trend. The trend line is deliberately neutral so it never competes with the phase colours.</div>
   </div>
 
   <div class="sg-sub">
     <div class="sg-sub-title">Design rules</div>
-    <div class="sg-sub-desc">Always include axis labels with units. Avoid overplotting by using 60% opacity on points. Add a legend when multiple colours are used. Trend line is optional but recommended when the correlation is the key message. Never use scatter for fewer than 10 data points.</div>
+    <div class="sg-sub-desc">Always include axis labels with units. Points sit at 85% opacity: solid enough to read clearly, with just enough translucency to show where points overlap. Add a legend when multiple colours are used. Trend line is optional but recommended when the correlation is the key message. Never use scatter for fewer than 10 data points.</div>
   </div>
 
   <div class="sg-sub">
@@ -13804,37 +14357,44 @@ new Chart(document.getElementById('chart-waterfall-canvas'), {
 
   <div class="code-block collapsed" style="margin-top:12px">
     <div class="code-block-header"><div style="display:flex;align-items:center;gap:10px"><span class="code-lang">JS</span><button class="code-toggle-btn" onclick="toggleCode(this)" aria-expanded="false"><span class="material-symbols-rounded" style="font-size:13px">expand_more</span><span class="code-toggle-label">Show</span></button></div><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
-    <pre>const pts = [
-  {x:3,y:4},{x:4,y:8},{x:5,y:9},{x:6,y:10},{x:7,y:14},
-  {x:8,y:13},{x:9,y:16},{x:10,y:17},{x:11,y:19},{x:12,y:21},
-  {x:13,y:22},{x:14,y:25},{x:15,y:27},{x:16,y:28},{x:17,y:30}
-];
+    <pre>// Colour encodes programme phase
+const phase1 = [{x:3,y:4},{x:5,y:9},{x:7,y:14},{x:9,y:16},{x:4,y:12}];
+const phase2 = [{x:11,y:19},{x:12,y:21},{x:8,y:7},{x:10,y:12},{x:7,y:23}];
+const phase3 = [{x:15,y:27},{x:17,y:30},{x:16,y:24},{x:14,y:32},{x:18,y:27}];
+
+const series = (label, data, fill) =&gt; ({
+  label, data, backgroundColor: fill, pointRadius: 6, pointHoverRadius: 8
+});
 
 new Chart(document.getElementById('chart-scatter-canvas'), {
   type: 'scatter',
   data: {
-    datasets: [{
-      label: 'Participant',
-      data: pts,
-      backgroundColor: 'rgba(98,93,156,0.6)',
-      pointRadius: 5
-    }, {
-      // Linear trend line - computed externally and passed as two-point line
-      label: 'Trend',
-      data: [{x: 2, y: 1.2}, {x: 18, y: 33}],
-      type: 'line',
-      borderColor: 'rgba(98,93,156,0.4)',
-      borderWidth: 1.5,
-      pointRadius: 0,
-      fill: false
-    }]
+    datasets: [
+      series('Phase 1', phase1, 'rgba(98,93,156,0.85)'),   // SOG Purple 85%
+      series('Phase 2', phase2, 'rgba(65,151,203,0.85)'),  // SOG Blue 85%
+      series('Phase 3', phase3, 'rgba(0,149,169,0.85)'),   // SOG Teal 85%
+      {
+        // Linear trend line - computed externally and passed as two-point line
+        label: 'Trend',
+        type: 'line',
+        data: [{x: 2, y: 1.2}, {x: 18, y: 33}],
+        borderColor: 'rgba(50,62,72,0.7)',   // SOG Charcoal 70%
+        borderWidth: 2,
+        borderDash: [5, 4],
+        pointRadius: 0,
+        fill: false
+      }
+    ]
   },
   options: {
     scales: {
-      x: { title: { display: true, text: 'Sessions attended' } },
+      x: { type: 'linear', title: { display: true, text: 'Sessions attended' } },
       y: { title: { display: true, text: 'Outcome score improvement (pts)' } }
     },
-    plugins: { legend: { display: false } }
+    plugins: {
+      legend: { display: true, position: 'top', align: 'end',
+                labels: { usePointStyle: true, boxWidth: 8 } }
+    }
   }
 });</pre>
   </div>
@@ -13939,7 +14499,7 @@ new Chart(document.getElementById('chart-scatter-canvas'), {
 
   <div class="sg-sub">
     <div class="sg-sub-title">Doughnut Chart: Programme Referral Breakdown</div>
-    <div class="sg-sub-desc">Use doughnut charts to show part-to-whole composition. Keep to 5 segments or fewer for legibility.</div>
+    <div class="sg-sub-desc">Use doughnut charts to show part-to-whole composition. Keep to 5 segments or fewer for legibility. Always set <code style="background:var(--muted-bg);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace">hoverBackgroundColor</code> explicitly to the <strong>+10% Black</strong> shade step of each segment colour: Chart.js otherwise generates its own hover colour by saturating and darkening the fill, which lands outside the SOG palette.</div>
     <div class="chart-card" role="figure" aria-labelledby="radial-title" aria-describedby="radial-desc">
       <div class="chart-head">
         <div id="radial-title" class="chart-title">Referral Sources</div>
@@ -14049,6 +14609,10 @@ new Chart(document.getElementById('chart-doughnut'), {
     labels: ['School', 'Social Services', 'Self-referral', 'Community', 'Other'],
     datasets: [{ data: [34, 27, 18, 13, 8],
       backgroundColor: SOG_COLORS.slice(0, 5),
+      // Always pin hover colours to the +10% Black shade step of each segment.
+      // Chart.js otherwise invents a saturated hover colour that is off-brand.
+      hoverBackgroundColor: ['#534F85','#3780AD','#5098C2','#007F90','#009583'],
+      hoverBorderColor: '#fff',
       borderWidth: 0 }]
   },
   options: {
@@ -14478,7 +15042,7 @@ function initTimelineChart() {
   const chart = new Chart(ctx, {
     type: 'bubble',
     data: { datasets: [
-      { label:'Intervention', backgroundColor:C.purple+'BB', borderColor:C.purple, borderWidth:1.5,
+      { label:'Intervention', backgroundColor:C.purple+'BB', hoverBackgroundColor:C.purple, borderColor:C.purple, borderWidth:1.5, hoverBorderWidth:1.5,
         data:[
           {x:new Date(2024,0,8).getTime(),y:0.5,r:10},{x:new Date(2024,1,15).getTime(),y:0.5,r:8},
           {x:new Date(2024,2,5).getTime(),y:0.5,r:14},{x:new Date(2024,3,20).getTime(),y:0.5,r:9},
@@ -14487,18 +15051,18 @@ function initTimelineChart() {
           {x:new Date(2024,8,9).getTime(),y:0.5,r:8},{x:new Date(2024,9,25).getTime(),y:0.5,r:10},
           {x:new Date(2024,10,7).getTime(),y:0.5,r:9},{x:new Date(2024,11,12).getTime(),y:0.5,r:11},
         ]},
-      { label:'Group Session', backgroundColor:C.teal+'BB', borderColor:C.teal, borderWidth:1.5,
+      { label:'Group Session', backgroundColor:C.teal+'BB', hoverBackgroundColor:C.teal, borderColor:C.teal, borderWidth:1.5, hoverBorderWidth:1.5,
         data:[
           {x:new Date(2024,0,22).getTime(),y:1.5,r:16},{x:new Date(2024,2,12).getTime(),y:1.5,r:18},
           {x:new Date(2024,4,5).getTime(),y:1.5,r:15},{x:new Date(2024,6,18).getTime(),y:1.5,r:17},
           {x:new Date(2024,9,8).getTime(),y:1.5,r:14},{x:new Date(2024,11,20).getTime(),y:1.5,r:16},
         ]},
-      { label:'Phase Session', backgroundColor:C.green+'BB', borderColor:C.green, borderWidth:1.5,
+      { label:'Phase Session', backgroundColor:C.green+'BB', hoverBackgroundColor:C.green, borderColor:C.green, borderWidth:1.5, hoverBorderWidth:1.5,
         data:[
           {x:new Date(2024,2,28).getTime(),y:2.5,r:12},{x:new Date(2024,6,15).getTime(),y:2.5,r:13},
           {x:new Date(2024,10,20).getTime(),y:2.5,r:11},
         ]},
-      { label:'Assessment', backgroundColor:C.blue+'BB', borderColor:C.blue, borderWidth:1.5,
+      { label:'Assessment', backgroundColor:C.blue+'BB', hoverBackgroundColor:C.blue, borderColor:C.blue, borderWidth:1.5, hoverBorderWidth:1.5,
         data:[
           {x:new Date(2024,1,5).getTime(),y:3.5,r:9},{x:new Date(2024,5,10).getTime(),y:3.5,r:10},
           {x:new Date(2024,10,15).getTime(),y:3.5,r:8},
@@ -14529,10 +15093,12 @@ function initRiskChart() {
   const risk=[78,72,65,68,60,54,48,42,38,30,28,22];
   const trend=[75,70,67,65,60,55,49,44,38,32,28,24];
   const barColors=risk.map(v=>v>=76?C.red:v>=56?C.orange:v>=31?C.yellow:C.green);
+  // Solid fill: hover = that colour's +10% Black shade step (never Chart.js's default).
+  const barHover=risk.map(v=>v>=76?'#CF212D':v>=56?'#D95C0C':v>=31?'#CEAE00':'#009583');
   const riskChart = new Chart(ctx,{
     type:'bar',
     data:{labels,datasets:[
-      {label:'Monthly Risk Score',data:risk,backgroundColor:barColors,borderRadius:4,order:2},
+      {label:'Monthly Risk Score',data:risk,backgroundColor:barColors,hoverBackgroundColor:barHover,borderRadius:4,order:2},
       {label:'Trend',data:trend,type:'line',borderColor:C.purple,borderWidth:2.5,borderDash:[6,4],pointRadius:0,fill:false,tension:0.4,order:1},
     ]},
     options:{
@@ -14586,11 +15152,11 @@ function initMonthlyChart() {
   monthlyChart = new Chart(ctx,{
     type:'bar',
     data:{labels,datasets:[
-      {label:'Intervention', data:[18,15,20,17,22,19,21,18,24,16,20,22],backgroundColor:C.purple+'CC',borderColor:C.purple,borderWidth:1,borderRadius:3},
-      {label:'Group Session',data:[4,6,5,8,6,7,9,7,8,6,8,10],backgroundColor:C.teal+'CC',borderColor:C.teal,borderWidth:1,borderRadius:3},
-      {label:'Assessment',   data:[3,2,4,3,5,3,4,2,5,3,4,3],backgroundColor:C.blue+'CC',borderColor:C.blue,borderWidth:1,borderRadius:3},
-      {label:'Employment',   data:[2,3,2,4,3,5,4,6,5,7,6,8],backgroundColor:C.green+'CC',borderColor:C.green,borderWidth:1,borderRadius:3},
-      {label:'Mentoring',    data:[5,4,6,5,7,6,8,7,9,8,10,9],backgroundColor:C.sky+'CC',borderColor:C.sky,borderWidth:1,borderRadius:3},
+      {label:'Intervention', data:[18,15,20,17,22,19,21,18,24,16,20,22],backgroundColor:C.purple+'CC',hoverBackgroundColor:C.purple,borderColor:C.purple,borderWidth:1,borderRadius:3},
+      {label:'Group Session',data:[4,6,5,8,6,7,9,7,8,6,8,10],backgroundColor:C.teal+'CC',hoverBackgroundColor:C.teal,borderColor:C.teal,borderWidth:1,borderRadius:3},
+      {label:'Assessment',   data:[3,2,4,3,5,3,4,2,5,3,4,3],backgroundColor:C.blue+'CC',hoverBackgroundColor:C.blue,borderColor:C.blue,borderWidth:1,borderRadius:3},
+      {label:'Employment',   data:[2,3,2,4,3,5,4,6,5,7,6,8],backgroundColor:C.green+'CC',hoverBackgroundColor:C.green,borderColor:C.green,borderWidth:1,borderRadius:3},
+      {label:'Mentoring',    data:[5,4,6,5,7,6,8,7,9,8,10,9],backgroundColor:C.sky+'CC',hoverBackgroundColor:C.sky,borderColor:C.sky,borderWidth:1,borderRadius:3},
     ]},
     options:{
       responsive:true,maintainAspectRatio:false,
@@ -14628,11 +15194,11 @@ function initEffectivenessChart() {
   const chart = new Chart(ctx,{
     type:'line',
     data:{labels,datasets:[
-      {label:'Composite Score',    data:[30,32,34,33,36,38,40,42,45,47,48,50,52,54,55,57,60,62,64,67,70,72,74,75],borderColor:C.purple,backgroundColor:C.purpleFill,fill:true,tension:0.4,pointRadius:0,pointHoverRadius:5,borderWidth:2.5,yAxisID:'y'},
-      {label:'Risk Score',         data:[80,78,75,76,72,68,65,62,58,55,52,50,47,44,42,40,38,36,34,31,28,25,23,22],borderColor:C.red,backgroundColor:C.redFill,fill:true,tension:0.4,pointRadius:0,pointHoverRadius:5,borderWidth:2,yAxisID:'y'},
-      {label:'Safety Score (YP)',  data:[40,42,44,43,46,48,50,52,54,55,57,59,60,62,63,65,67,68,70,71,72,73,74,72],borderColor:C.blue,backgroundColor:C.blueFill,fill:true,tension:0.4,pointRadius:0,pointHoverRadius:5,borderWidth:2,yAxisID:'y'},
-      {label:'Safety (Coach)',     data:[45,46,48,47,50,52,54,56,58,59,61,62,63,65,66,67,69,70,71,72,73,74,75,70],borderColor:C.teal,backgroundColor:'transparent',fill:false,tension:0.4,pointRadius:0,pointHoverRadius:4,borderWidth:1.5,borderDash:[4,3],yAxisID:'y'},
-      {label:'Self-Efficacy',      data:[28,30,31,30,33,35,37,38,40,42,44,46,47,49,51,53,56,58,60,62,64,66,67,68],borderColor:C.green,backgroundColor:C.greenFill,fill:true,tension:0.4,pointRadius:0,pointHoverRadius:5,borderWidth:2,yAxisID:'y1'},
+      {label:'Composite Score',    data:[30,32,34,33,36,38,40,42,45,47,48,50,52,54,55,57,60,62,64,67,70,72,74,75],borderColor:C.purple,backgroundColor:C.purpleFill,fill:true,tension:0.4,pointRadius:0,pointHoverRadius:5,pointHoverBackgroundColor:'#fff',pointHoverBorderColor:C.purple,pointHoverBorderWidth:2,borderWidth:2.5,yAxisID:'y'},
+      {label:'Risk Score',         data:[80,78,75,76,72,68,65,62,58,55,52,50,47,44,42,40,38,36,34,31,28,25,23,22],borderColor:C.red,backgroundColor:C.redFill,fill:true,tension:0.4,pointRadius:0,pointHoverRadius:5,pointHoverBackgroundColor:'#fff',pointHoverBorderColor:C.red,pointHoverBorderWidth:2,borderWidth:2,yAxisID:'y'},
+      {label:'Safety Score (YP)',  data:[40,42,44,43,46,48,50,52,54,55,57,59,60,62,63,65,67,68,70,71,72,73,74,72],borderColor:C.blue,backgroundColor:C.blueFill,fill:true,tension:0.4,pointRadius:0,pointHoverRadius:5,pointHoverBackgroundColor:'#fff',pointHoverBorderColor:C.blue,pointHoverBorderWidth:2,borderWidth:2,yAxisID:'y'},
+      {label:'Safety (Coach)',     data:[45,46,48,47,50,52,54,56,58,59,61,62,63,65,66,67,69,70,71,72,73,74,75,70],borderColor:C.teal,backgroundColor:'transparent',fill:false,tension:0.4,pointRadius:0,pointHoverRadius:4,pointHoverBackgroundColor:'#fff',pointHoverBorderColor:C.teal,pointHoverBorderWidth:2,borderWidth:1.5,borderDash:[4,3],yAxisID:'y'},
+      {label:'Self-Efficacy',      data:[28,30,31,30,33,35,37,38,40,42,44,46,47,49,51,53,56,58,60,62,64,66,67,68],borderColor:C.green,backgroundColor:C.greenFill,fill:true,tension:0.4,pointRadius:0,pointHoverRadius:5,pointHoverBackgroundColor:'#fff',pointHoverBorderColor:C.green,pointHoverBorderWidth:2,borderWidth:2,yAxisID:'y1'},
     ]},
     options:{
       responsive:true,maintainAspectRatio:false,
@@ -14662,8 +15228,13 @@ function initDoughnutChart() {
       datasets: [{
         data: [34, 27, 18, 13, 8],
         backgroundColor: ['#625D9C','#4197CB','#0095A9','#00AF9A','#5EB3E4'],
+        // Hover = each segment's +10% Black shade step. Without this Chart.js
+        // auto-generates a saturated hover colour that falls outside the palette.
+        hoverBackgroundColor: ['#534F85','#3780AD','#007F90','#009583','#5098C2'],
         borderColor: '#fff',
+        hoverBorderColor: '#fff',
         borderWidth: 3,
+        hoverBorderWidth: 3,
         hoverOffset: 8
       }]
     },
@@ -14692,7 +15263,11 @@ function initPolarChart() {
         data: [87, 64, 72, 55, 41, 93],
         backgroundColor: ['rgba(98,93,156,.75)','rgba(65,151,203,.75)','rgba(94,179,228,.75)','rgba(0,149,169,.75)','rgba(0,175,154,.75)','rgba(50,62,72,.75)'],
         borderColor: ['#625D9C','#4197CB','#5EB3E4','#0095A9','#00AF9A','#323E48'],
-        borderWidth: 2
+        // Translucent fill: hover solidifies to the base colour at full opacity.
+        hoverBackgroundColor: ['#625D9C','#4197CB','#5EB3E4','#0095A9','#00AF9A','#323E48'],
+        hoverBorderColor: ['#534F85','#3780AD','#5098C2','#007F90','#009583','#2B353D'],
+        borderWidth: 2,
+        hoverBorderWidth: 2
       }]
     },
     options: {
@@ -14726,7 +15301,11 @@ function initRadarChart() {
           backgroundColor: 'rgba(243,39,53,.12)',
           borderWidth: 2,
           pointBackgroundColor: '#F32735',
-          pointRadius: 4
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          pointHoverBackgroundColor: '#F32735',
+          pointHoverBorderColor: '#fff',
+          pointHoverBorderWidth: 2
         },
         {
           label: 'At Exit',
@@ -14735,7 +15314,11 @@ function initRadarChart() {
           backgroundColor: 'rgba(98,93,156,.12)',
           borderWidth: 2,
           pointBackgroundColor: '#625D9C',
-          pointRadius: 4
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          pointHoverBackgroundColor: '#625D9C',
+          pointHoverBorderColor: '#fff',
+          pointHoverBorderWidth: 2
         }
       ]
     },
@@ -14823,7 +15406,7 @@ function initFunnelChart() {
     { label: 'Assessment Completed',      count: 256, color: '#4197CB', shade4: '#102633' },
     { label: 'Enrolled & Active',         count: 198, color: '#0095A9', shade4: '#00252A' },
     { label: 'Programme Completed',       count: 147, color: '#00AF9A', shade4: '#002C27' },
-    { label: 'Progressing Independently', count: 112, color: '#323E48', shade4: '#0D1012' }
+    { label: 'Progressing Independently', count: 112, color: '#5EB3E4', shade4: '#182D39' }
   ];
   const max = stages[0].count;
   stages.forEach((stage, i) => {
@@ -14888,7 +15471,11 @@ function initDivergingChart() {
         data,
         backgroundColor: data.map(v => v >= 0 ? 'rgba(98,93,156,.85)' : 'rgba(243,39,53,.75)'),
         borderColor:     data.map(v => v >= 0 ? '#625D9C' : '#F32735'),
+        // Translucent fill: hover solidifies to the base colour at full opacity.
+        hoverBackgroundColor: data.map(v => v >= 0 ? '#625D9C' : '#F32735'),
+        hoverBorderColor:     data.map(v => v >= 0 ? '#534F85' : '#CF212D'),
         borderWidth: 1.5,
+        hoverBorderWidth: 1.5,
         borderRadius: 4
       }]
     },
@@ -15076,6 +15663,9 @@ function initWaterfallChart() {
   const totals = net.map(n => { running += n; return running; });
   const barColors  = net.map(n => n >= 0 ? 'rgba(0,175,154,0.85)'  : 'rgba(243,39,53,0.8)');
   const borderColors = net.map(n => n >= 0 ? C.green : C.red);
+  // Translucent fill: hover solidifies to the base colour at full opacity.
+  const barHover     = net.map(n => n >= 0 ? C.green : C.red);
+  const barHoverEdge = net.map(n => n >= 0 ? '#009583' : '#CF212D');
   const chart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -15086,8 +15676,11 @@ function initWaterfallChart() {
           label: 'Net change',
           data: net,
           backgroundColor: barColors,
+          hoverBackgroundColor: barHover,
           borderColor: borderColors,
+          hoverBorderColor: barHoverEdge,
           borderWidth: 1.5,
+          hoverBorderWidth: 1.5,
           borderRadius: 4,
           order: 1,
         },
@@ -15102,6 +15695,10 @@ function initWaterfallChart() {
           pointBackgroundColor: '#fff',
           pointBorderColor: C.purple,
           pointBorderWidth: 2,
+          pointHoverRadius: 6,
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: C.purple,
+          pointHoverBorderWidth: 2.5,
           tension: 0,
           yAxisID: 'y2',
           order: 0,
@@ -15188,35 +15785,56 @@ function initWaterfallChart() {
 function initScatterChart() {
   const ctx = document.getElementById('chart-scatter-canvas');
   if (!ctx) return;
-  const pts = [
+  // Colour encodes programme phase: Phase 1 purple, Phase 2 blue, Phase 3 teal.
+  const phase1 = [
     {x:3,y:4},{x:4,y:8},{x:5,y:9},{x:6,y:10},{x:7,y:14},{x:8,y:13},
-    {x:9,y:16},{x:10,y:17},{x:11,y:19},{x:12,y:21},{x:13,y:22},{x:14,y:25},
-    {x:15,y:27},{x:16,y:28},{x:17,y:30},{x:18,y:32},
-    {x:4,y:3},{x:6,y:15},{x:8,y:7},{x:10,y:12},{x:12,y:29},{x:14,y:18},
-    {x:16,y:24},{x:7,y:19},{x:9,y:9},{x:11,y:26},{x:13,y:15},{x:15,y:33},
-    {x:5,y:6},{x:3,y:13},{x:6,y:5},{x:8,y:21},{x:10,y:8},{x:12,y:17},
-    {x:14,y:32},{x:16,y:19},{x:4,y:12},{x:7,y:23},{x:9,y:29},{x:11,y:14},
-    {x:2,y:2},{x:2,y:7},{x:18,y:27},{x:17,y:35}
+    {x:9,y:16},{x:10,y:17},{x:4,y:3},{x:6,y:15},{x:5,y:6},{x:3,y:13},
+    {x:6,y:5},{x:4,y:12},{x:2,y:2},{x:2,y:7}
   ];
+  const phase2 = [
+    {x:11,y:19},{x:12,y:21},{x:13,y:22},{x:14,y:25},{x:8,y:7},{x:10,y:12},
+    {x:12,y:29},{x:14,y:18},{x:7,y:19},{x:9,y:9},{x:11,y:26},{x:8,y:21},
+    {x:10,y:8},{x:12,y:17},{x:7,y:23}
+  ];
+  const phase3 = [
+    {x:15,y:27},{x:16,y:28},{x:17,y:30},{x:18,y:32},{x:16,y:24},{x:13,y:15},
+    {x:15,y:33},{x:14,y:32},{x:16,y:19},{x:9,y:29},{x:11,y:14},{x:18,y:27},
+    {x:17,y:35}
+  ];
+  const series = (label, data, fill, solid) => ({
+    label, data, backgroundColor:fill, pointRadius:6, pointHoverRadius:8,
+    // Translucent fill: hover solidifies to the base colour, with a white ring.
+    pointHoverBackgroundColor:solid, pointHoverBorderColor:'#fff', pointHoverBorderWidth:2
+  });
   new Chart(ctx, {
     type:'scatter',
-    data: { datasets: [{ label:'Participant', data:pts,
-      backgroundColor:'rgba(98,93,156,0.5)', pointRadius:6, pointHoverRadius:8 }] },
+    data: { datasets: [
+      series('Phase 1', phase1, 'rgba(98,93,156,0.85)',  C.purple),
+      series('Phase 2', phase2, 'rgba(65,151,203,0.85)', C.blue),
+      series('Phase 3', phase3, 'rgba(0,149,169,0.85)',  C.teal),
+      { // Linear trend line - computed externally and passed as a two-point line
+        label:'Trend', type:'line', data:[{x:2,y:1.2},{x:18,y:33}],
+        borderColor:'rgba(50,62,72,0.7)', borderWidth:2, borderDash:[5,4],
+        pointRadius:0, pointHoverRadius:0, fill:false, order:99 }
+    ] },
     options: {
       responsive:true, maintainAspectRatio:false,
       plugins: {
-        legend:{ display:false },
-        tooltip:{ backgroundColor:'#323E48', titleColor:'#fff', bodyColor:'rgba(255,255,255,.8)', footerColor:'rgba(255,255,255,.4)', padding:12, cornerRadius:8, titleFont:{size:12,weight:'700'}, bodyFont:{size:12}, footerFont:{size:10,weight:'600'}, usePointStyle:true, boxWidth:8, boxHeight:8, boxPadding:4, callbacks:{ label: c => ` ${c.raw.x} sessions → +${c.raw.y} pts improvement` } }
+        legend:{ display:true, position:'top', align:'end',
+                 labels:{ usePointStyle:true, boxWidth:8, boxHeight:8, padding:16,
+                          color:'#70787F', font:{size:11} } },
+        tooltip:{ backgroundColor:'#323E48', titleColor:'#fff', bodyColor:'rgba(255,255,255,.8)', footerColor:'rgba(255,255,255,.4)', padding:12, cornerRadius:8, titleFont:{size:12,weight:'700'}, bodyFont:{size:12}, footerFont:{size:10,weight:'600'}, usePointStyle:true, boxWidth:8, boxHeight:8, boxPadding:4, filter: c => c.dataset.label !== 'Trend', callbacks:{ title: c => c[0].dataset.label, label: c => ` ${c.raw.x} sessions → +${c.raw.y} pts improvement` } }
       },
       scales: {
         x: { title:{ display:true, text:'Sessions Attended', color:'#70787F', font:{size:11} },
-             min:0, max:20, grid:{ color:'rgba(0,0,0,.04)' }, ticks:{ color:'#70787F', font:{size:11} } },
+             type:'linear', min:0, max:20, grid:{ color:'rgba(0,0,0,.04)' }, ticks:{ color:'#70787F', font:{size:11} } },
         y: { title:{ display:true, text:'Outcome Score Improvement (pts)', color:'#70787F', font:{size:11} },
              min:0, max:40, grid:{ color:'rgba(0,0,0,.04)' }, ticks:{ color:'#70787F', font:{size:11} } }
       }
     }
   });
 }
+
 
 // ── Area Chart ────────────────────────────────────────────────
 function initAreaChart() {
@@ -15230,11 +15848,13 @@ function initAreaChart() {
         { label:'Total Young People Reached',
           data:[234,312,445,581,718,789,967,1124,1387,1620],
           borderColor:C.teal, backgroundColor:'rgba(0,149,169,0.12)', fill:true,
-          borderWidth:2.5, tension:0.4, pointRadius:4, pointBackgroundColor:C.teal },
+          borderWidth:2.5, tension:0.4, pointRadius:4, pointBackgroundColor:C.teal,
+          pointHoverRadius:6, pointHoverBackgroundColor:C.teal, pointHoverBorderColor:'#fff', pointHoverBorderWidth:2 },
         { label:'Actively Engaged',
           data:[148,192,267,334,421,378,498,621,748,891],
           borderColor:C.green, backgroundColor:'rgba(0,175,154,0.18)', fill:true,
-          borderWidth:2.5, tension:0.4, pointRadius:4, pointBackgroundColor:C.green }
+          borderWidth:2.5, tension:0.4, pointRadius:4, pointBackgroundColor:C.green,
+          pointHoverRadius:6, pointHoverBackgroundColor:C.green, pointHoverBorderColor:'#fff', pointHoverBorderWidth:2 }
       ]
     },
     options: {
@@ -15650,7 +16270,7 @@ function initSidebarTheme() {
   };
   let saved = null;
   try { saved = localStorage.getItem('sogSidebarTheme'); } catch (e) {}
-  apply(saved === 'dark');
+  apply(saved !== 'light');
   btn.addEventListener('click', () => {
     const dark = !root.classList.contains('theme-dark');
     apply(dark);
@@ -15700,7 +16320,7 @@ function initSidebarLinkIcons() {
     '#tables': 'table_chart', '#progress': 'progress_activity', '#stepper': 'linear_scale',
     '#avatars': 'account_circle', '#skeleton': 'dashboard_customize', '#sheet': 'vertical_split', '#modal': 'web_asset',
     // Patterns
-    '#flywheel': 'autorenew', '#prog-timeline': 'route',
+    '#aim-model': 'hub', '#flywheel': 'autorenew', '#prog-timeline': 'route',
     // Data Visualisation
     '#dataviz': 'insights'
   };
@@ -15996,9 +16616,176 @@ function initGradPills() {
   });
 }
 
+// ── AIM+ Model (Appropriate Intervention Plus) ────────────────
+function initAimModel() {
+  const nodes = document.querySelectorAll('#aim-model .aim-node');
+  if (!nodes.length) return;
+  // Only one circle is held at a time; clicking the held one releases it.
+  const select = (target) => {
+    const wasActive = target.classList.contains('active');
+    nodes.forEach(n => { n.classList.remove('active'); n.setAttribute('aria-pressed','false'); });
+    if (!wasActive) { target.classList.add('active'); target.setAttribute('aria-pressed','true'); }
+  };
+  nodes.forEach(node => {
+    node.addEventListener('click', () => select(node));
+    node.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(node); }
+    });
+  });
+}
+
+// ── Tabbed code panels ────────────────────────────────────────
+// Merges runs of adjacent .code-block elements into one tabbed panel so a
+// single example's HTML, CSS and JS read as one thing. A repeated language
+// starts a new panel, which is what separates one example from the next.
+function initCodeTabs() {
+  const blocks = Array.from(document.querySelectorAll('.code-block'));
+  if (!blocks.length) return;
+
+  const groups = [];
+  let current = [];
+  blocks.forEach(block => {
+    block.dataset.lang = (block.querySelector('.code-lang')?.textContent || 'Code').trim();
+    const prev = current[current.length - 1];
+    const adjacent = prev && prev.nextElementSibling === block;
+    const repeated = current.some(b => b.dataset.lang === block.dataset.lang);
+    if (!adjacent || repeated) {
+      if (current.length) groups.push(current);
+      current = [block];
+    } else {
+      current.push(block);
+    }
+  });
+  if (current.length) groups.push(current);
+
+  let uid = 0;
+  groups.forEach(group => buildCodeTabs(group, ++uid));
+}
+
+function buildCodeTabs(group, uid) {
+  const first = group[0];
+  const startCollapsed = first.classList.contains('collapsed');
+
+  const wrap = document.createElement('div');
+  wrap.className = 'code-tabs' + (startCollapsed ? ' collapsed' : '');
+  if (first.style.marginTop) wrap.style.marginTop = first.style.marginTop;
+
+  const header = document.createElement('div');
+  header.className = 'code-tabs-header';
+  const list = document.createElement('div');
+  list.className = 'code-tabs-list';
+  const body = document.createElement('div');
+  body.className = 'code-tabs-body';
+
+  const tabs = [];
+  const panels = [];
+
+  group.forEach((block, i) => {
+    const pre = block.querySelector('pre');
+    if (!pre) return;
+    const panel = document.createElement('div');
+    panel.className = 'code-panel';
+    panel.id = `code-panel-${uid}-${i}`;
+    panel.setAttribute('role', 'tabpanel');
+    panel.setAttribute('aria-labelledby', `code-tab-${uid}-${i}`);
+    if (i > 0) panel.hidden = true;
+    panel.appendChild(pre);
+    body.appendChild(panel);
+    panels.push(panel);
+
+    if (group.length === 1) {
+      // A lone block keeps the plain language label it has today.
+      const label = document.createElement('span');
+      label.className = 'code-tabs-single';
+      label.textContent = block.dataset.lang;
+      list.appendChild(label);
+      return;
+    }
+    const tab = document.createElement('button');
+    tab.className = 'code-tab';
+    tab.id = `code-tab-${uid}-${i}`;
+    tab.type = 'button';
+    tab.setAttribute('role', 'tab');
+    tab.setAttribute('aria-controls', panel.id);
+    tab.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+    tab.tabIndex = i === 0 ? 0 : -1;
+    tab.textContent = block.dataset.lang;
+    list.appendChild(tab);
+    tabs.push(tab);
+  });
+
+  if (tabs.length) list.setAttribute('role', 'tablist');
+
+  const select = (index, focus) => {
+    tabs.forEach((tab, i) => {
+      const on = i === index;
+      tab.setAttribute('aria-selected', on ? 'true' : 'false');
+      tab.tabIndex = on ? 0 : -1;
+      panels[i].hidden = !on;
+    });
+    if (focus) tabs[index].focus();
+    // Choosing a language is a request to read it, so open the panel.
+    if (wrap.classList.contains('collapsed')) setOpen(true);
+  };
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => select(i));
+    tab.addEventListener('keydown', e => {
+      const last = tabs.length - 1;
+      if (e.key === 'ArrowRight') { e.preventDefault(); select(i === last ? 0 : i + 1, true); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); select(i === 0 ? last : i - 1, true); }
+      if (e.key === 'Home')       { e.preventDefault(); select(0, true); }
+      if (e.key === 'End')        { e.preventDefault(); select(last, true); }
+    });
+  });
+
+  // ── Show / hide ──
+  const toggle = document.createElement('button');
+  toggle.className = 'code-toggle-btn';
+  toggle.type = 'button';
+  const icon = document.createElement('span');
+  icon.className = 'material-symbols-rounded';
+  icon.style.fontSize = '13px';
+  const label = document.createElement('span');
+  label.className = 'code-toggle-label';
+  toggle.append(icon, label);
+
+  const setOpen = (open) => {
+    wrap.classList.toggle('collapsed', !open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    icon.textContent = open ? 'expand_less' : 'expand_more';
+    label.textContent = open ? 'Hide' : 'Show';
+  };
+  setOpen(!startCollapsed);
+  toggle.addEventListener('click', () => setOpen(wrap.classList.contains('collapsed')));
+
+  // ── Copy the language currently on screen ──
+  const copy = document.createElement('button');
+  copy.className = 'code-copy';
+  copy.type = 'button';
+  copy.textContent = 'Copy';
+  copy.addEventListener('click', () => {
+    const shown = panels.find(p => !p.hidden) || panels[0];
+    navigator.clipboard.writeText(shown.querySelector('pre').textContent).then(() => {
+      copy.textContent = 'Copied!';
+      copy.style.color = '#00AF9A';
+      setTimeout(() => { copy.textContent = 'Copy'; copy.style.color = ''; }, 2000);
+    });
+  });
+
+  const actions = document.createElement('div');
+  actions.className = 'code-tabs-actions';
+  actions.append(toggle, copy);
+  header.append(list, actions);
+  wrap.append(header, body);
+
+  first.parentNode.insertBefore(wrap, first);
+  group.forEach(block => block.remove());
+}
+
 // ── Boot ───────────────────────────────────────────────
 window.addEventListener('load', () => {
-  [renderHeatmap, renderScorecard, initTimelineChart, initRiskChart,
+  [initCodeTabs, renderHeatmap, renderScorecard, initTimelineChart, initRiskChart,
    initToolsChart, initMonthlyChart, initEffectivenessChart,
    initDoughnutChart, initPolarChart, initRadarChart,
    initKPICards, initFunnelChart, initGaugeCharts, initDivergingChart,
@@ -16006,7 +16793,7 @@ window.addEventListener('load', () => {
    initWaterfallChart, initScatterChart, initAreaChart,
    initCalendarHeatmap, initTreemap, initBulletCharts,
    initLandmarks, initScrollSpy, initScrollReveal,
-   initProgressBars,
+   initProgressBars, initAimModel,
    initColourStrip, initHeroPills, initTintCells, initSwatchCards, initGradientCards, initTableFrames, initSidebarTheme, initSidebarLinkIcons, initDownloadsModal, initImageFallbacks,
    initGradPills, initDatePickers, initPagination,
    initTimelineChart, initRiskChart, initToolsChart,
